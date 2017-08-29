@@ -81,7 +81,6 @@ public class RockGenerator extends WorldGenerator
 
 			// I'll manage the config vars Theishiopian. You don't need to worry about them. - Jonathan
 			if(ConfigVariables.developerMode)
-			{
 				switch(whatRock)
 				{
 					case 0:
@@ -90,7 +89,6 @@ public class RockGenerator extends WorldGenerator
 					case 1:
 						log.info("Generating flat rock at X: " + rp.getX() + " Y: " + rp.getY() + " Z: " + rp.getZ() + " on top of " + onTopOf + ".");
 				}
-			}
 		}
 
 		return false;

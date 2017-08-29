@@ -71,6 +71,7 @@ public class FCMasterWorldGenerator implements IWorldGenerator
 		}
 
 		// What's the if statement for??? What does it deactivate??? - Jonathan
+		// Ohhhhh it makes sure that it's only in those biomes
 		if
 		(
 			BiomeDictionary.hasType(world.getBiome(biomeCheckPos), BiomeDictionary.Type.FOREST)||
