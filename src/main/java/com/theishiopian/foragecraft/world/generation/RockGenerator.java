@@ -3,6 +3,7 @@ package com.theishiopian.foragecraft.world.generation;
 import java.util.Random;
 
 import com.theishiopian.foragecraft.ConfigVariables;
+import com.theishiopian.foragecraft.ForageLogger;
 import com.theishiopian.foragecraft.Reference;
 import com.theishiopian.foragecraft.init.ModBlocks;
 
@@ -30,8 +31,6 @@ import org.apache.logging.log4j.Logger;
 
 public class RockGenerator extends WorldGenerator
 {
-	public static final Logger log = LogManager.getLogger(Reference.SHORT_NAME);
-
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos pos)
 	{
@@ -80,15 +79,14 @@ public class RockGenerator extends WorldGenerator
 				worldIn.setBlockState(rp, rock.getDefaultState(), 2);
 
 			// I'll manage the config vars Theishiopian. You don't need to worry about them. - Jonathan
-			if(ConfigVariables.developerMode)
-				switch(whatRock)
-				{
-					case 0:
-						log.info("Generating rock at X: " + rp.getX() + " Y: " + rp.getY() + " Z: " + rp.getZ() + " on top of " + onTopOf + ".");
-						break;
-					case 1:
-						log.info("Generating flat rock at X: " + rp.getX() + " Y: " + rp.getY() + " Z: " + rp.getZ() + " on top of " + onTopOf + ".");
-				}
+			switch(whatRock)
+			{
+				case 0:
+					ForageLogger.printDevelop("Generating rock at X: " + rp.getX() + " Y: " + rp.getY() + " Z: " + rp.getZ() + " on top of " + onTopOf + ".");
+					break;
+				case 1:
+					ForageLogger.printDevelop("Generating flat rock at X: " + rp.getX() + " Y: " + rp.getY() + " Z: " + rp.getZ() + " on top of " + onTopOf + ".");
+			}
 		}
 
 		return false;

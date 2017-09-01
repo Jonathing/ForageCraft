@@ -3,6 +3,7 @@ package com.theishiopian.foragecraft.world.generation;
 import java.util.Random;
 
 import com.theishiopian.foragecraft.ConfigVariables;
+import com.theishiopian.foragecraft.ForageLogger;
 import com.theishiopian.foragecraft.Reference;
 import com.theishiopian.foragecraft.init.ModBlocks;
 
@@ -27,8 +28,6 @@ import org.apache.logging.log4j.Logger;
 
 public class StickGenerator extends WorldGenerator
 {
-	public static final Logger log = LogManager.getLogger(Reference.SHORT_NAME);
-
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos pos)
 	{
@@ -48,8 +47,7 @@ public class StickGenerator extends WorldGenerator
 		{
 			worldIn.setBlockState(pos, stick.getDefaultState().withProperty(BlockPumpkin.FACING, EnumFacing.Plane.HORIZONTAL.random(rand)), 2);
 
-			if(ConfigVariables.developerMode)
-				log.info("Generating stick at X: " + sp.getX() + " Y: " + sp.getY() + " Z: " + sp.getZ() + " on top of " + onTopOf + ".");
+			ForageLogger.printDevelop("Generating stick at X: " + sp.getX() + " Y: " + sp.getY() + " Z: " + sp.getZ() + " on top of " + onTopOf + ".");
 		}
 
 		return false;

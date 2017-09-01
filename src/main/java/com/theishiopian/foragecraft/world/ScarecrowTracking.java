@@ -3,6 +3,7 @@ package com.theishiopian.foragecraft.world;
 import java.util.LinkedHashSet;
 
 import com.theishiopian.foragecraft.ConfigVariables;
+import com.theishiopian.foragecraft.ForageLogger;
 import com.theishiopian.foragecraft.Reference;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,8 +26,6 @@ import org.apache.logging.log4j.Logger;
 // Fuckin hate the scarecrow problems
 public class ScarecrowTracking extends WorldSavedData
 {
-	public static final Logger log = LogManager.getLogger(Reference.SHORT_NAME);
-
 	private final LinkedHashSet<BlockPos>scarecrowLocations = new LinkedHashSet<BlockPos>();
 	private final static String NAME = "foragecraft:scarecrows";
 
@@ -53,20 +52,14 @@ public class ScarecrowTracking extends WorldSavedData
 	public void addScarecrow(BlockPos pos)
 	{
 		scarecrowLocations.add(pos);
-		if(ConfigVariables.developerMode)
-		{
-			log.info("Registering Scarecrow");
-		}
+		ForageLogger.printDevelop("Registering Scarecrow");
 	}
 
 	// removes scarecrow from list
 	public void removeScarecrow(BlockPos pos)
 	{
 		scarecrowLocations.remove(pos);
-		if(ConfigVariables.developerMode)
-		{
-			log.info("Unregistering Scarecrow");
-		}
+		ForageLogger.printDevelop("Unregistering Scarecrow");
 	}
 
 	@Override

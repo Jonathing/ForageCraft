@@ -26,9 +26,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 /*
 /  Logger based from Tinkers' Construct
 /  https://github.com/SlimeKnights/TinkersConstruct/blob/08f7180399ca8ad4717493dd0aa5a63b7aa14584/src/main/java/slimeknights/tconstruct/TConstruct.java
@@ -38,8 +35,6 @@ import org.apache.logging.log4j.Logger;
 
 public class ForageCraftMod 
 {
-	public static final Logger log = LogManager.getLogger(Reference.SHORT_NAME);
-
 	@SidedProxy(clientSide=Reference.CLIENTPROXY, serverSide=Reference.SERVERPROXY)
 	public static CommonProxy proxy;
 	
@@ -125,47 +120,33 @@ public class ForageCraftMod
 
 		// Save config
 		config.save();
+		ForageLogger.printInfo("Configuration file loaded.");
 
 		// Developer Mode logging
-		if(ConfigVariables.developerMode)
-		{
-			log.info("WARNING: Developer Mode is enabled. Extra logging features will take place.");
-			if(!ConfigVariables.jeiVanillaInt)
-			{
-				log.info("NOTE: JEI Integration for vanilla items has been disabled.");
-			}
-			if(!ConfigVariables.enableSticks)
-			{
-				log.info("WARNING: Stick generation has been disabled in the ForageCraft configuration file.");
-			}
-			if(!ConfigVariables.enableRocks)
-			{
-				log.info("WARNING: Rock generation has been disabled in the ForageCraft configuration file.");
-			}
-		}
+		if(!ConfigVariables.developerMode)
+			ForageLogger.printWarn("Developer Mode is enabled. Development logging will occur at the [INFO] level.");
+		else
+			ForageLogger.printWarn("Developer Mode is disabled. Development logging will occur at the [DEBUG] level.");
+		if(!ConfigVariables.jeiVanillaInt)
+			ForageLogger.printWarn("JEI Integration for vanilla items has been disabled.");
+		if(!ConfigVariables.enableSticks)
+			ForageLogger.printWarn("Stick generation has been disabled in the ForageCraft configuration file.");
+		if(!ConfigVariables.enableRocks)
+			ForageLogger.printWarn("Rock generation has been disabled in the ForageCraft configuration file.");
 
 		// Initialize Items
 		ModItems.init();
 		ModItems.register();
-		if(ConfigVariables.developerMode)
-		{
-			log.info("Items initialized successfully.");
-		}
+		ForageLogger.printDevelop("Items initialized successfully.");
 
 		// Initialize Blocks
 		ModBlocks.init();
 		ModBlocks.register();
-		if(ConfigVariables.developerMode)
-		{
-			log.info("Blocks initialized successfully.");
-		}
+		ForageLogger.printDevelop("Blocks initialized successfully.");
 
 		// Initialize Entities
 		ModEntities.init();
-		if(ConfigVariables.developerMode)
-		{
-			log.info("Entities initialized successfully.");
-		}
+		ForageLogger.printDevelop("Entities initialized successfully.");
 
 		// Let's Do This
 		proxy.init();
@@ -183,6 +164,6 @@ public class ForageCraftMod
 		GameRegistry.registerWorldGenerator(new FCMasterWorldGenerator(), 10);
 
 		// Getting fanceh here
-		log.info("Mod initialized.");
+		ForageLogger.printInfo("Ready to forage.");
 	}
 }
