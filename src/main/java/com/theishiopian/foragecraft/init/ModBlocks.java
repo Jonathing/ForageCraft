@@ -38,30 +38,30 @@ public class ModBlocks
 		stick_block = new BlockStick();
 	}
 	
-	public static void register()
-	{
-		registerBlock(fascine);
-		registerBlock(straw_bale);
-		registerBlock(scarecrow);
-		splitRegisterBlock(rock_normal, new RockItem(rock_normal, RockType.NORMAL));
-		splitRegisterBlock(rock_flat, new RockItem(rock_flat, RockType.FLAT));
-		registerBlock(road_stone);
-		registerBlock(stick_block);
-	}
+//	public static void register()
+//	{
+//		registerBlock(fascine);
+//		registerBlock(straw_bale);
+//		registerBlock(scarecrow);
+//		splitRegisterBlock(rock_normal, new RockItem(rock_normal, RockType.NORMAL));
+//		splitRegisterBlock(rock_flat, new RockItem(rock_flat, RockType.FLAT));
+//		registerBlock(road_stone);
+//		registerBlock(stick_block);
+//	}
 	
-	private static void registerBlock(Block block)
-	{
-		GameRegistry.register(block);
-		ItemBlock item = new ItemBlock(block);
-		item.setRegistryName(block.getRegistryName());
-		GameRegistry.register(item);
-	}
+//	private static void registerBlock(Block block)
+//	{
+//		GameRegistry.register(block);
+//		ItemBlock item = new ItemBlock(block);
+//		item.setRegistryName(block.getRegistryName());
+//		GameRegistry.register(item);
+//	}
 	
-	private static void splitRegisterBlock(Block block, ItemBlock item)
-	{
-		GameRegistry.register(block);
-		GameRegistry.register(item);
-	}
+//	private static void splitRegisterBlock(Block block, ItemBlock item)
+//	{
+//		GameRegistry.register(block);
+//		GameRegistry.register(item);
+//	}
 	
 	public static void registerRenders()
 	{

@@ -136,19 +136,19 @@ public class ForageCraftMod
 
 		// Initialize Items
 		ModItems.init();
-		ModItems.register();
+		//ModItems.register();
 		ForageLogger.printDevelop("Items initialized successfully.");
 
 		// Initialize Blocks
 		ModBlocks.init();
-		ModBlocks.register();
+		//ModBlocks.register();
 		ForageLogger.printDevelop("Blocks initialized successfully.");
 
 		// Initialize Entities
 		ModEntities.init();
 		ForageLogger.printDevelop("Entities initialized successfully.");
 
-		// Let's Do This
+		// Let's Do This Thing
 		proxy.init();
 	}
 
@@ -160,7 +160,7 @@ public class ForageCraftMod
 		MinecraftForge.EVENT_BUS.register(new SpawnHandler());
 		RecipeHandler.Shapless();
 		SeedLoader.seed();
-		GameRegistry.registerFuelHandler(new FuelHandler());
+		GameRegistry.registerFuelHandler(new FuelHandler());//deprecated, alternatives?
 		GameRegistry.registerWorldGenerator(new FCMasterWorldGenerator(), 10);
 
 		// Getting fanceh here
