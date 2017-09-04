@@ -23,19 +23,19 @@ public class RecipeHandler {
 		Item rock = Item.getByNameOrId("foragecraft:rock_normal");
 		Item flat = Item.getByNameOrId("foragecraft:rock_flat");
 		// TODO cleanup a bit
-		GameRegistry.addShapelessRecipe(new ItemStack(Items.DYE,9,15),Items.SKULL);
-		GameRegistry.addShapelessRecipe(new ItemStack(bundle,1,0),stick,stick,stick,stick,stick,stick,stick,stick,stick);
-		GameRegistry.addShapelessRecipe(new ItemStack(stick,9,0),bundle);
-		GameRegistry.addShapelessRecipe(new ItemStack(fascine,1,0),bundle,bundle,bundle,bundle,bundle,bundle,bundle,bundle,bundle);
-		GameRegistry.addShapelessRecipe(new ItemStack(bundle,9,0),fascine);
-		GameRegistry.addSmelting(Item.getItemFromBlock(Blocks.TALLGRASS), new ItemStack(straw,1,0), 0.0f);
-		GameRegistry.addShapelessRecipe(new ItemStack(bale,1,0),straw,straw,straw,straw,straw,straw,straw,straw,straw);
-		GameRegistry.addShapelessRecipe(new ItemStack(straw,9,0),bale);
-		GameRegistry.addShapedRecipe(new ItemStack(scarecrow,1,0), "LPL", "BFB", "LSL",'L',leather,'P',pumpkin,'B',bundle,'F',fascine,'S',stick);
-		GameRegistry.addShapedRecipe(new ItemStack(scarecrow,1,0), "LPL", "BFB", "LSL",'L',leather,'P',pumpkin,'B',bundle,'F',bale,'S',stick);
-		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.COBBLESTONE), rock, rock, rock, rock, rock, rock, rock, rock, rock);
-		GameRegistry.addShapelessRecipe(new ItemStack(rock, 9, 0), Blocks.COBBLESTONE);
-		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.road_stone), flat, flat, flat, flat, flat, flat, flat, flat, flat);
-		GameRegistry.addShapelessRecipe(new ItemStack(flat, 9, 0), ModBlocks.road_stone);
+//		GameRegistry.addShapelessRecipe(new ItemStack(Items.DYE,9,15),Items.SKULL);
+//		GameRegistry.addShapelessRecipe(new ItemStack(bundle,1,0),stick,stick,stick,stick,stick,stick,stick,stick,stick);
+//		GameRegistry.addShapelessRecipe(new ItemStack(stick,9,0),bundle);
+//		GameRegistry.addShapelessRecipe(new ItemStack(fascine,1,0),bundle,bundle,bundle,bundle,bundle,bundle,bundle,bundle,bundle);
+//		GameRegistry.addShapelessRecipe(new ItemStack(bundle,9,0),fascine);
+//		GameRegistry.addSmelting(Item.getItemFromBlock(Blocks.TALLGRASS), new ItemStack(straw,1,0), 0.0f);
+//		GameRegistry.addShapelessRecipe(new ItemStack(bale,1,0),straw,straw,straw,straw,straw,straw,straw,straw,straw);
+//		GameRegistry.addShapelessRecipe(new ItemStack(straw,9,0),bale);
+//		GameRegistry.addShapedRecipe(new ItemStack(scarecrow,1,0), "LPL", "BFB", "LSL",'L',leather,'P',pumpkin,'B',bundle,'F',fascine,'S',stick);
+//		GameRegistry.addShapedRecipe(new ItemStack(scarecrow,1,0), "LPL", "BFB", "LSL",'L',leather,'P',pumpkin,'B',bundle,'F',bale,'S',stick);
+//		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.COBBLESTONE), rock, rock, rock, rock, rock, rock, rock, rock, rock);
+//		GameRegistry.addShapelessRecipe(new ItemStack(rock, 9, 0), Blocks.COBBLESTONE);
+//		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.road_stone), flat, flat, flat, flat, flat, flat, flat, flat, flat);
+//		GameRegistry.addShapelessRecipe(new ItemStack(flat, 9, 0), ModBlocks.road_stone);
 	}
 }

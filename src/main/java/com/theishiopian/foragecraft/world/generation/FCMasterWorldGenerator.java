@@ -5,7 +5,6 @@ import java.util.Random;
 import com.theishiopian.foragecraft.ConfigVariables;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary;
@@ -19,7 +18,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 public class FCMasterWorldGenerator implements IWorldGenerator
 {
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
+	public void generate(Random random, int chunkX, int chunkZ, World world, net.minecraft.world.gen.IChunkGenerator chunkGenerator,
 			IChunkProvider chunkProvider)
 	{
 		int blockX = chunkX * 16;

@@ -1,6 +1,9 @@
 package com.theishiopian.foragecraft.proxy;
 
-public interface CommonProxy 
+public class CommonProxy 
 {
-	public void init();
+	public void init()
+	{
+	}
 }
+//fuck my life

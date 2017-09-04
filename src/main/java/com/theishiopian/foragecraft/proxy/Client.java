@@ -9,7 +9,7 @@ import com.theishiopian.foragecraft.render.RenderRockNormal;
 
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
-public class Client implements CommonProxy
+public class Client extends CommonProxy
 {
 	@Override
 	public void init()

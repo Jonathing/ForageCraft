@@ -1,6 +1,6 @@
 package com.theishiopian.foragecraft.proxy;
 
-public class Server implements CommonProxy
+public class Server extends CommonProxy
 {
 	@Override
 	public void init() 
