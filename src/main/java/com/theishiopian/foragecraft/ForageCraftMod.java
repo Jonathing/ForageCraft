@@ -10,10 +10,7 @@ import com.theishiopian.foragecraft.init.ModEntities;
 import com.theishiopian.foragecraft.init.ModItems;
 import com.theishiopian.foragecraft.proxy.CommonProxy;
 import com.theishiopian.foragecraft.world.generation.FCMasterWorldGenerator;
-
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -21,9 +18,6 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /*
@@ -136,7 +130,7 @@ public class ForageCraftMod
 
 		// Initialize Items
 		ModItems.init();
-		//ModItems.register();
+
 		ForageLogger.printDevelop("Items initialized successfully.");
 
 		// Initialize Blocks
@@ -152,6 +146,7 @@ public class ForageCraftMod
 		proxy.init();
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler // Time to Magic School Bus this shit
 	public void Init(FMLInitializationEvent event)
 	{
