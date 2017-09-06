@@ -7,16 +7,42 @@ import com.theishiopian.foragecraft.init.ModItems;
 import com.theishiopian.foragecraft.render.RenderRockFlat;
 import com.theishiopian.foragecraft.render.RenderRockNormal;
 
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class Client implements CommonProxy
+@Mod.EventBusSubscriber
+public class Client extends CommonProxy
 {
 	@Override
-	public void init()
+	public void preInit(FMLPreInitializationEvent e) 
 	{
-		ModBlocks.registerRenders();
-		ModItems.registerRenders();
+        
+    }
+	
+	@Override
+	public void init(FMLInitializationEvent e)
+	{
+		//curently FUBAR
+		//ModItems.initModels();
 		RenderingRegistry.registerEntityRenderingHandler(EntityRockNormal.class, RenderRockNormal.FACTORY);
 		RenderingRegistry.registerEntityRenderingHandler(EntityRockFlat.class, RenderRockFlat.FACTORY);
+	}
+	
+	@Override
+	public void postInit(FMLPostInitializationEvent e) 
+    {
+       
+    }
+	
+	@SubscribeEvent
+	public static void registerModels(ModelRegistryEvent event)
+	{
+		ModBlocks.initModels();
+		ModItems.initModels();
 	}
 }

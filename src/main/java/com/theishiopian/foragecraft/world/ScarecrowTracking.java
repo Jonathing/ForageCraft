@@ -2,16 +2,13 @@ package com.theishiopian.foragecraft.world;
 
 import java.util.LinkedHashSet;
 
-import com.theishiopian.foragecraft.ConfigVariables;
 import com.theishiopian.foragecraft.ForageLogger;
-import com.theishiopian.foragecraft.Reference;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraftforge.common.util.Constants;
 
@@ -19,12 +16,13 @@ import net.minecraftforge.common.util.Constants;
 /  Logger based from Tinkers' Construct
 /  https://github.com/SlimeKnights/TinkersConstruct/blob/08f7180399ca8ad4717493dd0aa5a63b7aa14584/src/main/java/slimeknights/tconstruct/TConstruct.java
 */
-
+//unused?
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 // Fuckin hate the scarecrow problems
-public class ScarecrowTracking extends WorldSavedData
+// I feel you. it will get better when I add crows
+public class ScarecrowTracking extends net.minecraft.world.storage.WorldSavedData
 {
 	private final LinkedHashSet<BlockPos>scarecrowLocations = new LinkedHashSet<BlockPos>();
 	private final static String NAME = "foragecraft:scarecrows";
