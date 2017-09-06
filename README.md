@@ -38,6 +38,6 @@ We have a Discord server! Come talk about memes and the mod with us here.
 ## Enjoy!
 Thank you for stopping by! We hope you enjoy ForageCraft for Minecraft.
 
-Cheers,  
-Jonathan  
-Community Manager of ForageCraft
+Cheers,
+Theishiopian, Lead Developer of ForageCraft
+Jonathan Community Manager of ForageCraft
