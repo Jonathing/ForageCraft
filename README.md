@@ -40,4 +40,4 @@ Thank you for stopping by! We hope you enjoy ForageCraft for Minecraft.
 
 Cheers,
 Theishiopian, Lead Developer of ForageCraft
-Jonathan Community Manager of ForageCraft
+Jonathan, Community Manager of ForageCraft
