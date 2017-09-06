@@ -154,6 +154,7 @@ public class ForageCraftMod
 		config.save();
 		ForageLogger.printInfo("Configuration file loaded.");
 
+		//how do I use this stuff?
 		// Developer Mode logging
 		if(!ConfigVariables.developerMode)
 			ForageLogger.printWarn("Developer Mode is enabled. Development logging will occur at the [INFO] level.");
@@ -165,20 +166,16 @@ public class ForageCraftMod
 		if(!ConfigVariables.enableRocks)
 			ForageLogger.printWarn("Rock generation has been disabled in the ForageCraft configuration file.");
 
+		
+		//TODO move a bunch of this shit to the proxy system.
 		// Initialize Items
-		ModItems.init();
-
-		ForageLogger.printDevelop("Items initialized successfully.");
+		ModItems.init(); ForageLogger.printDevelop("Items initialized successfully.");
 
 		// Initialize Blocks
-		ModBlocks.init();
-		// ModBlocks.register();
-		ForageLogger.printDevelop("Blocks initialized successfully.");
+		ModBlocks.init(); ForageLogger.printDevelop("Blocks initialized successfully.");
 
 		// Initialize Entities
-		ModEntities.init();
-		ForageLogger.printDevelop("Entities initialized successfully.");
-
+		ModEntities.init(); ForageLogger.printDevelop("Entities initialized successfully.");
 	}
 
 	@SuppressWarnings("deprecation")

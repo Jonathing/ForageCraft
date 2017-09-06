@@ -2,6 +2,7 @@ package com.theishiopian.foragecraft.proxy;
 
 import com.theishiopian.foragecraft.entity.EntityRockFlat;
 import com.theishiopian.foragecraft.entity.EntityRockNormal;
+import com.theishiopian.foragecraft.init.ModBlocks;
 import com.theishiopian.foragecraft.init.ModItems;
 import com.theishiopian.foragecraft.render.RenderRockFlat;
 import com.theishiopian.foragecraft.render.RenderRockNormal;
@@ -41,7 +42,7 @@ public class Client extends CommonProxy
 	@SubscribeEvent
 	public static void registerModels(ModelRegistryEvent event)
 	{
-		//ModBlocks.initModels();
-		ModItems.initModels();//lets try it here
+		ModBlocks.initModels();
+		ModItems.initModels();
 	}
 }
