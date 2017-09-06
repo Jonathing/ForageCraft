@@ -38,6 +38,3 @@ replay_pid*.log
 
 # other
 eclipse
-
-# shortcut files
-*.lnk
