@@ -40,4 +40,4 @@ Thank you for stopping by! We hope you enjoy ForageCraft for Minecraft.
 
 Cheers,  
 Jonathan  
-Manager of ForageCraft
+Community Manager of ForageCraft
