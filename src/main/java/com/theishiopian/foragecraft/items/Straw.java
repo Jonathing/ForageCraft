@@ -19,7 +19,7 @@ public class Straw extends Item
 	@SideOnly(Side.CLIENT)
 	public void initModel()
 	{
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
 	}
 	//TODO: create superclass for all foragecraft items, to make adding new ones go faster
 }
