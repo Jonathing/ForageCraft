@@ -25,7 +25,7 @@ public class Fascine extends BlockRotatedPillar
 		this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.Y));
 	}
 
-	//TODO make modBlocks the superclass
+	
 	@SideOnly(Side.CLIENT)
 	public void initModel()
 	{

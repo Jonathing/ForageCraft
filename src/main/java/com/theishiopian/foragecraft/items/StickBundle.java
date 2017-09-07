@@ -15,7 +15,7 @@ public class StickBundle extends Item
 		setRegistryName("stick_bundle");
 		setCreativeTab(CreativeTabs.MATERIALS);
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	public void initModel()
 	{

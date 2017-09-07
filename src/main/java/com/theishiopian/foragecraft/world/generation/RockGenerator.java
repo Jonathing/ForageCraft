@@ -2,11 +2,8 @@ package com.theishiopian.foragecraft.world.generation;
 
 import java.util.Random;
 
-import com.theishiopian.foragecraft.ConfigVariables;
 import com.theishiopian.foragecraft.ForageLogger;
-import com.theishiopian.foragecraft.Reference;
 import com.theishiopian.foragecraft.init.ModBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -16,10 +13,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 
 /*
 /  World generation based on sky_01's MC forums tutorial

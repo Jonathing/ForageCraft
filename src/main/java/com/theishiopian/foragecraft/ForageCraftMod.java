@@ -168,11 +168,15 @@ public class ForageCraftMod
 
 		
 		//TODO move a bunch of this shit to the proxy system.
+		
+		// Initialize Blocks
+		ModBlocks.init(); ForageLogger.printDevelop("Blocks initialized successfully.");
+		
+		
 		// Initialize Items
 		ModItems.init(); ForageLogger.printDevelop("Items initialized successfully.");
 
-		// Initialize Blocks
-		ModBlocks.init(); ForageLogger.printDevelop("Blocks initialized successfully.");
+		
 
 		// Initialize Entities
 		ModEntities.init(); ForageLogger.printDevelop("Entities initialized successfully.");

@@ -34,5 +34,11 @@ public class ModBlocks
 	public static void initModels()
 	{
 		fascine.initModel();
+		straw_bale.initModel();
+		scarecrow.initModel();
+		rock_normal.initModel();
+		rock_flat.initModel();
+		road_stone.initModel();
+		stick_block.initModel();
 	}
 }

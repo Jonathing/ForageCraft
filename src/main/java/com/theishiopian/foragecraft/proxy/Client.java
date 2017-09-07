@@ -27,8 +27,6 @@ public class Client extends CommonProxy
 	@Override
 	public void init(FMLInitializationEvent e)
 	{
-		//curently FUBAR
-		//ModItems.initModels();
 		RenderingRegistry.registerEntityRenderingHandler(EntityRockNormal.class, RenderRockNormal.FACTORY);
 		RenderingRegistry.registerEntityRenderingHandler(EntityRockFlat.class, RenderRockFlat.FACTORY);
 	}

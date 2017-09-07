@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+@SuppressWarnings("unused")
 public class RecipeHandler {
 
 	public static void Shapless()

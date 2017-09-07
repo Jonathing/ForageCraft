@@ -3,9 +3,9 @@ package com.theishiopian.foragecraft.items;
 import com.theishiopian.foragecraft.entity.EntityRockFlat;
 import com.theishiopian.foragecraft.entity.EntityRockNormal;
 import com.theishiopian.foragecraft.init.ModBlocks.RockType;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +19,9 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RockItem extends ItemBlock
 {
@@ -42,7 +45,13 @@ public class RockItem extends ItemBlock
 		
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(CreativeTabs.DECORATIONS);
+		setCreativeTab(CreativeTabs.MATERIALS);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void initModel()
+	{
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
 	}
 	
 	public RockType getRockType()
@@ -59,7 +68,6 @@ public class RockItem extends ItemBlock
 				break;
 			case NORMAL: target.attackEntityFrom(DamageSource.GENERIC, 3);
 				break;
-			
 		}
         return true;
     }

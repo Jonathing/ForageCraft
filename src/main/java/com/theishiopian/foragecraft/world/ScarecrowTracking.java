@@ -11,15 +11,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraftforge.common.util.Constants;
-
-/*
-/  Logger based from Tinkers' Construct
-/  https://github.com/SlimeKnights/TinkersConstruct/blob/08f7180399ca8ad4717493dd0aa5a63b7aa14584/src/main/java/slimeknights/tconstruct/TConstruct.java
-*/
-//unused?
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 // Fuckin hate the scarecrow problems
 // I feel you. it will get better when I add crows
 public class ScarecrowTracking extends net.minecraft.world.storage.WorldSavedData

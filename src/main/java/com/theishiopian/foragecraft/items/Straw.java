@@ -21,5 +21,4 @@ public class Straw extends Item
 	{
 		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
 	}
-	//TODO: create superclass for all foragecraft items, to make adding new ones go faster
 }

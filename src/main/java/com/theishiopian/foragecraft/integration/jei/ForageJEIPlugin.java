@@ -12,6 +12,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 // There's a bunch of deprecated methods here. Idk what the other methods are so I'm leaving them as is.
+@SuppressWarnings("deprecation")
 @mezz.jei.api.JEIPlugin
 public class ForageJEIPlugin extends BlankModPlugin
 {
