@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 @mezz.jei.api.JEIPlugin
 public class ForageJEIPlugin extends BlankModPlugin
 {
+    @SuppressWarnings("deprecation") //Fuck that shit man
     @Override
     public void register(IModRegistry registry) {
 
