@@ -1,5 +1,6 @@
 package com.theishiopian.foragecraft;
 
+import com.theishiopian.foragecraft.config.ConfigVariables;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

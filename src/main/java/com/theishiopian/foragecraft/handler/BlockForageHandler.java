@@ -2,7 +2,7 @@ package com.theishiopian.foragecraft.handler;
 
 import java.util.Random;
 
-import com.theishiopian.foragecraft.ConfigVariables;
+import com.theishiopian.foragecraft.config.ConfigVariables;
 import com.theishiopian.foragecraft.init.ModBlocks;
 
 import net.minecraft.block.Block;
@@ -29,7 +29,7 @@ public class BlockForageHandler
 			// leaves handler
 			if(target==Blocks.LEAVES||target==Blocks.LEAVES2)
 			{
-				if(CHANCE.nextFloat()<ConfigVariables.branchChance)
+				if(CHANCE.nextFloat()< ConfigVariables.branchChance)
 				{
 					event.getDrops().add(new ItemStack(Items.STICK,AMOUNT.nextInt(ConfigVariables.branchMaxAmount+1)));
 				}
@@ -37,31 +37,31 @@ public class BlockForageHandler
 			// grass block handler
 			if(target==Blocks.GRASS)
 			{
-				if(CHANCE.nextFloat()<ConfigVariables.rootChance)
+				if(CHANCE.nextFloat()< ConfigVariables.rootChance)
 				{
 					event.getDrops().add(new ItemStack(Items.STICK,AMOUNT.nextInt(ConfigVariables.rootMaxAmount+1)));
 				}
-				if(CHANCE.nextFloat()<ConfigVariables.rockChance)
+				if(CHANCE.nextFloat()< ConfigVariables.rockChance)
 				{
 					event.getDrops().add(new ItemStack(ModBlocks.rock_normal,AMOUNT.nextInt(ConfigVariables.rockMaxAmount+1)));
 				}
-				if(CHANCE.nextFloat()<ConfigVariables.wildCarrotChance)
+				if(CHANCE.nextFloat()< ConfigVariables.wildCarrotChance)
 				{
 					event.getDrops().add(new ItemStack(Items.CARROT,AMOUNT.nextInt(ConfigVariables.wildCarrotMaxAmount+1)));
 				}
-				if(CHANCE.nextFloat()<ConfigVariables.wildPotatoChance)
+				if(CHANCE.nextFloat()< ConfigVariables.wildPotatoChance)
 				{
 					event.getDrops().add(new ItemStack(Items.POTATO,AMOUNT.nextInt(ConfigVariables.wildPotatoMaxAmount+1)));
 				}
-				if(CHANCE.nextFloat()<ConfigVariables.wildToxicPotatoChance)
+				if(CHANCE.nextFloat()< ConfigVariables.wildToxicPotatoChance)
 				{
 					event.getDrops().add(new ItemStack(Items.POISONOUS_POTATO,AMOUNT.nextInt(ConfigVariables.wildToxicPotatoMaxAmount+1)));
 				}
-				if(CHANCE.nextFloat()<ConfigVariables.wildBeetRootChance)
+				if(CHANCE.nextFloat()< ConfigVariables.wildBeetRootChance)
 				{
 					event.getDrops().add(new ItemStack(Items.BEETROOT,AMOUNT.nextInt(ConfigVariables.wildBeetRootMaxAmount+1)));
 				}
-				if(CHANCE.nextFloat()<ConfigVariables.buriedBonesChance)
+				if(CHANCE.nextFloat()< ConfigVariables.buriedBonesChance)
 				{
 					event.getDrops().add(new ItemStack(Items.BONE,AMOUNT.nextInt(ConfigVariables.buriedBonesMaxBoneAmount+1)));
 					event.getDrops().add(new ItemStack(Items.SKULL,AMOUNT.nextInt(ConfigVariables.buriedBonesMaxSkullAmount+1)));
@@ -70,19 +70,19 @@ public class BlockForageHandler
 			// dirt handler
 			if(target==Blocks.DIRT)
 			{
-				if(CHANCE.nextFloat()<ConfigVariables.deepRootChance)
+				if(CHANCE.nextFloat()< ConfigVariables.deepRootChance)
 				{
 					event.getDrops().add(new ItemStack(Items.STICK,AMOUNT.nextInt(ConfigVariables.deepRootMaxAmount+1)));
 				}
-				if(CHANCE.nextFloat()<ConfigVariables.rockChance)
+				if(CHANCE.nextFloat()< ConfigVariables.rockChance)
 				{
 					event.getDrops().add(new ItemStack(ModBlocks.rock_normal,AMOUNT.nextInt(ConfigVariables.rockMaxAmount+1)));
 				}
-				if(CHANCE.nextFloat()<ConfigVariables.buriedFlintChance)
+				if(CHANCE.nextFloat()< ConfigVariables.buriedFlintChance)
 				{
 					event.getDrops().add(new ItemStack(Items.FLINT,AMOUNT.nextInt(ConfigVariables.buriedFlintMaxAmount+1)));
 				}
-				if(CHANCE.nextFloat()<ConfigVariables.buriedBonesChance)
+				if(CHANCE.nextFloat()< ConfigVariables.buriedBonesChance)
 				{
 					event.getDrops().add(new ItemStack(Items.BONE,AMOUNT.nextInt(ConfigVariables.buriedBonesMaxBoneAmount+1)));
 					event.getDrops().add(new ItemStack(Items.SKULL,AMOUNT.nextInt(ConfigVariables.buriedBonesMaxSkullAmount+1)));
@@ -91,15 +91,15 @@ public class BlockForageHandler
 			// stone handler
 			if(target==Blocks.STONE)
 			{
-				if(CHANCE.nextFloat()<ConfigVariables.goldChance)
+				if(CHANCE.nextFloat()< ConfigVariables.goldChance)
 				{
 					event.getDrops().add(new ItemStack(Items.GOLD_NUGGET,AMOUNT.nextInt(ConfigVariables.goldMaxAmount+1)));
 				}
-				if(CHANCE.nextFloat()<ConfigVariables.rockChance)
+				if(CHANCE.nextFloat()< ConfigVariables.rockChance)
 				{
 					event.getDrops().add(new ItemStack(ModBlocks.rock_normal,AMOUNT.nextInt(ConfigVariables.rockMaxAmount+1)));
 				}
-				if(CHANCE.nextFloat()<ConfigVariables.flintChipChance)
+				if(CHANCE.nextFloat()< ConfigVariables.flintChipChance)
 				{
 					event.getDrops().add(new ItemStack(Items.FLINT,AMOUNT.nextInt(ConfigVariables.flintChipMaxAmount+1)));
 				}
@@ -107,11 +107,11 @@ public class BlockForageHandler
 			// coal_ore handler
 			if(target==Blocks.COAL_ORE)
 			{
-				if(CHANCE.nextFloat()<ConfigVariables.coalDiamondChance)
+				if(CHANCE.nextFloat()< ConfigVariables.coalDiamondChance)
 				{
 					event.getDrops().add(new ItemStack(Items.DIAMOND,AMOUNT.nextInt(ConfigVariables.coalDiamondMaxAmount+1)));
 				}
-				if(CHANCE.nextFloat()<ConfigVariables.coalEmeraldChance)
+				if(CHANCE.nextFloat()< ConfigVariables.coalEmeraldChance)
 				{
 					event.getDrops().add(new ItemStack(Items.EMERALD,AMOUNT.nextInt(ConfigVariables.coalEmeraldMaxAmount+1)));
 				}
@@ -119,7 +119,7 @@ public class BlockForageHandler
 			// nether quartz handler
 			if(target==Blocks.QUARTZ_ORE)
 			{	
-				if(CHANCE.nextFloat()<ConfigVariables.netherGoldChance)
+				if(CHANCE.nextFloat()< ConfigVariables.netherGoldChance)
 				{
 				event.getDrops().add(new ItemStack(Items.GOLD_NUGGET,AMOUNT.nextInt(ConfigVariables.netherGoldMaxAmount+1)));
 				}
@@ -127,7 +127,7 @@ public class BlockForageHandler
 			// gravel handler
 			if(target==Blocks.GRAVEL)
 			{
-				if(CHANCE.nextFloat()<ConfigVariables.rockChance)
+				if(CHANCE.nextFloat()< ConfigVariables.rockChance)
 				{
 					event.getDrops().add(new ItemStack(ModBlocks.rock_normal,AMOUNT.nextInt(ConfigVariables.rockMaxAmount+1)));
 				}

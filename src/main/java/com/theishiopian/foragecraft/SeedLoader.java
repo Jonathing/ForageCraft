@@ -1,5 +1,6 @@
 package com.theishiopian.foragecraft;
 
+import com.theishiopian.foragecraft.config.ConfigVariables;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
