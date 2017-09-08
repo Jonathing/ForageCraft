@@ -130,15 +130,10 @@ public class ConfigHandler
         ForageLogger.printInfo("Configuration file loaded.");
     }
 
-    public void configWarnings()
+    public static void configWarnings()
     {
-        configClientWarnings();
-        configServerWarnings();
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void configClientWarnings()
-    {
+        //how do I use this stuff?
+        // Developer Mode logging
         if(!ConfigVariables.developerMode)
             ForageLogger.printWarn("Developer Mode is enabled. Development logging will occur at the [INFO] level.");
         else ForageLogger.printWarn("Developer Mode is disabled. Development logging will occur at the [DEBUG] level.");
@@ -148,17 +143,5 @@ public class ConfigHandler
             ForageLogger.printWarn("Stick generation has been disabled in the ForageCraft configuration file.");
         if(!ConfigVariables.enableRocks)
             ForageLogger.printWarn("Rock generation has been disabled in the ForageCraft configuration file.");
-    }
-
-    @SideOnly(Side.SERVER)
-    public static void configServerWarnings()
-    {
-        if(!ConfigVariables.developerMode)
-            ForageLogger.printWarn("Developer Mode is enabled. " + notRecommendedForServer + ". Development logging will occur at the [INFO] level.");
-        else ForageLogger.printWarn("Developer Mode is disabled. Development logging will occur at the [DEBUG] level.");
-        if(!ConfigVariables.enableSticks)
-            ForageLogger.printWarn("Stick generation has been disabled in the ForageCraft configuration file. " + notRecommendedForServer + " if you want the best player experience.");
-        if(!ConfigVariables.enableRocks)
-            ForageLogger.printWarn("Rock generation has been disabled in the ForageCraft configuration file. " + notRecommendedForServer + " if you want the best player experience.");
     }
 }

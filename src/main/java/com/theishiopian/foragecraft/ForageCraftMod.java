@@ -25,11 +25,24 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 /  https://github.com/SlimeKnights/TinkersConstruct/blob/08f7180399ca8ad4717493dd0aa5a63b7aa14584/src/main/java/slimeknights/tconstruct/TConstruct.java
 */
 
-@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, acceptedMinecraftVersions = Reference.MC_VERSIONS, updateJSON = Reference.UPDATE_JSON)
+@Mod(modid = ForageCraftMod.MODID,
+		name = ForageCraftMod.NAME,
+		version = ForageCraftMod.VERSION,
+		acceptedMinecraftVersions = ForageCraftMod.MC_VERSIONS,
+		updateJSON = ForageCraftMod.UPDATE_JSON)
 
 public class ForageCraftMod
 {
-	@SidedProxy(clientSide = Reference.CLIENTPROXY, serverSide = Reference.SERVERPROXY)
+	public static final String MODID = "foragecraft";
+	public static final String MOD_NAME = "ForageCraft";
+	public static final String NAME = "ForageCraft";
+	public static final String VERSION = "1.13";
+	public static final String MC_VERSIONS = "[1.12.1]";
+	public static final String UPDATE_JSON = "https://raw.githubusercontent.com/theishiopian/ForageCraft/master/update.json";
+	public static final String CLIENTPROXY = "com.theishiopian.foragecraft.proxy.Client";
+	public static final String SERVERPROXY = "com.theishiopian.foragecraft.proxy.Server";
+
+	@SidedProxy(clientSide = ForageCraftMod.CLIENTPROXY, serverSide = ForageCraftMod.SERVERPROXY)
 	public static CommonProxy proxy;
 
 	@Instance
@@ -39,19 +52,7 @@ public class ForageCraftMod
 	public void PreInit(FMLPreInitializationEvent event)
 	{
 		ConfigHandler.loadConfig(event);
-
-		//how do I use this stuff?
-		// Developer Mode logging
-		if(!ConfigVariables.developerMode)
-			ForageLogger.printWarn("Developer Mode is enabled. Development logging will occur at the [INFO] level.");
-		else ForageLogger.printWarn("Developer Mode is disabled. Development logging will occur at the [DEBUG] level.");
-		if(!ConfigVariables.jeiVanillaInt)
-			ForageLogger.printWarn("JEI Integration for vanilla items has been disabled.");
-		if(!ConfigVariables.enableSticks)
-			ForageLogger.printWarn("Stick generation has been disabled in the ForageCraft configuration file.");
-		if(!ConfigVariables.enableRocks)
-			ForageLogger.printWarn("Rock generation has been disabled in the ForageCraft configuration file.");
-
+		ConfigHandler.configWarnings();
 		
 		//TODO move a bunch of this shit to the proxy system.
 		
