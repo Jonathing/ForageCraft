@@ -2,7 +2,7 @@ package com.theishiopian.foragecraft.world.generation;
 
 import java.util.Random;
 
-import com.theishiopian.foragecraft.ConfigVariables;
+import com.theishiopian.foragecraft.config.ConfigVariables;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;

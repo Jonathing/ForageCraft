@@ -1,11 +1,14 @@
 package com.theishiopian.foragecraft;
 
+import com.theishiopian.foragecraft.config.ConfigVariables;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.text.TextComponentString;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ForageLogger
 {
-    public static final Logger log = LogManager.getLogger(Reference.MOD_NAME);
+    public static final Logger log = LogManager.getLogger(ForageCraftMod.MOD_NAME);
 
     public static void printDevelop(Object messageDevelop)
     {
@@ -34,5 +37,10 @@ public class ForageLogger
     public static void printInfo(Object messageInfo)
     {
         log.info(messageInfo.toString());
+    }
+
+    public static void printChat(EntityPlayer player, Object messageChat)
+    {
+        player.sendMessage(new TextComponentString("[ForageCraft] " + messageChat));
     }
 }

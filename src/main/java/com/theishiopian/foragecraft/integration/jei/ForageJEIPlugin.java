@@ -2,7 +2,7 @@ package com.theishiopian.foragecraft.integration.jei;
 
 import javax.annotation.Nonnull;
 
-import com.theishiopian.foragecraft.ConfigVariables;
+import com.theishiopian.foragecraft.config.ConfigVariables;
 import com.theishiopian.foragecraft.init.ModBlocks;
 import com.theishiopian.foragecraft.init.ModItems;
 import mezz.jei.api.BlankModPlugin;
