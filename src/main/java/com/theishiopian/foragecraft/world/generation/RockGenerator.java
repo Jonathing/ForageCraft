@@ -75,10 +75,11 @@ public class RockGenerator extends WorldGenerator
 			switch(whatRock)
 			{
 				case 0:
-					ForageLogger.printDevelop("Generating rock at X: " + rp.getX() + " Y: " + rp.getY() + " Z: " + rp.getZ() + " on top of " + onTopOf + ".");
+					ForageLogger.printWorldGen("Generating rock at X: " + rp.getX() + " Y: " + rp.getY() + " Z: " + rp.getZ() + " on top of " + onTopOf + ".");
 					break;
 				case 1:
-					ForageLogger.printDevelop("Generating flat rock at X: " + rp.getX() + " Y: " + rp.getY() + " Z: " + rp.getZ() + " on top of " + onTopOf + ".");
+					ForageLogger.printWorldGen("Generating flat rock at X: " + rp.getX() + " Y: " + rp.getY() + " Z: " + rp.getZ() + " on top of " + onTopOf + ".");
+					break;
 			}
 		}
 

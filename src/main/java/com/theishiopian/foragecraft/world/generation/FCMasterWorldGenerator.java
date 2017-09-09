@@ -92,7 +92,7 @@ public class FCMasterWorldGenerator implements IWorldGenerator
 		}
 	}
 
-	// TODO
+	// TODO Make shit for the End maybe
 	private void generateEnd(World world, Random rand, int blockX, int blockZ)
 	{
 

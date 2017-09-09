@@ -40,7 +40,7 @@ public class StickGenerator extends WorldGenerator
 		{
 			worldIn.setBlockState(pos, stick.getDefaultState().withProperty(BlockPumpkin.FACING, EnumFacing.Plane.HORIZONTAL.random(rand)), 2);
 
-			ForageLogger.printDevelop("Generating stick at X: " + sp.getX() + " Y: " + sp.getY() + " Z: " + sp.getZ() + " on top of " + onTopOf + ".");
+			ForageLogger.printWorldGen("Generating stick at X: " + sp.getX() + " Y: " + sp.getY() + " Z: " + sp.getZ() + " on top of " + onTopOf + ".");
 		}
 
 		return false;
