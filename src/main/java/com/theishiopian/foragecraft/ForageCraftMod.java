@@ -19,12 +19,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import sun.security.krb5.Config;
-
-/*
-/  Logger based from Tinkers' Construct
-/  https://github.com/SlimeKnights/TinkersConstruct/blob/08f7180399ca8ad4717493dd0aa5a63b7aa14584/src/main/java/slimeknights/tconstruct/TConstruct.java
-*/
 
 @Mod(modid = ForageCraftMod.MODID,
 		name = ForageCraftMod.NAME,
@@ -61,11 +55,8 @@ public class ForageCraftMod
 		// Initialize Blocks
 		ModBlocks.init(); ForageLogger.printDevelop("Blocks initialized successfully.");
 		
-		
 		// Initialize Items
 		ModItems.init(); ForageLogger.printDevelop("Items initialized successfully.");
-
-		
 
 		// Initialize Entities
 		ModEntities.init(); ForageLogger.printDevelop("Entities initialized successfully.");
@@ -85,9 +76,10 @@ public class ForageCraftMod
 		SeedLoader.seed();
 		GameRegistry.registerFuelHandler(new FuelHandler());// deprecated,
 															// alternatives?
+															// probably not man. Welcome to life and it's fucking adventures. Now get in the magic school bus you twit.
 		GameRegistry.registerWorldGenerator(new FCMasterWorldGenerator(), 10);
 
 		// Getting fanceh here
-		ForageLogger.printInfo("Ready to forage.");
+		ForageLogger.printInfo("The Magic School Bus is here.");
 	}
 }

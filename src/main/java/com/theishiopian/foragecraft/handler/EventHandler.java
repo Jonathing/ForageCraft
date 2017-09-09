@@ -11,12 +11,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EventHandler
 {
     /* FML Events */
-    /* TODO: Uncomment this once newer version of Forge fixes player.sendMessage(TextComponentString);
     @SubscribeEvent
-    public static void developerWarningClient(EntityJoinWorldEvent event)
+    public static void developerWarningClient(EntityJoinWorldEvent event) //TODO: This kinda isn't working right now
     {
         if(ConfigVariables.developerMode)
         {
+            String developerWarning = "Developer mode is enabled. Please check the console for extra logging features.";
             Entity entity = event.getEntity();
             World world = entity.world;
             if (!world.isRemote)
@@ -24,10 +24,19 @@ public class EventHandler
                 if (entity instanceof EntityPlayer)
                 {
                     EntityPlayer player = (EntityPlayer) entity;
-                    ForageLogger.printChat(player, "Developer mode is enabled. Please check the console for extra logging features.");
+                    ForageLogger.printChat(player, developerWarning);
                 }
+                else
+                {
+                    ForageLogger.printError("EntityJoinWorldEvent entity not instanceof EntityPlayer. Aborting send message.");
+                    ForageLogger.printWarn("Error while sending message to player. Message meant to send: \"" + developerWarning + "\"");
+                }
+            }
+            else
+            {
+                ForageLogger.printError("world isRemote. Aborting send message.");
+                ForageLogger.printWarn("Error while sending message to player. Message meant to send: \"" + developerWarning + "\"");
             }
         }
     }
-    */
 }

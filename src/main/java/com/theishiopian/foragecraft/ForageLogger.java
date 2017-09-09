@@ -18,6 +18,11 @@ public class ForageLogger
             printDebug(messageDevelop);
     }
 
+    public static void printWorldGen(Object messageExtra)
+    {
+        log.debug("[WORLDGEN] " + messageExtra.toString());
+    }
+
     // NOTE: Developer mode and debug logging are two very different things.
     public static void printDebug(Object messageDebug)
     {
@@ -27,6 +32,11 @@ public class ForageLogger
     public static void printWarn(Object messageWarn)
     {
         log.warn("[WARNING] " + messageWarn.toString());
+    }
+
+    public static void printError(Object messageError)
+    {
+        log.error("[ERROR] " + messageError.toString());
     }
 
     public static void printNotice(Object messageNotice)
@@ -41,6 +51,7 @@ public class ForageLogger
 
     public static void printChat(EntityPlayer player, Object messageChat)
     {
-        player.sendMessage(new TextComponentString("[ForageCraft] " + messageChat));
+        player.sendMessage(new TextComponentString("[ForageCraft] " + messageChat.toString()));
+        printInfo("Attempted to print to player: \"" + messageChat.toString() + "\"");
     }
 }
