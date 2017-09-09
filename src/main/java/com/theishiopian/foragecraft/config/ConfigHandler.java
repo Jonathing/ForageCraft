@@ -127,6 +127,7 @@ public class ConfigHandler
 
         // Save config
         config.save();
+
         ForageLogger.printInfo("Configuration file loaded.");
     }
 
@@ -134,7 +135,7 @@ public class ConfigHandler
     {
         //how do I use this stuff?
         // Developer Mode logging
-        if(!ConfigVariables.developerMode)
+        if(ConfigVariables.developerMode)
             ForageLogger.printWarn("Developer Mode is enabled. Development logging will occur at the [INFO] level.");
         else ForageLogger.printWarn("Developer Mode is disabled. Development logging will occur at the [DEBUG] level.");
         if(!ConfigVariables.jeiVanillaInt)
