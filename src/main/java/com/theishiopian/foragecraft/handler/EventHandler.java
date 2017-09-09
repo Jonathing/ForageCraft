@@ -7,12 +7,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+
 public class EventHandler
 {
     /* FML Events */
-    @SideOnly(Side.CLIENT)
+    /* TODO: Uncomment this once newer version of Forge fixes player.sendMessage(TextComponentString);
     @SubscribeEvent
     public static void developerWarningClient(EntityJoinWorldEvent event)
     {
@@ -30,4 +29,5 @@ public class EventHandler
             }
         }
     }
+    */
 }

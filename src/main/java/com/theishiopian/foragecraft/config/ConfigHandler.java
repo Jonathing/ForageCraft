@@ -1,5 +1,6 @@
 package com.theishiopian.foragecraft.config;
 
+import com.theishiopian.foragecraft.ForageCraftMod;
 import com.theishiopian.foragecraft.ForageLogger;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
@@ -131,9 +132,17 @@ public class ConfigHandler
         ForageLogger.printInfo("Configuration file loaded.");
     }
 
+    public static void autoDeveloperMode(String versionCode)
+    {
+        if(ForageCraftMod.VERSION.contains(versionCode))
+        {
+            ConfigVariables.developerMode = true;
+            ForageLogger.printInfo("This is a development version of ForageCraft. Therefore, developer mode has been automatically enabled.");
+        }
+    }
+
     public static void configWarnings()
     {
-        //how do I use this stuff?
         // Developer Mode logging
         if(ConfigVariables.developerMode)
             ForageLogger.printWarn("Developer Mode is enabled. Development logging will occur at the [INFO] level.");
