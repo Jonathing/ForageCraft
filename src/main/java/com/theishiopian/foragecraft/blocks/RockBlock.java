@@ -80,7 +80,7 @@ public class RockBlock extends BlockFalling
 //	@Override
 //	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) 
 //	{
-//		System.out.println("crack");
+//		System.out.println("crack cocaine");
 //		if(neighbor == pos.down())
 //		{
 //			((World) world).setBlockToAir(pos);
