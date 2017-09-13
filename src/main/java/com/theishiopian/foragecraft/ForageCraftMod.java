@@ -77,6 +77,7 @@ public class ForageCraftMod
 		GameRegistry.registerFuelHandler(new FuelHandler());// deprecated,
 															// alternatives?
 															// probably not man. Welcome to life and it's fucking adventures. Now get in the magic school bus you twit.
+															// then WHY THE FUCK IS IT DEPRACATED IF THERES NO ALTERNATIVE?????
 		GameRegistry.registerWorldGenerator(new FCMasterWorldGenerator(), 10);
 
 		// Getting fanceh here
