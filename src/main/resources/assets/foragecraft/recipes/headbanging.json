@@ -2,11 +2,11 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "minecraft:cobblestone"
+            "item": "minecraft:skeleton_skull"
         }
     ],
     "result": 
     {
-        "item": "foragecraft:rock_normal","count": 9
+        "item": "minecraft:bonemeal","count": 9
     }
 }

@@ -2,11 +2,11 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "minecraft:cobblestone"
+            "item": "foragecraft:straw_bale"
         }
     ],
     "result": 
     {
-        "item": "foragecraft:rock_normal","count": 9
+        "item": "foragecraft:straw","count": 9
     }
 }

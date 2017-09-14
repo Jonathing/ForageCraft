@@ -4,9 +4,6 @@ import com.theishiopian.foragecraft.ForageCraftMod;
 import com.theishiopian.foragecraft.ForageLogger;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 
 public class ConfigHandler
 {
