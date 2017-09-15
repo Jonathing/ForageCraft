@@ -6,6 +6,7 @@ import com.theishiopian.foragecraft.config.ConfigVariables;
 import com.theishiopian.foragecraft.init.ModBlocks;
 import com.theishiopian.foragecraft.init.ModItems;
 import mezz.jei.api.BlankModPlugin;
+//import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModRegistry;
 import net.minecraft.init.Items;
@@ -19,7 +20,7 @@ public class ForageJEIPlugin extends BlankModPlugin
     @Override
     public void register(IModRegistry registry) {
 
-        // IJeiHelpers jeiHelpers = registry.getJeiHelpers();
+        //IJeiHelpers jeiHelpers = registry.getJeiHelpers();
 
         registry.addDescription(new ItemStack(ModItems.stick_bundle), "jei.description.foraging.foragecraft.stick_bundle");
         registry.addDescription(new ItemStack(ModItems.straw), "jei.description.foraging.foragecraft.straw");

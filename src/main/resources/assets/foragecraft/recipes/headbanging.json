@@ -2,11 +2,14 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "minecraft:skull"
+            "item": "minecraft:skull",
+            "data": 0
         }
     ],
     "result": 
     {
-        "item": "minecraft:bonemeal","count": 9
+        "item": "minecraft:dye",
+        "count": 9,
+        "data":15
     }
 }
