@@ -53,6 +53,7 @@ public class CommonProxy
 		event.getRegistry().register(new ItemBlock(ModBlocks.scarecrow).setRegistryName(ModBlocks.scarecrow.getRegistryName()));
 		event.getRegistry().register(ModItems.rock_normal);
 		event.getRegistry().register(ModItems.rock_flat);
+		event.getRegistry().register(ModItems.spaghetti);
 	}
 	
 	
