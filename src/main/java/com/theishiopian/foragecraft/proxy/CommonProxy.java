@@ -54,6 +54,7 @@ public class CommonProxy
 		event.getRegistry().register(ModItems.rock_normal);
 		event.getRegistry().register(ModItems.rock_flat);
 		event.getRegistry().register(ModItems.spaghetti);
+		event.getRegistry().register(ModItems.leek_seeds);
 	}
 	
 	

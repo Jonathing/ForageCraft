@@ -1,10 +1,12 @@
 package com.theishiopian.foragecraft.init;
 
 import com.theishiopian.foragecraft.init.ModBlocks.RockType;
+import com.theishiopian.foragecraft.items.Modseeds;
 import com.theishiopian.foragecraft.items.RockItem;
 import com.theishiopian.foragecraft.items.Spaghetti;
 import com.theishiopian.foragecraft.items.StickBundle;
 import com.theishiopian.foragecraft.items.Straw;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -15,6 +17,7 @@ public class ModItems
 	public static RockItem rock_normal;
 	public static RockItem rock_flat;
 	public static Spaghetti spaghetti;
+	public static Modseeds leek_seeds;
 
 	public static void init()
 	{
@@ -23,6 +26,7 @@ public class ModItems
 		rock_normal = new RockItem(ModBlocks.rock_normal, RockType.NORMAL);
 		rock_flat = new RockItem(ModBlocks.rock_flat, RockType.FLAT);
 		spaghetti = new Spaghetti(11, 20, false);
+		leek_seeds = (Modseeds) new Modseeds(Blocks.LEAVES,Blocks.FARMLAND).setUnlocalizedName("leek_seeds").setRegistryName("leek_seeds");
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -33,5 +37,6 @@ public class ModItems
 		rock_normal.initModel();
 		rock_flat.initModel();
 		spaghetti.initModel();
+		leek_seeds.initModel();
 	}
 }
