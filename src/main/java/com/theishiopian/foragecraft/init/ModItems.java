@@ -1,6 +1,7 @@
 package com.theishiopian.foragecraft.init;
 
 import com.theishiopian.foragecraft.init.ModBlocks.RockType;
+import com.theishiopian.foragecraft.items.Leek;
 import com.theishiopian.foragecraft.items.Modseeds;
 import com.theishiopian.foragecraft.items.RockItem;
 import com.theishiopian.foragecraft.items.Spaghetti;
@@ -18,6 +19,7 @@ public class ModItems
 	public static RockItem rock_flat;
 	public static Spaghetti spaghetti;
 	public static Modseeds leek_seeds;
+	public static Leek leek;
 
 	public static void init()
 	{
@@ -25,8 +27,9 @@ public class ModItems
 		straw = new Straw();
 		rock_normal = new RockItem(ModBlocks.rock_normal, RockType.NORMAL);
 		rock_flat = new RockItem(ModBlocks.rock_flat, RockType.FLAT);
-		spaghetti = new Spaghetti(11, 20, false);
+		spaghetti = new Spaghetti(11, 20, false);//keep those wolves away from my spaghetti!
 		leek_seeds = (Modseeds) new Modseeds(Blocks.LEAVES,Blocks.FARMLAND).setUnlocalizedName("leek_seeds").setRegistryName("leek_seeds");
+		leek = new Leek(2,4, false);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -38,5 +41,6 @@ public class ModItems
 		rock_flat.initModel();
 		spaghetti.initModel();
 		leek_seeds.initModel();
+		leek.initModel();
 	}
 }
