@@ -40,6 +40,7 @@ public class CommonProxy
 		event.getRegistry().register(ModBlocks.stick_block);
 		event.getRegistry().register(ModBlocks.rock_normal);
 		event.getRegistry().register(ModBlocks.rock_flat);
+		event.getRegistry().register(ModBlocks.leek_block);
 	}
 	
 	@SubscribeEvent

@@ -2,6 +2,8 @@ package com.theishiopian.foragecraft.init;
 
 import com.theishiopian.foragecraft.blocks.BlockStick;
 import com.theishiopian.foragecraft.blocks.Fascine;
+import com.theishiopian.foragecraft.blocks.LeekCrop;
+import com.theishiopian.foragecraft.blocks.ModCropsBasic;
 import com.theishiopian.foragecraft.blocks.RoadStone;
 import com.theishiopian.foragecraft.blocks.RockBlock;
 import com.theishiopian.foragecraft.blocks.Scarecrow;
@@ -17,6 +19,7 @@ public class ModBlocks
 	public static RockBlock rock_flat;
 	public static RoadStone road_stone;
 	public static BlockStick stick_block;
+	public static ModCropsBasic leek_block;
 	
 	public static enum RockType{NORMAL, FLAT};
 	
@@ -29,6 +32,7 @@ public class ModBlocks
 		rock_flat = new RockBlock(RockType.FLAT);
 		road_stone = new RoadStone();
 		stick_block = new BlockStick();
+		leek_block = new LeekCrop();
 	}
 
 	public static void initModels()
@@ -40,5 +44,6 @@ public class ModBlocks
 		rock_flat.initModel();
 		road_stone.initModel();
 		stick_block.initModel();
+		leek_block.initModel();
 	}
 }
