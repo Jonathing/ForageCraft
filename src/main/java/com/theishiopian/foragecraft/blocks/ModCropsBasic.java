@@ -15,7 +15,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-//extend, don't instantiate
+//extend, don't instantiate. Instantiating causes crops to drop air blocks. Not ideal.
 public abstract class ModCropsBasic extends BlockCrops
 {
 	// creates a basic, vanilla style crop block, similar to wheat or potatoes.
@@ -36,8 +36,21 @@ public abstract class ModCropsBasic extends BlockCrops
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0,
 				new ModelResourceLocation(getRegistryName(), "inventory"));
 	}
+	
+	//these three methods are important:
+	
+	@Override
+	public abstract int getMaxAge();
+   
+	@Override
+	public abstract Item getSeed();
 
-	//shouldnt need to modify this too much, hopefully. If that ends up not being the case, I'll add a probability modifier to the constructor
+	@Override
+	public abstract Item getCrop();
+	
+	//don't forget to override these things and return shit
+
+	//shouldn't need to modify this too much, hopefully. If that ends up not being the case, I'll add a probability modifier to the constructor
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
