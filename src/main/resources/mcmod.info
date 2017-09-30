@@ -4,7 +4,7 @@
   "name": "ForageCraft",
   "description": "Makes surviving easier and more realistic by giving various blocks extra random drops.",
   "version": "Between a rock and a hard place",
-  "mcversion": "1.12.1",
+  "mcversion": "1.12.1 - 1.12.2",
   "url": "https://minecraft.curseforge.com/projects/foragecraft",
   "updateUrl": "https://raw.githubusercontent.com/theishiopian/ForageCraft/master/update.json",
   "authorList": ["theishiopian", "Jonathan"],
