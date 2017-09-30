@@ -2,6 +2,7 @@ package com.theishiopian.foragecraft.integration.jei;
 
 import javax.annotation.Nonnull;
 
+import com.theishiopian.foragecraft.ForageLogger;
 import com.theishiopian.foragecraft.config.ConfigVariables;
 import com.theishiopian.foragecraft.init.ModBlocks;
 import com.theishiopian.foragecraft.init.ModItems;
@@ -41,6 +42,7 @@ public class ForageJEIPlugin extends BlankModPlugin
             registry.addDescription(new ItemStack(Items.GOLD_NUGGET), "jei.description.foraging.minecraft.gold_nugget");
             registry.addDescription(new ItemStack(Items.DIAMOND), "jei.description.foraging.minecraft.diamond");
             registry.addDescription(new ItemStack(Items.EMERALD), "jei.description.foraging.minecraft.emerald");
+            ForageLogger.printDevelop("Vanilla items registered");
         }
 
 
