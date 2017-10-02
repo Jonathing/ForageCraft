@@ -28,6 +28,7 @@ public class ForageJEIPlugin extends BlankModPlugin
         registry.addDescription(new ItemStack(ModBlocks.road_stone), "jei.description.foraging.foragecraft.road_stone");
         registry.addDescription(new ItemStack(ModBlocks.scarecrow), "jei.description.foraging.foragecraft.scarecrow");
         registry.addDescription(new ItemStack(ModBlocks.straw_bale), "jei.description.foraging.foragecraft.straw_bale");
+        registry.addDescription(new ItemStack(ModItems.leek), "jei.description.foraging.foragecraft.leek");
         if(ConfigVariables.jeiVanillaInt)
         {
             registry.addDescription(new ItemStack(Items.STICK), "jei.description.foraging.minecraft.stick");

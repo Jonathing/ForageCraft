@@ -61,7 +61,7 @@ public class RockGenerator extends WorldGenerator
 		Biome biome = worldIn.getBiome(pos);
 		
 		if((toReplace == Blocks.AIR || toReplace == Blocks.TALLGRASS)
-				&& (onTopOf != Blocks.RED_MUSHROOM_BLOCK && onTopOf != Blocks.BROWN_MUSHROOM_BLOCK)
+				&& this.isValidSpot(onTopOf)
 				&& worldIn.getBlockState(rp.down()).isSideSolid(worldIn, pos, EnumFacing.UP))
 		{
 			//TODO: add sandstone rocks or something similar. Also seashells
@@ -84,6 +84,23 @@ public class RockGenerator extends WorldGenerator
 		}
 
 		return false;
+	}
+	
+	public boolean isValidSpot(Block in)
+	{
+		Block[] array =
+		{
+			Blocks.RED_MUSHROOM_BLOCK,
+			Blocks.BROWN_MUSHROOM_BLOCK,
+			Blocks.PLANKS,
+			Blocks.SAND
+		};
+		
+		for(Block b :array)
+		{
+			if(in == b)return false;
+		}
+		return true;
 	}
 
 }
