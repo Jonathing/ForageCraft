@@ -35,6 +35,7 @@ public class Scarecrow extends BlockHorizontal
 		setRegistryName("scarecrow");
 		setCreativeTab(CreativeTabs.DECORATIONS);
 		setSoundType(SoundType.WOOD);
+		this.useNeighborBrightness = true;
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		
 	}
