@@ -12,7 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.BiomeDictionary;
 
 /*
 /  World generation based on sky_01's MC forums tutorial
@@ -46,8 +45,6 @@ public class RockGenerator extends WorldGenerator
 			default:
 				rock = ModBlocks.rock_normal;
 				whatRock = 0;
-				// break;
-				// Add break in default case even though it's impossible to get to? - Jonathan
 		}
 
 		BlockPos rp = new BlockPos(pos.getX(), pos.getY(), pos.getZ());
@@ -65,11 +62,7 @@ public class RockGenerator extends WorldGenerator
 				&& worldIn.getBlockState(rp.down()).isSideSolid(worldIn, pos, EnumFacing.UP))
 		{
 			//TODO: add sandstone rocks or something similar. Also seashells
-			// TODO: Maybe also remove the desert biome along with the beach biome for generation? - Jonathan
-			if(!BiomeDictionary.hasType(biome, BiomeDictionary.Type.SANDY))
-				if(biome != Biomes.BEACH)worldIn.setBlockState(rp, rock.getDefaultState(), 2);
-			else if(!worldIn.canSeeSky(pos))
-				worldIn.setBlockState(rp, rock.getDefaultState(), 2);
+			if(this.isValidBiome(biome))worldIn.setBlockState(rp, rock.getDefaultState(), 2);
 
 			// I'll manage the config vars Theishiopian. You don't need to worry about them. - Jonathan
 			switch(whatRock)
@@ -86,6 +79,8 @@ public class RockGenerator extends WorldGenerator
 		return false;
 	}
 	
+	//TODO possible merge these if at all possible
+	
 	public boolean isValidSpot(Block in)
 	{
 		Block[] array =
@@ -97,6 +92,22 @@ public class RockGenerator extends WorldGenerator
 		};
 		
 		for(Block b :array)
+		{
+			if(in == b)return false;
+		}
+		return true;
+	}
+	
+	public boolean isValidBiome(Biome in)
+	{
+		Biome[] array =
+		{
+			Biomes.BEACH,
+			Biomes.DESERT,
+			Biomes.DESERT_HILLS			
+		};
+		
+		for(Biome b :array)
 		{
 			if(in == b)return false;
 		}
