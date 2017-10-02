@@ -2,7 +2,6 @@ package com.theishiopian.foragecraft.config;
 
 import com.theishiopian.foragecraft.ForageCraftMod;
 import com.theishiopian.foragecraft.ForageLogger;
-import net.minecraftforge.common.config.Config;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
 

@@ -1,16 +1,7 @@
 package com.theishiopian.foragecraft.handler;
 
-import com.theishiopian.foragecraft.ForageLogger;
-import com.theishiopian.foragecraft.config.ConfigVariables;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+
 
 public class EventHandler
 {

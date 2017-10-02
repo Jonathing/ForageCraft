@@ -52,6 +52,7 @@ public class CommonProxy
 		event.getRegistry().register(new ItemBlock(ModBlocks.straw_bale).setRegistryName(ModBlocks.straw_bale.getRegistryName()));
 		event.getRegistry().register(new ItemBlock(ModBlocks.road_stone).setRegistryName(ModBlocks.road_stone.getRegistryName()));
 		event.getRegistry().register(new ItemBlock(ModBlocks.scarecrow).setRegistryName(ModBlocks.scarecrow.getRegistryName()));
+		event.getRegistry().register(new ItemBlock(ModBlocks.stick_block).setRegistryName(ModBlocks.stick_block.getRegistryName()));//for creative mode players
 		event.getRegistry().register(ModItems.rock_normal);
 		event.getRegistry().register(ModItems.rock_flat);
 		event.getRegistry().register(ModItems.spaghetti);
