@@ -32,7 +32,7 @@ public class ForageCraftMod
 	public static final String MOD_NAME = "ForageCraft";
 	public static final String NAME = "ForageCraft";
 	public static final String VERSION = "1.14-dev";
-	public static final String MC_VERSIONS = "[1.12.1]";
+	public static final String MC_VERSIONS = "[1.12.1], [1.12.2]";
 	public static final String UPDATE_JSON = "https://raw.githubusercontent.com/theishiopian/ForageCraft/master/update.json";
 	public static final String PROXY_CLIENT = "com.theishiopian.foragecraft.proxy.Client";
 	public static final String PROXY_SERVER = "com.theishiopian.foragecraft.proxy.Server";
@@ -43,6 +43,8 @@ public class ForageCraftMod
 	@Instance
 	public static ForageCraftMod instance;
 
+	public static com.theishiopian.foragecraft.handler.EventHandler forgeEventHandler;
+
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent event)
 	{
@@ -51,6 +53,11 @@ public class ForageCraftMod
 		ConfigHandler.configWarnings();
 		
 		//TODO move a bunch of this shit to the proxy system.
+
+		// Register EventHandler
+		forgeEventHandler = new com.theishiopian.foragecraft.handler.EventHandler();
+		forgeEventHandler.register();
+		ForageLogger.printInfo("Target acquired...");
 		
 		// Initialize Blocks
 		ModBlocks.init(); ForageLogger.printDevelop("Blocks initialized successfully.");
@@ -78,6 +85,7 @@ public class ForageCraftMod
 															// alternatives?
 															// probably not man. Welcome to life and it's fucking adventures. Now get in the magic school bus you twit.
 															// then WHY THE FUCK IS IT DEPRACATED IF THERES NO ALTERNATIVE?????
+															// idfk I'm not the one who wrote the Emoji Movie script
 		GameRegistry.registerWorldGenerator(new FCMasterWorldGenerator(), 10);
 
 		// Getting fanceh here

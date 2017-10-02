@@ -49,9 +49,11 @@ public class ForageLogger
         log.info(messageInfo.toString());
     }
 
+    /*
     public static void printChat(EntityPlayer player, Object messageChat)
     {
         player.sendMessage(new TextComponentString("[ForageCraft] " + messageChat.toString()));
         printInfo("Attempted to print to player: \"" + messageChat.toString() + "\"");
     }
+    */
 }

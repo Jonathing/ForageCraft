@@ -4,39 +4,31 @@ import com.theishiopian.foragecraft.ForageLogger;
 import com.theishiopian.foragecraft.config.ConfigVariables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class EventHandler
 {
-    /* FML Events */
-    @SubscribeEvent
-    public static void developerWarningClient(EntityJoinWorldEvent event) //TODO: This kinda isn't working right now
+    public void register()
     {
-        if(ConfigVariables.developerMode)
-        {
-            String developerWarning = "Developer mode is enabled. Please check the console for extra logging features.";
-            Entity entity = event.getEntity();
-            World world = entity.world;
-            if (!world.isRemote)
-            {
-                if (entity instanceof EntityPlayer)
-                {
-                    EntityPlayer player = (EntityPlayer) entity;
-                    ForageLogger.printChat(player, developerWarning);
-                }
-                else
-                {
-                    ForageLogger.printError("EntityJoinWorldEvent entity not instanceof EntityPlayer. Aborting send message.");
-                    ForageLogger.printWarn("Error while sending message to player. Message meant to send: \"" + developerWarning + "\"");
-                }
-            }
-            else
-            {
-                ForageLogger.printError("world isRemote. Aborting send message.");
-                ForageLogger.printWarn("Error while sending message to player. Message meant to send: \"" + developerWarning + "\"");
-            }
-        }
+        MinecraftForge.EVENT_BUS.register(this);
     }
+
+    /* FML Events */
+    /*
+    @SubscribeEvent
+    public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) //IDK how to get this one to work.
+    {
+        String developerWarning = "Developer mode is enabled. Please check the console for extra logging features.";
+        EntityPlayer player = event.player;
+        //World world = event.player.world;
+        ForageLogger.printChat(player, ("[ForageCraft] " + developerWarning));
+        ForageLogger.printInfo("Attempted to print to player: \"" + developerWarning + "\"");
+    }
+    */
 }
