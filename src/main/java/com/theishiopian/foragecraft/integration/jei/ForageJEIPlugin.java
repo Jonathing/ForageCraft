@@ -14,6 +14,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 // There's a bunch of deprecated methods here. Idk what the other methods are so I'm leaving them as is.
+// Even though they seem to be deprecated, they still work.
 @SuppressWarnings("deprecation")
 @mezz.jei.api.JEIPlugin
 public class ForageJEIPlugin extends BlankModPlugin
@@ -30,6 +31,7 @@ public class ForageJEIPlugin extends BlankModPlugin
         registry.addDescription(new ItemStack(ModBlocks.scarecrow), "jei.description.foraging.foragecraft.scarecrow");
         registry.addDescription(new ItemStack(ModBlocks.straw_bale), "jei.description.foraging.foragecraft.straw_bale");
         registry.addDescription(new ItemStack(ModItems.leek), "jei.description.foraging.foragecraft.leek");
+        ForageLogger.printDevelop("ForageCraft items registered into JEI.");
         if(ConfigVariables.jeiVanillaInt)
         {
             registry.addDescription(new ItemStack(Items.STICK), "jei.description.foraging.minecraft.stick");
@@ -43,8 +45,8 @@ public class ForageJEIPlugin extends BlankModPlugin
             registry.addDescription(new ItemStack(Items.GOLD_NUGGET), "jei.description.foraging.minecraft.gold_nugget");
             registry.addDescription(new ItemStack(Items.DIAMOND), "jei.description.foraging.minecraft.diamond");
             registry.addDescription(new ItemStack(Items.EMERALD), "jei.description.foraging.minecraft.emerald");
-            ForageLogger.printDevelop("Vanilla items registered");
-        }
+            ForageLogger.printDevelop("Vanilla item descriptions from ForageCraft registered into JEI.");
+    }
 
 
     }

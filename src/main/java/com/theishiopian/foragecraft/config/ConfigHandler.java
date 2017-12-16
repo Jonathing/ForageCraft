@@ -145,8 +145,7 @@ public class ConfigHandler
     {
         // Developer Mode logging
         if(ConfigVariables.developerMode)
-            ForageLogger.printWarn("Developer Mode is enabled. Development logging will occur at the [INFO] level.");
-        else ForageLogger.printWarn("Developer Mode is disabled. Development logging will occur at the [DEBUG] level.");
+            ForageLogger.printWarn("Developer Mode is enabled. Development logging will occur at the [INFO] level. Generation of rocks and sticks will always occur at [DEBUG] level.");
         if(!ConfigVariables.jeiVanillaInt)
             ForageLogger.printWarn("JEI Integration for vanilla items has been disabled.");
         if(!ConfigVariables.enableSticks)

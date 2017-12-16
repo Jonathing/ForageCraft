@@ -47,7 +47,7 @@ public class ForageLogger
         log.info(messageInfo.toString());
     }
 
-    /*
+    /* TODO: Make method to send messages to player in-game.
     public static void printChat(EntityPlayer player, Object messageChat)
     {
         player.sendMessage(new TextComponentString("[ForageCraft] " + messageChat.toString()));
