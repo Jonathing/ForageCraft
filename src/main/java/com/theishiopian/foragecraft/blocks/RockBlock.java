@@ -82,6 +82,12 @@ public class RockBlock extends BlockFalling
 	}
 
 	@Override
+	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
+	{
+		return this.canPlaceBlockAt(worldIn, pos);
+	}
+
+	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
 		IBlockState state = worldIn.getBlockState(pos.down());
