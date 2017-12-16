@@ -82,6 +82,8 @@ public class RockItem extends ItemBlock
             itemstack.shrink(1);
         }
 
+        //It seems like it's playing a sound to null player.
+		//But it seems to work regardless? This might be a bug within multiplayer. We'll have to check.
         worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
         if (!worldIn.isRemote)
@@ -97,16 +99,17 @@ public class RockItem extends ItemBlock
 				default:
 					break;
             }
-        	
-        	
-            rock.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+
+            rock.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F); //setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
             worldIn.spawnEntity(rock);
         }
 
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+        //ActionResult<ItemStack> //The ItemStack part is no longer necessary so I removed it.
+        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
     }
-	
-	@Override
+
+	/*
+	@Override //Override doesn't seem to work here.
 	public float getStrVsBlock(ItemStack stack, IBlockState state)
     {
 		// anything will break faster if you hit it with a rock enough
@@ -121,4 +124,5 @@ public class RockItem extends ItemBlock
 		}
 		return e;
     }
+    */
 }
