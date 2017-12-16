@@ -29,13 +29,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RockBlock extends BlockFalling
 {
 	RockType type;
-	
+
 	public RockBlock(RockType t)
 	{
 		super(Material.ROCK);
-		
+
 		String name = null;
-		
+
 		switch(t)
 		{
 			case NORMAL: name = "rock_normal";
@@ -49,9 +49,9 @@ public class RockBlock extends BlockFalling
 		setSoundType(SoundType.STONE);
 		type = t;
 	}
-	
-	
-	
+
+
+
 	@SideOnly(Side.CLIENT)
 	public void initModel()
 	{
@@ -76,9 +76,9 @@ public class RockBlock extends BlockFalling
 	{
 		return null;
 	}
-	
+
 //	@Override
-//	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) 
+//	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor)
 //	{
 //		System.out.println("crack cocaine");
 //		if(neighbor == pos.down())
@@ -90,10 +90,18 @@ public class RockBlock extends BlockFalling
 	@Override
 	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
 	{
-		if(!worldIn.isRemote) 
+		//Moved stuff to removedByPlayer
+	}
+
+	@Override
+	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+	{
+		if (willHarvest)
+			return true;
+		if(!world.isRemote)
 		{
 			ItemStack stack = null;
-			
+
 			switch(type)
 			{
 				case FLAT: stack  = new ItemStack(Item.getItemFromBlock(ModBlocks.rock_flat));
@@ -101,19 +109,21 @@ public class RockBlock extends BlockFalling
 				case NORMAL: stack  = new ItemStack(Item.getItemFromBlock(ModBlocks.rock_normal));
 					break;
 			}
-			
-			worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack));
+
+			if(!player.capabilities.isCreativeMode)
+				world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack));
 		}
+		return super.removedByPlayer(state, world, pos, player, willHarvest);
 	}
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if(!worldIn.isRemote) 
+		if(!worldIn.isRemote)
 		{
 			ItemStack stack = null;
-			
+
 			switch(type)
 			{
 				case FLAT: stack  = new ItemStack(Item.getItemFromBlock(ModBlocks.rock_flat));
@@ -121,14 +131,14 @@ public class RockBlock extends BlockFalling
 				case NORMAL: stack  = new ItemStack(Item.getItemFromBlock(ModBlocks.rock_normal));
 					break;
 			}
-			
+
 			worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack));
 			worldIn.setBlockToAir(pos);
 		}
-		
+
 		return false;
 	}
-	
+
 	 /**
      * Get the OffsetType for this Block. Determines if the model is rendered slightly offset.
      */
