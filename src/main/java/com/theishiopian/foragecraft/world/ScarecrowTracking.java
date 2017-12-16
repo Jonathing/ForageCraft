@@ -11,8 +11,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraftforge.common.util.Constants;
+
 // Fuckin hate the scarecrow problems
 // I feel you. it will get better when I add crows
+
 public class ScarecrowTracking extends net.minecraft.world.storage.WorldSavedData
 {
 	private final LinkedHashSet<BlockPos>scarecrowLocations = new LinkedHashSet<BlockPos>();

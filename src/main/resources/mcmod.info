@@ -4,13 +4,13 @@
   "name": "ForageCraft",
   "description": "Makes surviving easier and more realistic by giving various blocks extra random drops.",
   "version": "The great Hatsune Miku reference featuring Papyrus",
-  "mcversion": "1.12.1 - 1.12.2",
+  "mcversion": "1.12.X",
   "url": "https://minecraft.curseforge.com/projects/foragecraft",
   "updateUrl": "https://raw.githubusercontent.com/theishiopian/ForageCraft/master/update.json",
-  "authorList": ["theishiopian", "Jonathan"],
-  "credits": "All the helpful people on the MC forums!",
+  "authorList": ["theishiopian", "JonathanTheInsane"],
+  "credits": "Thank you to all the helpful people in the MC Forums, bug reporters on our GitHub issue tracker, and Bailey for taking screenshots which are featured on the CurseForge page!",
   "logoFile": "assets/foragecraft/foragecraft.png",
-  "screenshots": [],
+  "screenshots": ["assets/foragecraft/screenshots/horses_sticks_rocks.png", "assets/foragecraft/screenshots/horses_hay_straw.png"],
   "dependencies": []
 }
 ]
