@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -50,7 +51,10 @@ public class RockBlock extends BlockFalling
 		type = t;
 	}
 
-
+	public boolean isTopSolid(IBlockState state)
+	{
+		return false;
+	}
 
 	@SideOnly(Side.CLIENT)
 	public void initModel()
@@ -77,15 +81,32 @@ public class RockBlock extends BlockFalling
 		return null;
 	}
 
-//	@Override
-//	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor)
-//	{
-//		System.out.println("crack cocaine");
-//		if(neighbor == pos.down())
-//		{
-//			((World) world).setBlockToAir(pos);
-//		}
-//	}
+	@Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	{
+		IBlockState state = worldIn.getBlockState(pos.down());
+
+		if (state.isTopSolid())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	/*
+	@Override
+	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor)
+	{
+		System.out.println("crack cocaine");
+		if(neighbor == pos.down())
+		{
+			((World) world).setBlockToAir(pos);
+		}
+	}
+	*/
 
 	@Override
 	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)

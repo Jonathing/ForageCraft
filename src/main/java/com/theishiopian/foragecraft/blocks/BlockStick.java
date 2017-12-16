@@ -38,7 +38,12 @@ public class BlockStick extends BlockHorizontal
 		setRegistryName("stick_block");
 		setSoundType(SoundType.WOOD);
 	}
-	
+
+	public boolean isTopSolid(IBlockState state)
+	{
+		return false;
+	}
+
 	@SideOnly(Side.CLIENT)
 	public void initModel()
 	{
@@ -62,6 +67,21 @@ public class BlockStick extends BlockHorizontal
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	{
 		return NULL_AABB;
+	}
+
+	@Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	{
+		IBlockState state = worldIn.getBlockState(pos.down());
+
+		if (state.isTopSolid())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override
