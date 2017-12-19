@@ -2,6 +2,8 @@ package com.theishiopian.foragecraft.blocks;
 
 import java.util.List;
 import javax.annotation.Nullable;
+
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -140,6 +142,19 @@ public class BlockStick extends BlockHorizontal
 		}
 
 		return false;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+		if(!worldIn.isRemote)
+		{
+			ItemStack stack = new ItemStack(Items.STICK);
+
+			worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack));
+			worldIn.setBlockToAir(pos);
+		}
 	}
 
 	@Override
