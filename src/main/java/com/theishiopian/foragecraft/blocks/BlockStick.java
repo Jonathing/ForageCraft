@@ -82,9 +82,10 @@ public class BlockStick extends BlockHorizontal
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
-		IBlockState state = worldIn.getBlockState(pos.down());
+		IBlockState state = worldIn.getBlockState(pos);
+		IBlockState stateDown = worldIn.getBlockState(pos.down());
 
-		if (state.isTopSolid())
+		if (stateDown.isTopSolid() && state.getBlock().equals(Blocks.AIR))
 		{
 			return true;
 		}

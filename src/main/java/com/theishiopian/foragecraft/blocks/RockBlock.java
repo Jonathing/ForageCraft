@@ -5,9 +5,7 @@ import javax.annotation.Nullable;
 import com.theishiopian.foragecraft.init.ModBlocks;
 import com.theishiopian.foragecraft.init.ModBlocks.RockType;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFalling;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -15,6 +13,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -90,9 +89,10 @@ public class RockBlock extends BlockFalling
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
-		IBlockState state = worldIn.getBlockState(pos.down());
+		IBlockState state = worldIn.getBlockState(pos);
+		IBlockState stateDown = worldIn.getBlockState(pos.down());
 
-		if (state.isTopSolid())
+		if (stateDown.isTopSolid() && state.getBlock().equals(Blocks.AIR))
 		{
 			return true;
 		}
