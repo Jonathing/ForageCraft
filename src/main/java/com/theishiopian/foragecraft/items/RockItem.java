@@ -4,7 +4,6 @@ import com.theishiopian.foragecraft.entity.EntityRockFlat;
 import com.theishiopian.foragecraft.entity.EntityRockNormal;
 import com.theishiopian.foragecraft.init.ModBlocks.RockType;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -100,11 +99,11 @@ public class RockItem extends ItemBlock
 					break;
             }
 
-            rock.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F); //setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+            rock.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+            //wtf is "shoot"?
             worldIn.spawnEntity(rock);
         }
-
-        //ActionResult<ItemStack> //The ItemStack part is no longer necessary so I removed it.
+        
         return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
     }
 

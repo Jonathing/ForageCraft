@@ -1,7 +1,6 @@
 package com.theishiopian.foragecraft.blocks;
 
 import java.util.List;
-import java.util.Random;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
@@ -34,6 +33,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockStick extends BlockHorizontal
 {
 
+private static AxisAlignedBB bounds = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
+	
 	public BlockStick()
 	{
 		super(Material.WOOD);
@@ -42,6 +43,11 @@ public class BlockStick extends BlockHorizontal
 		setRegistryName("stick_block");
 		setSoundType(SoundType.WOOD);
 	}
+
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        return bounds;
+    }
 
 	public boolean isTopSolid(IBlockState state)
 	{
