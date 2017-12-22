@@ -7,7 +7,6 @@ import com.theishiopian.foragecraft.init.ModBlocks.RockType;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -29,7 +28,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RockBlock extends BlockFalling
 {
 	RockType type;
-
+	//looks kinda derpy with the random offset :(
+	private static AxisAlignedBB bounds_normal = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 0.25D, 0.7D);
+	private static AxisAlignedBB bounds_flat= new AxisAlignedBB(0.2D, 0.0D, 0.2D, 0.8D, 0.125D, 0.8D);
+	
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        if(type == RockType.NORMAL)
+        {
+        	return bounds_normal;
+        }
+        else
+        {
+        	return bounds_flat;
+        }
+    }
+	
 	public RockBlock(RockType t)
 	{
 		super(Material.ROCK);
