@@ -28,20 +28,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RockBlock extends BlockFalling
 {
 	RockType type;
-	//looks kinda derpy with the random offset :(
-	private static AxisAlignedBB bounds_normal = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 0.25D, 0.7D);
-	private static AxisAlignedBB bounds_flat= new AxisAlignedBB(0.2D, 0.0D, 0.2D, 0.8D, 0.125D, 0.8D);
+
+//	private static AxisAlignedBB bounds_normal = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 0.25D, 0.7D);
+//	private static AxisAlignedBB bounds_flat= new AxisAlignedBB(0.2D, 0.0D, 0.2D, 0.8D, 0.125D, 0.8D);
 	
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        if(type == RockType.NORMAL)
-        {
-        	return bounds_normal;
-        }
-        else
-        {
-        	return bounds_flat;
-        }
+		//a compromise between realism and practicality
+		return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D);
     }
 	
 	public RockBlock(RockType t)
@@ -116,24 +110,7 @@ public class RockBlock extends BlockFalling
 		}
 	}
 
-	/*
-	@Override
-	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor)
-	{
-		System.out.println("crack cocaine");
-		if(neighbor == pos.down())
-		{
-			((World) world).setBlockToAir(pos);
-		}
-	}
-	*/
-
-	@Override
-	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
-	{
-		//Moved stuff to removedByPlayer
-	}
-
+	//whats the difference between this and blockDestryoedByPlayer?
 	@Override
 	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
 	{
