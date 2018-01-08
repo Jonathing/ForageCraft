@@ -1,11 +1,14 @@
 ext.config = loadConfig(file('build.properties'))
 
-buildscript {
-    repositories {
+buildscript
+{
+    repositories
+	{
         jcenter()
         maven { url = "http://files.minecraftforge.net/maven" }
     }
-    dependencies {
+    dependencies
+	{
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
 		classpath 'org.ajoberstar:gradle-git:1.4.2'
     }
@@ -13,31 +16,34 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-repositories {
-	maven {
+repositories
+{
+	maven
+	{
 		url "http://dvs1.progwml6.com/files/maven"
 	}
 }
 
-dependencies {
+dependencies
+{
 	deobfCompile "mezz.jei:jei_${config.mc_version}:${config.jei_version}:api"
 	runtime "mezz.jei:jei_${config.mc_version}:${config.jei_version}"
 }
 
 import org.ajoberstar.grgit.*
 
-//Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
-
 version = "${config.mod_version}"
 group= "${config.mod_group}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "ForageCraft"
+archivesBaseName = "${archives_base_name}"
 
 sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
-compileJava {
+compileJava
+{
     sourceCompatibility = targetCompatibility = "1.8"
 }
 
-minecraft {
+minecraft
+{
     version = "${config.forge_version}"
     runDir = "${config.run_dir}"
     
@@ -50,7 +56,8 @@ minecraft {
     makeObfSourceJar = "${config.make_source_jar}" // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
-dependencies {
+dependencies
+{
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
@@ -81,7 +88,8 @@ processResources
     inputs.property "mcversion", project.minecraft.version
 
     // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
+    from(sourceSets.main.resources.srcDirs)
+	{
         include 'mcmod.info'
                 
         // replace version and mcversion
@@ -89,14 +97,17 @@ processResources
     }
         
     // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
+    from(sourceSets.main.resources.srcDirs)
+	{
         exclude 'mcmod.info'
     }
 }
 
-static def loadConfig(File config) {
+static def loadConfig(File config)
+{
 	def props = new Properties()
-	config.withInputStream {
+	config.withInputStream
+	{
 		stream -> props.load(stream)
 	}
 	return new ConfigSlurper().parse(props)
