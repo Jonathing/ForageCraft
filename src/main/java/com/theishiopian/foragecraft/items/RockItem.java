@@ -99,8 +99,8 @@ public class RockItem extends ItemBlock
 					break;
             }
 
-            rock.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-            //wtf is "shoot"?
+			rock.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F); //rock.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+            //wtf is "shoot"? //Forge changed their shit
             worldIn.spawnEntity(rock);
         }
         
