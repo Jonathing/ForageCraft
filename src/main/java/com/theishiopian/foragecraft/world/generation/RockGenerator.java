@@ -83,19 +83,19 @@ public class RockGenerator extends WorldGenerator
 	
 	public boolean isValidSpot(Block in)
 	{
+		//tighter control over what rocks generate on. 
 		Block[] array =
 		{
-			Blocks.RED_MUSHROOM_BLOCK,
-			Blocks.BROWN_MUSHROOM_BLOCK,
-			Blocks.PLANKS,
-			Blocks.SAND
+			Blocks.GRASS,
+			Blocks.GRAVEL,
+			Blocks.STONE
 		};
 		
 		for(Block b :array)
 		{
-			if(in == b)return false;
+			if(in == b)return true;
 		}
-		return true;
+		return false;
 	}
 	
 	public boolean isValidBiome(Biome in)

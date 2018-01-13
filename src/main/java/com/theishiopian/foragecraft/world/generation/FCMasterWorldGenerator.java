@@ -59,18 +59,18 @@ public class FCMasterWorldGenerator implements IWorldGenerator
 		if(ConfigVariables.enableRocks)
 		{
 			// rocks can be found everywhere, even mushroom isles
+			//this is intentional, since they generate underground. 
 			for (int i = 0; i < rockRange; i++)
 			{
-				int randX = blockX + rand.nextInt(16);
+				int randX = blockX + rand.nextInt(16)+8;
 				int randY = rand.nextInt(255);
-				int randZ = blockZ + rand.nextInt(16);
+				int randZ = blockZ + rand.nextInt(16)+8;
 				BlockPos pos = new BlockPos(randX, randY, randZ);
 				rocky.generate(world, rand, pos);
 			}
 		}
 
-		// What's the if statement for??? What does it deactivate??? - Jonathan
-		// Ohhhhh it makes sure that it's only in those biomes
+		//sticks can only be found in places where it makes sense to find them
 		if
 		(
 			BiomeDictionary.hasType(world.getBiome(biomeCheckPos), BiomeDictionary.Type.FOREST)||
@@ -83,9 +83,9 @@ public class FCMasterWorldGenerator implements IWorldGenerator
 		{
 			for (int i = 0; i < stickRange; i++)
 			{
-				int randX = blockX + rand.nextInt(16);
+				int randX = blockX + rand.nextInt(16)+8;
 				int randY = rand.nextInt(255);//I long for cubic chunks :(
-				int randZ = blockZ + rand.nextInt(16);
+				int randZ = blockZ + rand.nextInt(16)+8;
 
 				sticky.generate(world, rand, new BlockPos(randX, randY, randZ));
 			}
