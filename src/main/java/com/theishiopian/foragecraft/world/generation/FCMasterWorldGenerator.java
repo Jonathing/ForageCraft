@@ -59,7 +59,7 @@ public class FCMasterWorldGenerator implements IWorldGenerator
 		if(ConfigVariables.enableRocks)
 		{
 			// rocks can be found everywhere, even mushroom isles
-			//this is intentional, since they generate underground. 
+			// this is intentional, since they generate underground. 
 			for (int i = 0; i < rockRange; i++)
 			{
 				int randX = blockX + rand.nextInt(16)+8;
