@@ -1,4 +1,5 @@
 # ForageCraft
+[![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg?style=flat-square)](https://github.com/theishiopian/ForageCraft)  [<img src="https://discordapp.com/api/guilds/244658516181123082/widget.png?style=shield">](https://discord.io/foragecraft)
 This mod aims to make survival mode easier by giving various blocks extra drops.
 
 Examples include:
