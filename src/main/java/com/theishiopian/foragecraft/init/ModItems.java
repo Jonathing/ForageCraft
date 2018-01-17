@@ -27,13 +27,11 @@ public class ModItems
 		straw = new Straw();
 		rock_normal = new RockItem(ModBlocks.rock_normal, RockType.NORMAL);
 		rock_flat = new RockItem(ModBlocks.rock_flat, RockType.FLAT);
-		spaghetti = new Spaghetti(11, 20, false);//keep those wolves away from my spaghetti!
+		spaghetti = new Spaghetti(11, 20, false);//keep those wolves away from my spaghet!
 		leek_seeds = (Modseeds) new Modseeds(ModBlocks.leek_block,Blocks.FARMLAND).setUnlocalizedName("leek_seeds").setRegistryName("leek_seeds");
 		leek = new Leek(2,4, false);
 	}
-	
-	
-	
+
 	@SideOnly(Side.CLIENT)
 	public static void initModels()
 	{
