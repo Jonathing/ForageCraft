@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
+        "particle": "blocks/log_oak",
 		"0": "blocks/log_oak"
 	},
 	"elements": [{
