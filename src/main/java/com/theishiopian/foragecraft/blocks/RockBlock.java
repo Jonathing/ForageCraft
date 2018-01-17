@@ -111,6 +111,7 @@ public class RockBlock extends BlockFalling
 	}
 
 	//whats the difference between this and blockDestryoedByPlayer?
+	//this method allowed me to add so that creative mode players can't get the block
 	@Override
 	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
 	{

@@ -31,33 +31,43 @@ public class CommonProxy
     }
     
     @SubscribeEvent
-	public static void registerBlocks(RegistryEvent.Register<Block> event)
+	public static void registerBlocks(RegistryEvent.Register<Block> e)
 	{
-		event.getRegistry().register(ModBlocks.fascine);
-		event.getRegistry().register(ModBlocks.straw_bale);
-		event.getRegistry().register(ModBlocks.scarecrow);
-		event.getRegistry().register(ModBlocks.road_stone);
-		event.getRegistry().register(ModBlocks.stick_block);
-		event.getRegistry().register(ModBlocks.rock_normal);
-		event.getRegistry().register(ModBlocks.rock_flat);
-		event.getRegistry().register(ModBlocks.leek_block);
+		regBlock(e, ModBlocks.fascine);
+		regBlock(e, ModBlocks.straw_bale);
+		regBlock(e, ModBlocks.scarecrow);
+		regBlock(e, ModBlocks.road_stone);
+		regBlock(e, ModBlocks.stick_block);
+		regBlock(e, ModBlocks.rock_normal);
+		regBlock(e, ModBlocks.rock_flat);
+		regBlock(e, ModBlocks.leek_block);
 	}
 	
 	@SubscribeEvent
-	public static void registerItems(RegistryEvent.Register<Item> event)
+	public static void registerItems(RegistryEvent.Register<Item> e)
 	{
-		event.getRegistry().register(ModItems.stick_bundle);
-		event.getRegistry().register(ModItems.straw);
-		event.getRegistry().register(new ItemBlock(ModBlocks.fascine).setRegistryName(ModBlocks.fascine.getRegistryName()));
-		event.getRegistry().register(new ItemBlock(ModBlocks.straw_bale).setRegistryName(ModBlocks.straw_bale.getRegistryName()));
-		event.getRegistry().register(new ItemBlock(ModBlocks.road_stone).setRegistryName(ModBlocks.road_stone.getRegistryName()));
-		event.getRegistry().register(new ItemBlock(ModBlocks.scarecrow).setRegistryName(ModBlocks.scarecrow.getRegistryName()));
-		event.getRegistry().register(new ItemBlock(ModBlocks.stick_block).setRegistryName(ModBlocks.stick_block.getRegistryName()));//for creative mode players
-		event.getRegistry().register(ModItems.rock_normal);
-		event.getRegistry().register(ModItems.rock_flat);
-		event.getRegistry().register(ModItems.spaghetti);
-		event.getRegistry().register(ModItems.leek_seeds);
-		event.getRegistry().register(ModItems.leek);
+		regItem(e, ModItems.stick_bundle);
+		regItem(e, ModItems.straw);
+		regItem(e, new ItemBlock(ModBlocks.fascine).setRegistryName(ModBlocks.fascine.getRegistryName()));
+		regItem(e, new ItemBlock(ModBlocks.straw_bale).setRegistryName(ModBlocks.straw_bale.getRegistryName()));
+		regItem(e, new ItemBlock(ModBlocks.road_stone).setRegistryName(ModBlocks.road_stone.getRegistryName()));
+		regItem(e, new ItemBlock(ModBlocks.scarecrow).setRegistryName(ModBlocks.scarecrow.getRegistryName()));
+		regItem(e, new ItemBlock(ModBlocks.stick_block).setRegistryName(ModBlocks.stick_block.getRegistryName()));//for creative mode players
+		regItem(e, ModItems.rock_normal);
+		regItem(e, ModItems.rock_flat);
+		regItem(e, ModItems.spaghetti);
+		regItem(e, ModItems.leek_seeds);
+		regItem(e, ModItems.leek);
+	}
+
+	public static void regBlock(RegistryEvent.Register<Block> e, Block block)
+	{
+		e.getRegistry().register(block);
+	}
+
+	public static void regItem(RegistryEvent.Register<Item> e, Item item)
+	{
+		e.getRegistry().register(item);
 	}
 	
 	

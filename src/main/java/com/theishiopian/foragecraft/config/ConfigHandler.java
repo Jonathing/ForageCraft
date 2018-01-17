@@ -7,8 +7,6 @@ import net.minecraftforge.common.config.Configuration;
 
 public class ConfigHandler
 {
-    public static final String notRecommendedForServer = "This is not recommended for servers";
-
     public static void loadConfig(FMLPreInitializationEvent event)
     {
         // Call config
