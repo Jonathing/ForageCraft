@@ -12,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
@@ -32,7 +33,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 
-	//TODO: figure out why crows don't fly.
+	//TODO: make crows run away from predators
 	//TODO: make crows eat crops
 	//TODO: improve model and texture
 	
@@ -68,6 +69,7 @@ public class EntityCrow extends EntityCreature implements EntityFlying
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(2, new EntityAIWanderAvoidWaterFlying(this, 1.0D));
+		this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 3.0F, 7.0F));
 	}
 
 	private void calculateFlapping()
