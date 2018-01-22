@@ -32,6 +32,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 
+	//TODO: figure out why crows don't fly.
+	//TODO: make crows eat crops
+	//TODO: improve model and texture
+	
+
 public class EntityCrow extends EntityCreature implements EntityFlying
 {
 

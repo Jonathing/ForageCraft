@@ -13,7 +13,6 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 public class RenderCrow extends RenderLiving<EntityCrow>
 {
-
 	public static final Factory FACTORY = new Factory();
 	
 	public RenderCrow(RenderManager rendermanagerIn)
