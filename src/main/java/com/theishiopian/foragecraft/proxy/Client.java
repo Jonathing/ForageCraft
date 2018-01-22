@@ -23,15 +23,15 @@ public class Client extends CommonProxy
 	@Override
 	public void preInit(FMLPreInitializationEvent e) 
 	{
-        
+		RenderingRegistry.registerEntityRenderingHandler(EntityRockNormal.class, RenderRockNormal.FACTORY);
+		RenderingRegistry.registerEntityRenderingHandler(EntityRockFlat.class, RenderRockFlat.FACTORY);
+		RenderingRegistry.registerEntityRenderingHandler(EntityCrow.class, RenderCrow.FACTORY);
     }
 	
 	@Override
 	public void init(FMLInitializationEvent e)
 	{
-		RenderingRegistry.registerEntityRenderingHandler(EntityRockNormal.class, RenderRockNormal.FACTORY);
-		RenderingRegistry.registerEntityRenderingHandler(EntityRockFlat.class, RenderRockFlat.FACTORY);
-		RenderingRegistry.registerEntityRenderingHandler(EntityCrow.class, RenderCrow.FACTORY);
+		
 	}
 	
 	@Override
