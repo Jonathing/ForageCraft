@@ -2,17 +2,17 @@
 	"pools":
 	[
 		{
-			"rolls": 1'
+			"rolls": 1,
 			"entries":
 			[
 				{
 					"type":"item",
-					"name":"minecraft:dirt"
+					"name":"minecraft:dirt",
 					"weight": 1
 				},
 				{
 					"type":"item",
-					"name":"minecraft:stick"
+					"name":"minecraft:stick",
 					"weight": 1
 				}
 			]

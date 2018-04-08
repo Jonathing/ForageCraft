@@ -27,6 +27,7 @@ public class BlockForageHandler
 		if(table != null)
 		{
 			System.out.println(table.toString());
+			
 			World world = event.getWorld();
 			LootTable loottable = world.getLootTableManager().getLootTableFromLocation(table);
             LootContext.Builder lootcontext$builder = (new LootContext.Builder((WorldServer)world)).withPlayer(event.getHarvester());
@@ -36,6 +37,8 @@ public class BlockForageHandler
             for (ItemStack itemstack : loottable.generateLootForPools(new Random(), lootcontext$builder.build()))
             {
                 event.getDrops().add(itemstack);
+                
+                System.out.println("adding item "+itemstack.getItem().toString());
             }
 		}
 	}
