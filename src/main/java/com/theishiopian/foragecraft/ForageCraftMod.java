@@ -1,5 +1,7 @@
 package com.theishiopian.foragecraft;
 
+import java.util.Hashtable;
+
 import com.theishiopian.foragecraft.config.*;
 import com.theishiopian.foragecraft.handler.BlockForageHandler;
 import com.theishiopian.foragecraft.handler.FuelHandler;
@@ -11,6 +13,11 @@ import com.theishiopian.foragecraft.init.ModEntities;
 import com.theishiopian.foragecraft.init.ModItems;
 import com.theishiopian.foragecraft.proxy.CommonProxy;
 import com.theishiopian.foragecraft.world.generation.FCMasterWorldGenerator;
+
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -46,6 +53,8 @@ public class ForageCraftMod
 	public static ForageCraftMod instance;
 
 	public static com.theishiopian.foragecraft.handler.EventHandler forgeEventHandler;
+	
+	public static Hashtable<Block, ResourceLocation> ForageTable = new Hashtable<Block,ResourceLocation>();
 
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent event)
@@ -67,6 +76,15 @@ public class ForageCraftMod
 
 		// Initialize Entities
 		ModEntities.init(); ForageLogger.printDevelop("Entities initialized successfully.");
+		
+		//Instance loot tables
+		ResourceLocation dirtTable = new ResourceLocation(MODID, "dirt");
+		
+		//register loot tables
+		LootTableList.register(dirtTable);
+		
+		//Populate ForageTable
+		ForageTable.put(Blocks.DIRT, dirtTable);
 	}
 
 	@SuppressWarnings("deprecation")
