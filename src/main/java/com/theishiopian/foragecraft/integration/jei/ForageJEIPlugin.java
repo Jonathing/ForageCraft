@@ -11,7 +11,6 @@ import mezz.jei.api.BlankModPlugin;
 import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModRegistry;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 // There's a bunch of deprecated methods here. Idk what the other methods are so I'm leaving them as is.

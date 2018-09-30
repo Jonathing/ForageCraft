@@ -2,15 +2,23 @@
    "items":[  
       {  
          "name":"stick",
-         "price":3.0
+         "chance":0.5,
+         "amount":1
       },
       {  
          "name":"rock",
-         "price":5.0
+         "chance":0.6,
+         "amount":1
       },
       {  
          "name":"bone",
-         "price":7.0
+         "chance":0.7,
+         "amount":1
+      },
+      {  
+         "name":"skull",
+         "chance":0.9,
+         "amount":1
       }
    ]
 }

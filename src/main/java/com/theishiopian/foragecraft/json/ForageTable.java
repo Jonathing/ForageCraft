@@ -4,27 +4,45 @@ import java.util.List;
 
 public class ForageTable
 {
-	List<ForagePool> items;
+	private List<ForagePool> items;
 	
 	public ForageTable(List<ForagePool>items)
 	{
 		this.items=items;
 	}
 	
+	public int getSize()
+	{
+		return items.size();
+	}
+	
+	public String getPool(int index)
+	{
+		return items.get(index).toString();
+	}
+	
+	@Override
+	public String toString()
+	{
+		return this.items.toString();
+	}
+	
 	public static class ForagePool
 	{
 		String name;
-		float price;
+		float chance;
+		int amount;
 		
-		public ForagePool(String name, float price)
+		public ForagePool(String name, float chance, int amount)
 		{
 			this.name = name;
-			this.price = price;
+			this.chance = chance;
+			this.amount = amount;
 		}
 		
 		public String toString()
 		{
-			return (name+" "+price+" ");
+			return (name+" "+chance+" "+amount+" ");
 		}
 	}
 }

@@ -2,8 +2,6 @@ package com.theishiopian.foragecraft;
 
 import java.io.IOException;
 
-//import java.util.Hashtable;
-
 import com.theishiopian.foragecraft.config.ConfigHandler;
 import com.theishiopian.foragecraft.handler.BlockForageHandler;
 import com.theishiopian.foragecraft.handler.FuelHandler;
@@ -17,7 +15,6 @@ import com.theishiopian.foragecraft.proxy.CommonProxy;
 import com.theishiopian.foragecraft.world.generation.FCMasterWorldGenerator;
 import com.theishiopian.foragecraft.json.*;
 
-//import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -101,6 +98,14 @@ public class ForageCraftMod
 	
 	private static void populateForageDictionaryFromTables()
 	{
-		System.out.println(JasonHandler.deserializeTable(JasonHandler.serializeTable()));
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		try
+		{
+			System.out.println(JasonHandler.buildTableFromJSON(new ResourceLocation(ForageCraftMod.MODID+":data/dirt.json")).toString());
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
