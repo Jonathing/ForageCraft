@@ -42,20 +42,21 @@ public class ForageTable
 	 */
 	public static class ForagePool
 	{
-		String name;
+		String item;
 		float chance;
 		int amount;
 		
-		public ForagePool(String name, float chance, int amount)
+		//will store items as strings, then convert automatically to itemstack notation via magic.
+		public ForagePool(String item, float chance, int amount)
 		{
-			this.name = name;
+			this.item = item;
 			this.chance = chance;
 			this.amount = amount;
 		}
 		
 		public String toString()
 		{
-			return (name+" "+chance+" "+amount+" ");
+			return (item+" "+chance+" "+amount+" ");
 		}
 	}
 }
