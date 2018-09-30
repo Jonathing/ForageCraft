@@ -1,0 +1,5 @@
+Student [ name: Mahesh, age: 21 ] 
+{ 
+   "name" : "Mahesh", 
+   "age" : 21 
+}

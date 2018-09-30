@@ -1,6 +1,8 @@
 package com.theishiopian.foragecraft;
 
-import java.util.Hashtable;
+import java.io.IOException;
+
+//import java.util.Hashtable;
 
 import com.theishiopian.foragecraft.config.ConfigHandler;
 import com.theishiopian.foragecraft.handler.BlockForageHandler;
@@ -15,9 +17,8 @@ import com.theishiopian.foragecraft.proxy.CommonProxy;
 import com.theishiopian.foragecraft.world.generation.FCMasterWorldGenerator;
 import com.theishiopian.foragecraft.json.*;
 
-import net.minecraft.block.Block;
+//import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -53,8 +54,6 @@ public class ForageCraftMod
 	public static ForageCraftMod instance;
 
 	public static com.theishiopian.foragecraft.handler.EventHandler forgeEventHandler;
-	
-	public static Hashtable<Block, ResourceLocation> ForageTable = new Hashtable<Block,ResourceLocation>();
 
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent event)
@@ -76,12 +75,6 @@ public class ForageCraftMod
 
 		// Initialize Entities
 		ModEntities.init(); ForageLogger.printDevelop("Entities initialized successfully.");
-		
-		//Instance loot tables
-		ResourceLocation dirtTable = new ResourceLocation(MODID, "dirt");
-		
-		//register loot tables
-		LootTableList.register(dirtTable);
 		
 		//todo: make this functional
 		populateForageDictionaryFromTables();
@@ -108,6 +101,14 @@ public class ForageCraftMod
 	
 	private static void populateForageDictionaryFromTables()
 	{
-		JasonHandler.testMethod(JasonHandler.buildTableFromJSON("{\"name\":\"Mahesh\", \"age\":21}"));
+		try
+		{
+			JasonHandler.testMethod(JasonHandler.buildTableFromJSON(new ResourceLocation(ForageCraftMod.MODID+":data/dirt.json")));
+		} 
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
