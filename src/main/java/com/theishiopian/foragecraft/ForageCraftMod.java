@@ -13,6 +13,7 @@ import com.theishiopian.foragecraft.init.ModEntities;
 import com.theishiopian.foragecraft.init.ModItems;
 import com.theishiopian.foragecraft.proxy.CommonProxy;
 import com.theishiopian.foragecraft.world.generation.FCMasterWorldGenerator;
+import com.theishiopian.foragecraft.json.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
@@ -107,6 +108,6 @@ public class ForageCraftMod
 	
 	private static void populateForageDictionaryFromTables()
 	{
-		
+		JasonHandler.testMethod(JasonHandler.buildTableFromJSON("{\"name\":\"Mahesh\", \"age\":21}"));
 	}
 }
