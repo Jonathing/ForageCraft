@@ -15,6 +15,8 @@ import com.theishiopian.foragecraft.proxy.CommonProxy;
 import com.theishiopian.foragecraft.world.generation.FCMasterWorldGenerator;
 import com.theishiopian.foragecraft.json.*;
 
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -73,8 +75,7 @@ public class ForageCraftMod
 		// Initialize Entities
 		ModEntities.init(); ForageLogger.printDevelop("Entities initialized successfully.");
 		
-		//todo: make this functional
-		populateForageDictionaryFromTables();
+		
 	}
 
 	@SuppressWarnings("deprecation")
@@ -94,6 +95,9 @@ public class ForageCraftMod
 
 		// Getting fanceh here
 		ForageLogger.printInfo("The Magic School Bus is here.");
+		
+		//todo: make this functional
+		populateForageDictionaryFromTables();
 	}
 	
 	private static void populateForageDictionaryFromTables()
@@ -102,7 +106,6 @@ public class ForageCraftMod
 		try
 		{
 			System.out.println(JasonHandler.buildTableFromJSON(new ResourceLocation(ForageCraftMod.MODID+":data/dirt.json")).toString());
-			System.out.println(JasonHandler.buildTableFromJSON(new ResourceLocation(ForageCraftMod.MODID+":data/grass.json")).toString());
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block

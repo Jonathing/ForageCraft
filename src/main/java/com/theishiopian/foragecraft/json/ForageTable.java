@@ -2,6 +2,10 @@ package com.theishiopian.foragecraft.json;
 
 import java.util.List;
 
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
 /**
  * This object is just a wrapper for a list.
  * The list is all the forage options for a single block.
@@ -56,7 +60,7 @@ public class ForageTable
 		
 		public String toString()
 		{
-			return (item+" "+chance+" "+amount+" ");
+			return (ForgeRegistries.ITEMS.getValue(new ResourceLocation(item)).getUnlocalizedName()+" "+chance+" "+amount+" ");
 		}
 	}
 }

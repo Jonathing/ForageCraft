@@ -1,23 +1,18 @@
 {  
    "items":[  
       {  
-         "name":"stick",
+         "item":"minecraft:stick",
          "chance":0.5,
          "amount":1
       },
       {  
-         "name":"rock",
+         "item":"foragecraft:leek",
          "chance":0.6,
          "amount":1
       },
       {  
-         "name":"bone",
+         "item":"minecraft:bone",
          "chance":0.7,
-         "amount":1
-      },
-      {  
-         "name":"skull",
-         "chance":0.9,
          "amount":1
       }
    ]
