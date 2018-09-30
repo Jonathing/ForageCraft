@@ -2,6 +2,13 @@ package com.theishiopian.foragecraft.json;
 
 import java.util.List;
 
+/**
+ * This object is just a wrapper for a list.
+ * The list is all the forage options for a single block.
+ * @author Andrew
+ *
+ */
+
 public class ForageTable
 {
 	private List<ForagePool> items;
@@ -27,6 +34,12 @@ public class ForageTable
 		return this.items.toString();
 	}
 	
+	
+	/**
+	 * This inner class is the meat of the whole operation. It acts as a storage bpx for a particular forage option eg sticks from leaves.
+	 * @author Andrew
+	 *
+	 */
 	public static class ForagePool
 	{
 		String name;

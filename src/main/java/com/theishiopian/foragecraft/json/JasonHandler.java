@@ -5,40 +5,29 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-//does the dirty work so we don't have to.
-
 import com.google.gson.*;
-import com.theishiopian.foragecraft.json.ForageTable.ForagePool;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
 public class JasonHandler
 {
-	public static String deserializeTable(String table)
-	{
-		ForagePool[] pools = new Gson().fromJson(table, ForagePool[].class);
-		
-		String out = "Items: ";
-		
-		for(ForagePool add : pools)
-		{
-			out += add.toString();
-		}
-		
-		return out;
-	}
-
+	
+	/**
+	 * This turns a json file at a resourcelocation into a foragetable object
+	 * @param location
+	 * @return
+	 * @throws IOException
+	 */
 	public static ForageTable buildTableFromJSON(ResourceLocation location) throws IOException
 	{
-		GsonBuilder builder = new GsonBuilder();
-		builder.setPrettyPrinting();
-		Gson gson = builder.create();
-		
-		InputStream in = Minecraft.getMinecraft().getResourceManager().getResource(location).getInputStream();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-		ForageTable test = gson.fromJson(reader, ForageTable.class);
+		GsonBuilder builder = new GsonBuilder();//makes a builder
+		builder.setPrettyPrinting();//pretty
+		Gson gson = builder.create();//makes a gson, which is basically a java to json translator
+		InputStream in = Minecraft.getMinecraft().getResourceManager().getResource(location).getInputStream();//read file from resourcelocation
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));//make a guy to read said file
+		ForageTable table = gson.fromJson(reader, ForageTable.class);//read file and convert to foragetable, which is a wrapper for a list of forage pools.
 
-		return test;
+		return table;
 	}
 }

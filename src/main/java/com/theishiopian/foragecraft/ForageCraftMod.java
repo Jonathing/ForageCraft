@@ -98,10 +98,11 @@ public class ForageCraftMod
 	
 	private static void populateForageDictionaryFromTables()
 	{
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");//debug shit, please ignore
 		try
 		{
 			System.out.println(JasonHandler.buildTableFromJSON(new ResourceLocation(ForageCraftMod.MODID+":data/dirt.json")).toString());
+			System.out.println(JasonHandler.buildTableFromJSON(new ResourceLocation(ForageCraftMod.MODID+":data/grass.json")).toString());
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
