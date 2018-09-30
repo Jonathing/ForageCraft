@@ -2,7 +2,7 @@ package com.theishiopian.foragecraft;
 
 import java.util.Hashtable;
 
-import com.theishiopian.foragecraft.config.*;
+import com.theishiopian.foragecraft.config.ConfigHandler;
 import com.theishiopian.foragecraft.handler.BlockForageHandler;
 import com.theishiopian.foragecraft.handler.FuelHandler;
 import com.theishiopian.foragecraft.handler.PotatoPlanter;
@@ -15,7 +15,6 @@ import com.theishiopian.foragecraft.proxy.CommonProxy;
 import com.theishiopian.foragecraft.world.generation.FCMasterWorldGenerator;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.MinecraftForge;
@@ -83,8 +82,8 @@ public class ForageCraftMod
 		//register loot tables
 		LootTableList.register(dirtTable);
 		
-		//Populate ForageTable
-		ForageTable.put(Blocks.DIRT, dirtTable);
+		//todo: make this functional
+		populateForageDictionaryFromTables();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -104,5 +103,10 @@ public class ForageCraftMod
 
 		// Getting fanceh here
 		ForageLogger.printInfo("The Magic School Bus is here.");
+	}
+	
+	private static void populateForageDictionaryFromTables()
+	{
+		
 	}
 }
