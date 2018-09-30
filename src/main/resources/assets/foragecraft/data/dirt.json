@@ -1,5 +1,16 @@
-Student [ name: Mahesh, age: 21 ] 
-{ 
-   "name" : "Mahesh", 
-   "age" : 21 
+{  
+   "items":[  
+      {  
+         "name":"stick",
+         "price":3.0
+      },
+      {  
+         "name":"rock",
+         "price":5.0
+      },
+      {  
+         "name":"bone",
+         "price":7.0
+      }
+   ]
 }

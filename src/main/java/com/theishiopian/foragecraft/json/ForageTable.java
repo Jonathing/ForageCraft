@@ -1,39 +1,30 @@
 package com.theishiopian.foragecraft.json;
 
+import java.util.List;
+
 public class ForageTable
 {
-	private String name;
-	private int age;
-
-	//test methods from a gson tutorial. you gotta start somewhere.
+	List<ForagePool> items;
 	
-	public ForageTable()
+	public ForageTable(List<ForagePool>items)
 	{
-
+		this.items=items;
 	}
-
-	public String getName()
+	
+	public static class ForagePool
 	{
-		return name;
-	}
-
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-
-	public int getAge()
-	{
-		return age;
-	}
-
-	public void setAge(int age)
-	{
-		this.age = age;
-	}
-
-	public String toString()
-	{
-		return "Student [ name: " + name + ", age: " + age + " ]";
+		String name;
+		float price;
+		
+		public ForagePool(String name, float price)
+		{
+			this.name = name;
+			this.price = price;
+		}
+		
+		public String toString()
+		{
+			return (name+" "+price+" ");
+		}
 	}
 }

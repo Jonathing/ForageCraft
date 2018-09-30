@@ -1,9 +1,6 @@
 package com.theishiopian.foragecraft.handler;
 
 import java.util.Random;
-
-import com.theishiopian.foragecraft.ForageCraftMod;
-
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 

@@ -101,14 +101,6 @@ public class ForageCraftMod
 	
 	private static void populateForageDictionaryFromTables()
 	{
-		try
-		{
-			JasonHandler.testMethod(JasonHandler.buildTableFromJSON(new ResourceLocation(ForageCraftMod.MODID+":data/dirt.json")));
-		} 
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println(JasonHandler.deserializeTable(JasonHandler.serializeTable()));
 	}
 }
