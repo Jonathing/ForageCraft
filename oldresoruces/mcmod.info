@@ -1,0 +1,16 @@
+[
+{
+  "modid": "foragecraft",
+  "name": "ForageCraft",
+  "description": "Makes surviving easier and more realistic by giving various blocks extra random drops.",
+  "version": "Feathered Theives",
+  "mcversion": "1.12.X",
+  "url": "https://minecraft.curseforge.com/projects/foragecraft",
+  "updateUrl": "https://raw.githubusercontent.com/theishiopian/ForageCraft/master/update.json",
+  "authorList": ["theishiopian", "JonathanTheInsane"],
+  "credits": "Thank you to all the helpful people in the MC Forums, bug reporters on our GitHub issue tracker, and Bailey for taking screenshots which are featured on the CurseForge page!",
+  "logoFile": "assets/foragecraft/foragecraft.png",
+  "screenshots": ["assets/foragecraft/screenshots/horses_sticks_rocks.png", "assets/foragecraft/screenshots/horses_hay_straw.png"],
+  "dependencies": []
+}
+]

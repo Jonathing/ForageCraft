@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "foragecraft:blocks/straw_bale_top",
+        "side": "foragecraft:blocks/straw_bale_side"
+    }
+}

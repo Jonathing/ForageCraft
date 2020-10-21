@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "foragecraft:stick_block" },
+        "facing=south": { "model": "foragecraft:stick_block", "y": 180 },
+        "facing=west":  { "model": "foragecraft:stick_block", "y": 270 },
+        "facing=east":  { "model": "foragecraft:stick_block", "y": 90 }
+    }
+}

@@ -1,0 +1,28 @@
+{
+  "result": 
+  {
+    "item": "foragecraft:spaghetti"
+  },
+  "pattern": 
+  [
+    " s ",
+    "www",
+    " b "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": 
+  {
+    "s": 
+    {
+      	"item": "minecraft:cooked_beef"
+    },
+    "w":
+    {
+    	"item": "minecraft:wheat"
+    },
+    "b":
+    {
+    	"item": "minecraft:bowl"
+    }
+  }
+}

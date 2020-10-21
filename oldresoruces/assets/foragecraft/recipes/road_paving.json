@@ -1,0 +1,20 @@
+{
+  "result": 
+  {
+    "item": "foragecraft:road_stone"
+  },
+  "pattern": 
+  [
+    "sss",
+    "sss",
+    "sss"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": 
+  {
+    "s": 
+    {
+      "item": "foragecraft:rock_flat"
+    }
+  }
+}

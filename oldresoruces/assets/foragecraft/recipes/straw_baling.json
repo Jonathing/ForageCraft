@@ -1,0 +1,20 @@
+{
+  "result": 
+  {
+    "item": "foragecraft:straw_bale"
+  },
+  "pattern": 
+  [
+    "sss",
+    "sss",
+    "sss"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": 
+  {
+    "s": 
+    {
+      "item": "foragecraft:straw"
+    }
+  }
+}

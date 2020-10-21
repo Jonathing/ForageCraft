@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "foragecraft:scarecrow" },
+        "facing=south": { "model": "foragecraft:scarecrow", "y": 180 },
+        "facing=west":  { "model": "foragecraft:scarecrow", "y": 270 },
+        "facing=east":  { "model": "foragecraft:scarecrow", "y": 90 }
+    }
+}

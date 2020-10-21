@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "foragecraft:blocks/road_stone_top",
+        "side": "foragecraft:blocks/road_stone_side"
+    }
+}

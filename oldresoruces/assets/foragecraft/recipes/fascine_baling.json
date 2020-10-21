@@ -1,0 +1,20 @@
+{
+  "result": 
+  {
+    "item": "foragecraft:fascine"
+  },
+  "pattern": 
+  [
+    "sss",
+    "sss",
+    "sss"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": 
+  {
+    "s": 
+    {
+      "item": "foragecraft:stick_bundle"
+    }
+  }
+}

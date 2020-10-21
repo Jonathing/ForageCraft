@@ -1,0 +1,32 @@
+{
+	"result": {
+		"item": "foragecraft:scarecrow"
+	},
+	"pattern": [
+		"lpl",
+		"fbf",
+		"lsl"
+	],
+	"type": "minecraft:crafting_shaped",
+	"key": {
+		"s": {
+			"item": "minecraft:stick"
+		},
+		"b": [{
+				"item": "foragecraft:straw_bale"
+			},
+			{
+				"item": "foragecraft:fascine"
+			}
+		],
+		"p": {
+			"item": "minecraft:pumpkin"
+		},
+		"f": {
+			"item": "foragecraft:stick_bundle"
+		},
+		"l": {
+			"item": "minecraft:leather"
+		}
+	}
+}

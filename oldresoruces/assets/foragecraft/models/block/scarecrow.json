@@ -1,0 +1,388 @@
+{
+    "__comment": "Designed by Theishiopian with BDcraft Cubik PRO 0.96 Beta - http://bdcraft.net",
+    "textures": {
+        "particle": "blocks/planks_oak",
+        "texture": "foragecraft:blocks/scarecrow"
+    },
+    "elements": [{
+        "__comment": "Post Top",
+        "from": [7, 12, 7],
+        "to": [9, 20, 9],
+        "faces": {
+            "down": {
+                "uv": [14, 0, 15, 1],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "north": {
+                "uv": [14, 0, 15, 4],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "south": {
+                "uv": [15, 0, 16, 4],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "west": {
+                "uv": [13, 0, 14, 4.5],
+                "rotation": 180,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "east": {
+                "uv": [12, 0, 13, 4],
+                "texture": "#texture",
+                "cullface": "up"
+            }
+        }
+    }, {
+        "__comment": "Head",
+        "from": [4, 20, 4],
+        "to": [12, 28, 12],
+        "faces": {
+            "down": {
+                "uv": [0, 0, 4, 4],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "up": {
+                "uv": [0, 0, 4, 4],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "north": {
+                "uv": [4, 4, 8, 8],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "south": {
+                "uv": [0, 8, 4, 12],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "west": {
+                "uv": [4, 4, 8, 8],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "east": {
+                "uv": [4, 4, 8, 8],
+                "texture": "#texture",
+                "cullface": "up"
+            }
+        }
+    }, {
+        "__comment": "Post Bottom",
+        "from": [7, 0, 7],
+        "to": [9, 8, 9],
+        "faces": {
+            "down": {
+                "uv": [14, 0, 15, 1],
+                "texture": "#texture",
+                "cullface": "down"
+            },
+            "north": {
+                "uv": [14, 0, 15, 4],
+                "texture": "#texture"
+            },
+            "south": {
+                "uv": [15, 0, 16, 4],
+                "texture": "#texture"
+            },
+            "west": {
+                "uv": [13, 0, 14, 4.5],
+                "rotation": 180,
+                "texture": "#texture"
+            },
+            "east": {
+                "uv": [12, 0, 13, 4],
+                "texture": "#texture"
+            }
+        }
+    }, {
+        "__comment": "Body",
+        "from": [5, 8, 6],
+        "to": [11, 18, 10],
+        "faces": {
+            "down": {
+                "uv": [8, 10, 11, 12],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "up": {
+                "uv": [8, 10, 11, 12],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "north": {
+                "uv": [8, 0, 11, 5],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "south": {
+                "uv": [8, 0, 11, 5],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "west": {
+                "uv": [8, 5, 10, 10],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "east": {
+                "uv": [8, 5, 10, 10],
+                "texture": "#texture",
+                "cullface": "up"
+            }
+        }
+    }, {
+        "__comment": "Shirt",
+        "from": [4.5, 7.5, 5.5],
+        "to": [11.5, 18.5, 10.5],
+        "faces": {
+            "down": {
+                "uv": [6, 11.5, 6.5, 12],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "up": {
+                "uv": [5.5, 10, 6, 10.5],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "north": {
+                "uv": [4, 13, 6, 16],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "south": {
+                "uv": [1, 13, 3, 16],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "west": {
+                "uv": [0, 13, 1, 16],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "east": {
+                "uv": [3, 13, 4, 16],
+                "texture": "#texture",
+                "cullface": "up"
+            }
+        }
+    }, {
+        "__comment": "Left Arm",
+        "from": [11.5, 14, 6.5],
+        "to": [16.5, 17, 9.5],
+        "faces": {
+            "down": {
+                "uv": [10, 7, 11.5, 10],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "up": {
+                "uv": [10, 7, 11.5, 10],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "north": {
+                "uv": [10, 7, 11.5, 10],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "south": {
+                "uv": [10, 7, 11.5, 10],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "east": {
+                "uv": [10, 5, 11.5, 6.5],
+                "texture": "#texture",
+                "cullface": "up"
+            }
+        }
+    }, {
+        "__comment": "Right Arm",
+        "from": [-0.5, 14, 6.5],
+        "to": [4.5, 17, 9.5],
+        "faces": {
+            "down": {
+                "uv": [10, 7, 11.5, 10],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "up": {
+                "uv": [10, 7, 11.5, 10],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "north": {
+                "uv": [10, 7, 11.5, 10],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "south": {
+                "uv": [10, 7, 11.5, 10],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "west": {
+                "uv": [10, 5, 11.5, 6.5],
+                "texture": "#texture",
+                "cullface": "up"
+            }
+        }
+    }, {
+        "__comment": "Right Sleeve",
+        "from": [-0.5, 13.5, 6],
+        "to": [4.5, 17.5, 10],
+        "faces": {
+            "down": {
+                "uv": [9, 13, 10, 14.5],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "up": {
+                "uv": [8, 13, 9, 14.5],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "north": {
+                "uv": [8, 14.5, 9, 16],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "south": {
+                "uv": [9, 14.5, 10, 16],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "west": {
+                "uv": [11, 15, 12, 16],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "east": {
+                "uv": [11, 15, 12, 16],
+                "texture": "#texture",
+                "cullface": "up"
+            }
+        }
+    }, {
+        "__comment": "Left Sleeve",
+        "from": [11.5, 13.5, 6],
+        "to": [16.5, 17.5, 10],
+        "faces": {
+            "down": {
+                "uv": [9, 13, 10, 14.5],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "up": {
+                "uv": [8, 13, 9, 14.5],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "north": {
+                "uv": [8, 14.5, 9, 16],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "south": {
+                "uv": [9, 14.5, 10, 16],
+                "rotation": 90,
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "west": {
+                "uv": [11, 15, 12, 16],
+                "texture": "#texture",
+                "cullface": "up"
+            },
+            "east": {
+                "uv": [11, 15, 12, 16],
+                "texture": "#texture",
+                "cullface": "up"
+            }
+        }
+    }, {
+        "__comment": "Right Hand",
+        "from": [-2, 14.5, 7],
+        "to": [0, 16.5, 9],
+        "faces": {
+            "down": {
+                "uv": [15, 15, 16, 16],
+                "texture": "#texture",
+                "cullface": "west"
+            },
+            "up": {
+                "uv": [15, 15, 16, 16],
+                "texture": "#texture",
+                "cullface": "west"
+            },
+            "north": {
+                "uv": [15, 15, 16, 16],
+                "texture": "#texture",
+                "cullface": "west"
+            },
+            "south": {
+                "uv": [15, 15, 16, 16],
+                "texture": "#texture",
+                "cullface": "west"
+            },
+            "west": {
+                "uv": [15, 15, 16, 16],
+                "texture": "#texture",
+                "cullface": "west"
+            }
+        }
+    }, {
+        "__comment": "Left Hand",
+        "from": [16, 14.5, 7],
+        "to": [18, 16.5, 9],
+        "faces": {
+            "down": {
+                "uv": [15, 15, 16, 16],
+                "texture": "#texture",
+                "cullface": "east"
+            },
+            "up": {
+                "uv": [15, 15, 16, 16],
+                "texture": "#texture",
+                "cullface": "east"
+            },
+            "north": {
+                "uv": [15, 15, 16, 16],
+                "texture": "#texture",
+                "cullface": "east"
+            },
+            "south": {
+                "uv": [15, 15, 16, 16],
+                "texture": "#texture",
+                "cullface": "east"
+            },
+            "east": {
+                "uv": [15, 15, 16, 16],
+                "texture": "#texture",
+                "cullface": "east"
+            }
+        }
+    }]
+}

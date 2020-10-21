@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:skull",
+            "data": 0
+        }
+    ],
+    "result": 
+    {
+        "item": "minecraft:dye",
+        "count": 9,
+        "data":15
+    }
+}

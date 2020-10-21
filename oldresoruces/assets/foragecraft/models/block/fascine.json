@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "foragecraft:blocks/fascine_top",
+        "side": "foragecraft:blocks/fascine_side"
+    }
+}
