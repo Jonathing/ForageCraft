@@ -1,0 +1,40 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+# CM: we include the .idea directory itself to include code styles and inspection profiles.
+.idea/
+
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+/run
+.cache
+local.properties
+
+
+# Files from Forge MDK
+forge*changelog.txt
+
+# Java Keystores
+*.jks
+
+# VSCode Workspaces
+# I use this to edit files that have nothing to with Java code or the mod. - Jonathing
+*.code-workspace
+
+# I don't know where these came from
+logs/
