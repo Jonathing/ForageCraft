@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "foragecraft:paving_stones"
+  },
+  "pattern": [
+    "sss",
+    "sss",
+    "sss"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "foragecraft:flat_rock"
+    }
+  }
+}

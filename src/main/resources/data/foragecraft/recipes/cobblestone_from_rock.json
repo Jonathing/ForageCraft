@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "foragecraft:flat_rock"
+      "item": "foragecraft:rock"
     }
   },
   "result": {
-    "item": "foragecraft:paving_stones"
+    "item": "minecraft:cobblestone"
   }
 }

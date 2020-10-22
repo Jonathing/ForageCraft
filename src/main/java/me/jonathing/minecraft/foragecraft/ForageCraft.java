@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft;
 
 import me.jonathing.minecraft.foragecraft.client.ForageCraftClient;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageRegistry;
+import me.jonathing.minecraft.foragecraft.data.ForageCraftDataGen;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,6 +37,7 @@ public class ForageCraft
         });
 
         // Register the events
+        mod.register(ForageCraftDataGen.class);
         mod.addListener(ForageCraft::commonSetup);
         mod.register(ForageRegistry.class);
     }

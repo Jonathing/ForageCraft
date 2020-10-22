@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "foragecraft:flat_rock"
+      "item": "foragecraft:straw"
     }
   },
   "result": {
-    "item": "foragecraft:paving_stones"
+    "item": "foragecraft:straw_bale"
   }
 }

@@ -1,10 +1,13 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "result": {
+    "item": "foragecraft:spaghetti"
+  },
   "pattern": [
     " s ",
     "www",
     " b "
   ],
+  "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
       "item": "minecraft:cooked_beef"
@@ -15,8 +18,5 @@
     "b": {
       "item": "minecraft:bowl"
     }
-  },
-  "result": {
-    "item": "foragecraft:spaghetti"
   }
 }

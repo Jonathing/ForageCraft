@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "foragecraft:flat_rock"
+      "item": "foragecraft:stick_bundle"
     }
   },
   "result": {
-    "item": "foragecraft:paving_stones"
+    "item": "foragecraft:fascine"
   }
 }
