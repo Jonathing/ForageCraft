@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y": { "model": "foragecraft:block/straw_bale" },
+        "axis=z": { "model": "foragecraft:block/straw_bale", "x": 90 },
+        "axis=x": { "model": "foragecraft:block/straw_bale", "x": 90, "y": 90 }
+    }
+}
