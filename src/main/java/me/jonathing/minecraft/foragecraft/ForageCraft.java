@@ -1,6 +1,5 @@
 package me.jonathing.minecraft.foragecraft;
 
-import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageRegistry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;

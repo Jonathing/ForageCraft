@@ -53,7 +53,7 @@ public class ForageEventHandler
             Triple.of(0.05f, Items.FLINT, 1)));
 
     /**
-     * Contains a list of pairs containing the chance for an item to be dropped when stone is mined,
+     * Contains a list of pairs containing the chance for an item to be dropped when coal ore is mined,
      * and the item itself. The list uses NonNullLazy to prevent {@link ExceptionInInitializerError}.
      */
     static final NonNullLazy<List<Triple<Float, Item, Integer>>> COAL_ORE_DROPS = NonNullLazy.of(() -> Arrays.asList(
@@ -61,7 +61,7 @@ public class ForageEventHandler
             Triple.of(0.001f, Items.EMERALD, 1)));
 
     /**
-     * Contains a list of pairs containing the chance for an item to be dropped when stone is mined,
+     * Contains a list of pairs containing the chance for an item to be dropped when nether quartz ore is mined,
      * and the item itself. The list uses NonNullLazy to prevent {@link ExceptionInInitializerError}.
      */
     static final NonNullLazy<List<Triple<Float, Item, Integer>>> NETHER_QUARTZ_ORE_DROPS = NonNullLazy.of(() -> Arrays.asList(

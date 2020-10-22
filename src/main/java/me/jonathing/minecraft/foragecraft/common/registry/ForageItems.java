@@ -1,5 +1,6 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
+import me.jonathing.minecraft.foragecraft.common.items.ForageItemGroups;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -13,12 +14,16 @@ import java.util.Map;
 
 public class ForageItems
 {
+    public static Item straw;
+
     private static IForgeRegistry<Item> iItemRegistry;
     public static List<Item> coloredTools = new ArrayList<>();
 
     public static void init(Register<Item> event)
     {
         ForageItems.iItemRegistry = event.getRegistry();
+
+        straw = register("straw", new Item(new Item.Properties().group(ForageItemGroups.FORAGECRAFT)));
 
         registerBlockItems();
     }

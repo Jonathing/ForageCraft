@@ -8,13 +8,13 @@ import org.spongepowered.asm.mixin.connect.IMixinConnector;
 
 public class MixinConnector implements IMixinConnector
 {
-    private static final Logger staticLogger = LogManager.getLogger("ForageCraft Mixin Connector");
+    private static final Logger LOGGER = LogManager.getLogger("ForageCraft Mixin Connector");
 
     @Override
     public void connect()
     {
-        staticLogger.info("Connecting ForageCraft to Mixin...");
+        LOGGER.info("Connecting ForageCraft to Mixin...");
         Mixins.addConfiguration(ForageCraft.MOD_ID + ".mixins.json");
-        staticLogger.info("ForageCraft connected to Mixin successfully!");
+        LOGGER.info("ForageCraft connected to Mixin successfully!");
     }
 }
