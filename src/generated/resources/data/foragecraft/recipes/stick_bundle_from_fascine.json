@@ -1,8 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "ingredient": {
-    "item": "foragecraft:fascine"
-  },
-  "result": "foragecraft:stick_bundle",
-  "count": 9
+  "ingredients": [
+    {
+      "item": "foragecraft:fascine"
+    }
+  ],
+  "result": {
+    "item": "foragecraft:stick_bundle",
+    "count": 9
+  }
 }

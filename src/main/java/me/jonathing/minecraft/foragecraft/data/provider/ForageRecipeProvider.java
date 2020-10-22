@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.data;
+package me.jonathing.minecraft.foragecraft.data.provider;
 
 import com.google.gson.JsonObject;
 import me.jonathing.minecraft.foragecraft.ForageCraft;
@@ -53,11 +53,6 @@ public class ForageRecipeProvider extends RecipeProvider
         simpleInOut(ForageBlocks.straw_bale, ForageItems.straw, 9);
     }
 
-    private SingleItemRecipeBuilder makeSimpleInOut(IItemProvider in, IItemProvider out, int amount)
-    {
-        return new SingleItemRecipeBuilder(IRecipeSerializer.CRAFTING_SHAPELESS, Ingredient.fromItems(in), out, amount);
-    }
-
     private void simpleInOut(IItemProvider in, IItemProvider out, int amount)
     {
         simpleInOut(in, out, amount, in);
@@ -65,7 +60,7 @@ public class ForageRecipeProvider extends RecipeProvider
 
     private void simpleInOut(IItemProvider in, IItemProvider out, int amount, IItemProvider criterion)
     {
-        makeSimpleInOut(in, out, amount).addCriterion(hasItem, hasItem(criterion)).build(consumer, ForageCraft.find(out.asItem().getRegistryName().getPath() + "_from_" + in.asItem().getRegistryName().getPath()));
+        ShapelessRecipeBuilder.shapelessRecipe(out, amount).addIngredient(in).addCriterion(hasItem, hasItem(criterion)).build(consumer, ForageCraft.find(out.asItem().getRegistryName().getPath() + "_from_" + in.asItem().getRegistryName().getPath()));;
     }
 
     private void simple3x3withResourceLoc(IItemProvider in, IItemProvider out, int amount)

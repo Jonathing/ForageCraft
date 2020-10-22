@@ -1,8 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "ingredient": {
-    "item": "minecraft:cobblestone"
-  },
-  "result": "foragecraft:rock",
-  "count": 9
+  "ingredients": [
+    {
+      "item": "minecraft:cobblestone"
+    }
+  ],
+  "result": {
+    "item": "foragecraft:rock",
+    "count": 9
+  }
 }

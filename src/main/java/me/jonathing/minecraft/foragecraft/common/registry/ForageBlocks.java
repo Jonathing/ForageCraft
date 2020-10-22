@@ -2,10 +2,8 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.blocks.*;
 import me.jonathing.minecraft.foragecraft.common.items.ForageItemGroups;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HayBlock;
+import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -30,7 +28,7 @@ public class ForageBlocks
     {
         ForageBlocks.iBlockRegistry = event.getRegistry();
 
-        rock = registerForage("rock", new RockBlock(Block.Properties.from(Blocks.STONE).doesNotBlockMovement().nonOpaque().zeroHardnessAndResistance()));
+        rock = registerForage("rock", new RockBlock(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).doesNotBlockMovement().nonOpaque().zeroHardnessAndResistance()));
         flat_rock = registerForage("flat_rock", new FlatRockBlock(Block.Properties.from(rock)));
         stick = registerForage("stick", new StickBlock(Block.Properties.from(Blocks.OAK_PLANKS).doesNotBlockMovement().nonOpaque().zeroHardnessAndResistance()));
 

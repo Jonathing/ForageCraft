@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "foragecraft:straw_bale",
+    "foragecraft:fascine",
+    "minecraft:hay_block"
+  ]
+}

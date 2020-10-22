@@ -18,6 +18,7 @@ public class GeneralEventHandler
         {
             event.getWorld().setBlockState(event.getPos().offset(event.getFace()), ForageBlocks.stick.getDefaultState());
             event.getPlayer().swingArm(event.getHand());
+            event.getItemStack().shrink(1);
         }
     }
 }

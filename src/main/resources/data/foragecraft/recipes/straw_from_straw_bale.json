@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "ingredient": {
-    "item": "foragecraft:straw_bale"
-  },
-  "result": "foragecraft:straw",
-  "count": 9
-}

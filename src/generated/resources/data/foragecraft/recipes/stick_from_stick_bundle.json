@@ -1,8 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "ingredient": {
-    "item": "foragecraft:stick_bundle"
-  },
-  "result": "minecraft:stick",
-  "count": 9
+  "ingredients": [
+    {
+      "item": "foragecraft:stick_bundle"
+    }
+  ],
+  "result": {
+    "item": "minecraft:stick",
+    "count": 9
+  }
 }
