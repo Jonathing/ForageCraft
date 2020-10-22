@@ -1,7 +1,10 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
+import me.jonathing.minecraft.foragecraft.common.blocks.FlatRockBlock;
 import me.jonathing.minecraft.foragecraft.common.blocks.PavingStoneBlock;
+import me.jonathing.minecraft.foragecraft.common.blocks.RockBlock;
 import me.jonathing.minecraft.foragecraft.common.items.ForageItemGroups;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HayBlock;
@@ -15,6 +18,7 @@ import java.util.Map;
 
 public class ForageBlocks
 {
+    public static Block rock, flat_rock;
     public static Block straw_bale, fascine;
     public static Block paving_stones;
 
@@ -26,6 +30,9 @@ public class ForageBlocks
     public static void init(Register<Block> event)
     {
         ForageBlocks.iBlockRegistry = event.getRegistry();
+
+        rock = registerForage("rock", new RockBlock(Block.Properties.from(Blocks.STONE).doesNotBlockMovement().nonOpaque().zeroHardnessAndResistance()));
+        flat_rock = registerForage("flat_rock", new FlatRockBlock(Block.Properties.from(rock)));
 
         straw_bale = registerForage("straw_bale", new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)));
         fascine = registerForage("fascine", new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)));
