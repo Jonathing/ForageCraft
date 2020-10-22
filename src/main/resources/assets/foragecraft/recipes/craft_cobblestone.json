@@ -1,20 +1,16 @@
 {
-  "result": 
-  {
+  "result": {
     "item": "minecraft:cobblestone"
   },
-  "pattern": 
-  [
+  "pattern": [
     "sss",
     "sss",
     "sss"
   ],
   "type": "minecraft:crafting_shaped",
-  "key": 
-  {
-    "s": 
-    {
-      "item": "foragecraft:rock_normal"
+  "key": {
+    "s": {
+      "item": "foragecraft:rock"
     }
   }
 }

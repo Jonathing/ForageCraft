@@ -1,8 +1,8 @@
 {
     "__comment": "Designed by Theishiopian with BDcraft Cubik PRO 0.96 Beta - http://bdcraft.net",
     "textures": {
-        "particle": "blocks/planks_oak",
-        "texture": "foragecraft:blocks/scarecrow"
+        "particle": "block/planks_oak",
+        "texture": "foragecraft:block/scarecrow"
     },
     "elements": [{
         "__comment": "Post Top",

@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "foragecraft:items/stick_bundle"
+        "layer0": "foragecraft:item/stick_bundle"
     }
 }

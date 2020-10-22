@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "foragecraft:block/paving_stones_top",
+    "side": "foragecraft:block/paving_stones_side"
+  }
+}

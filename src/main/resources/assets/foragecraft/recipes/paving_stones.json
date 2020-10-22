@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "foragecraft:straw_bale"
+    "item": "foragecraft:paving_stones"
   },
   "pattern": [
     "sss",
@@ -10,7 +10,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "foragecraft:straw"
+      "item": "foragecraft:flat_rock"
     }
   }
 }

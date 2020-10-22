@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "foragecraft:items/rock_normal"
+        "layer0": "foragecraft:item/flat_rock"
     }
 }

@@ -1,7 +1,16 @@
 {
-    "variants": {
-        "axis=y": { "model": "foragecraft:fascine" },
-        "axis=z": { "model": "foragecraft:fascine", "x": 90 },
-        "axis=x": { "model": "foragecraft:fascine", "x": 90, "y": 90 }
+  "variants": {
+    "axis=y": {
+      "model": "foragecraft:block/fascine"
+    },
+    "axis=z": {
+      "model": "foragecraft:block/fascine",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "foragecraft:block/fascine",
+      "x": 90,
+      "y": 90
     }
+  }
 }

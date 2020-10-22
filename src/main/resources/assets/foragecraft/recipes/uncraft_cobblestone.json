@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "foragecraft:stick_bundle"
+      "item": "minecraft:cobblestone"
     }
   ],
   "result": {
-    "item": "minecraft:stick",
+    "item": "foragecraft:rock",
     "count": 9
   }
 }

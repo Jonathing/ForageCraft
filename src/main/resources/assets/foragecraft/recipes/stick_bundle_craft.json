@@ -1,19 +1,15 @@
 {
-  "result": 
-  {
+  "result": {
     "item": "foragecraft:stick_bundle"
   },
-  "pattern": 
-  [
+  "pattern": [
     "sss",
     "sss",
     "sss"
   ],
   "type": "minecraft:crafting_shaped",
-  "key": 
-  {
-    "s": 
-    {
+  "key": {
+    "s": {
       "item": "minecraft:stick"
     }
   }

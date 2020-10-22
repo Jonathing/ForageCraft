@@ -1,6 +1,6 @@
 {
-    "parent": "block/crop",
-    "textures": {
-        "crop": "foragecraft:blocks/crops/leek/leek_stage_7"
-    }
+  "parent": "block/crop",
+  "textures": {
+    "crop": "foragecraft:block/crops/leek/leek_stage_7"
+  }
 }

@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "foragecraft:stick_bundle"
+      "item": "minecraft:skeleton_skull"
     }
   ],
   "result": {
-    "item": "minecraft:stick",
+    "item": "minecraft:bone_meal",
     "count": 9
   }
 }
