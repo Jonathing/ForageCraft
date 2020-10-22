@@ -1,5 +1,6 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
+import me.jonathing.minecraft.foragecraft.common.blocks.PavingStoneBlock;
 import me.jonathing.minecraft.foragecraft.common.items.ForageItemGroups;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -15,6 +16,7 @@ import java.util.Map;
 public class ForageBlocks
 {
     public static Block straw_bale, fascine;
+    public static Block paving_stones;
 
     public static Map<Block, ItemGroup> blockItemMap = new LinkedHashMap<>();
     public static Map<Block, Item.Properties> blockItemPropertiesMap = new LinkedHashMap<>();
@@ -27,6 +29,8 @@ public class ForageBlocks
 
         straw_bale = registerForage("straw_bale", new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)));
         fascine = registerForage("fascine", new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)));
+
+        paving_stones = registerForage("paving_stones", new PavingStoneBlock(Block.Properties.from(Blocks.STONE)));
 
 //        // Crops
 //        winter_leaves = registerBlock("winter_leaves", new SkyCropBlock(() -> SkiesItems.winter_leaf_seeds, 10));
