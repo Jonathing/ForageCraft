@@ -15,6 +15,7 @@ import java.util.Map;
 public class ForageItems
 {
     public static Item straw;
+    public static Item stick_bundle;
 
     private static IForgeRegistry<Item> iItemRegistry;
     public static List<Item> coloredTools = new ArrayList<>();
@@ -24,6 +25,8 @@ public class ForageItems
         ForageItems.iItemRegistry = event.getRegistry();
 
         straw = register("straw", new Item(new Item.Properties().group(ForageItemGroups.FORAGECRAFT)));
+
+        stick_bundle = register("stick_bundle", new Item(new Item.Properties().group(ForageItemGroups.FORAGECRAFT)));
 
         registerBlockItems();
     }
