@@ -1,11 +1,9 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.items.ForageItemGroups;
+import me.jonathing.minecraft.foragecraft.common.items.LeekItem;
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.item.*;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -17,7 +15,8 @@ public class ForageItems
 {
     public static Item straw;
     public static Item stick_bundle;
-    public static Item spaghetti;
+    public static Item spaghetti, leek;
+    public static Item leek_seeds;
 
     private static IForgeRegistry<Item> iItemRegistry;
     public static List<Item> coloredTools = new ArrayList<>();
@@ -31,6 +30,9 @@ public class ForageItems
         stick_bundle = register("stick_bundle", new Item(new Item.Properties().group(ForageItemGroups.FORAGECRAFT)));
 
         spaghetti = register("spaghetti", new Item(new Item.Properties().group(ForageItemGroups.FORAGECRAFT).food(new Food.Builder().hunger(11).saturation(0.375F).build())));
+        leek = register("leek", new LeekItem(new Item.Properties().group(ForageItemGroups.FORAGECRAFT).food(new Food.Builder().hunger(2).saturation(0.1F).build())));
+
+        leek_seeds = register("leek_seeds", new BlockNamedItem(ForageBlocks.leek_crop, new Item.Properties().group(ForageItemGroups.FORAGECRAFT)));
 
         registerBlockItems();
     }

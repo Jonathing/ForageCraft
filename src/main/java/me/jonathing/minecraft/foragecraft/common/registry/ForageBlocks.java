@@ -1,9 +1,6 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
-import me.jonathing.minecraft.foragecraft.common.blocks.FlatRockBlock;
-import me.jonathing.minecraft.foragecraft.common.blocks.PavingStoneBlock;
-import me.jonathing.minecraft.foragecraft.common.blocks.RockBlock;
-import me.jonathing.minecraft.foragecraft.common.blocks.StickBlock;
+import me.jonathing.minecraft.foragecraft.common.blocks.*;
 import me.jonathing.minecraft.foragecraft.common.items.ForageItemGroups;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -22,6 +19,7 @@ public class ForageBlocks
     public static Block rock, flat_rock, stick;
     public static Block straw_bale, fascine;
     public static Block paving_stones;
+    public static Block leek_crop;
 
     public static Map<Block, ItemGroup> blockItemMap = new LinkedHashMap<>();
     public static Map<Block, Item.Properties> blockItemPropertiesMap = new LinkedHashMap<>();
@@ -41,13 +39,7 @@ public class ForageBlocks
 
         paving_stones = registerForage("paving_stones", new PavingStoneBlock(Block.Properties.from(Blocks.STONE)));
 
-//        // Crops
-//        winter_leaves = registerBlock("winter_leaves", new SkyCropBlock(() -> SkiesItems.winter_leaf_seeds, 10));
-//        fiery_beans = registerBlock("fiery_beans", new SkyCropBlock(() -> SkiesItems.fiery_bean_seeds, 14));
-//        solnuts = registerBlock("solnuts", new SkyCropBlock(() -> SkiesItems.solnut, 13));
-//        cryo_roots = registerBlock("cryo_roots", new SkyCropBlock(() -> SkiesItems.cryo_root, 8));
-//        scalefruits = registerBlock("scalefruits", new SkyDoubleCropBlock(() -> SkiesItems.scalefruit_seeds, 16));
-//        pine_fruits = registerBlock("pine_fruits", new SkyDoubleCropBlock(() -> SkiesItems.pine_fruit_seeds, 16));
+        leek_crop = registerBlock("leek_crop", new LeekCropBlock(Block.Properties.from(Blocks.WHEAT)));
     }
 
     /**

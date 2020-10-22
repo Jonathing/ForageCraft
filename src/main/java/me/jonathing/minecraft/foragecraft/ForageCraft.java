@@ -1,9 +1,12 @@
 package me.jonathing.minecraft.foragecraft;
 
+import me.jonathing.minecraft.foragecraft.client.ForageCraftClient;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageRegistry;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -26,6 +29,11 @@ public class ForageCraft
         // Get event buses
         IEventBus mod = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forge = MinecraftForge.EVENT_BUS;
+
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
+        {
+            mod.addListener(ForageCraftClient::clientSetup);
+        });
 
         // Register the events
         mod.addListener(ForageCraft::commonSetup);
