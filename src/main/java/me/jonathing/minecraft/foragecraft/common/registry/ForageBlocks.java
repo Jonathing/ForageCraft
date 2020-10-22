@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ForageBlocks
 {
-    public static Block straw_bale;
+    public static Block straw_bale, fascine;
 
     public static Map<Block, ItemGroup> blockItemMap = new LinkedHashMap<>();
     public static Map<Block, Item.Properties> blockItemPropertiesMap = new LinkedHashMap<>();
@@ -26,6 +26,7 @@ public class ForageBlocks
         ForageBlocks.iBlockRegistry = event.getRegistry();
 
         straw_bale = registerForage("straw_bale", new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)));
+        fascine = registerForage("fascine", new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)));
 
 //        // Crops
 //        winter_leaves = registerBlock("winter_leaves", new SkyCropBlock(() -> SkiesItems.winter_leaf_seeds, 10));
