@@ -3,6 +3,7 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 import me.jonathing.minecraft.foragecraft.common.blocks.FlatRockBlock;
 import me.jonathing.minecraft.foragecraft.common.blocks.PavingStoneBlock;
 import me.jonathing.minecraft.foragecraft.common.blocks.RockBlock;
+import me.jonathing.minecraft.foragecraft.common.blocks.StickBlock;
 import me.jonathing.minecraft.foragecraft.common.items.ForageItemGroups;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 public class ForageBlocks
 {
-    public static Block rock, flat_rock;
+    public static Block rock, flat_rock, stick;
     public static Block straw_bale, fascine;
     public static Block paving_stones;
 
@@ -33,6 +34,7 @@ public class ForageBlocks
 
         rock = registerForage("rock", new RockBlock(Block.Properties.from(Blocks.STONE).doesNotBlockMovement().nonOpaque().zeroHardnessAndResistance()));
         flat_rock = registerForage("flat_rock", new FlatRockBlock(Block.Properties.from(rock)));
+        stick = registerForage("stick", new StickBlock(Block.Properties.from(Blocks.OAK_PLANKS).doesNotBlockMovement().nonOpaque().zeroHardnessAndResistance()));
 
         straw_bale = registerForage("straw_bale", new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)));
         fascine = registerForage("fascine", new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)));

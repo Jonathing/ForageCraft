@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.common;
+package me.jonathing.minecraft.foragecraft.common.handler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Mod.EventBusSubscriber
-public class ForageEventHandler
+public class ForagingEventHandler
 {
     /**
      * Contains a list of pairs containing the chance for an item to be dropped when grass is broken,
