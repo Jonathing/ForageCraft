@@ -3,6 +3,7 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 import me.jonathing.minecraft.foragecraft.common.items.ForageItemGroups;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -16,6 +17,7 @@ public class ForageItems
 {
     public static Item straw;
     public static Item stick_bundle;
+    public static Item spaghetti;
 
     private static IForgeRegistry<Item> iItemRegistry;
     public static List<Item> coloredTools = new ArrayList<>();
@@ -27,6 +29,8 @@ public class ForageItems
         straw = register("straw", new Item(new Item.Properties().group(ForageItemGroups.FORAGECRAFT)));
 
         stick_bundle = register("stick_bundle", new Item(new Item.Properties().group(ForageItemGroups.FORAGECRAFT)));
+
+        spaghetti = register("spaghetti", new Item(new Item.Properties().group(ForageItemGroups.FORAGECRAFT).food(new Food.Builder().hunger(11).saturation(0.375F).build())));
 
         registerBlockItems();
     }
