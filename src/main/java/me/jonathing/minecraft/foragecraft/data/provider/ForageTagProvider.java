@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft.data.provider;
 
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.data.tag.ForageItemTags;
+import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -17,7 +18,7 @@ public class ForageTagProvider
     {
         public BlockTagProvider(DataGenerator generator, ExistingFileHelper existingFileHelper)
         {
-            super(generator, ForageCraft.MOD_ID, existingFileHelper);
+            super(generator, ForageInfo.MOD_ID, existingFileHelper);
         }
 
         @Override
@@ -37,7 +38,7 @@ public class ForageTagProvider
     {
         public ItemTagProvider(DataGenerator generator, BlockTagsProvider blockTagsProvider, ExistingFileHelper existingFileHelper)
         {
-            super(generator, blockTagsProvider, ForageCraft.MOD_ID, existingFileHelper);
+            super(generator, blockTagsProvider, ForageInfo.MOD_ID, existingFileHelper);
         }
 
         @Override

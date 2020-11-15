@@ -1,0 +1,16 @@
+{
+  "version": {
+    "number": "2.0.0-pre1",
+    "name": "ForageCraft: Reborn (Pre-Release 1)",
+    "minecraft": "1.16.4",
+    "stable": false
+  },
+  "description": [
+    "ForageCraft, rewritten by Jonathing for modern Minecraft versions."
+  ],
+  "changelog": [
+    "ForageCraft's jars are now signed.",
+    "Updated Minecraft to 1.16.4",
+    "Updated Minecraft Forge to 35.0.18"
+  ]
+}

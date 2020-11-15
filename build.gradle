@@ -2,17 +2,25 @@ buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url = 'https://dist.creeper.host/Sponge/maven' }
+        maven { url = 'https://maven.shadew.net/' }
         jcenter()
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+        classpath group: 'net.shadew', name: 'modutil', version: '1.0-beta.10'
     }
 }
+
+ext {
+    timeOfExecution = new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+}
+
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'net.shadew.modutil'
+
 apply plugin: 'eclipse'
 apply plugin: 'signing'
 
@@ -21,13 +29,11 @@ String getVariable(String key) {
 }
 
 def mc_version = "${mc_version_major}.${mc_version_minor}.${mc_version_patch}"
-def forge_version = "${forge_version_major}.${forge_version_minor}.${forge_version_patch}"
-def mc_username = project.hasProperty('dev_username') ? dev_username : "${mod_id}_dev"
-def mc_uuid = project.hasProperty('dev_uuid') ? dev_uuid : mod_id
+def forge_version = project.hasProperty('forge_version_build') ? "${forge_version_major}.${forge_version_minor}.${forge_version_patch}.${forge_version_build}" : "${forge_version_major}.${forge_version_minor}.${forge_version_patch}"
 
-version = "${mod_version_major}.${mod_version_minor}.${mod_version_patch}-${mod_version_modifier}"
+version = project.hasProperty('mod_version_modifier') ? "${mod_version_major}.${mod_version_minor}.${mod_version_patch}-${mod_version_modifier}" : "${mod_version_major}.${mod_version_minor}.${mod_version_patch}"
 group = "me.jonathing.minecraft.${mod_id}"
-archivesBaseName = "${mod_id}_${mc_version}"
+archivesBaseName = "${mod_id}-${mc_version}"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -36,8 +42,22 @@ project.ext.getProjectFingerprint = { return getProjectFingerprint() }
 project.ext.sign = { File jar -> return sign(jar) }
 project.ext.isOsx = { return isOsx() }
 
-// Print Java version to make sure we know what we are doing.
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+println('')
+println('Java Information')
+println('- Java: ' + System.getProperty('java.version'))
+println('- JVM: ' + System.getProperty('java.vm.version') + ' (' + System.getProperty('java.vendor') + ')')
+println('- Arch: ' + System.getProperty('os.arch'))
+println('')
+println('Minecraft Information')
+println('- Minecraft: ' + "${mc_version}".toString())
+println('- Minecraft Forge: ' + "${forge_version}".toString())
+println('- Mappings: ' + "${mappings_version} ${mappings_channel}".toString())
+println('')
+println('Mod Information')
+println('- ID: ' + "${mod_id}".toString())
+println('- Name: ' + "${mod_name}".toString())
+println('- Version: ' + "${version}".toString())
+println('')
 
 repositories {
     mavenLocal()
@@ -47,10 +67,6 @@ repositories {
         url = "https://maven.tterrag.com/"
     }
     maven {
-        name = "Shadew's Maven Repository"
-        url = "http://maven.shadew.net/"
-    }
-    maven {
         name = "ModMaven"
         url = "https://modmaven.k-4u.nl/"
     }
@@ -58,6 +74,20 @@ repositories {
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
     }
+}
+
+modutil {
+    changelogJson file('changelog.json')
+
+    constant('mod_id', mod_id)
+    constant('mod_name', mod_name)
+    constant('version', changelogInfo.versionNumber)
+    constant('version_name', changelogInfo.versionName)
+    constant('group', project.group)
+    constant('build_time', project.ext.timeOfExecution)
+    constant('expected_sha256', getProjectFingerprint())
+
+    constantAnnotation 'me.jonathing.minecraft.foragecraft.info.DynamicConstant'
 }
 
 minecraft {
@@ -86,8 +116,6 @@ minecraft {
 
             // Tell Minecraft if it is running in an IDE
             property "${mod_id}.iside".toString(), 'true'
-
-            args '--username', "${mc_username}".toString(), '--uuid', "${mc_uuid}".toString()
 
             mods {
                 foragecraft {
@@ -192,11 +220,12 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    compileOnly fg.deobf("mezz.jei:jei-1.16.3:7.3.2.36:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.16.3:7.3.2.36")
-
-    compileOnly fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.3-12.0.0.404:api-obf")
-    compile fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.3-12.0.0.404:universal-obf")
+    // TODO Re-add dependencies as they are updated.
+//    compileOnly fg.deobf("mezz.jei:jei-1.16.3:7.3.2.36:api")
+//    runtimeOnly fg.deobf("mezz.jei:jei-1.16.3:7.3.2.36")
+//
+//    compileOnly fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.3-12.0.0.404:api-obf")
+//    compile fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.3-12.0.0.404:universal-obf")
 }
 
 mixin {
@@ -224,15 +253,14 @@ jar {
 }
 
 def canJarBeSigned() {
-    return getVariable('fcKeyStore') != null
+    return getVariable('jcKeyStore') != null
 }
 
 // Returns the public fingerprint, may be empty ("")
 def getProjectFingerprint() {
     if (canJarBeSigned()) {
-        def sha1 = getVariable('fcSignSHA1')
-        if (sha1 == null) return ''
-        return sha1.replaceAll(':', '').toLowerCase()
+        def sha256 = getVariable('jcKeyStoreSHA256')
+        return sha256 != null ? sha256 : ''
     }
 }
 
@@ -243,11 +271,11 @@ def sign(File jar) {
         ant.signjar(
                 destDir: "${jar.parentFile}",
                 jar: "${jar}",
-                alias: getVariable('fcKeyStoreAlias'),
+                alias: getVariable('jcKeyStoreAlias'),
                 storetype: "jks",
-                keystore: getVariable("fcKeyStore"),
-                storepass: getVariable('fcKeyStorePass'),
-                keypass: getVariable('fcKeyStoreKeyPass'),
+                keystore: getVariable("jcKeyStore"),
+                storepass: getVariable('jcKeyStorePass'),
+                keypass: getVariable('jcKeyStoreKeyPass'),
                 verbose: true,
                 preservelastmodified: "true"
         )

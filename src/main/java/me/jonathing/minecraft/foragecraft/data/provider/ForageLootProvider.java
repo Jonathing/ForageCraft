@@ -6,6 +6,7 @@ import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.blocks.LeekCropBlock;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
+import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.advancements.criterion.MinMaxBounds;
@@ -99,7 +100,7 @@ public class ForageLootProvider extends LootTableProvider
 
         private Stream<Block> blocks()
         {
-            return ForgeRegistries.BLOCKS.getValues().stream().filter(b -> b.getRegistryName().getNamespace().equals(ForageCraft.MOD_ID) && !b.getLootTable().equals(LootTables.EMPTY));
+            return ForgeRegistries.BLOCKS.getValues().stream().filter(b -> b.getRegistryName().getNamespace().equals(ForageInfo.MOD_ID) && !b.getLootTable().equals(LootTables.EMPTY));
         }
 
         private void droppingSeedTag(Block block, ITag.INamedTag<Item> tag)
