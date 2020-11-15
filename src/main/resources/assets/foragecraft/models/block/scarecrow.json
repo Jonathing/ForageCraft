@@ -1,5 +1,6 @@
 {
-	"credit": "Made with Blockbench",
+	"__comment": "Designed by Theishiopian with BDcraft Cubik PRO 0.96 Beta - http://bdcraft.net",
+	"__comment2": "Updated by Silver_David with Blockbench",
 	"textures": {
 		"texture": "foragecraft:block/scarecrow"
 	},
