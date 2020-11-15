@@ -7,54 +7,26 @@
   "elements": [
     {
       "name": "Post Top",
-      "from": [
-        7,
-        12,
-        7
-      ],
-      "to": [
-        9,
-        20,
-        9
-      ],
+      "from": [7, 12, 7],
+      "to": [9, 20, 9],
       "faces": {
         "north": {
-          "uv": [
-            11,
-            4,
-            12,
-            8
-          ],
+          "uv": [11, 4, 12, 8],
           "texture": "#texture",
           "cullface": "up"
         },
         "east": {
-          "uv": [
-            8,
-            4,
-            9,
-            8
-          ],
+          "uv": [8, 4, 9, 8],
           "texture": "#texture",
           "cullface": "up"
         },
         "south": {
-          "uv": [
-            9,
-            4,
-            10,
-            8
-          ],
+          "uv": [9, 4, 10, 8],
           "texture": "#texture",
           "cullface": "up"
         },
         "west": {
-          "uv": [
-            10,
-            4,
-            11,
-            8
-          ],
+          "uv": [10, 4, 11, 8],
           "rotation": 180,
           "texture": "#texture",
           "cullface": "up"
@@ -63,74 +35,36 @@
     },
     {
       "name": "Head",
-      "from": [
-        4,
-        20,
-        4
-      ],
-      "to": [
-        12,
-        28,
-        12
-      ],
+      "from": [4, 20, 4],
+      "to": [12, 28, 12],
       "faces": {
         "north": {
-          "uv": [
-            0,
-            4,
-            4,
-            8
-          ],
+          "uv": [0, 4, 4, 8],
           "texture": "#texture",
           "cullface": "up"
         },
         "east": {
-          "uv": [
-            0,
-            4,
-            4,
-            8
-          ],
+          "uv": [0, 4, 4, 8],
           "texture": "#texture",
           "cullface": "up"
         },
         "south": {
-          "uv": [
-            4,
-            4,
-            8,
-            8
-          ],
+          "uv": [4, 4, 8, 8],
           "texture": "#texture",
           "cullface": "up"
         },
         "west": {
-          "uv": [
-            0,
-            4,
-            4,
-            8
-          ],
+          "uv": [0, 4, 4, 8],
           "texture": "#texture",
           "cullface": "up"
         },
         "up": {
-          "uv": [
-            4,
-            0,
-            8,
-            4
-          ],
+          "uv": [4, 0, 8, 4],
           "texture": "#texture",
           "cullface": "up"
         },
         "down": {
-          "uv": [
-            4,
-            0,
-            8,
-            4
-          ],
+          "uv": [4, 0, 8, 4],
           "texture": "#texture",
           "cullface": "up"
         }
@@ -138,61 +72,28 @@
     },
     {
       "name": "Post Bottom",
-      "from": [
-        7,
-        0,
-        7
-      ],
-      "to": [
-        9,
-        8,
-        9
-      ],
+      "from": [7, 0, 7],
+      "to": [9, 8, 9],
       "faces": {
         "north": {
-          "uv": [
-            11,
-            4,
-            12,
-            8
-          ],
+          "uv": [11, 4, 12, 8],
           "texture": "#texture"
         },
         "east": {
-          "uv": [
-            8,
-            4,
-            9,
-            8
-          ],
+          "uv": [8, 4, 9, 8],
           "texture": "#texture"
         },
         "south": {
-          "uv": [
-            9,
-            4,
-            10,
-            8
-          ],
+          "uv": [9, 4, 10, 8],
           "texture": "#texture"
         },
         "west": {
-          "uv": [
-            10,
-            4,
-            11,
-            8
-          ],
+          "uv": [10, 4, 11, 8],
           "rotation": 180,
           "texture": "#texture"
         },
         "down": {
-          "uv": [
-            8,
-            3,
-            9,
-            4
-          ],
+          "uv": [8, 3, 9, 4],
           "texture": "#texture",
           "cullface": "down"
         }
@@ -200,74 +101,36 @@
     },
     {
       "name": "Body",
-      "from": [
-        5,
-        8,
-        6
-      ],
-      "to": [
-        11,
-        18,
-        10
-      ],
+      "from": [5, 8, 6],
+      "to": [11, 18, 10],
       "faces": {
         "north": {
-          "uv": [
-            13,
-            11,
-            16,
-            16
-          ],
+          "uv": [13, 11, 16, 16],
           "texture": "#texture",
           "cullface": "up"
         },
         "east": {
-          "uv": [
-            13,
-            11,
-            11,
-            16
-          ],
+          "uv": [13, 11, 11, 16],
           "texture": "#texture",
           "cullface": "up"
         },
         "south": {
-          "uv": [
-            13,
-            11,
-            16,
-            16
-          ],
+          "uv": [13, 11, 16, 16],
           "texture": "#texture",
           "cullface": "up"
         },
         "west": {
-          "uv": [
-            11,
-            11,
-            13,
-            16
-          ],
+          "uv": [11, 11, 13, 16],
           "texture": "#texture",
           "cullface": "up"
         },
         "up": {
-          "uv": [
-            13,
-            9,
-            16,
-            11
-          ],
+          "uv": [13, 9, 16, 11],
           "texture": "#texture",
           "cullface": "up"
         },
         "down": {
-          "uv": [
-            13,
-            9,
-            16,
-            11
-          ],
+          "uv": [13, 9, 16, 11],
           "texture": "#texture",
           "cullface": "up"
         }
@@ -275,74 +138,36 @@
     },
     {
       "name": "Shirt",
-      "from": [
-        4.5,
-        7.5,
-        5.5
-      ],
-      "to": [
-        11.5,
-        18.5,
-        10.5
-      ],
+      "from": [4.5, 7.5, 5.5],
+      "to": [11.5, 18.5, 10.5],
       "faces": {
         "north": {
-          "uv": [
-            4,
-            13,
-            6,
-            16
-          ],
+          "uv": [4, 13, 6, 16],
           "texture": "#texture",
           "cullface": "up"
         },
         "east": {
-          "uv": [
-            3,
-            13,
-            4,
-            16
-          ],
+          "uv": [3, 13, 4, 16],
           "texture": "#texture",
           "cullface": "up"
         },
         "south": {
-          "uv": [
-            1,
-            13,
-            3,
-            16
-          ],
+          "uv": [1, 13, 3, 16],
           "texture": "#texture",
           "cullface": "up"
         },
         "west": {
-          "uv": [
-            0,
-            13,
-            1,
-            16
-          ],
+          "uv": [0, 13, 1, 16],
           "texture": "#texture",
           "cullface": "up"
         },
         "up": {
-          "uv": [
-            5.5,
-            10,
-            6,
-            10.5
-          ],
+          "uv": [5.5, 10, 6, 10.5],
           "texture": "#texture",
           "cullface": "up"
         },
         "down": {
-          "uv": [
-            6,
-            11.5,
-            6.5,
-            12
-          ],
+          "uv": [6, 11.5, 6.5, 12],
           "texture": "#texture",
           "cullface": "up"
         }
@@ -350,76 +175,39 @@
     },
     {
       "name": "Left Arm",
-      "from": [
-        11,
-        14,
-        6.5
-      ],
-      "to": [
-        17,
-        17,
-        9.5
-      ],
+      "from": [11, 14, 6.5],
+      "to": [17, 17, 9.5],
       "rotation": {
         "angle": 0,
         "axis": "y",
-        "origin": [
-          9,
-          8,
-          8
-        ]
+        "origin": [9, 8, 8]
       },
       "faces": {
         "north": {
-          "uv": [
-            0,
-            0.75,
-            1.5,
-            4
-          ],
+          "uv": [0, 0.75, 1.5, 4],
           "rotation": 90,
           "texture": "#texture",
           "cullface": "up"
         },
         "east": {
-          "uv": [
-            1.5,
-            2.5,
-            3,
-            4
-          ],
+          "uv": [1.5, 2.5, 3, 4],
           "texture": "#texture",
           "cullface": "up"
         },
         "south": {
-          "uv": [
-            0,
-            0.75,
-            1.5,
-            4
-          ],
+          "uv": [0, 0.75, 1.5, 4],
           "rotation": 270,
           "texture": "#texture",
           "cullface": "up"
         },
         "up": {
-          "uv": [
-            0,
-            0.75,
-            1.5,
-            4
-          ],
+          "uv": [0, 0.75, 1.5, 4],
           "rotation": 270,
           "texture": "#texture",
           "cullface": "up"
         },
         "down": {
-          "uv": [
-            0,
-            0.75,
-            1.5,
-            4
-          ],
+          "uv": [0, 0.75, 1.5, 4],
           "rotation": 270,
           "texture": "#texture",
           "cullface": "up"
@@ -428,67 +216,34 @@
     },
     {
       "name": "Right Arm",
-      "from": [
-        -1,
-        14,
-        6.5
-      ],
-      "to": [
-        5,
-        17,
-        9.5
-      ],
+      "from": [-1, 14, 6.5],
+      "to": [5, 17, 9.5],
       "faces": {
         "north": {
-          "uv": [
-            0,
-            0.75,
-            1.5,
-            4
-          ],
+          "uv": [0, 0.75, 1.5, 4],
           "rotation": 270,
           "texture": "#texture",
           "cullface": "up"
         },
         "south": {
-          "uv": [
-            0,
-            0.75,
-            1.5,
-            4
-          ],
+          "uv": [0, 0.75, 1.5, 4],
           "rotation": 90,
           "texture": "#texture",
           "cullface": "up"
         },
         "west": {
-          "uv": [
-            1.5,
-            2.5,
-            3,
-            4
-          ],
+          "uv": [1.5, 2.5, 3, 4],
           "texture": "#texture",
           "cullface": "up"
         },
         "up": {
-          "uv": [
-            0,
-            0.75,
-            1.5,
-            4
-          ],
+          "uv": [0, 0.75, 1.5, 4],
           "rotation": 90,
           "texture": "#texture",
           "cullface": "up"
         },
         "down": {
-          "uv": [
-            0,
-            0.75,
-            1.5,
-            4
-          ],
+          "uv": [0, 0.75, 1.5, 4],
           "rotation": 90,
           "texture": "#texture",
           "cullface": "up"
@@ -497,77 +252,39 @@
     },
     {
       "name": "Right Sleeve",
-      "from": [
-        -0.5,
-        13.5,
-        6
-      ],
-      "to": [
-        4.5,
-        17.5,
-        10
-      ],
+      "from": [-0.5, 13.5, 6],
+      "to": [4.5, 17.5, 10],
       "faces": {
         "north": {
-          "uv": [
-            7,
-            14.5,
-            8,
-            16
-          ],
+          "uv": [7, 14.5, 8, 16],
           "rotation": 270,
           "texture": "#texture",
           "cullface": "up"
         },
         "east": {
-          "uv": [
-            7,
-            12,
-            8,
-            13
-          ],
+          "uv": [7, 12, 8, 13],
           "texture": "#texture",
           "cullface": "up"
         },
         "south": {
-          "uv": [
-            6,
-            14.5,
-            7,
-            16
-          ],
+          "uv": [6, 14.5, 7, 16],
           "rotation": 90,
           "texture": "#texture",
           "cullface": "up"
         },
         "west": {
-          "uv": [
-            6,
-            12,
-            7,
-            13
-          ],
+          "uv": [6, 12, 7, 13],
           "texture": "#texture",
           "cullface": "up"
         },
         "up": {
-          "uv": [
-            7,
-            13,
-            6,
-            14.5
-          ],
+          "uv": [7, 13, 6, 14.5],
           "rotation": 90,
           "texture": "#texture",
           "cullface": "up"
         },
         "down": {
-          "uv": [
-            8,
-            13,
-            7,
-            14.5
-          ],
+          "uv": [8, 13, 7, 14.5],
           "rotation": 90,
           "texture": "#texture",
           "cullface": "up"
@@ -576,77 +293,39 @@
     },
     {
       "name": "Left Sleeve",
-      "from": [
-        11.5,
-        13.5,
-        6
-      ],
-      "to": [
-        16.5,
-        17.5,
-        10
-      ],
+      "from": [11.5, 13.5, 6],
+      "to": [16.5, 17.5, 10],
       "faces": {
         "north": {
-          "uv": [
-            8,
-            14.5,
-            7,
-            16
-          ],
+          "uv": [8, 14.5, 7, 16],
           "rotation": 90,
           "texture": "#texture",
           "cullface": "up"
         },
         "east": {
-          "uv": [
-            6,
-            12,
-            7,
-            13
-          ],
+          "uv": [6, 12, 7, 13],
           "texture": "#texture",
           "cullface": "up"
         },
         "south": {
-          "uv": [
-            7,
-            14.5,
-            6,
-            16
-          ],
+          "uv": [7, 14.5, 6, 16],
           "rotation": 270,
           "texture": "#texture",
           "cullface": "up"
         },
         "west": {
-          "uv": [
-            7,
-            12,
-            8,
-            13
-          ],
+          "uv": [7, 12, 8, 13],
           "texture": "#texture",
           "cullface": "up"
         },
         "up": {
-          "uv": [
-            6,
-            13,
-            7,
-            14.5
-          ],
+          "uv": [6, 13, 7, 14.5],
           "rotation": 270,
           "texture": "#texture",
           "cullface": "up"
         },
         "down": {
-          "uv": [
-            7,
-            13,
-            8,
-            14.5
-          ],
+          "uv": [7, 13, 8, 14.5],
           "rotation": 270,
           "texture": "#texture",
           "cullface": "up"
@@ -655,64 +334,31 @@
     },
     {
       "name": "Right Hand",
-      "from": [
-        -2,
-        14.5,
-        7
-      ],
-      "to": [
-        0,
-        16.5,
-        9
-      ],
+      "from": [-2, 14.5, 7],
+      "to": [0, 16.5, 9],
       "faces": {
         "north": {
-          "uv": [
-            8,
-            3,
-            9,
-            4
-          ],
+          "uv": [8, 3, 9, 4],
           "texture": "#texture",
           "cullface": "west"
         },
         "south": {
-          "uv": [
-            8,
-            3,
-            9,
-            4
-          ],
+          "uv": [8, 3, 9, 4],
           "texture": "#texture",
           "cullface": "west"
         },
         "west": {
-          "uv": [
-            8,
-            3,
-            9,
-            4
-          ],
+          "uv": [8, 3, 9, 4],
           "texture": "#texture",
           "cullface": "west"
         },
         "up": {
-          "uv": [
-            8,
-            3,
-            9,
-            4
-          ],
+          "uv": [8, 3, 9, 4],
           "texture": "#texture",
           "cullface": "west"
         },
         "down": {
-          "uv": [
-            8,
-            3,
-            9,
-            4
-          ],
+          "uv": [8, 3, 9, 4],
           "texture": "#texture",
           "cullface": "west"
         }
@@ -720,64 +366,31 @@
     },
     {
       "name": "Left Hand",
-      "from": [
-        16,
-        14.5,
-        7
-      ],
-      "to": [
-        18,
-        16.5,
-        9
-      ],
+      "from": [16, 14.5, 7],
+      "to": [18, 16.5, 9],
       "faces": {
         "north": {
-          "uv": [
-            8,
-            3,
-            9,
-            4
-          ],
+          "uv": [8, 3, 9, 4],
           "texture": "#texture",
           "cullface": "east"
         },
         "east": {
-          "uv": [
-            8,
-            3,
-            9,
-            4
-          ],
+          "uv": [8, 3, 9, 4],
           "texture": "#texture",
           "cullface": "east"
         },
         "south": {
-          "uv": [
-            8,
-            3,
-            9,
-            4
-          ],
+          "uv": [8, 3, 9, 4],
           "texture": "#texture",
           "cullface": "east"
         },
         "up": {
-          "uv": [
-            8,
-            3,
-            9,
-            4
-          ],
+          "uv": [8, 3, 9, 4],
           "texture": "#texture",
           "cullface": "east"
         },
         "down": {
-          "uv": [
-            8,
-            3,
-            9,
-            4
-          ],
+          "uv": [8, 3, 9, 4],
           "texture": "#texture",
           "cullface": "east"
         }
