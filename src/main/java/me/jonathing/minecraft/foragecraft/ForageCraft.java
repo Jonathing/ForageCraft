@@ -70,7 +70,7 @@ public class ForageCraft
 
     public static void commonSetup(final FMLCommonSetupEvent event)
     {
-        VerificationHelper.validateMod(LOGGER, ForageInfo.MOD_ID, ForageInfo.EXPECTED_SHA256);
+        VerificationHelper.validateMod(ForageInfo.MOD_ID, ForageInfo.EXPECTED_SHA256);
     }
 
     public static ResourceLocation locate(String key)
