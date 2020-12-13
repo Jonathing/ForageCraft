@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.asm.mixin;
+package me.jonathing.minecraft.foragecraft.asm.mixin.dev;
 
 import net.minecraft.world.gen.settings.DimensionGeneratorSettings;
 import org.spongepowered.asm.mixin.Mixin;

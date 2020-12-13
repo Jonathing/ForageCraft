@@ -17,13 +17,23 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
+/**
+ * The main class of ForageCraft containing a bunch of initialization methods.
+ *
+ * @author Jonathing
+ * @since 2.0.0
+ */
 @Mod(ForageInfo.MOD_ID)
 public class ForageCraft
 {
-    // Directly reference a log4j logger.
+    /**
+     * This is the main logger that most of the methods in the mod will be using.
+     */
     public static final Logger LOGGER = LogManager.getLogger("ForageCraft");
 
+    /**
+     * Public constructor for ForageCraft. The initial spark which begins all of the registration processes.
+     */
     public ForageCraft()
     {
         printInfo();
@@ -40,11 +50,26 @@ public class ForageCraft
         mod.register(ForageRegistry.class);
     }
 
+    /**
+     * Prints information about ForageCraft to the console. Is limited when in a normal environment.
+     * <p>
+     * Normal:
+     * <pre>
+     *     Initializing ForageCraft. See the debug log for build information.
+     * </pre>
+     * <p>
+     * Debug:
+     * <pre>
+     *     ForageCraft Build Information
+     *     - Version:     2.0.0 - ForageCraft: Reborn
+     *     - Build Date:  2038-01-19T03:14:08Z
+     *     - Dist:        CLIENT
+     *     - Environment: Normal
+     * </pre>
+     */
     private void printInfo()
     {
         LOGGER.info(String.format("Initializing %s.%s", ForageInfo.NAME, !ForageInfo.IDE ? " See the debug log for build information." : ""));
-
-        LOGGER.info("Expected SHA256 is " + ForageInfo.EXPECTED_SHA256);
 
         if (ForageInfo.IDE)
         {
@@ -62,18 +87,35 @@ public class ForageCraft
             LOGGER.debug(String.format(" - Dist:        %s", FMLEnvironment.dist.toString()));
             LOGGER.debug(" - Environment: Normal");
         }
+
+        if (ForageInfo.FORCE_DEV_MIXINS)
+        {
+            LOGGER.warn("Dev-environment mixins for ForageCraft have been enabled!");
+            LOGGER.warn("If you have no idea what you're doing, please remove the option from you JVM arguments.");
+        }
     }
 
+    /**
+     * Runs methods that are designed to be run on the {@link FMLCommonSetupEvent}.
+     */
     public static void commonSetup(final FMLCommonSetupEvent event)
     {
         VerificationUtil.validateMod(ForageInfo.MOD_ID, ForageInfo.EXPECTED_SHA256);
     }
 
+    /**
+     * @param key The key to search the resource for.
+     * @return A new {@link ResourceLocation} under ForageCraft's mod id.
+     */
     public static ResourceLocation locate(String key)
     {
         return new ResourceLocation(ForageInfo.MOD_ID + ":" + key);
     }
 
+    /**
+     * @param key The key to search the resource for.
+     * @return A {@link String} containing a potential {@link ResourceLocation}.
+     */
     public static String find(String key)
     {
         return ForageInfo.MOD_ID + ":" + key;

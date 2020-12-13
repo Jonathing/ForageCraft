@@ -107,6 +107,7 @@ minecraft {
         client {
             workingDirectory project.file('run/client')
             arg "-mixin.config=${mod_id}.mixins.json".toString()
+            arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -127,6 +128,7 @@ minecraft {
         server {
             workingDirectory project.file('run/server')
             arg "-mixin.config=${mod_id}.mixins.json".toString()
+            arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -157,6 +159,7 @@ minecraft {
         data {
             workingDirectory project.file('run/data')
             arg "-mixin.config=${mod_id}.mixins.json".toString()
+            arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -220,12 +223,11 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    // TODO Re-add dependencies as they are updated.
-//    compileOnly fg.deobf("mezz.jei:jei-1.16.3:7.3.2.36:api")
-//    runtimeOnly fg.deobf("mezz.jei:jei-1.16.3:7.3.2.36")
-//
-//    compileOnly fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.3-12.0.0.404:api-obf")
-//    compile fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.3-12.0.0.404:universal-obf")
+    compileOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62")
+
+    compileOnly fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.4-13.0.0.420:api-obf")
+    compile fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.4-13.0.0.420:universal-obf")
 }
 
 mixin {

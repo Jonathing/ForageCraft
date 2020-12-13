@@ -27,6 +27,8 @@ public final class ForageInfo implements IForageInfo
      */
     public static final boolean IDE = isRunningFromIDE();
 
+    public static final boolean FORCE_DEV_MIXINS = wantsDevMixins();
+
     /**
      * This constant is true when the system property {@code midnight.datagen} is {@code "true"}. This property is set
      * in the {@code data} run configration (for the {@code runData} task).
@@ -67,18 +69,19 @@ public final class ForageInfo implements IForageInfo
     }
 
     private static boolean isRunningFromIDE() {
-        String p = System.getProperty(String.format("%s.iside", INSTANCE.modId()));
-        return Boolean.parseBoolean(p);
+        return Boolean.parseBoolean(String.format("%s.iside", INSTANCE.modId()));
+    }
+
+    private static boolean wantsDevMixins() {
+        return Boolean.parseBoolean(System.getProperty(String.format("%s.devmixins", INSTANCE.modId())));
     }
 
     private static boolean isRunningDatagen() {
-        String p = System.getProperty(String.format("%s.datagen", INSTANCE.modId()));
-        return Boolean.parseBoolean(p);
+        return Boolean.parseBoolean(String.format("%s.datagen", INSTANCE.modId()));
     }
 
     private static boolean isRunningTestServer() {
-        String p = System.getProperty(String.format("%s.istestserver", INSTANCE.modId()));
-        return Boolean.parseBoolean(p);
+        return Boolean.parseBoolean(String.format("%s.istestserver", INSTANCE.modId()));
     }
 
     @Override
@@ -110,6 +113,12 @@ public final class ForageInfo implements IForageInfo
     public String expectedSHA256()
     {
         return EXPECTED_SHA256;
+    }
+
+    @Override
+    public boolean forceDevMixins()
+    {
+        return FORCE_DEV_MIXINS;
     }
 
     @Override

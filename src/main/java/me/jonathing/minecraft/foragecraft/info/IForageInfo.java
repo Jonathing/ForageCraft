@@ -47,6 +47,8 @@ public interface IForageInfo
      */
     boolean ide();
 
+    boolean forceDevMixins();
+
     /**
      * Returns whether ForageCraft is running as a data generator.
      */
