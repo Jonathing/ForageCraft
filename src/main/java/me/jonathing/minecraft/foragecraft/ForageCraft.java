@@ -2,8 +2,7 @@ package me.jonathing.minecraft.foragecraft;
 
 import me.jonathing.minecraft.foragecraft.client.ForageCraftClient;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageRegistry;
-import me.jonathing.minecraft.foragecraft.common.util.verification.SignatureInformation;
-import me.jonathing.minecraft.foragecraft.common.util.verification.VerificationHelper;
+import me.jonathing.minecraft.foragecraft.common.security.VerificationUtil;
 import me.jonathing.minecraft.foragecraft.data.ForageCraftDataGen;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.util.ResourceLocation;
@@ -15,11 +14,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.xml.bind.ValidationException;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(ForageInfo.MOD_ID)
@@ -70,7 +66,7 @@ public class ForageCraft
 
     public static void commonSetup(final FMLCommonSetupEvent event)
     {
-        VerificationHelper.validateMod(ForageInfo.MOD_ID, ForageInfo.EXPECTED_SHA256);
+        VerificationUtil.validateMod(ForageInfo.MOD_ID, ForageInfo.EXPECTED_SHA256);
     }
 
     public static ResourceLocation locate(String key)
