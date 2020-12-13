@@ -63,6 +63,10 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven {
+        name = "Shadew's Maven Repo"
+        url = "https://maven.shadew.net/"
+    }
+    maven {
         name = "tterrag's Maven Repository"
         url = "https://maven.tterrag.com/"
     }
