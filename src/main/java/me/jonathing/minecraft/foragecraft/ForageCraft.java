@@ -1,6 +1,7 @@
 package me.jonathing.minecraft.foragecraft;
 
 import me.jonathing.minecraft.foragecraft.client.ForageCraftClient;
+import me.jonathing.minecraft.foragecraft.common.registry.ForageFeatures;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageRegistry;
 import me.jonathing.minecraft.foragecraft.common.security.VerificationUtil;
 import me.jonathing.minecraft.foragecraft.data.ForageCraftDataGen;
@@ -101,6 +102,7 @@ public class ForageCraft
     public static void commonSetup(final FMLCommonSetupEvent event)
     {
         VerificationUtil.validateMod(ForageInfo.MOD_ID, ForageInfo.EXPECTED_SHA256);
+        ForageFeatures.initFeatures();
     }
 
     /**
