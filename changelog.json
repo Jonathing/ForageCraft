@@ -1,16 +1,22 @@
 {
   "version": {
-    "number": "2.0.0-pre1",
-    "name": "ForageCraft: Reborn (Pre-Release 1)",
+    "number": "2.0.0",
+    "name": "ForageCraft: Reborn",
     "minecraft": "1.16.4",
     "stable": false
   },
   "description": [
-    "ForageCraft, rewritten by Jonathing for modern Minecraft versions."
+    "ForageCraft, rewritten for modern Minecraft versions."
   ],
   "changelog": [
-    "ForageCraft's jars are now signed.",
     "Updated Minecraft to 1.16.4",
-    "Updated Minecraft Forge to 35.0.18"
+    "Updated Minecraft Forge to 35.1.0",
+    "ForageCraft's jars are now signed.",
+    "Added a check to make sure that the mod is signed.",
+    "Fixed any potential issues with recipes and loot tables.",
+    "Temporarily removed the scarecrow.",
+    "Temporarily removed the crow.",
+    "All of the textures have been redesigned by Silver_David.",
+    "Added full compatibility with mods that add their own overworld biomes."
   ]
 }

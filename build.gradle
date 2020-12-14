@@ -82,6 +82,9 @@ repositories {
 
 modutil {
     changelogJson file('changelog.json')
+    markdownChangelog file('versioninfo/latest_changelog.md')
+    markdownChangelog file("versioninfo/${changelogInfo.versionNumber}_changelog.md")
+    updateJson file('versioninfo/update.json')
 
     constant('mod_id', mod_id)
     constant('mod_name', mod_name)

@@ -1,0 +1,59 @@
+{
+  "homepage": "https://minecraft.curseforge.com/projects/foragecraft",
+  "promos": {
+    "1.9-latest": "1.10.0.1",
+    "1.9-recommended": "1.10.0.1",
+    "1.9.4-latest": "1.10.0.1",
+    "1.9.4-recommended": "1.10.0.1",
+    "1.10-latest": "1.10.0.1",
+    "1.10-recommended": "1.10.0.1",
+    "1.10.2-latest": "1.10.0.1",
+    "1.10.2-recommended": "1.10.0.1",
+    "1.11.2-latest": "1.12.3",
+    "1.11.2-recommended": "1.11",
+    "1.12-latest": "1.14.0.1-dev",
+    "1.12.1-latest": "1.14.0.1-dev",
+    "1.12.2-latest": "1.14.0.1-dev",
+    "1.16.4-latest": "2.0.0"
+  },
+  "1.9": {
+    "1.9": "Added support for Minecraft 1.9, 1.9.4, and 1.10.",
+    "1.10": "Added JEI integration.",
+    "1.10.0.1": "Reduced file size."
+  },
+  "1.9.4": {
+    "1.9": "Added support for Minecraft 1.9, 1.9.4, and 1.10.",
+    "1.10": "Added JEI integration.",
+    "1.10.0.1": "Reduced file size."
+  },
+  "1.10": {
+    "1.9": "Added support for Minecraft 1.9, 1.9.4, and 1.10.",
+    "1.10": "Added JEI integration.",
+    "1.10.0.1": "Reduced file size."
+  },
+  "1.10.2": {
+    "1.9": "Added support for Minecraft 1.9, 1.9.4, and 1.10.",
+    "1.10": "Added JEI integration.",
+    "1.10.0.1": "Reduced file size."
+  },
+  "1.11.2": {
+    "1.11": "Added support for Minecraft 1.11.2",
+    "1.12.1": "Fixed acacia/dark oak leaves bug. Added rocks and sticks.",
+    "1.12.2": "Fixed stick block bug.",
+    "1.12.3": "Added configuration options."
+  },
+  "1.12": {
+    "1.14.0.1-dev": "Added support for 1.12 and fixed a lighting issue."
+  },
+  "1.12.1": {
+    "1.14-dev": "Added support for 1.12.1 and 1.12.2.",
+    "1.14.0.1-dev": "Added support for 1.12 and fixed a lighting issue."
+  },
+  "1.12.2": {
+    "1.14-dev": "Added support for 1.12.1 and 1.12.2.",
+    "1.14.0.1-dev": "Added support for 1.12 and fixed a lighting issue."
+  },
+  "1.16.4": {
+    "2.0.0": "2.0.0 - ForageCraft: Reborn: ForageCraft, rewritten for modern Minecraft versions.\n- Updated Minecraft to 1.16.4\n- Updated Minecraft Forge to 35.1.0\n- ForageCraft's jars are now signed.\n- Added a check to make sure that the mod is signed.\n- Fixed any potential issues with recipes and loot tables.\n- Temporarily removed the scarecrow.\n- Temporarily removed the crow.\n- All of the textures have been redesigned by Silver_David.\n- Added full compatibility with mods that add their own overworld biomes."
+  }
+}

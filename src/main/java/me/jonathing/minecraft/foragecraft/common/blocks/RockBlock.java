@@ -10,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -18,6 +17,10 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.util.Random;
 
 public class RockBlock extends FallingBlock
 {
@@ -26,7 +29,8 @@ public class RockBlock extends FallingBlock
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
+    public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_)
+    {
         return Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D);
     }
 
@@ -40,6 +44,18 @@ public class RockBlock extends FallingBlock
     public boolean isValidPosition(BlockState blockState, IWorldReader world, BlockPos blockPos)
     {
         return world.getBlockState(blockPos).isAir() && world.getBlockState(blockPos.down()).isSolid();
+    }
+
+    /**
+     * This essentially just prevents particles from being spawned under a rock or stick floating in stasis. They're
+     * not really meant to do that.
+     *
+     * @see FallingBlock#animateTick(BlockState, World, BlockPos, Random)
+     */
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void animateTick(BlockState p_180655_1_, World p_180655_2_, BlockPos p_180655_3_, Random p_180655_4_)
+    {
     }
 
     @SuppressWarnings("deprecation")

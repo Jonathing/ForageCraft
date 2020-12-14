@@ -1,6 +1,6 @@
 package me.jonathing.minecraft.foragecraft;
 
-import me.jonathing.minecraft.foragecraft.client.ForageCraftClient;
+import me.jonathing.minecraft.foragecraft.client.ForageClient;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageFeatures;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageRegistry;
 import me.jonathing.minecraft.foragecraft.common.security.VerificationUtil;
@@ -43,7 +43,7 @@ public class ForageCraft
         IEventBus mod = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forge = MinecraftForge.EVENT_BUS;
 
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> mod.addListener(ForageCraftClient::clientSetup));
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> mod.addListener(ForageClient::clientSetup));
 
         // Register the events
         mod.register(ForageCraftDataGen.class);
@@ -87,12 +87,12 @@ public class ForageCraft
             LOGGER.debug(String.format(" - Build Date:  %s", ForageInfo.BUILD_DATE));
             LOGGER.debug(String.format(" - Dist:        %s", FMLEnvironment.dist.toString()));
             LOGGER.debug(" - Environment: Normal");
-        }
 
-        if (ForageInfo.FORCE_DEV_MIXINS)
-        {
-            LOGGER.warn("Dev-environment mixins for ForageCraft have been enabled!");
-            LOGGER.warn("If you have no idea what you're doing, please remove the option from you JVM arguments.");
+            if (ForageInfo.FORCE_DEV_MIXINS)
+            {
+                LOGGER.warn("Dev-environment mixins for ForageCraft have been enabled!");
+                LOGGER.warn("If you have no idea what you're doing, please remove the option from you JVM arguments.");
+            }
         }
     }
 
@@ -101,7 +101,9 @@ public class ForageCraft
      */
     public static void commonSetup(final FMLCommonSetupEvent event)
     {
-        VerificationUtil.validateMod(ForageInfo.MOD_ID, ForageInfo.EXPECTED_SHA256);
+        if (!ForageInfo.IDE)
+            VerificationUtil.validateMod(ForageInfo.MOD_ID, ForageInfo.EXPECTED_SHA256);
+
         ForageFeatures.initFeatures();
     }
 

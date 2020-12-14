@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-public class ForageCraftClient
+public class ForageClient
 {
     public static void clientSetup(final FMLClientSetupEvent event)
     {
