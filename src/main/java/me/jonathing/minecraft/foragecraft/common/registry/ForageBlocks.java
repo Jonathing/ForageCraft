@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.blocks.*;
 import me.jonathing.minecraft.foragecraft.common.items.ForageItemGroups;
+import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
@@ -28,16 +29,37 @@ public class ForageBlocks
     {
         ForageBlocks.iBlockRegistry = event.getRegistry();
 
-        rock = registerForage("rock", new RockBlock(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).doesNotBlockMovement().nonOpaque().zeroHardnessAndResistance()));
-        flat_rock = registerForage("flat_rock", new FlatRockBlock(Block.Properties.from(rock)));
-        stick = registerForage("stick", new StickBlock(Block.Properties.from(Blocks.OAK_PLANKS).doesNotBlockMovement().nonOpaque().zeroHardnessAndResistance()));
+        rock = register("rock",
+                new RockBlock(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).doesNotBlockMovement().nonOpaque().zeroHardnessAndResistance()),
+                ItemGroup.MISC,
+                true);
+        flat_rock = register("flat_rock",
+                new FlatRockBlock(Block.Properties.from(rock)),
+                ItemGroup.MISC,
+                true);
+        stick = register("stick",
+                new StickBlock(Block.Properties.from(Blocks.OAK_PLANKS).doesNotBlockMovement().nonOpaque().zeroHardnessAndResistance()),
+                null,
+                false);
 
-        straw_bale = registerForage("straw_bale", new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)));
-        fascine = registerForage("fascine", new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)));
+        straw_bale = register("straw_bale",
+                new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)),
+                ItemGroup.BUILDING_BLOCKS,
+                true);
+        fascine = register("fascine",
+                new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)),
+                ItemGroup.BUILDING_BLOCKS,
+                true);
 
-        paving_stones = registerForage("paving_stones", new PavingStoneBlock(Block.Properties.from(Blocks.STONE)));
+        paving_stones = register("paving_stones",
+                new PavingStoneBlock(Block.Properties.from(Blocks.STONE)),
+                ItemGroup.BUILDING_BLOCKS,
+                true);
 
-        leek_crop = registerBlock("leek_crop", new LeekCropBlock(Block.Properties.from(Blocks.WHEAT)));
+        leek_crop = register("leek_crop",
+                new LeekCropBlock(Block.Properties.from(Blocks.WHEAT)),
+                null,
+                false);
     }
 
     /**
@@ -45,29 +67,21 @@ public class ForageBlocks
      *
      * @param key
      * @param block
-     * @param itemGroup
+     * @param defaultItemGroup
      * @return
      */
-    public static <B extends Block> B register(String key, B block, ItemGroup itemGroup)
+    public static <B extends Block> B register(String key, B block, ItemGroup defaultItemGroup, boolean registerItem)
     {
-        blockItemMap.put(block, itemGroup);
-        return registerBlock(key, block);
-    }
+        if (registerItem)
+            blockItemMap.put(block, ForageInfo.IDE ? ForageItemGroups.FORAGECRAFT : defaultItemGroup);
 
-    public static <B extends Block> B registerItemProperties(String key, B block, Item.Properties itemProperties)
-    {
-        blockItemPropertiesMap.put(block, itemProperties);
-        return registerBlock(key, block);
-    }
-
-    public static <B extends Block> B registerBlock(String key, B block)
-    {
         ForageRegistry.register(iBlockRegistry, key, block);
         return block;
     }
 
-    public static <B extends Block> B registerForage(String key, B block)
+    public static <B extends Block> B register(String key, B block, Item.Properties itemProperties, ItemGroup defaultItemGroup, boolean registerItem)
     {
-        return register(key, block, ForageItemGroups.FORAGECRAFT);
+        blockItemPropertiesMap.put(block, itemProperties);
+        return register(key, block, defaultItemGroup, registerItem);
     }
 }

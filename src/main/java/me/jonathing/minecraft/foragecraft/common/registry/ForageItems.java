@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.items.ForageItemGroups;
 import me.jonathing.minecraft.foragecraft.common.items.LeekItem;
+import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
 import net.minecraft.item.*;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -19,20 +20,31 @@ public class ForageItems
     public static Item leek_seeds;
 
     private static IForgeRegistry<Item> iItemRegistry;
-    public static List<Item> coloredTools = new ArrayList<>();
 
     public static void init(Register<Item> event)
     {
         ForageItems.iItemRegistry = event.getRegistry();
 
-        straw = register("straw", new Item(new Item.Properties().group(ForageItemGroups.FORAGECRAFT)));
+        straw = register("straw",
+                new Item(new Item.Properties()
+                        .group(ForageInfo.IDE ? ForageItemGroups.FORAGECRAFT : ItemGroup.MISC)));
 
-        stick_bundle = register("stick_bundle", new Item(new Item.Properties().group(ForageItemGroups.FORAGECRAFT)));
+        stick_bundle = register("stick_bundle",
+                new Item(new Item.Properties()
+                        .group(ForageInfo.IDE ? ForageItemGroups.FORAGECRAFT : ItemGroup.MISC)));
 
-        spaghetti = register("spaghetti", new Item(new Item.Properties().group(ForageItemGroups.FORAGECRAFT).food(new Food.Builder().hunger(11).saturation(0.375F).build())));
-        leek = register("leek", new LeekItem(new Item.Properties().group(ForageItemGroups.FORAGECRAFT).food(new Food.Builder().hunger(2).saturation(0.1F).build())));
+        spaghetti = register("spaghetti",
+                new Item(new Item.Properties()
+                        .group(ForageInfo.IDE ? ForageItemGroups.FORAGECRAFT : ItemGroup.FOOD)
+                        .food(new Food.Builder().hunger(11).saturation(0.375F).build())));
+        leek = register("leek",
+                new LeekItem(new Item.Properties()
+                        .group(ForageInfo.IDE ? ForageItemGroups.FORAGECRAFT : ItemGroup.FOOD)
+                        .food(new Food.Builder().hunger(2).saturation(0.1F).build())));
 
-        leek_seeds = register("leek_seeds", new BlockNamedItem(ForageBlocks.leek_crop, new Item.Properties().group(ForageItemGroups.FORAGECRAFT)));
+        leek_seeds = register("leek_seeds",
+                new BlockNamedItem(ForageBlocks.leek_crop, new Item.Properties()
+                        .group(ForageInfo.IDE ? ForageItemGroups.FORAGECRAFT : ItemGroup.MISC)));
 
         registerBlockItems();
     }
@@ -52,12 +64,6 @@ public class ForageItems
             ForageRegistry.register(iItemRegistry, block.getRegistryName(), new BlockItem(block, entry.getValue()));
         }
         ForageBlocks.blockItemPropertiesMap.clear();
-    }
-
-    private static Item registerTool(String name, Item item)
-    {
-        coloredTools.add(item);
-        return register(name, item);
     }
 
     private static Item register(String name, Item item)
