@@ -16,9 +16,15 @@ public class GeneralEventHandler
 
         if (event.getItemStack().getItem().equals(Items.STICK))
         {
+            // set the blockstate
             event.getWorld().setBlockState(event.getPos().offset(event.getFace()), ForageBlocks.stick.getDefaultState());
+
+            // swing the hand
             event.getPlayer().swingArm(event.getHand());
-            event.getItemStack().shrink(1);
+
+            // shrink the stack if not in creative
+            if (!event.getPlayer().isCreative())
+                event.getItemStack().shrink(1);
         }
     }
 }
