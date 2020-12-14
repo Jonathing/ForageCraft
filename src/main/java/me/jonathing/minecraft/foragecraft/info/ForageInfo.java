@@ -69,19 +69,23 @@ public final class ForageInfo implements IForageInfo
     }
 
     private static boolean isRunningFromIDE() {
-        return Boolean.parseBoolean(String.format("%s.iside", INSTANCE.modId()));
+        String p = System.getProperty("foragecraft.iside");
+        return Boolean.parseBoolean(p);
     }
 
     private static boolean wantsDevMixins() {
-        return Boolean.parseBoolean(System.getProperty(String.format("%s.devmixins", INSTANCE.modId())));
+        String p = System.getProperty("foragecraft.devmixins");
+        return Boolean.parseBoolean(p);
     }
 
     private static boolean isRunningDatagen() {
-        return Boolean.parseBoolean(String.format("%s.datagen", INSTANCE.modId()));
+        String p = System.getProperty("foragecraft.datagen");
+        return Boolean.parseBoolean(p);
     }
 
     private static boolean isRunningTestServer() {
-        return Boolean.parseBoolean(String.format("%s.istestserver", INSTANCE.modId()));
+        String p = System.getProperty("foragecraft.istestserver");
+        return Boolean.parseBoolean(p);
     }
 
     @Override
