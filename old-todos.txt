@@ -1,0 +1,7 @@
+EntityCrow
+// TODO: make crows run away from predators
+// TODO: make crows eat crops
+// TODO: improve model and texture
+
+RockGenerator
+// TODO: add sandstone rocks or something similar. Also seashells

@@ -35,7 +35,7 @@ public class ForageCraft
     /**
      * Public constructor for ForageCraft. The initial spark which begins all of the registration processes.
      */
-    public ForageCraft()
+    public ForageCraft() // the Magic School Bus returns, bitch.
     {
         printInfo();
 
