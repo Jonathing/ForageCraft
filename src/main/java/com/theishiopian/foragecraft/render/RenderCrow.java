@@ -2,7 +2,6 @@ package com.theishiopian.foragecraft.render;
 
 import com.theishiopian.foragecraft.ForageCraftMod;
 import com.theishiopian.foragecraft.entity.EntityCrow;
-
 import net.minecraft.client.model.ModelParrot;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -11,26 +10,32 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 public class RenderCrow extends RenderLiving<EntityCrow>
 {
-	public static final Factory FACTORY = new Factory();
-	
-	public RenderCrow(RenderManager rendermanagerIn)
-	{
-		super(rendermanagerIn, new ModelParrot(), 0.3F);
-	}
+    public static final Factory FACTORY = new Factory();
 
-	 /**
+    public RenderCrow(RenderManager rendermanagerIn)
+    {
+        super(rendermanagerIn, new ModelParrot(), 0.3F);
+    }
+
+    /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
+    @Override
+    @ParametersAreNonnullByDefault
     protected ResourceLocation getEntityTexture(EntityCrow entity)
     {
-        return new ResourceLocation(ForageCraftMod.MODID+":textures/entity/crow.png");
+        return new ResourceLocation(ForageCraftMod.MODID + ":textures/entity/crow.png");
     }
-	
-	 /**
+
+    /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
+    @Override
+    @ParametersAreNonnullByDefault
     public float handleRotationFloat(EntityCrow livingBase, float partialTicks)
     {
         return this.getCustomBob(livingBase, partialTicks);
@@ -44,11 +49,11 @@ public class RenderCrow extends RenderLiving<EntityCrow>
     }
 
     public static class Factory implements IRenderFactory<EntityCrow>
-	{
-		@Override
-		public Render<? super EntityCrow> createRenderFor(RenderManager manager)
-		{
-			return new RenderCrow(manager);
-		}
-	}
+    {
+        @Override
+        public Render<? super EntityCrow> createRenderFor(RenderManager manager)
+        {
+            return new RenderCrow(manager);
+        }
+    }
 }

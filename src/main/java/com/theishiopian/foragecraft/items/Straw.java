@@ -9,16 +9,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Straw extends Item
 {
-	public Straw() 
-	{
-		setUnlocalizedName("straw");
-		setRegistryName("straw");
-		setCreativeTab(CreativeTabs.MATERIALS);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void initModel()
-	{
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
-	}
+    public Straw()
+    {
+        this.setTranslationKey("straw");
+        this.setRegistryName("straw");
+        this.setCreativeTab(CreativeTabs.MATERIALS);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void initModel()
+    {
+        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
+    }
 }

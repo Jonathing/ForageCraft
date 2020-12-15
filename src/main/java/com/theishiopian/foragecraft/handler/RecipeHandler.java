@@ -1,32 +1,28 @@
 package com.theishiopian.foragecraft.handler;
 
-import com.theishiopian.foragecraft.init.ModBlocks;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 //this whole class will be removed soon
 
 @SuppressWarnings("unused")
-public class RecipeHandler 
+public class RecipeHandler
 {
 
-	public static void Shapless()
-	{
-		Item stick = Items.STICK;
-		Item bundle = Item.getByNameOrId("foragecraft:stick_bundle");
-		Item fascine = Item.getByNameOrId("foragecraft:fascine");
-		Item straw = Item.getByNameOrId("foragecraft:straw");
-		Item bale = Item.getByNameOrId("foragecraft:straw_bale");
-		Item scarecrow = Item.getByNameOrId("foragecraft:scarecrow");
-		Item pumpkin = Item.getItemFromBlock(Blocks.PUMPKIN);
-		Item leather = Items.LEATHER;
-		Item rock = Item.getByNameOrId("foragecraft:rock_normal");
-		Item flat = Item.getByNameOrId("foragecraft:rock_flat");
-		// TODO cleanup a bit
+    public static void Shapless()
+    {
+        Item stick = Items.STICK;
+        Item bundle = Item.getByNameOrId("foragecraft:stick_bundle");
+        Item fascine = Item.getByNameOrId("foragecraft:fascine");
+        Item straw = Item.getByNameOrId("foragecraft:straw");
+        Item bale = Item.getByNameOrId("foragecraft:straw_bale");
+        Item scarecrow = Item.getByNameOrId("foragecraft:scarecrow");
+        Item pumpkin = Item.getItemFromBlock(Blocks.PUMPKIN);
+        Item leather = Items.LEATHER;
+        Item rock = Item.getByNameOrId("foragecraft:rock_normal");
+        Item flat = Item.getByNameOrId("foragecraft:rock_flat");
+        // TODO cleanup a bit
 //		GameRegistry.addShapelessRecipe(new ItemStack(Items.DYE,9,15),Items.SKULL);
 //		GameRegistry.addShapelessRecipe(new ItemStack(bundle,1,0),stick,stick,stick,stick,stick,stick,stick,stick,stick);
 //		GameRegistry.addShapelessRecipe(new ItemStack(stick,9,0),bundle);
@@ -41,5 +37,5 @@ public class RecipeHandler
 //		GameRegistry.addShapelessRecipe(new ItemStack(rock, 9, 0), Blocks.COBBLESTONE);
 //		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.road_stone), flat, flat, flat, flat, flat, flat, flat, flat, flat);
 //		GameRegistry.addShapelessRecipe(new ItemStack(flat, 9, 0), ModBlocks.road_stone);
-	}
+    }
 }

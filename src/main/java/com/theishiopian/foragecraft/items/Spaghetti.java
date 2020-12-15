@@ -10,19 +10,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class Spaghetti extends ItemFood
 {
 
-	public Spaghetti(int amount, float saturation, boolean isWolfFood)
-	{
-		super(amount, saturation, isWolfFood);
-		String name = "spaghetti";
-		this.setUnlocalizedName(name);
-		this.setRegistryName(name);
-		this.setCreativeTab(CreativeTabs.FOOD);
-	}
+    public Spaghetti(int amount, float saturation, boolean isWolfFood)
+    {
+        super(amount, saturation, isWolfFood);
+        String name = "spaghetti";
+        this.setTranslationKey(name);
+        this.setRegistryName(name);
+        this.setCreativeTab(CreativeTabs.FOOD);
+    }
 
-	//why do I have to create a whole class for just this one method?
-	@SideOnly(Side.CLIENT)
-	public void initModel()
-	{
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
-	}
+    //why do I have to create a whole class for just this one method?
+    @SideOnly(Side.CLIENT)
+    public void initModel()
+    {
+        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
+    }
 }

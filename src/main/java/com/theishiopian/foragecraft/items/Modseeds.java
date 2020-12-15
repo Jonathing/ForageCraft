@@ -10,15 +10,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class Modseeds extends ItemSeeds
 {
 
-	public Modseeds(Block crops, Block soil)
-	{
-		super(crops, soil);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void initModel()
-	{
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
-	}
+    public Modseeds(Block crops, Block soil)
+    {
+        super(crops, soil);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void initModel()
+    {
+        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
+    }
 
 }

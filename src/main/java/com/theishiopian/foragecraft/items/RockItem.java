@@ -12,69 +12,75 @@ import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 public class RockItem extends ItemBlock
 {
-	RockType type;
-	
-	public RockItem(Block block, RockType t)
-	{
-		super(block);
-		
-		String name = null;
-		
-		switch(t)
-		{
-			case NORMAL: name = "rock_normal";
-			break;
-			case FLAT: name = "rock_flat";
-			break;
-		}
-		
-		type = t;
-		
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(CreativeTabs.MATERIALS);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void initModel()
-	{
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
-	}
-	
-	public RockType getRockType()
-	{
-		return type;
-	}
-	
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+    RockType type;
+
+    public RockItem(Block block, RockType t)
     {
-		switch(type)
-		{
-			case FLAT: target.attackEntityFrom(DamageSource.GENERIC, 2);
-				break;
-			case NORMAL: target.attackEntityFrom(DamageSource.GENERIC, 3);
-				break;
-		}
+        super(block);
+
+        String name = null;
+
+        switch (t)
+        {
+            case NORMAL:
+                name = "rock_normal";
+                break;
+            case FLAT:
+                name = "rock_flat";
+                break;
+        }
+
+        type = t;
+
+        this.setTranslationKey(name);
+        this.setRegistryName(name);
+        this.setCreativeTab(CreativeTabs.MATERIALS);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void initModel()
+    {
+        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
+    }
+
+    public RockType getRockType()
+    {
+        return type;
+    }
+
+    @Override
+    @ParametersAreNonnullByDefault
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+    {
+        switch (type)
+        {
+            case FLAT:
+                target.attackEntityFrom(DamageSource.GENERIC, 2);
+                break;
+            case NORMAL:
+                target.attackEntityFrom(DamageSource.GENERIC, 3);
+                break;
+        }
         return true;
     }
 
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    @Override
+    @Nonnull
+    @ParametersAreNonnullByDefault
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
-		ItemStack itemstack = playerIn.getHeldItem(handIn);
+        ItemStack itemstack = playerIn.getHeldItem(handIn);
 
         if (!playerIn.capabilities.isCreativeMode)
         {
@@ -82,28 +88,30 @@ public class RockItem extends ItemBlock
         }
 
         //It seems like it's playing a sound to null player.
-		//But it seems to work regardless? This might be a bug within multiplayer. We'll have to check.
-        worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        //But it seems to work regardless? This might be a bug within multiplayer. We'll have to check.
+        worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
         if (!worldIn.isRemote)
         {
-        	EntityThrowable rock = new EntityRockNormal(worldIn, playerIn);
-        	switch(type)
+            EntityThrowable rock = new EntityRockNormal(worldIn, playerIn);
+            switch (type)
             {
-            	
-            	case NORMAL: rock = new EntityRockNormal(worldIn, playerIn);
-            		break;
-				case FLAT: rock = new EntityRockFlat(worldIn, playerIn);
-					break;
-				default:
-					break;
+
+                case NORMAL:
+                    rock = new EntityRockNormal(worldIn, playerIn);
+                    break;
+                case FLAT:
+                    rock = new EntityRockFlat(worldIn, playerIn);
+                    break;
+                default:
+                    break;
             }
 
-			rock.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F); //rock.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+            rock.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F); //rock.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
             //wtf is "shoot"? //Forge changed their shit
             worldIn.spawnEntity(rock);
         }
-        
+
         return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
     }
 

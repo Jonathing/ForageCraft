@@ -1,7 +1,6 @@
 package com.theishiopian.foragecraft.blocks;
 
 import com.theishiopian.foragecraft.init.ModItems;
-
 import net.minecraft.item.Item;
 
 public class LeekCrop extends ModCropsBasic
@@ -10,7 +9,7 @@ public class LeekCrop extends ModCropsBasic
 	{
 		super();
 		String name = "leek_block";
-		this.setUnlocalizedName(name);
+		this.setTranslationKey(name);
 		this.setRegistryName(name);
 	}
 	

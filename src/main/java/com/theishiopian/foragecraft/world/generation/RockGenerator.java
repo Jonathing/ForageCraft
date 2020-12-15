@@ -1,7 +1,5 @@
 package com.theishiopian.foragecraft.world.generation;
 
-import java.util.Random;
-
 import com.theishiopian.foragecraft.ForageLogger;
 import com.theishiopian.foragecraft.init.ModBlocks;
 import net.minecraft.block.Block;
@@ -13,6 +11,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
+
 /*
 /  World generation based on sky_01's MC forums tutorial
 /  http://www.minecraftforum.net/forums/mapping-and-modding/mapping-and-modding-tutorials/2666351-1-8-x-and-1-9-structure-generation-tutorial
@@ -23,95 +24,91 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class RockGenerator extends WorldGenerator
 {
-	@Override
-	public boolean generate(World worldIn, Random rand, BlockPos pos)
-	{
-		Random rng = new Random();
+    @Override
+    @ParametersAreNonnullByDefault
+    public boolean generate(World worldIn, Random rand, BlockPos pos)
+    {
+        Random rng = new Random();
 
-		int whatRock;
-		
-		Block rock = null;
-		
-		switch(rng.nextInt(2))
-		{
-			case 0:
-				rock = ModBlocks.rock_normal;
-				whatRock = 0;
-				break;
-			case 1:
-				rock = ModBlocks.rock_flat;
-				whatRock = 1;
-				break;
-			default:
-				rock = ModBlocks.rock_normal;
-				whatRock = 0;
-		}
+        int whatRock;
 
-		BlockPos rp = new BlockPos(pos.getX(), pos.getY(), pos.getZ());
+        Block rock;
 
-		BlockPos rpUnder = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
+        if (rng.nextInt(2) == 1)
+        {
+            rock = ModBlocks.rock_flat;
+            whatRock = 1;
+        }
+        else
+        {
+            rock = ModBlocks.rock_normal;
+            whatRock = 0;
+        }
 
-		Block toReplace = worldIn.getBlockState(rp).getBlock();
+        BlockPos rp = new BlockPos(pos.getX(), pos.getY(), pos.getZ());
 
-		Block onTopOf = worldIn.getBlockState(rpUnder).getBlock();
+        BlockPos rpUnder = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
 
-		Biome biome = worldIn.getBiome(pos);
-		
-		if((toReplace == Blocks.AIR || toReplace == Blocks.TALLGRASS)
-				&& this.isValidSpot(onTopOf)
-				&& worldIn.getBlockState(rp.down()).isSideSolid(worldIn, pos, EnumFacing.UP))
-		{
-			//TODO: add sandstone rocks or something similar. Also seashells
-			if(this.isValidBiome(biome))worldIn.setBlockState(rp, rock.getDefaultState(), 2);
+        Block toReplace = worldIn.getBlockState(rp).getBlock();
 
-			// I'll manage the config vars Theishiopian. You don't need to worry about them. - Jonathan
-			switch(whatRock)
-			{
-				case 0:
-					ForageLogger.printWorldGen("Generating rock at X: " + rp.getX() + " Y: " + rp.getY() + " Z: " + rp.getZ() + " on top of " + onTopOf + ".");
-					break;
-				case 1:
-					ForageLogger.printWorldGen("Generating flat rock at X: " + rp.getX() + " Y: " + rp.getY() + " Z: " + rp.getZ() + " on top of " + onTopOf + ".");
-					break;
-			}
-		}
+        Block onTopOf = worldIn.getBlockState(rpUnder).getBlock();
 
-		return false;
-	}
-	
-	//TODO possible merge these if at all possible
-	
-	public boolean isValidSpot(Block in)
-	{
-		//tighter control over what rocks generate on. 
-		Block[] array =
-		{
-			Blocks.GRASS,
-			Blocks.GRAVEL,
-			Blocks.STONE
-		};
-		
-		for(Block b :array)
-		{
-			if(in == b)return true;
-		}
-		return false;
-	}
-	
-	public boolean isValidBiome(Biome in)
-	{
-		Biome[] array =
-		{
-			Biomes.BEACH,
-			Biomes.DESERT,
-			Biomes.DESERT_HILLS			
-		};
-		
-		for(Biome b :array)
-		{
-			if(in == b)return false;
-		}
-		return true;
-	}
+        Biome biome = worldIn.getBiome(pos);
+
+        if ((toReplace == Blocks.AIR || toReplace == Blocks.TALLGRASS)
+                && this.isValidSpot(onTopOf)
+                && worldIn.getBlockState(rp.down()).isSideSolid(worldIn, pos, EnumFacing.UP))
+        {
+            //TODO: add sandstone rocks or something similar. Also seashells
+            if (this.isValidBiome(biome)) worldIn.setBlockState(rp, rock.getDefaultState(), 2);
+
+            switch (whatRock)
+            {
+                case 0:
+                    ForageLogger.printWorldGen("Generating rock at X: " + rp.getX() + " Y: " + rp.getY() + " Z: " + rp.getZ() + " on top of " + onTopOf + ".");
+                    break;
+                case 1:
+                    ForageLogger.printWorldGen("Generating flat rock at X: " + rp.getX() + " Y: " + rp.getY() + " Z: " + rp.getZ() + " on top of " + onTopOf + ".");
+                    break;
+            }
+        }
+
+        return false;
+    }
+
+    //TODO possible merge these if at all possible
+
+    public boolean isValidSpot(Block in)
+    {
+        //tighter control over what rocks generate on.
+        Block[] array =
+                {
+                        Blocks.GRASS,
+                        Blocks.GRAVEL,
+                        Blocks.STONE
+                };
+
+        for (Block b : array)
+        {
+            if (in == b) return true;
+        }
+        return false;
+    }
+
+    public boolean isValidBiome(Biome in)
+    {
+        Biome[] array =
+                {
+                        Biomes.BEACH,
+                        Biomes.DESERT,
+                        Biomes.DESERT_HILLS
+                };
+
+        for (Biome b : array)
+        {
+            if (in == b) return false;
+        }
+        return true;
+    }
 
 }

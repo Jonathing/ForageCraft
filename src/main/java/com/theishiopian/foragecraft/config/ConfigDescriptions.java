@@ -1,6 +1,6 @@
 package com.theishiopian.foragecraft.config;
 
-public class ConfigDescriptions
+public final class ConfigDescriptions
 {
     // Leaves
     public static final String BranchChance = "The chance of a stick dropping fom leaves";

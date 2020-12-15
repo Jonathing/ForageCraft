@@ -12,33 +12,36 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 public class Leek extends ItemFood
 {
 
-	public Leek(int amount, float saturation, boolean isWolfFood)
-	{
-		super(amount, saturation, isWolfFood);
-		this.setUnlocalizedName("leek");
-		this.setRegistryName("leek");
-	}
-
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+    public Leek(int amount, float saturation, boolean isWolfFood)
     {
-		target.attackEntityFrom(DamageSource.GENERIC, 4);
-		
-		if (((EntityPlayer)attacker).capabilities.isCreativeMode==false)
+        super(amount, saturation, isWolfFood);
+        this.setTranslationKey("leek");
+        this.setRegistryName("leek");
+    }
+
+    @Override
+    @ParametersAreNonnullByDefault
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+    {
+        target.attackEntityFrom(DamageSource.GENERIC, 4);
+
+        if (!((EntityPlayer) attacker).capabilities.isCreativeMode)
         {
-			((EntityPlayer)attacker).inventory.clearMatchingItems(stack.getItem(), -1, 1, null);
-			attacker.getEntityWorld().playSound((EntityPlayer)null, attacker.posX, attacker.posY, attacker.posZ, SoundEvents.ENTITY_WITHER_BREAK_BLOCK, SoundCategory.HOSTILE, 1, 1);
+            ((EntityPlayer) attacker).inventory.clearMatchingItems(stack.getItem(), -1, 1, null);
+            attacker.getEntityWorld().playSound(null, attacker.posX, attacker.posY, attacker.posZ, SoundEvents.ENTITY_WITHER_BREAK_BLOCK, SoundCategory.HOSTILE, 1, 1);
         }
-		
+
         return true;
     }
-	
-	@SideOnly(Side.CLIENT)
-	public void initModel()
-	{
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
-	}
+
+    @SideOnly(Side.CLIENT)
+    public void initModel()
+    {
+        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
+    }
 }

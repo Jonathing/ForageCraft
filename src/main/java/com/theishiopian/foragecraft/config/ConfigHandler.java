@@ -2,8 +2,8 @@ package com.theishiopian.foragecraft.config;
 
 import com.theishiopian.foragecraft.ForageCraftMod;
 import com.theishiopian.foragecraft.ForageLogger;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ConfigHandler
 {
@@ -132,7 +132,7 @@ public class ConfigHandler
 
     public static void autoDeveloperMode(String versionCode)
     {
-        if(ForageCraftMod.VERSION.contains(versionCode))
+        if (ForageCraftMod.VERSION.contains(versionCode))
         {
             ConfigVariables.developerMode = true;
             ForageLogger.printInfo("This is a development version of ForageCraft. Therefore, developer mode has been automatically enabled.");
@@ -142,13 +142,13 @@ public class ConfigHandler
     public static void configWarnings()
     {
         // Developer Mode logging
-        if(ConfigVariables.developerMode)
+        if (ConfigVariables.developerMode)
             ForageLogger.printWarn("Developer Mode is enabled. Development logging will occur at the [INFO] level. Generation of rocks and sticks will always occur at [DEBUG] level.");
-        if(!ConfigVariables.jeiVanillaInt)
+        if (!ConfigVariables.jeiVanillaInt)
             ForageLogger.printWarn("JEI Integration for vanilla items has been disabled.");
-        if(!ConfigVariables.enableSticks)
+        if (!ConfigVariables.enableSticks)
             ForageLogger.printWarn("Stick generation has been disabled in the ForageCraft configuration file.");
-        if(!ConfigVariables.enableRocks)
+        if (!ConfigVariables.enableRocks)
             ForageLogger.printWarn("Rock generation has been disabled in the ForageCraft configuration file.");
     }
 
@@ -173,17 +173,17 @@ public class ConfigHandler
 
         ForageLogger.printDebug("Chance of digging up beet root from a grass block is " + ConfigVariables.wildBeetRootChance);
         ForageLogger.printDebug("Maximum amount of beet root dropping from a grass block is " + ConfigVariables.wildBeetRootMaxAmount);
-        if(ConfigVariables.beetrootSeeds)
+        if (ConfigVariables.beetrootSeeds)
             ForageLogger.printDebug("Digging up beet root seeds from grass is enabled.");
         else
             ForageLogger.printDebug("Digging up beet root seeds from grass is disabled.");
 
-        if(ConfigVariables.pumpkinSeeds)
+        if (ConfigVariables.pumpkinSeeds)
             ForageLogger.printDebug("Digging up pumpkin seeds from grass is enabled.");
         else
             ForageLogger.printDebug("Digging up pumpkin seeds from grass is disabled.");
 
-        if(ConfigVariables.melonSeeds)
+        if (ConfigVariables.melonSeeds)
             ForageLogger.printDebug("Digging up melon seeds from grass is enabled.");
         else
             ForageLogger.printDebug("Digging up melon seeds from grass is disabled.");

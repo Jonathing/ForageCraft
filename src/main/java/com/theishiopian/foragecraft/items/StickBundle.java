@@ -9,16 +9,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class StickBundle extends Item
 {
-	public StickBundle()
-	{
-		setUnlocalizedName("stick_bundle");
-		setRegistryName("stick_bundle");
-		setCreativeTab(CreativeTabs.MATERIALS);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void initModel()
-	{
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
-	}
+    public StickBundle()
+    {
+        this.setTranslationKey("stick_bundle");
+        this.setRegistryName("stick_bundle");
+        this.setCreativeTab(CreativeTabs.MATERIALS);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void initModel()
+    {
+        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
+    }
 }

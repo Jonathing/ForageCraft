@@ -10,16 +10,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class StrawBale extends BlockHay
 {
-	public StrawBale()
-	{
-		setUnlocalizedName("straw_bale");
-		setRegistryName("straw_bale");
-		setSoundType(SoundType.PLANT);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void initModel()
-	{
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-	}
+    public StrawBale()
+    {
+        this.setTranslationKey("straw_bale");
+        this.setRegistryName("straw_bale");
+        this.setSoundType(SoundType.PLANT);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void initModel()
+    {
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    }
 }

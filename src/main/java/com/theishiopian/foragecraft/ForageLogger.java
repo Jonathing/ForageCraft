@@ -10,7 +10,7 @@ public class ForageLogger
 
     public static void printDevelop(Object messageDevelop)
     {
-        if(ConfigVariables.developerMode)
+        if (ConfigVariables.developerMode)
             log.info("[DEVELOPER DEBUG] " + messageDevelop.toString());
         else
             printDebug(messageDevelop);

@@ -1,13 +1,9 @@
 package com.theishiopian.foragecraft.blocks;
 
-import java.util.List;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -30,153 +26,182 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
+
 public class BlockStick extends BlockHorizontal
 {
 
-private static AxisAlignedBB bounds = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
-	
-	public BlockStick()
-	{
-		super(Material.WOOD);
-		// setCreativeTab(CreativeTabs.DECORATIONS);
-		setUnlocalizedName("stick_block");
-		setRegistryName("stick_block");
-		setSoundType(SoundType.WOOD);
-	}
+    private static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
 
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    public BlockStick()
     {
-        return bounds;
+        super(Material.WOOD);
+
+        this.setTranslationKey("stick_block");
+        this.setRegistryName("stick_block");
+        this.setSoundType(SoundType.WOOD);
     }
 
-	public boolean isTopSolid(IBlockState state)
-	{
-		return false;
-	}
+    @Override
+    @Nonnull
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        return BOUNDS;
+    }
 
-	@SideOnly(Side.CLIENT)
-	public void initModel()
-	{
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-	}
+    @Override
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public boolean isTopSolid(IBlockState state)
+    {
+        return false;
+    }
 
-	@Override
-	public boolean isFullCube(IBlockState state)
-	{
-		return false;
-	}
+    @SideOnly(Side.CLIENT)
+    public void initModel()
+    {
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    }
 
-	@Override
-	public boolean isOpaqueCube(IBlockState state)
-	{
-		return false;
-	}
+    @Override
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public boolean isFullCube(IBlockState state)
+    {
+        return false;
+    }
 
-	@Override
-	@Nullable
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
-	{
-		return NULL_AABB;
-	}
+    @Override
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
+    }
 
-	@Override
-	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
-	{
-		return this.canPlaceBlockAt(worldIn, pos);
-	}
+    @Override
+    @Nullable
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+    {
+        return NULL_AABB;
+    }
 
-	@Override
-	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-	{
-		IBlockState state = worldIn.getBlockState(pos);
-		IBlockState stateDown = worldIn.getBlockState(pos.down());
+    @Override
+    @ParametersAreNonnullByDefault
+    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
+    {
+        return this.canPlaceBlockAt(worldIn, pos);
+    }
 
-		if (stateDown.isTopSolid() && state.getBlock().equals(Blocks.AIR))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+    @Override
+    @ParametersAreNonnullByDefault
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+    {
+        IBlockState state = worldIn.getBlockState(pos);
+        IBlockState stateDown = worldIn.getBlockState(pos.down());
 
-	@Override
-	protected BlockStateContainer createBlockState()
-	{
-		return new BlockStateContainer(this, new IProperty[] { FACING });
-	}
+        return stateDown.isSideSolid(worldIn, pos, EnumFacing.DOWN) && state.getBlock().equals(Blocks.AIR);
+    }
 
-	@Override
-	public IBlockState withRotation(IBlockState state, Rotation rot)
-	{
-		return state.withProperty(FACING, rot.rotate((EnumFacing) state.getValue(FACING)));
-	}
+    @Override
+    @Nonnull
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, FACING);
+    }
 
-	@Override
-	public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
-	{
-		return state.withRotation(mirrorIn.toRotation((EnumFacing) state.getValue(FACING)));
-	}
+    @Override
+    @Nonnull
+    @SuppressWarnings("deprecation")
+    public IBlockState withRotation(IBlockState state, Rotation rot)
+    {
+        return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
+    }
 
-	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-			float hitZ, int meta, EntityLivingBase placer)
-	{
-		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-	}
+    @Override
+    @Nonnull
+    @SuppressWarnings("deprecation")
+    public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
+    {
+        return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
+    }
 
-	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
-		return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
-	}
+    @Override
+    @Nonnull
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+                                            float hitZ, int meta, EntityLivingBase placer)
+    {
+        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+    }
 
-	@Override
-	public int getMetaFromState(IBlockState state)
-	{
-		return ((EnumFacing) state.getValue(FACING)).getHorizontalIndex();
-	}
+    @Override
+    @Nonnull
+    @SuppressWarnings("deprecation")
+    public IBlockState getStateFromMeta(int meta)
+    {
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
+    }
 
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		if(!worldIn.isRemote)
-		{
-			ItemStack stack = new ItemStack(Items.STICK);
+    @Override
+    public int getMetaFromState(IBlockState state)
+    {
+        return state.getValue(FACING).getHorizontalIndex();
+    }
 
-			worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack));
-			worldIn.setBlockToAir(pos);
-		}
+    @Override
+    @ParametersAreNonnullByDefault
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    {
+        if (!worldIn.isRemote)
+        {
+            ItemStack stack = new ItemStack(Items.STICK);
 
-		return false;
-	}
+            worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack));
+            worldIn.setBlockToAir(pos);
+        }
 
-	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-	{
-		IBlockState stateDown = worldIn.getBlockState(pos.down());
+        return false;
+    }
 
-		if (!stateDown.isTopSolid() || stateDown.getBlock().equals(Blocks.AIR))
-		{
-			if(!worldIn.isRemote)
-			{
-				ItemStack stack = new ItemStack(Items.STICK);
+    @Override
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+    {
+        IBlockState stateDown = worldIn.getBlockState(pos.down());
 
-				worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack));
-				worldIn.setBlockToAir(pos);
-			}
-		}
-	}
+        if (!stateDown.isTopSolid() || stateDown.getBlock().equals(Blocks.AIR))
+        {
+            if (!worldIn.isRemote)
+            {
+                ItemStack stack = new ItemStack(Items.STICK);
 
-	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-	{
-		List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
+                worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack));
+                worldIn.setBlockToAir(pos);
+            }
+        }
+    }
 
-		ret.add(new ItemStack(Items.STICK));
-		
-		return ret;
-	}
+    @Override
+    @Nonnull
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+    {
+        List<ItemStack> ret = new java.util.ArrayList<>();
+
+        ret.add(new ItemStack(Items.STICK));
+
+        return ret;
+    }
 }
