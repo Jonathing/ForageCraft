@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " d ",
+    "dbd",
+    " d "
+  ],
+  "key": {
+    "d": {
+      "item": "minecraft:dirt"
+    },
+    "b": {
+      "item": "minecraft:book"
+    }
+  },
+  "result": {
+    "item": "patchouli:guide_book",
+    "nbt": {
+      "patchouli:book": "foragecraft:book"
+    }
+  }
+}
