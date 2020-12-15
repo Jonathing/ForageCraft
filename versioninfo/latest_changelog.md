@@ -12,6 +12,5 @@ ForageCraft, rewritten for modern Minecraft versions.
 - Added a check to make sure that the mod is signed.
 - Fixed any potential issues with recipes and loot tables.
 - Temporarily removed the scarecrow.
-- Temporarily removed the crow.
 - All of the textures have been redesigned by Silver_David.
 - Added full compatibility with mods that add their own overworld biomes.

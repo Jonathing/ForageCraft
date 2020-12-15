@@ -54,6 +54,6 @@
     "1.14.0.1-dev": "Added support for 1.12 and fixed a lighting issue."
   },
   "1.16.4": {
-    "2.0.0": "2.0.0 - ForageCraft: Reborn: ForageCraft, rewritten for modern Minecraft versions.\n- Updated Minecraft to 1.16.4\n- Updated Minecraft Forge to 35.1.0\n- ForageCraft's jars are now signed.\n- Added a check to make sure that the mod is signed.\n- Fixed any potential issues with recipes and loot tables.\n- Temporarily removed the scarecrow.\n- Temporarily removed the crow.\n- All of the textures have been redesigned by Silver_David.\n- Added full compatibility with mods that add their own overworld biomes."
+    "2.0.0": "2.0.0 - ForageCraft: Reborn: ForageCraft, rewritten for modern Minecraft versions.\n- Updated Minecraft to 1.16.4\n- Updated Minecraft Forge to 35.1.0\n- ForageCraft's jars are now signed.\n- Added a check to make sure that the mod is signed.\n- Fixed any potential issues with recipes and loot tables.\n- Temporarily removed the scarecrow.\n- All of the textures have been redesigned by Silver_David.\n- Added full compatibility with mods that add their own overworld biomes."
   }
 }
