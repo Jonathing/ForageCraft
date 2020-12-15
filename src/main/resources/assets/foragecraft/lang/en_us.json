@@ -17,6 +17,11 @@
   "item.foragecraft.leek_seeds": "Leek Seeds",
   "item.foragecraft.leek": "Leek",
 
+  "_comment": "Patchouli Book",
+
+  "patchouli.foragecraft.name": "ForageCraft",
+  "patchouli.foragecraft.landing_text": "Still hungry? Dig for carrots, instead.",
+
   "_comment": "JEI Vanilla Localizations (jei)",
 
   "jei.description.foraging.minecraft.stick": "The best way to get sticks is to go straight to the source and break them off of trees. However, for those of you who would rather hug trees than harm them, nature sometimes does the job for you. Often times, while rooting around in tall grass, you can find old sticks from long dead trees. Of course, not all sticks are of the leafy variety. Sometimes roots found underground are sturdy enough to qualify as sticks.",

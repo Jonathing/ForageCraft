@@ -67,7 +67,7 @@ repositories {
         url = "https://maven.shadew.net/"
     }
     maven {
-        name = "tterrag's Maven Repository"
+        name = "tterrag's Maven Repo"
         url = "https://maven.tterrag.com/"
     }
     maven {
@@ -77,6 +77,10 @@ repositories {
     maven {
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        name = "Jared's Maven Repo"
+        url = "https://maven.blamejared.com"
     }
 }
 
@@ -113,11 +117,17 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run/client')
-            arg "-mixin.config=${mod_id}.mixins.json".toString()
-            arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
+
+            // We are using a Mixin connector in the dev environment, so we dont need these.
+            // Only uncomment these if for some reason the connector doesn't work
+            //arg "-mixin.config=${mod_id}.mixins.json".toString()
+            //arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
+
+            // Disable refmaps for mixin in a dev environment
+            property 'mixin.env.disableRefMap', 'true'
 
             // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
@@ -134,11 +144,17 @@ minecraft {
 
         server {
             workingDirectory project.file('run/server')
-            arg "-mixin.config=${mod_id}.mixins.json".toString()
-            arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
+
+            // We are using a Mixin connector in the dev environment, so we dont need these.
+            // Only uncomment these if for some reason the connector doesn't work
+            //arg "-mixin.config=${mod_id}.mixins.json".toString()
+            //arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
+
+            // Disable refmaps for mixin in a dev environment
+            property 'mixin.env.disableRefMap', 'true'
 
             // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
@@ -165,11 +181,17 @@ minecraft {
 
         data {
             workingDirectory project.file('run/data')
-            arg "-mixin.config=${mod_id}.mixins.json".toString()
-            arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
+
+            // We are using a Mixin connector in the dev environment, so we dont need these.
+            // Only uncomment these if for some reason the connector doesn't work
+            //arg "-mixin.config=${mod_id}.mixins.json".toString()
+            //arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
+
+            // Disable refmaps for mixin in a dev environment
+            property 'mixin.env.disableRefMap', 'true'
 
             // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
@@ -235,6 +257,9 @@ dependencies {
 
     compileOnly fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.4-13.0.0.420:api-obf")
     compile fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.4-13.0.0.420:universal-obf")
+
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48")
 }
 
 mixin {

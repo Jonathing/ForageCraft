@@ -34,7 +34,7 @@ public class MixinConnector implements IMixinConnector
 
         if (ForageInfo.IDE || ForageInfo.FORCE_DEV_MIXINS)
         {
-            LOGGER.warn("Connecting dev-environment mixins...");
+            LOGGER.info("Connecting ForageCraft dev-environment mixins...");
             Mixins.addConfiguration(ForageInfo.MOD_ID + ".dev.mixins.json");
             LOGGER.info("ForageCraft dev-environment mixins connected successfully!");
         }
