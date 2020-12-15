@@ -8,10 +8,15 @@ import net.minecraft.item.*;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
+/**
+ * This class holds all of the items in ForageCraft.
+ *
+ * @author Jonathing
+ * @see #init(Register)
+ * @since 2.0.0
+ */
 public class ForageItems
 {
     public static Item straw;
@@ -49,6 +54,11 @@ public class ForageItems
         registerBlockItems();
     }
 
+    /**
+     * This method registers items for all of the registered blocks in ForageCraft.
+     *
+     * @see ForageBlocks
+     */
     private static void registerBlockItems()
     {
         for (Map.Entry<Block, ItemGroup> entry : ForageBlocks.blockItemMap.entrySet())
@@ -66,6 +76,13 @@ public class ForageItems
         ForageBlocks.blockItemPropertiesMap.clear();
     }
 
+    /**
+     * Queues an {@link Item} for item registry and then returns the item afterwards.
+     *
+     * @param name The name of the item to register.
+     * @param item The item instance to register.
+     * @return The registered item instance.
+     */
     private static Item register(String name, Item item)
     {
         ForageRegistry.register(iItemRegistry, name, item);

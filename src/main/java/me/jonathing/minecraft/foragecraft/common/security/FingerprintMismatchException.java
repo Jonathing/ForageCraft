@@ -5,8 +5,11 @@ package me.jonathing.minecraft.foragecraft.common.security;
  *
  * @author Jonathing
  */
-public class FingerprintMismatchException extends RuntimeException {
-    public FingerprintMismatchException(String modId) {
+// TODO: Add more documentation and move this into its own dependency along with VerificationUtil.
+public class FingerprintMismatchException extends RuntimeException
+{
+    public FingerprintMismatchException(String modId)
+    {
         super(String.format("Fingerprint found in mod %s does not match the expected fingerprint!", modId));
     }
 }

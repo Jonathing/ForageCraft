@@ -1,6 +1,5 @@
 package me.jonathing.minecraft.foragecraft.data.provider;
 
-import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.data.tag.ForageItemTags;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Blocks;
@@ -9,11 +8,23 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-import static me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks.straw_bale;
-import static me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks.fascine;
+import javax.annotation.Nonnull;
 
+import static me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks.fascine;
+import static me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks.straw_bale;
+
+/**
+ * The provider for all of the tags in ForageCraft.
+ *
+ * @author Jonathing
+ * @author Silver_David
+ * @since Not yet implemented.
+ */
 public class ForageTagProvider
 {
+    /**
+     * @see BlockTagsProvider
+     */
     public static class BlockTagProvider extends BlockTagsProvider
     {
         public BlockTagProvider(DataGenerator generator, ExistingFileHelper existingFileHelper)
@@ -21,6 +32,9 @@ public class ForageTagProvider
             super(generator, ForageInfo.MOD_ID, existingFileHelper);
         }
 
+        /**
+         * @see BlockTagsProvider#registerTags()
+         */
         @Override
         protected void registerTags()
         {
@@ -28,6 +42,7 @@ public class ForageTagProvider
         }
 
         @Override
+        @Nonnull
         public String getName()
         {
             return "ForageCraft Block Tags";
@@ -59,6 +74,7 @@ public class ForageTagProvider
         }
 
         @Override
+        @Nonnull
         public String getName()
         {
             return "ForageCraft Item Tags";

@@ -9,14 +9,34 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+/**
+ * This is the main registry class for ForageCraft. The bulk of registration happens here.
+ *
+ * @author Jonathing
+ * @see ForageBlocks
+ * @see ForageItems
+ * @since 2.0.0
+ */
 public class ForageRegistry
 {
+    /**
+     * This event method calls the {@link ForageBlocks#init(RegistryEvent.Register)} method and prepares to register all
+     * of the {@link Block}s of ForageCraft into the game.
+     *
+     * @see RegistryEvent.Register
+     */
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
     {
         ForageBlocks.init(event);
     }
 
+    /**
+     * This event method calls the {@link ForageItems#init(RegistryEvent.Register)} method and prepares to register all
+     * of the {@link Item}s of ForageCraft into the game.
+     *
+     * @see RegistryEvent.Register
+     */
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {

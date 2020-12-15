@@ -5,6 +5,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * This annotation is used by Shadew's modutil to dynamically inject values into ForageCraft on build.
+ *
+ * @author Shadew
+ * @see <a href="https://github.com/ShadewEnder/ModUtil">ModUtil Gradle Plugin by Shadew</a>
+ * @since 2.0.0
+ */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.SOURCE)
 public @interface DynamicConstant

@@ -5,13 +5,13 @@ package me.jonathing.minecraft.foragecraft.common.security;
  *
  * @author Jonathing
  */
-// TODO: Add more documentation.
+// TODO: Add more documentation and move this into its own dependency along with VerificationUtil.
 public class FingerprintInfo
 {
-    private boolean fingerprintVerified;
-    private String fingerprint;
-    private String expectedFingerprint;
-    private String trustData;
+    private final boolean fingerprintVerified;
+    private final String fingerprint;
+    private final String expectedFingerprint;
+    private final String trustData;
 
     public FingerprintInfo(String fingerprint, String expectedFingerprint, String trustData)
     {

@@ -5,3 +5,5 @@ src/generated/**/.cache/cache text eol=lf
 src/generated/**/*.json text eol=lf
 
 old-data/* linguist-vendored
+images/* linguist-vendored
+versioninfo/* linguist-vendored

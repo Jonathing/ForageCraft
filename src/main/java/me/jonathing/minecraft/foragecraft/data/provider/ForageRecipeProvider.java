@@ -6,24 +6,36 @@ import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
 import net.minecraft.data.*;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.nio.file.Path;
 import java.util.function.Consumer;
 
+/**
+ * The provider for all of the recipes in ForageCraft.
+ *
+ * @author Jonathing
+ * @author Silver_David
+ * @see RecipeProvider
+ * @since 2.0.0
+ */
 public class ForageRecipeProvider extends RecipeProvider
 {
+    private final String hasItem = "has_item";
     private Consumer<IFinishedRecipe> consumer;
-    private String hasItem = "has_item";
 
     public ForageRecipeProvider(DataGenerator generatorIn)
     {
         super(generatorIn);
     }
 
+    /**
+     * @see RecipeProvider#registerRecipes(Consumer)
+     */
     @Override
+    @ParametersAreNonnullByDefault
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
     {
         this.consumer = consumer;
@@ -60,7 +72,7 @@ public class ForageRecipeProvider extends RecipeProvider
 
     private void simpleInOut(IItemProvider in, IItemProvider out, int amount, IItemProvider criterion)
     {
-        ShapelessRecipeBuilder.shapelessRecipe(out, amount).addIngredient(in).addCriterion(hasItem, hasItem(criterion)).build(consumer, ForageCraft.find(out.asItem().getRegistryName().getPath() + "_from_" + in.asItem().getRegistryName().getPath()));;
+        ShapelessRecipeBuilder.shapelessRecipe(out, amount).addIngredient(in).addCriterion(hasItem, hasItem(criterion)).build(consumer, ForageCraft.find(out.asItem().getRegistryName().getPath() + "_from_" + in.asItem().getRegistryName().getPath()));
     }
 
     private void simple3x3withResourceLoc(IItemProvider in, IItemProvider out, int amount)
@@ -90,6 +102,7 @@ public class ForageRecipeProvider extends RecipeProvider
     }
 
     @Override
+    @Nonnull
     public String getName()
     {
         return "ForageCraft Recipes";

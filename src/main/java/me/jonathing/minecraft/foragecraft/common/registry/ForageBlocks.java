@@ -3,7 +3,10 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 import me.jonathing.minecraft.foragecraft.common.blocks.*;
 import me.jonathing.minecraft.foragecraft.common.items.ForageItemGroups;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.HayBlock;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -13,6 +16,13 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * This class holds all of the blocks in ForageCraft.
+ *
+ * @author Jonathing
+ * @see #init(Register)
+ * @since 2.0.0
+ */
 public class ForageBlocks
 {
     public static Block rock, flat_rock, stick;

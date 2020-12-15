@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.*;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -49,6 +49,35 @@ public class ForageCraft
         mod.register(ForageCraftDataGen.class);
         mod.addListener(ForageCraft::commonSetup);
         mod.register(ForageRegistry.class);
+    }
+
+    /**
+     * Runs methods that are designed to be run on the {@link FMLCommonSetupEvent}.
+     */
+    public static void commonSetup(final FMLCommonSetupEvent event)
+    {
+        if (!ForageInfo.IDE)
+            VerificationUtil.validateMod(ForageInfo.MOD_ID, ForageInfo.EXPECTED_SHA256);
+
+        ForageFeatures.initFeatures();
+    }
+
+    /**
+     * @param key The key to search the resource for.
+     * @return A new {@link ResourceLocation} under ForageCraft's mod id.
+     */
+    public static ResourceLocation locate(String key)
+    {
+        return new ResourceLocation(ForageInfo.MOD_ID + ":" + key);
+    }
+
+    /**
+     * @param key The key to search the resource for.
+     * @return A {@link String} containing a potential {@link ResourceLocation}.
+     */
+    public static String find(String key)
+    {
+        return ForageInfo.MOD_ID + ":" + key;
     }
 
     /**
@@ -94,34 +123,5 @@ public class ForageCraft
                 LOGGER.warn("If you have no idea what you're doing, please remove the option from you JVM arguments.");
             }
         }
-    }
-
-    /**
-     * Runs methods that are designed to be run on the {@link FMLCommonSetupEvent}.
-     */
-    public static void commonSetup(final FMLCommonSetupEvent event)
-    {
-        if (!ForageInfo.IDE)
-            VerificationUtil.validateMod(ForageInfo.MOD_ID, ForageInfo.EXPECTED_SHA256);
-
-        ForageFeatures.initFeatures();
-    }
-
-    /**
-     * @param key The key to search the resource for.
-     * @return A new {@link ResourceLocation} under ForageCraft's mod id.
-     */
-    public static ResourceLocation locate(String key)
-    {
-        return new ResourceLocation(ForageInfo.MOD_ID + ":" + key);
-    }
-
-    /**
-     * @param key The key to search the resource for.
-     * @return A {@link String} containing a potential {@link ResourceLocation}.
-     */
-    public static String find(String key)
-    {
-        return ForageInfo.MOD_ID + ":" + key;
     }
 }

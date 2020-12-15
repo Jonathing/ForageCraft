@@ -7,12 +7,15 @@ import java.util.Objects;
 
 /**
  * I am God.
+ * <p>
+ * Unused, but in case I ever need it for advanced handling of foraging, I will be ready.
  *
- * @param <A>
- * @param <B>
- * @param <C>
- * @param <D>
+ * @param <A> The first.
+ * @param <B> The second.
+ * @param <C> The third.
+ * @param <D> The fourth.
  * @author Jonathing
+ * @since 2.0.0
  */
 public class Quadruple<A, B, C, D> implements Comparable<Quadruple<A, B, C, D>>, Serializable
 {

@@ -15,6 +15,7 @@ import java.util.function.Function;
  *
  * @author Jonathing
  */
+// TODO: Add more documentation and move this into its own dependency.
 public final class VerificationUtil
 {
     private static final Logger LOGGER = LogManager.getLogger();

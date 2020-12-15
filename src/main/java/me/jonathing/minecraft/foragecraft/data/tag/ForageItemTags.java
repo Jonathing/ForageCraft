@@ -5,13 +5,20 @@ import net.minecraft.item.Item;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags.IOptionalNamedTag;
 
+/**
+ * The holder of all the item tags in ForageCraft.
+ *
+ * @author Jonathing
+ * @author Silver_David
+ * @since Not yet implemented.
+ */
 public class ForageItemTags
 {
+    public static final IOptionalNamedTag<Item> SCARECROW_CRAFTABLE = tag("scarecrow_craftable");
+
     public static void init()
     {
     }
-
-    public static final IOptionalNamedTag<Item> SCARECROW_CRAFTABLE = tag("scarecrow_craftable");
 
     private static IOptionalNamedTag<Item> tag(String key)
     {

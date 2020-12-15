@@ -16,14 +16,22 @@ import org.apache.commons.lang3.tuple.Triple;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class handles the foraging loot for vanilla blocks in the game. If I ever need to make loot for any of my own
+ * blocks, I will do so with data generation.
+ *
+ * @author Jonathing
+ * @see #onBlockBroken(BlockEvent.BreakEvent)
+ * @since 2.0.0
+ */
 @Mod.EventBusSubscriber
 public class ForagingEventHandler
 {
     /**
-     * Contains a list of pairs containing the chance for an item to be dropped when grass is broken,
-     * and the item itself. The list uses NonNullLazy to prevent {@link ExceptionInInitializerError}.
+     * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when grass is broken,
+     * and the item itself. The list uses {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
      */
-    static final NonNullLazy<List<Triple<Float, Item, Integer>>> GRASS_BLOCK_DROPS = NonNullLazy.of(() -> Arrays.asList(
+    private static final NonNullLazy<List<Triple<Float, Item, Integer>>> GRASS_BLOCK_DROPS = NonNullLazy.of(() -> Arrays.asList(
             Triple.of(0.09f, Items.STICK, 1),
             Triple.of(0.01f, Items.CARROT, 1),
             Triple.of(0.01f, Items.POTATO, 1),
@@ -34,10 +42,10 @@ public class ForagingEventHandler
             Triple.of(0.005f, Items.SKELETON_SKULL, 1)));
 
     /**
-     * Contains a list of pairs containing the chance for an item to be dropped when dirt is mined,
-     * and the item itself. The list uses NonNullLazy to prevent {@link ExceptionInInitializerError}.
+     * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when dirt is mined,
+     * and the item itself. The list uses {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
      */
-    static final NonNullLazy<List<Triple<Float, Item, Integer>>> DIRT_DROPS = NonNullLazy.of(() -> Arrays.asList(
+    private static final NonNullLazy<List<Triple<Float, Item, Integer>>> DIRT_DROPS = NonNullLazy.of(() -> Arrays.asList(
             Triple.of(0.07f, Items.STICK, 1),
             Triple.of(0.04f, Items.FLINT, 1),
             Triple.of(0.01f, Items.POTATO, 1),
@@ -45,26 +53,26 @@ public class ForagingEventHandler
             Triple.of(0.005f, Items.SKELETON_SKULL, 1)));
 
     /**
-     * Contains a list of pairs containing the chance for an item to be dropped when stone is mined,
-     * and the item itself. The list uses NonNullLazy to prevent {@link ExceptionInInitializerError}.
+     * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when stone is mined,
+     * and the item itself. The list uses {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
      */
-    static final NonNullLazy<List<Triple<Float, Item, Integer>>> STONE_DROPS = NonNullLazy.of(() -> Arrays.asList(
+    private static final NonNullLazy<List<Triple<Float, Item, Integer>>> STONE_DROPS = NonNullLazy.of(() -> Arrays.asList(
             Triple.of(0.005f, Items.GOLD_NUGGET, 1),
             Triple.of(0.05f, Items.FLINT, 1)));
 
     /**
-     * Contains a list of pairs containing the chance for an item to be dropped when coal ore is mined,
-     * and the item itself. The list uses NonNullLazy to prevent {@link ExceptionInInitializerError}.
+     * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when coal ore is
+     * mined, and the item itself. The list uses {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
      */
-    static final NonNullLazy<List<Triple<Float, Item, Integer>>> COAL_ORE_DROPS = NonNullLazy.of(() -> Arrays.asList(
+    private static final NonNullLazy<List<Triple<Float, Item, Integer>>> COAL_ORE_DROPS = NonNullLazy.of(() -> Arrays.asList(
             Triple.of(0.001f, Items.DIAMOND, 1),
             Triple.of(0.001f, Items.EMERALD, 1)));
 
     /**
-     * Contains a list of pairs containing the chance for an item to be dropped when nether quartz ore is mined,
-     * and the item itself. The list uses NonNullLazy to prevent {@link ExceptionInInitializerError}.
+     * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when nether quartz ore
+     * is mined, and the item itself. The list uses {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
      */
-    static final NonNullLazy<List<Triple<Float, Item, Integer>>> NETHER_QUARTZ_ORE_DROPS = NonNullLazy.of(() -> Arrays.asList(
+    private static final NonNullLazy<List<Triple<Float, Item, Integer>>> NETHER_QUARTZ_ORE_DROPS = NonNullLazy.of(() -> Arrays.asList(
             Triple.of(0.5f, Items.GOLD_NUGGET, 9)));
 
     /**
