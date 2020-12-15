@@ -1,9 +1,11 @@
 package me.jonathing.minecraft.foragecraft.common.handler;
 
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
+import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
 import net.minecraft.item.Items;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -29,6 +31,19 @@ public class GeneralEventHandler
             // shrink the stack if not in creative
             if (!event.getPlayer().isCreative())
                 event.getItemStack().shrink(1);
+        }
+    }
+
+    @SubscribeEvent
+    public static void furnaceFuelBurnTimeEvent(FurnaceFuelBurnTimeEvent event)
+    {
+        if (event.getItemStack().getItem().equals(ForageBlocks.fascine.asItem()))
+        {
+            event.setBurnTime(20 * 5 * 9 * 9);
+        }
+        else if (event.getItemStack().getItem().equals(ForageItems.stick_bundle))
+        {
+            event.setBurnTime(20 * 5 * 9);
         }
     }
 }
