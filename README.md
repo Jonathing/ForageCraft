@@ -2,8 +2,8 @@
 
 # ForageCraft
 
-[![CurseForge Badge](https://cf.way2muchnoise.eu/foragecraft.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/foragecraft)
-[![Latest Version](https://cf.way2muchnoise.eu/versions/foragecraft_latest.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/foragecraft/files)
+[![CurseForge Badge](http://cf.way2muchnoise.eu/foragecraft.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/foragecraft)
+[![Latest Version](http://cf.way2muchnoise.eu/versions/foragecraft_latest.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/foragecraft/files)
 [![Built with Forge](https://img.shields.io/badge/built%20with-forge-red.svg?style=for-the-badge&logo=conda-forge)](https://forums.minecraftforge.net/)
 [![License](https://img.shields.io/github/license/Jonathing/ForageCraft?style=for-the-badge)](https://choosealicense.com/licenses/mit/)
 [![Last GitHub Commit](https://img.shields.io/github/last-commit/Jonathing/ForageCraft?style=for-the-badge)](https://github.com/Jonathing/ForageCraft/commits/)
