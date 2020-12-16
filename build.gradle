@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
-        maven { url = 'https://dist.creeper.host/Sponge/maven' }
+        maven { url = 'https://repo.spongepowered.org/maven' }
         maven { url = 'https://maven.shadew.net/' }
         jcenter()
         mavenCentral()
@@ -17,31 +17,45 @@ ext {
     timeOfExecution = new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
 }
 
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'net.shadew.modutil'
+apply plugin: 'net.minecraftforge.gradle' // ForgeGradle
+apply plugin: 'org.spongepowered.mixin' // MixinGradle
+apply plugin: 'net.shadew.modutil' // ModUtil
 
+// This plugin is used to add compatibility for Eclipse workspaces.
 apply plugin: 'eclipse'
+// This plugin is used to add the ability to sign jars.
 apply plugin: 'signing'
+// This plugin is used to be able to publish to the Modding Legacy Maven (ask Jonathing for details).
+apply plugin: 'maven-publish'
 
+// Get a variable from gradle.properties, or return null if it doesn't exist.
 String getVariable(String key) {
     return rootProject.hasProperty(key) ? rootProject.property(key) : null
 }
 
+// Get the Minecraft version from gradle.properties
 def mc_version = "${mc_version_major}.${mc_version_minor}.${mc_version_patch}"
+// Get the Minecraft Forge version from gradle.properties
 def forge_version = project.hasProperty('forge_version_build') ? "${forge_version_major}.${forge_version_minor}.${forge_version_patch}.${forge_version_build}" : "${forge_version_major}.${forge_version_minor}.${forge_version_patch}"
 
+
+// Get the mod version from gradle.properties
 version = project.hasProperty('mod_version_modifier') ? "${mod_version_major}.${mod_version_minor}.${mod_version_patch}-${mod_version_modifier}" : "${mod_version_major}.${mod_version_minor}.${mod_version_patch}"
-group = "me.jonathing.minecraft.${mod_id}"
+// Get the mod group from gradle.properties
+group = "${mod_group}"
+// Get the archives base name from the mod id and the Minecraft version.
 archivesBaseName = "${mod_id}-${mc_version}"
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+// Ensure that the IDE knows that this project is for Java 8 and not anything else.
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 project.ext.canJarBeSigned = { return canJarBeSigned() }
 project.ext.getProjectFingerprint = { return getProjectFingerprint() }
 project.ext.sign = { File jar -> return sign(jar) }
 project.ext.isOsx = { return isOsx() }
 
+// This section prints out the Java, Minecraft, and Mod info just to double check all the values are correct.
+// It is printed on every build, so make sure you double check!
 println('')
 println('Java Information')
 println('- Java: ' + System.getProperty('java.version'))
@@ -59,6 +73,7 @@ println('- Name: ' + "${mod_name}".toString())
 println('- Version: ' + "${version}".toString())
 println('')
 
+// Any repositories for dependencies go here.
 repositories {
     mavenLocal()
     mavenCentral()
@@ -88,12 +103,15 @@ repositories {
     }
 }
 
+// ModUtil setup
 modutil {
+    // Changelog generation
     changelogJson file('changelog.json')
     markdownChangelog file('versioninfo/latest_changelog.md')
     markdownChangelog file("versioninfo/${changelogInfo.versionNumber}_changelog.md")
     updateJson file('versioninfo/update.json')
 
+    // Constants to inject
     constant('mod_id', mod_id)
     constant('mod_name', mod_name)
     constant('version', changelogInfo.versionNumber)
@@ -102,79 +120,88 @@ modutil {
     constant('build_time', project.ext.timeOfExecution)
     constant('expected_sha256', getProjectFingerprint())
 
+    // DynamicConstant annotation class
     constantAnnotation 'me.jonathing.minecraft.foragecraft.info.DynamicConstant'
 }
 
+// Minecraft information
 minecraft {
-    // The mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   Snapshot are built nightly.
-    // stable_#            Stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not always work.
-    // Simply re-run your setup task after changing the mappings to update your workspace.
+    // Mappings from gradle.properties
     mappings channel: "${mappings_channel}".toString(), version: "${mappings_version}".toString()
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    // Access Transformer (commented out by default)
+    //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
+    // Run configurations
     runs {
+        // Client run configuration
         client {
+            // The directory for Minecraft to run in
             workingDirectory project.file('run/client')
 
-            // We are using a Mixin connector in the dev environment, so we dont need these.
-            // Only uncomment these if for some reason the connector doesn't work
+            // Enable mixins (comment out if using a Mixin connector)
             //arg "-mixin.config=${mod_id}.mixins.json".toString()
             //arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
+
+            // Enable Structure Gel API mixins (commented out by default)
+            //arg '-mixin.config=structure_gel.mixins.json'
 
             // Disable refmaps for mixin in a dev environment
             property 'mixin.env.disableRefMap', 'true'
 
-            // Recommended logging data for a userdev environment
+            // Mod scanning, registration, and registry dump logging (commented out by default)
             //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+            // Console logging level (info by default)
+            property 'forge.logging.console.level', 'info'
 
-            // Tell Minecraft if it is running in an IDE
+            // Tell Minecraft if it is running in an IDE (must be configured in your project)
             property "${mod_id}.iside".toString(), 'true'
 
             mods {
+                // you will NEED to change this to your mod id. Unfortunately, this is not automated.
                 foragecraft {
                     source sourceSets.main
                 }
             }
         }
 
+        // Server run configuration
         server {
+            // The directory for Minecraft to run in
             workingDirectory project.file('run/server')
 
-            // We are using a Mixin connector in the dev environment, so we dont need these.
-            // Only uncomment these if for some reason the connector doesn't work
+            // Enable mixins (comment out if using a Mixin connector)
             //arg "-mixin.config=${mod_id}.mixins.json".toString()
             //arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
+
+            // Enable Structure Gel API mixins (commented out by default)
+            //arg '-mixin.config=structure_gel.mixins.json'
 
             // Disable refmaps for mixin in a dev environment
             property 'mixin.env.disableRefMap', 'true'
 
-            // Recommended logging data for a userdev environment
+            // Mod scanning, registration, and registry dump logging (commented out by default)
             //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+            // Console logging level (info by default)
+            property 'forge.logging.console.level', 'info'
 
-            // Tell Minecraft if it is running in an IDE
+            // Tell Minecraft if it is running in an IDE (must be configured in your project)
             property "${mod_id}.iside".toString(), 'true'
 
+            // Additional arguments exclusive to the server (nogui by default, separated by ",")
             args 'nogui'
 
             mods {
+                // you will NEED to change this to your mod id. Unfortunately, this is not automated.
                 foragecraft {
                     source sourceSets.main
                 }
             }
         }
 
+        // CI Test Server Plugin configuration
         testServer {
             // Get all the shit from the server config
             parent minecraft.runs.server
@@ -183,27 +210,31 @@ minecraft {
             property 'minecraftdev.ci.istestserver', 'true'
         }
 
+        // Data generation run configuration
         data {
+            // The directory for Minecraft to run in
             workingDirectory project.file('run/data')
 
-            // We are using a Mixin connector in the dev environment, so we dont need these.
-            // Only uncomment these if for some reason the connector doesn't work
+            // Enable mixins (comment out if using a Mixin connector)
             //arg "-mixin.config=${mod_id}.mixins.json".toString()
             //arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
+
+            // Enable Structure Gel API mixins (commented out by default)
+            //arg '-mixin.config=structure_gel.mixins.json'
 
             // Disable refmaps for mixin in a dev environment
             property 'mixin.env.disableRefMap', 'true'
 
-            // Recommended logging data for a userdev environment
+            // Mod scanning, registration, and registry dump logging (commented out by default)
             //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+            // Console logging level (info by default)
+            property 'forge.logging.console.level', 'info'
 
-            // Tell Minecraft if it is running in an IDE
+            // Tell Minecraft if it is running in an IDE (must be configured in your project)
             property "${mod_id}.iside".toString(), 'true'
 
-            // Tell Minecraft if it is running datagen
+            // Tell Minecraft if it is running datagen (must be configured in your project)
             property "${mod_id}.datagen".toString(), 'true'
 
             // Workaround for https://github.com/MinecraftForge/ForgeGradle/issues/690
@@ -212,9 +243,11 @@ minecraft {
                 jvmArg("-XstartOnFirstThread")
             }
 
+            // Additional arguments exclusive to data generation (do NOT change these unless necessary)
             args '--mod', "${mod_id}".toString(), '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
+                // you will NEED to change this to your mod id. Unfortunately, this is not automated.
                 foragecraft {
                     source sourceSets.main
                 }
@@ -232,66 +265,63 @@ sourceSets {
     }
 }
 
-dependencies {
-    // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
-    // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
-    // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}".toString()
-
-    // You may put jars on which you depend on in ./libs or you may define them like so..
-    // compile "some.group:artifact:version:classifier"
-    // compile "some.group:artifact:version"
-
-    // Real examples
-    // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    // compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // The 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
-    // provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
-    // These dependencies get remapped to your current MCP mappings
-    // deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
-    // For more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
-    compile fg.deobf("me.jonathing.minecraft:ci_testserver:1.16.4-1.0.1")
-
-    compileOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62")
-
-    compileOnly fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.4-13.0.0.420:api-obf")
-    compile fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.4-13.0.0.420:universal-obf")
-
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48")
-}
-
+// Ensure the reference map is included in the source sets
 mixin {
     add sourceSets.main, "${mod_id}.refmap.json"
 }
 
-build {
-    dependsOn 'signJar'
+// Additional dependencies (including Minecraft) for the project)
+dependencies {
+    // Minecraft Forge
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}".toString()
+
+    // CI Test Server Plugin
+    compile fg.deobf("me.jonathing.minecraft:ci_testserver:1.16.4-1.0.1")
+
+    // JEI
+    compileOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62")
+
+    // Biomes O' Plenty
+    compileOnly fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.4-13.0.0.420:api-obf")
+    compile fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.4-13.0.0.420:universal-obf")
+
+    // Patchouli
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48")
+
+    // The Blame Mod
+    runtimeOnly fg.deobf("com.telepathicgrunt:blame:1.7.4")
 }
 
-// Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "ForageCraft",
-                "Specification-Vendor"    : "Jonathing",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Specification-Title"     : "${jar_specification_title}",
+                "Specification-Vendor"    : "${jar_specification_vendor}",
+                "Specification-Version"   : "${jar_specification_version}",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : "${version}",
-                "Implementation-Vendor"   : "Jonathing",
+                "Implementation-Vendor"   : "${jar_specification_vendor}",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConnector"          : "me.jonathing.minecraft.foragecraft.asm.MixinConnector"
+                "MixinConfigs"            : "${mod_id}.mixins.json"
         ])
     }
 }
 
+// Detects if the OS is macOS. Required for the workaround in genData.
+static def isOsx() {
+    def osProp = System.properties['os.name'].toLowerCase()
+    return osProp.contains('darwin') || osProp.contains('osx') || osProp.contains('mac')
+}
+
+// Ensures that the signJar task will run on every build
+// REMINDER: the jar will not be signed if the jcKeyStore key in gradle.properties does not exist
+build {
+    dependsOn 'signJar'
+}
+
+// detects if the jcKeyStore key in gradle.properties exists so the jar can be signed
 def canJarBeSigned() {
     return getVariable('jcKeyStore') != null
 }
@@ -325,13 +355,45 @@ def sign(File jar) {
     }
 }
 
-static def isOsx() {
-    def osProp = System.properties['os.name'].toLowerCase()
-    return osProp.contains('darwin') || osProp.contains('osx') || osProp.contains('mac')
-}
-
+// Gradle task to sign the jar.
 task signJar(dependsOn: 'reobfJar') {
     doLast {
         project.ext.sign(jar.archivePath)
+    }
+}
+
+// generates the javadocs and shoves them in a jar
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+// Ensures that the mod is built before it is published to the maven
+publish {
+    dependsOn 'build'
+}
+
+// the reobfFile takes the built file (from the build task) and uses that to publish it to the maven
+def reobfFile = file("build/libs/${archivesBaseName}-${version}.jar")
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = "${maven_group}"
+            artifactId = "${maven_artifact_id}"
+            version = "${mc_version}-${version}"
+
+            artifact reobfFile
+            artifact javadocJar
+        }
+    }
+    repositories {
+        maven {
+            name = "ModdingLegacyMaven"
+            url = uri("https://maven.moddinglegacy.com/artifactory/modding-legacy/")
+            credentials {
+                username = project.findProperty("mlm.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("mlm.key") ?: System.getenv("TOKEN")
+            }
+        }
     }
 }
