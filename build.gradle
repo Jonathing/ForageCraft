@@ -63,6 +63,10 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven {
+        name = "Modding Legacy Maven"
+        url = "https://maven.moddinglegacy.com/artifactory/modding-legacy/"
+    }
+    maven {
         name = "Shadew's Maven Repo"
         url = "https://maven.shadew.net/"
     }
@@ -176,7 +180,7 @@ minecraft {
             parent minecraft.runs.server
 
             // Tell Minecraft that we are only running a test server for the CI
-            property "${mod_id}.istestserver".toString(), 'true'
+            property 'minecraftdev.ci.istestserver', 'true'
         }
 
         data {
@@ -251,6 +255,8 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+    compile fg.deobf("me.jonathing.minecraft:ci_testserver:1.16.4-1.0.1")
 
     compileOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62")

@@ -10,23 +10,23 @@ package me.jonathing.minecraft.foragecraft.info;
 public interface IForageInfo
 {
     /**
-     * Returns the mod-id/resources namespace of the Midnight, which is {@code foragecraft}.
+     * Returns the mod-id/resources namespace of ForageCraft, which is {@code foragecraft}.
      */
     String modId();
 
     /**
-     * Returns the mod name of the Midnight, which is 'ForageCraft'.
+     * Returns the mod name of ForageCraft, which is 'ForageCraft'.
      */
     String name();
 
     /**
-     * Returns the build version number of the Midnight, in the following format:<br>
+     * Returns the build version number of ForageCraft, in the following format:<br>
      * <code><i>major</i>.<i>minor</i>.<i>patch</i><i>[</i>-<i>modifier]</i></code><br>
      */
     String version();
 
     /**
-     * Returns the build version name of the Midnight.
+     * Returns the build version name of ForageCraft.
      */
     String versionName();
 
