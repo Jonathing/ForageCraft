@@ -12,6 +12,8 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.tuple.Triple;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +29,8 @@ import java.util.List;
 @Mod.EventBusSubscriber
 public class ForagingEventHandler
 {
+    private static final Logger LOGGER = LogManager.getLogger();
+
     /**
      * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when grass is broken,
      * and the item itself. The list uses {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
@@ -94,13 +98,15 @@ public class ForagingEventHandler
 
         // TODO Make configuration values.
         Block blockBroken = event.getState().getBlock();
-        System.out.println("blockBroken = " + blockBroken);
         if (Blocks.GRASS_BLOCK.equals(blockBroken))
         {
             GRASS_BLOCK_DROPS.get().forEach(p ->
             {
                 if (world.getRandom().nextFloat() < p.getLeft())
+                {
+                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), p.getMiddle().toString()));
                     Block.spawnAsEntity(world, event.getPos(), new ItemStack(p.getMiddle(), world.getRandom().nextInt(p.getRight() + 1)));
+                }
             });
         }
         else if (Blocks.DIRT.equals(blockBroken))
@@ -108,7 +114,10 @@ public class ForagingEventHandler
             DIRT_DROPS.get().forEach(p ->
             {
                 if (world.getRandom().nextFloat() < p.getLeft())
+                {
+                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), p.getMiddle().toString()));
                     Block.spawnAsEntity(world, event.getPos(), new ItemStack(p.getMiddle(), world.getRandom().nextInt(p.getRight() + 1)));
+                }
             });
         }
         else if (Blocks.STONE.equals(blockBroken))
@@ -116,7 +125,10 @@ public class ForagingEventHandler
             STONE_DROPS.get().forEach(p ->
             {
                 if (world.getRandom().nextFloat() < p.getLeft())
+                {
+                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), p.getMiddle().toString()));
                     Block.spawnAsEntity(world, event.getPos(), new ItemStack(p.getMiddle(), world.getRandom().nextInt(p.getRight() + 1)));
+                }
             });
         }
         else if (Blocks.COAL_ORE.equals(blockBroken))
@@ -124,7 +136,10 @@ public class ForagingEventHandler
             COAL_ORE_DROPS.get().forEach(p ->
             {
                 if (world.getRandom().nextFloat() < p.getLeft())
+                {
+                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), p.getMiddle().toString()));
                     Block.spawnAsEntity(world, event.getPos(), new ItemStack(p.getMiddle(), world.getRandom().nextInt(p.getRight() + 1)));
+                }
             });
         }
         else if (Blocks.NETHER_QUARTZ_ORE.equals(blockBroken))
@@ -132,7 +147,10 @@ public class ForagingEventHandler
             NETHER_QUARTZ_ORE_DROPS.get().forEach(p ->
             {
                 if (world.getRandom().nextFloat() < p.getLeft())
+                {
+                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), p.getMiddle().toString()));
                     Block.spawnAsEntity(world, event.getPos(), new ItemStack(p.getMiddle(), world.getRandom().nextInt(p.getRight() + 1)));
+                }
             });
         }
     }

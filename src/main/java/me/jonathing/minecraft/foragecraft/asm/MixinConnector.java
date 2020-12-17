@@ -20,7 +20,8 @@ public class MixinConnector implements IMixinConnector
     private static final Logger LOGGER = LogManager.getLogger("ForageCraft Mixin Connector");
 
     /**
-     * Connects our mixins to the environment.
+     * Connects ForageCraft's mixins to the environment. The workspace is configured to use this in the IDE since it is
+     * manually specified in the {@code MANIFEST.MF} file in the {@code META-INF} folder.
      *
      * @see MixinConnector
      * @see IMixinConnector#connect()

@@ -82,6 +82,10 @@ repositories {
         url = "https://maven.moddinglegacy.com/artifactory/modding-legacy/"
     }
     maven {
+        name = "Modding Legacy Mirror Maven"
+        url = "https://maven.moddinglegacy.com/artifactory/mirror/"
+    }
+    maven {
         name = "Shadew's Maven Repo"
         url = "https://maven.shadew.net/"
     }
