@@ -23,7 +23,7 @@ public class GeneralEventHandler
      * though that is not its proper function in vanilla. Various statements are commented in this method for reference.
      *
      * @see PlayerInteractEvent.RightClickBlock
-     * @see me.jonathing.minecraft.foragecraft.common.blocks.StickBlock
+     * @see me.jonathing.minecraft.foragecraft.common.block.StickBlock
      * @since 2.0.0
      */
     @SubscribeEvent

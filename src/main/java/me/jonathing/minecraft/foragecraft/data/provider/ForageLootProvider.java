@@ -2,7 +2,7 @@ package me.jonathing.minecraft.foragecraft.data.provider;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
-import me.jonathing.minecraft.foragecraft.common.blocks.LeekCropBlock;
+import me.jonathing.minecraft.foragecraft.common.block.LeekCropBlock;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;

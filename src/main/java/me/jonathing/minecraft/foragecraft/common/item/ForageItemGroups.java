@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.common.items;
+package me.jonathing.minecraft.foragecraft.common.item;
 
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;

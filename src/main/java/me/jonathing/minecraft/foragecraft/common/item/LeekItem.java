@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.common.items;
+package me.jonathing.minecraft.foragecraft.common.item;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

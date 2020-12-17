@@ -1,7 +1,7 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
-import me.jonathing.minecraft.foragecraft.common.blocks.*;
-import me.jonathing.minecraft.foragecraft.common.items.ForageItemGroups;
+import me.jonathing.minecraft.foragecraft.common.block.*;
+import me.jonathing.minecraft.foragecraft.common.item.ForageItemGroups;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.common.blocks;
+package me.jonathing.minecraft.foragecraft.common.block;
 
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import net.minecraft.block.Block;

@@ -1,7 +1,7 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
-import me.jonathing.minecraft.foragecraft.common.items.ForageItemGroups;
-import me.jonathing.minecraft.foragecraft.common.items.LeekItem;
+import me.jonathing.minecraft.foragecraft.common.item.ForageItemGroups;
+import me.jonathing.minecraft.foragecraft.common.item.LeekItem;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
 import net.minecraft.item.*;
