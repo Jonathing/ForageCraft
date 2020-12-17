@@ -46,7 +46,7 @@ public class ItemMixin
      * {@link ForageBlocks#stick}.
      *
      * @param itemUseContext The item context in which the player right clicks any block with an item in hand.
-     * @param callback Returns the resulting {@link ActionResultType} of the action.
+     * @param callback       Returns the resulting {@link ActionResultType} of the action.
      */
     @Inject(at = @At("HEAD"), method = "Lnet/minecraft/item/Item;onItemUse(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;", cancellable = true)
     public void onItemUse(ItemUseContext itemUseContext, CallbackInfoReturnable<ActionResultType> callback)
