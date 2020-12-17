@@ -293,9 +293,6 @@ dependencies {
     // Patchouli
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48")
-
-    // The Blame Mod
-    runtimeOnly fg.deobf("com.telepathicgrunt:blame:1.7.4")
 }
 
 jar {
