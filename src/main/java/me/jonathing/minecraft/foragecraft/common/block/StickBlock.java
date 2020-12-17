@@ -128,4 +128,11 @@ public class StickBlock extends RockBlock
     {
         return Items.STICK;
     }
+
+    @Override
+    @Nonnull
+    public Item asItem()
+    {
+        return Items.STICK;
+    }
 }
