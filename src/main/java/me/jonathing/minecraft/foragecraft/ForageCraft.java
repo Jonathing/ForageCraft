@@ -116,12 +116,6 @@ public class ForageCraft
             LOGGER.debug(String.format(" - Build Date:  %s", ForageInfo.BUILD_DATE));
             LOGGER.debug(String.format(" - Dist:        %s", FMLEnvironment.dist.toString()));
             LOGGER.debug(" - Environment: Normal");
-
-            if (ForageInfo.FORCE_DEV_MIXINS)
-            {
-                LOGGER.warn("Dev-environment mixins for ForageCraft have been enabled!");
-                LOGGER.warn("If you have no idea what you're doing, please remove the option from you JVM arguments.");
-            }
         }
     }
 }

@@ -4,8 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "foragecraft.refmap.json",
   "mixins": [
-    "EntityMixin",
-    "ItemMixin"
+    "EntityMixin"
   ],
   "minVersion": "0.8.2"
 }

@@ -100,56 +100,56 @@ public class ForagingEventHandler
         Block blockBroken = event.getState().getBlock();
         if (Blocks.GRASS_BLOCK.equals(blockBroken))
         {
-            GRASS_BLOCK_DROPS.get().forEach(p ->
+            GRASS_BLOCK_DROPS.get().forEach(t ->
             {
-                if (world.getRandom().nextFloat() < p.getLeft())
+                if (world.getRandom().nextFloat() < t.getLeft())
                 {
-                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), p.getMiddle().toString()));
-                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(p.getMiddle(), world.getRandom().nextInt(p.getRight() + 1)));
+                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), t.getMiddle().toString()));
+                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(t.getMiddle(), world.getRandom().nextInt(t.getRight() + 1)));
                 }
             });
         }
         else if (Blocks.DIRT.equals(blockBroken))
         {
-            DIRT_DROPS.get().forEach(p ->
+            DIRT_DROPS.get().forEach(t ->
             {
-                if (world.getRandom().nextFloat() < p.getLeft())
+                if (world.getRandom().nextFloat() < t.getLeft())
                 {
-                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), p.getMiddle().toString()));
-                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(p.getMiddle(), world.getRandom().nextInt(p.getRight() + 1)));
+                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), t.getMiddle().toString()));
+                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(t.getMiddle(), world.getRandom().nextInt(t.getRight() + 1)));
                 }
             });
         }
         else if (Blocks.STONE.equals(blockBroken))
         {
-            STONE_DROPS.get().forEach(p ->
+            STONE_DROPS.get().forEach(t ->
             {
-                if (world.getRandom().nextFloat() < p.getLeft())
+                if (world.getRandom().nextFloat() < t.getLeft())
                 {
-                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), p.getMiddle().toString()));
-                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(p.getMiddle(), world.getRandom().nextInt(p.getRight() + 1)));
+                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), t.getMiddle().toString()));
+                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(t.getMiddle(), world.getRandom().nextInt(t.getRight() + 1)));
                 }
             });
         }
         else if (Blocks.COAL_ORE.equals(blockBroken))
         {
-            COAL_ORE_DROPS.get().forEach(p ->
+            COAL_ORE_DROPS.get().forEach(t ->
             {
-                if (world.getRandom().nextFloat() < p.getLeft())
+                if (world.getRandom().nextFloat() < t.getLeft())
                 {
-                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), p.getMiddle().toString()));
-                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(p.getMiddle(), world.getRandom().nextInt(p.getRight() + 1)));
+                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), t.getMiddle().toString()));
+                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(t.getMiddle(), world.getRandom().nextInt(t.getRight() + 1)));
                 }
             });
         }
         else if (Blocks.NETHER_QUARTZ_ORE.equals(blockBroken))
         {
-            NETHER_QUARTZ_ORE_DROPS.get().forEach(p ->
+            NETHER_QUARTZ_ORE_DROPS.get().forEach(t ->
             {
-                if (world.getRandom().nextFloat() < p.getLeft())
+                if (world.getRandom().nextFloat() < t.getLeft())
                 {
-                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), p.getMiddle().toString()));
-                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(p.getMiddle(), world.getRandom().nextInt(p.getRight() + 1)));
+                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), t.getMiddle().toString()));
+                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(t.getMiddle(), world.getRandom().nextInt(t.getRight() + 1)));
                 }
             });
         }

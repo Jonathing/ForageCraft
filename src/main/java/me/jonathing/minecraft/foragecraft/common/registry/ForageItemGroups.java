@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.common.item;
+package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
@@ -24,7 +24,7 @@ public class ForageItemGroups extends ItemGroup
      * This is the development environment item group for ForageCraft. This will <em>never</em> be seen in game unless
      * the specific system property has been defined.
      */
-    public static final ForageItemGroups FORAGECRAFT = new ForageItemGroups(ForageInfo.MOD_ID, "straw_bale");
+    public static final ForageItemGroups FORAGECRAFT = new ForageItemGroups(ForageInfo.MOD_ID, "stick_bundle");
     private final String iconName;
 
     public ForageItemGroups(String label, String iconName)

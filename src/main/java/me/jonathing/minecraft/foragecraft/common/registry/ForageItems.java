@@ -1,6 +1,5 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
-import me.jonathing.minecraft.foragecraft.common.item.ForageItemGroups;
 import me.jonathing.minecraft.foragecraft.common.item.LeekItem;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
@@ -74,6 +73,9 @@ public class ForageItems
             ForageRegistry.register(iItemRegistry, block.getRegistryName(), new BlockItem(block, entry.getValue()));
         }
         ForageBlocks.blockItemPropertiesMap.clear();
+
+        // the fucking stick
+        ForageRegistry.register(iItemRegistry, Items.STICK.getRegistryName(), new BlockItem(ForageBlocks.stick, new Item.Properties()));
     }
 
     /**
