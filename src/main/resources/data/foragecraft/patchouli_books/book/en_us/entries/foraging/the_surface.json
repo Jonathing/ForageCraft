@@ -2,6 +2,7 @@
   "name": "The Surface",
   "icon": "minecraft:stick",
   "category": "foragecraft:foraging",
+  "sortnum": 0,
   "pages": [
     {
       "type": "text",
