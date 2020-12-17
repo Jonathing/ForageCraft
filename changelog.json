@@ -9,13 +9,8 @@
     "ForageCraft, rewritten for modern Minecraft versions."
   ],
   "changelog": [
-    "Updated Minecraft to 1.16.4",
-    "Updated Minecraft Forge to 35.1.0",
-    "ForageCraft's jars are now signed.",
-    "Added a check to make sure that the mod is signed.",
-    "Fixed any potential issues with recipes and loot tables.",
-    "Temporarily removed the scarecrow.",
-    "All of the textures have been redesigned by Silver_David.",
-    "Added full compatibility with mods that add their own overworld biomes."
+    "Added full compatibility with Patchouli.",
+    "Fixed ForageEventHandler spamming the console with useless information. (#66)",
+    "Right-clicking the stick in the world no longer has unintended side-effects. (#64)"
   ]
 }
