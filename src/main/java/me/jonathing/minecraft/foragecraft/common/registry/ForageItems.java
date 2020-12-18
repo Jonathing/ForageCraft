@@ -73,9 +73,6 @@ public class ForageItems
             ForageRegistry.register(iItemRegistry, block.getRegistryName(), new BlockItem(block, entry.getValue()));
         }
         ForageBlocks.blockItemPropertiesMap.clear();
-
-        // the fucking stick
-        ForageRegistry.register(iItemRegistry, Items.STICK.getRegistryName(), new BlockItem(ForageBlocks.stick, new Item.Properties()));
     }
 
     /**
