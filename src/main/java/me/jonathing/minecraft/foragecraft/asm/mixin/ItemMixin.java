@@ -1,5 +1,6 @@
 package me.jonathing.minecraft.foragecraft.asm.mixin;
 
+import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.AirBlock;
@@ -48,7 +49,7 @@ public class ItemMixin
      * @param itemUseContext The item context in which the player right clicks any block with an item in hand.
      * @param callback       Returns the resulting {@link ActionResultType} of the action.
      */
-    @Inject(at = @At("HEAD"), method = "Lnet/minecraft/item/Item;onItemUse(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "onItemUse(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;", cancellable = true)
     public void onItemUse(ItemUseContext itemUseContext, CallbackInfoReturnable<ActionResultType> callback)
     {
         if (itemUseContext.getItem().getItem().equals(Items.STICK))
@@ -61,7 +62,8 @@ public class ItemMixin
             }
             else
             {
-                BlockState blockstate = ForageBlocks.stick.getDefaultState();
+                BlockState blockstate = ForageBlocks.stick.getStateForPlacement(useContext);
+                blockstate = blockstate == null ? ((StickBlock) ForageBlocks.stick).getStateWithRandomDirection() : blockstate;
                 if (!useContext.getWorld().setBlockState(useContext.getPos(), blockstate, 11))
                 {
                     callback.setReturnValue(ActionResultType.FAIL);
