@@ -1,0 +1,17 @@
+{
+  "name": "Foraging 101",
+  "icon": "minecraft:dirt",
+  "category": "foragecraft:foraging",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Foraging is a very simple task. Simpler than you might expect, actually! All you have to do is dig up a block (i.e. grass block, dirt, stone) and hope you get a lucky resource drop!$(br2)Welp, that's your crash course on foraging. What are you still doing here? Get out there and start digging for resources!"
+    },
+    {
+      "type": "image",
+      "images": ["foragecraft:textures/gui/entries/screenshot.png"],
+      "border": true
+    }
+  ]
+}

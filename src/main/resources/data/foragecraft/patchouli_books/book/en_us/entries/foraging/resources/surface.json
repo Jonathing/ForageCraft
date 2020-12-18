@@ -1,7 +1,7 @@
 {
   "name": "The Surface",
-  "icon": "minecraft:stick",
-  "category": "foragecraft:foraging",
+  "icon": "minecraft:grass_block",
+  "category": "foragecraft:resources",
   "sortnum": 0,
   "pages": [
     {
@@ -9,9 +9,21 @@
       "text": "Since researching into the the possibility of foraging your world, various new blocks have been making an appearance on $(bold)the surface$() of The Overworld.$(br2)It might be wise to continue research by collecting these newly-found blocks and using them to their best potential."
     },
     {
+      "type": "multiblock",
+      "name": "",
+      "multiblock_id": "foragecraft:the_surface",
+      "enable_visualize": false
+    },
+    {
       "type": "spotlight",
       "item": "minecraft:stick",
       "text": "A simple glance at your environment and there are sticks everywhere. In the $(bold)leaves$() of the trees, lying on the fuzzy $(bold)grass$() the environment holds, or maybe even $(bold)within the Earth itself!$()"
+    },
+    {
+      "type": "multiblock",
+      "name": "",
+      "multiblock_id": "foragecraft:single_stick",
+      "enable_visualize": false
     },
     {
       "type": "spotlight",
@@ -19,9 +31,21 @@
       "text": "Aside from sticks making their way across the landscape, various small rocks have also found their way onto $(bold)the surface$() of The Overworld. Perhaps if you collect enough of them, you might be able to make yourself some cobblestone?"
     },
     {
+      "type": "multiblock",
+      "name": "",
+      "multiblock_id": "foragecraft:single_rock",
+      "enable_visualize": false
+    },
+    {
       "type": "spotlight",
       "item": "foragecraft:flat_rock",
       "text": "A direct cousin of the rocks on the surface, more commonly referred to as flat rocks, are found $(bold)just as often$() as normal rocks. You might be able to craft something other than cobblestone once you get you hands on enough of them..."
+    },
+    {
+      "type": "multiblock",
+      "name": "",
+      "multiblock_id": "foragecraft:single_flat_rock",
+      "enable_visualize": false
     }
   ]
 }

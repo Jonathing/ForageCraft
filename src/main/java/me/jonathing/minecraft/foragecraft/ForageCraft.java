@@ -1,6 +1,7 @@
 package me.jonathing.minecraft.foragecraft;
 
 import me.jonathing.minecraft.foragecraft.client.ForageClient;
+import me.jonathing.minecraft.foragecraft.common.compat.ModCompatHandler;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageFeatures;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageRegistry;
 import me.jonathing.minecraft.foragecraft.common.security.VerificationUtil;
@@ -60,6 +61,7 @@ public class ForageCraft
             VerificationUtil.validateMod(ForageInfo.MOD_ID, ForageInfo.EXPECTED_SHA256);
 
         ForageFeatures.initFeatures();
+        ModCompatHandler.init();
     }
 
     /**

@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.connect.IMixinConnector;
  */
 public class MixinConnector implements IMixinConnector
 {
-    private static final Logger LOGGER = LogManager.getLogger("ForageCraft Mixin Connector");
+    public static final Logger LOGGER = LogManager.getLogger("ForageCraft Mixins");
 
     /**
      * Connects ForageCraft's mixins to the environment. The workspace is configured to use this in the IDE since it is

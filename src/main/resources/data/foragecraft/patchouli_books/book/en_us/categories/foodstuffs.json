@@ -1,0 +1,7 @@
+{
+  "name": "Foodstuffs",
+  "description": "Resources are not the only things you can forage from the earth. It turns out that there are a plethora of foods that you are able to retrieve from the Earth itself! Too scared to slaughter some meaty animals? Dig for potatoes!",
+  "icon": "minecraft:potato",
+  "parent": "foragecraft:foraging",
+  "sortnum": 0
+}

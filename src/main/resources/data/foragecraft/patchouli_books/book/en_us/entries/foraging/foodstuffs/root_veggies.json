@@ -1,0 +1,38 @@
+{
+  "name": "Root Vegetables",
+  "icon": "minecraft:carrot",
+  "category": "foragecraft:foodstuffs",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "text": "The more you dig through your environment, the more you see and understand what you are able to find. Despite the numerous sources of meat freshly available around you, you are able to forage different foods from the ground. Let's just hope that you're lucky enough."
+    },
+    {
+      "type": "entity",
+      "entity": "minecraft:villager{VillagerData:{profession:unemployed,type:plains}}",
+      "name": "Villager",
+      "text": "A farmer villager from the villages who own a monopoly on root vegetables."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:potato",
+      "text": "The glorious potato! The potato has been a staple crop of humanity for a very long time, but it can rarely be found in the wilderness of this world. Once thought to only be in the hands of the $(bold)zombies$() and the $(bold)villages,$() it is discovered that they can be dug up from the $(bold)grass blocks$() of the surface and the $(bold)dirt$() beneath it."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:poisonous_potato",
+      "text": "Unfortunately, some potatoes have been cruelly stripped of their glory and have grown rotten for they naturally absorb harmful substances from $(bold)the earth they were dug up from.$() Maybe they might have some useful application in the future?"
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:carrot",
+      "text": "For hundreds of years, carrots have been hoarded by the small, compact, and arguably rare $(bold)villages$() that seem to hold so many root crops on their own. Fortunately, there is a new solution to this problem: foraging! Just like potatoes, they can be dug up from the $(bold)grass blocks$() of the surface and the $(bold)dirt$() beneath it."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:beetroot",
+      "text": "The beetroot is a mysterious plant. It grows from a large, spherical seed, which is are surprisingly tough, and can survive for years on its own. Although the $(bold)villages$() continue to hold a monopoly on the vast majority of root crops, beetroot can still be dug up from $(bold)the ground$() like the other foodstuffs thus far."
+    }
+  ]
+}
