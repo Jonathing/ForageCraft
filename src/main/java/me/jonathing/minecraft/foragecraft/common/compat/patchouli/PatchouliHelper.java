@@ -1,9 +1,12 @@
 package me.jonathing.minecraft.foragecraft.common.compat.patchouli;
 
+import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
 import me.jonathing.minecraft.foragecraft.common.compat.ModCompatHandler;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.*;
+import net.minecraft.state.properties.SlabType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import vazkii.patchouli.api.IMultiblock;
 import vazkii.patchouli.api.PatchouliAPI;
@@ -24,7 +27,7 @@ public class PatchouliHelper
      */
     private static final String[][] THE_SURFACE = new String[][]
             {
-                    new String[] {" R Y ", "S PR ", " YFB ", "  AS "},
+                    new String[] {" R Y ", "S PR ", " YFB ", "  As "},
                     new String[] {" GGG ", "GGGGG", "GG0GG", " GGG "},
                     new String[] {"  D  ", " DDD ", " DDD ", "  D  "}
             };
@@ -37,6 +40,17 @@ public class PatchouliHelper
                     new String[] {"     ", "1  G ", "G  S ", " C2  "},
                     new String[] {" SES ", "SCSdS", "SS0dS", " SSE "},
                     new String[] {"  S  ", " SSS ", " DSS ", "  S  "}
+            };
+
+    private static final String[][] THE_NETHER = new String[][]
+            {
+                    new String[] {"  1  ", "     ", "     ", "  1  "},
+                    new String[] {"  N  ", "  O  ", "  O  ", "  N  "},
+                    new String[] {" IOi ", "  P  ", "  P  ", " IOi "},
+                    new String[] {" LOl ", "  P  ", "  P  ", " LOl "},
+                    new String[] {" FO  ", "R PfB", "  P  ", " bOr "},
+                    new String[] {" WNC ", "WWOCC", "WW0CC", " WNC "},
+                    new String[] {"  N  ", " QNN ", " NNG ", "  N  "}
             };
 
     private static final String[][] SINGLE_BLOCK = new String[][]
@@ -54,7 +68,8 @@ public class PatchouliHelper
                         'G', Blocks.GRASS_BLOCK,
                         'R', ForageBlocks.rock,
                         'Y', Blocks.DANDELION,
-                        'S', ForageBlocks.stick,
+                        'S', ForageBlocks.stick.getDefaultState(),
+                        's', ForageBlocks.stick.getDefaultState().with(StickBlock.FACING, Direction.SOUTH),
                         'P', Blocks.POPPY,
                         'F', ForageBlocks.flat_rock,
                         'B', Blocks.BLUE_ORCHID,
@@ -74,9 +89,32 @@ public class PatchouliHelper
                         '2', Blocks.SKELETON_SKULL.getDefaultState().with(SkullBlock.ROTATION, 13))
                 .setSymmetrical(true);
 
+        IMultiblock theNether = PatchouliAPI.get()
+                .makeMultiblock(THE_NETHER,
+                        '0', Blocks.OBSIDIAN,
+                        'N', Blocks.NETHERRACK,
+                        'Q', Blocks.NETHER_QUARTZ_ORE,
+                        'G', Blocks.NETHER_GOLD_ORE,
+                        'W', Blocks.WARPED_NYLIUM,
+                        'C', Blocks.CRIMSON_NYLIUM,
+                        'O', Blocks.OBSIDIAN,
+                        'R', Blocks.WARPED_ROOTS,
+                        'F', Blocks.WARPED_FUNGUS,
+                        'P', Blocks.NETHER_PORTAL.getDefaultState().with(NetherPortalBlock.AXIS, Direction.Axis.X),
+                        'f', Blocks.CRIMSON_FUNGUS,
+                        'B', Blocks.BLACKSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM),
+                        'b', Blocks.POLISHED_BLACKSTONE_BRICK_SLAB,
+                        'r', Blocks.CRIMSON_ROOTS,
+                        'L', Blocks.SOUL_LANTERN.getDefaultState().with(LanternBlock.HANGING, true),
+                        'l', Blocks.LANTERN.getDefaultState().with(LanternBlock.HANGING, true),
+                        'I', Blocks.IRON_BARS.getDefaultState().with(PaneBlock.SOUTH, true),
+                        'i', Blocks.IRON_BARS.getDefaultState().with(PaneBlock.NORTH, true),
+                        '1', Blocks.FIRE.getDefaultState().with(FireBlock.AGE, 0))
+                .setSymmetrical(true);
+
         IMultiblock singleStick = PatchouliAPI.get()
                 .makeMultiblock(SINGLE_BLOCK,
-                        '0', ForageBlocks.stick,
+                        '0', ForageBlocks.stick.getDefaultState().with(StickBlock.FACING, Direction.SOUTH),
                         '1', Blocks.GRASS_BLOCK);
 
         IMultiblock singleRock = PatchouliAPI.get()
@@ -91,6 +129,7 @@ public class PatchouliHelper
 
         PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "the_surface"), theSurface);
         PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "the_underground"), theUnderground);
+        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "the_nether"), theNether);
         PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_stick"), singleStick);
         PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_rock"), singleRock);
         PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_flat_rock"), singleFlatRock);

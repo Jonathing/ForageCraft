@@ -1,0 +1,31 @@
+{
+  "name": "The Nether",
+  "icon": "minecraft:netherrack",
+  "category": "foragecraft:resources",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "text": "The more you learn about the world, the more you understand how beautiful, hostile, and strange it is. However, these is another world. Another side of the same coin, that is infinitely more hostile and stranger than The Overworld but with a sadistic sense of beauty. This is $(bold)The Nether,$() and it is arguably the incarnation of a deadly risk-reward system. Best of luck as you continue research here."
+    },
+    {
+      "type": "multiblock",
+      "name": "",
+      "multiblock_id": "foragecraft:the_nether",
+      "enable_visualize": false,
+      "text": "The Nether is known to be home to some of the harshest environments ever known or researched."
+    },
+    {
+      "type": "spotlight",
+      "title": "Gold Nuggets",
+      "item": "minecraft:gold_nugget",
+      "text": "A recent mysterious change in The Nether's environment has given gold its very own $(bold)nether ore$() that can be found and mined regularly. Additionally, there is a small chance for gold nuggets to be foraged from $(bold)nether quartz ore,$() which can be useful since those $(italic)pig creatures$() found here won't act so hostile while you have gold."
+    },
+    {
+      "type": "entity",
+      "entity": "minecraft:piglin",
+      "name": "The Piglin",
+      "text": "A pig creature found in The Nether that is naturally hostile unless you have gold and can offer it to them."
+    }
+  ]
+}
