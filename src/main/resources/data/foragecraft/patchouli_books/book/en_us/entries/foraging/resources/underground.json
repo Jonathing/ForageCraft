@@ -37,7 +37,7 @@
       "type": "spotlight",
       "title": "Gold Nuggets",
       "item": "minecraft:gold_nugget",
-      "text": "Throughout the years, gold was believed to be one of the most useless precious ores. But if you come to your senses for even just a moment, you realize that if you don't want this gold, $(italic)someone$() will. Regardless of your conclusion, gold has $(bold)its own ore$() you can mine, or you can mine some $(bold)stone$() and cross your fingers..."
+      "text": "Throughout the years, gold was believed to be one of the most useless precious ores. That's been common sense for many years, but your gut feeling tells you that you might want a good amount of it. $(italic)Something somewhere else$() might want it, too... Regardless, gold has $(bold)its own ore$() you can mine, or you can mine some $(bold)stone$() and cross your fingers..."
     },
     {
       "type": "spotlight",

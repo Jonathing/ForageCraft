@@ -1,18 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " d ",
-    "dbd",
-    " d "
-  ],
-  "key": {
-    "d": {
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:paper"
+    },
+    {
       "item": "minecraft:dirt"
     },
-    "b": {
-      "item": "minecraft:book"
+    {
+      "item": "minecraft:dirt"
+    },
+    {
+      "item": "minecraft:dirt"
     }
-  },
+  ],
   "result": {
     "item": "patchouli:guide_book",
     "nbt": {
