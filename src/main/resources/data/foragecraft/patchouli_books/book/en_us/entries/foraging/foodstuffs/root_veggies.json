@@ -2,17 +2,17 @@
   "name": "Root Vegetables",
   "icon": "minecraft:carrot",
   "category": "foragecraft:foodstuffs",
-  "sortnum": 2,
+  "sortnum": 0,
   "pages": [
     {
       "type": "text",
-      "text": "The more you dig through your environment, the more you see and understand what you are able to find. Despite the numerous sources of meat freshly available around you, you are able to forage different foods from the ground. Let's just hope that you're lucky enough."
+      "text": "Root vegetables are the second most common type of food that exist in the world as we know it. Unfortunately, they have proven themselves to be harder to acquire in the wilderness in comparison to meat, as the $(bold)villages$() seem to hold an unstoppable monopoly on these foodstuffs, since they have only ever been found in their communities with some rare exceptions."
     },
     {
       "type": "entity",
       "entity": "minecraft:villager{VillagerData:{profession:unemployed,type:plains}}",
-      "name": "Villager",
-      "text": "A farmer villager from the villages who own a monopoly on root vegetables."
+      "name": "The Villager",
+      "text": "A farmer villager from the villages which hold a monopoly on root vegetables."
     },
     {
       "type": "spotlight",

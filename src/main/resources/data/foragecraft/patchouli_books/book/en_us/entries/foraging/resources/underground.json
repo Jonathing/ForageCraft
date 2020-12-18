@@ -6,13 +6,14 @@
   "pages": [
     {
       "type": "text",
-      "text": "As you progress past learning about the surface and its foods and resources, you begin to dig deeper into $(bold)the underground$() of The Overworld.$(br2)Immediately, you realize that being below the Earth is much more dangerous than being on the surface, but the underground is also a place of riches and treasures beyond one's imagination."
+      "text": "As you progress past learning about the surface and its foods and resources, you begin to dig deeper into $(bold)the underground$() of $(bold)The Overworld.$()$(br2)Immediately, you realize that being below the Earth is much more dangerous than being on the surface, but the underground is also a place of riches and treasures beyond one's imagination."
     },
     {
       "type": "multiblock",
       "name": "",
       "multiblock_id": "foragecraft:the_underground",
-      "enable_visualize": false
+      "enable_visualize": false,
+      "text": "The underground of The Overworld, while home to many hostile creatures, is incredibly resource-rich."
     },
     {
       "type": "spotlight",
@@ -36,19 +37,19 @@
       "type": "spotlight",
       "title": "Gold Nuggets",
       "item": "minecraft:gold_nugget",
-      "text": "Throughout the years, gold was believed to be one of the most useless precious ores. But if you come to your senses for even just a moment, you realize that if you don't want this gold, $(italic)someone$() will.$(br2)Regardless of your conclusion, gold has $(bold)its own ore$() you can mine, or you can mine some $(bold)stone() and cross your fingers..."
+      "text": "Throughout the years, gold was believed to be one of the most useless precious ores. But if you come to your senses for even just a moment, you realize that if you don't want this gold, $(italic)someone$() will. Regardless of your conclusion, gold has $(bold)its own ore$() you can mine, or you can mine some $(bold)stone$() and cross your fingers..."
     },
     {
       "type": "spotlight",
       "title": "Diamonds",
       "item": "minecraft:diamond",
-      "text": "The most precious of all of the gems in this world, diamonds are among the most coveted treasures of the underground. As it turns out, there is a rough estimate of a 0.1% chance of foraging a diamond out of ordinary $(bold)stone.$() So, what are you still doing here? Mine some stone and maybe you'll get lucky today!"
+      "text": "The most precious of all of the gems in this world, diamonds are among the most coveted treasures of the underground. As it turns out, there is a rough estimate of a 0.1% chance of foraging a diamond out from $(bold)coal ore.$() So, what are you still doing here? Mine some stone and maybe you'll get lucky today!"
     },
     {
       "type": "spotlight",
       "title": "Emeralds",
       "item": "minecraft:emerald",
-      "text": "The most useless of all of the gems in this world... or so you might think. The villages of the world treasure the emerald as the most precious of gems as it is rarer than diamonds and stimulates the market. As of late, the villagers become much more generous the more you trade. Maybe you'll be lucky enough to forage emeralds from $(bold)stone.$()"
+      "text": "The most useless of all of the gems in this world... or so you might think. The villages of the world treasure the emerald as the most precious of gems as it is rarer than diamonds and stimulates the market. As of late, the villagers become much more generous the more you trade. Maybe you'll be lucky enough to forage emeralds from $(bold)coal ore.$()"
     }
   ]
 }

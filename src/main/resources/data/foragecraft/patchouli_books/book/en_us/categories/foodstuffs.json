@@ -1,6 +1,6 @@
 {
   "name": "Foodstuffs",
-  "description": "Resources are not the only things you can forage from the earth. It turns out that there are a plethora of foods that you are able to retrieve from the Earth itself! Too scared to slaughter some meaty animals? Dig for potatoes!",
+  "description": "The more you dig through your environment, the more you see and understand what you are able to find. Despite the numerous sources of meat freshly available around you, you are able to forage different foods from the ground. Too scared to slaughter some meaty animals? Dig for potatoes! Let's just hope that you're lucky enough.",
   "icon": "minecraft:potato",
   "parent": "foragecraft:foraging",
   "sortnum": 0

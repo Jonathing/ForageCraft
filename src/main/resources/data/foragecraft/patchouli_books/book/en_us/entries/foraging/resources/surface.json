@@ -6,13 +6,14 @@
   "pages": [
     {
       "type": "text",
-      "text": "Since researching into the the possibility of foraging your world, various new blocks have been making an appearance on $(bold)the surface$() of The Overworld.$(br2)It might be wise to continue research by collecting these newly-found blocks and using them to their best potential."
+      "text": "Since researching into the the possibility of foraging your world, various new blocks have been making an appearance on $(bold)the surface$() of $(bold)The Overworld.$()$(br2)It might be wise to continue research by collecting these newly-found blocks and using them to their best potential."
     },
     {
       "type": "multiblock",
       "name": "",
       "multiblock_id": "foragecraft:the_surface",
-      "enable_visualize": false
+      "enable_visualize": false,
+      "text": "The surface of The Overworld is known to hold the most tame of environments and is abundant with resources."
     },
     {
       "type": "spotlight",
