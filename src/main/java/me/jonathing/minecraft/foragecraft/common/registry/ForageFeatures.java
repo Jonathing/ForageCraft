@@ -1,5 +1,7 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
+import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
+import net.minecraft.util.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.biome.Biome;
@@ -30,7 +32,7 @@ public class ForageFeatures
             () -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .addState(ForageBlocks.flat_rock.getDefaultState(), 1)
                     .addState(ForageBlocks.rock.getDefaultState(), 1)
-                    .addState(ForageBlocks.stick.getDefaultState(), 2),
+                    .addState(((StickBlock) ForageBlocks.stick).getStateWithRandomDirection(), 2),
                     new SimpleBlockPlacer())).tries(1).build();
 
     public static final Supplier<ConfiguredFeature<?, ?>> RANDOM_EARTH_PATCH = () -> Feature.RANDOM_PATCH

@@ -35,10 +35,6 @@ import java.util.Random;
  */
 public class RockBlock extends FallingBlock
 {
-    // from the old ForageCraft
-//	private static AxisAlignedBB bounds_normal = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 0.25D, 0.7D);
-//	private static AxisAlignedBB bounds_flat= new AxisAlignedBB(0.2D, 0.0D, 0.2D, 0.8D, 0.125D, 0.8D);
-
     public RockBlock(Block.Properties properties)
     {
         super(properties);

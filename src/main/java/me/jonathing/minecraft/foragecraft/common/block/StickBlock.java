@@ -11,16 +11,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 /**
  * This class holds the {@link ForageBlocks#stick} block. It is required so that it is able to have its own hitbox,
@@ -35,9 +39,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 public class StickBlock extends RockBlock
 {
-//    private static AxisAlignedBB bounds = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
-
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    private static final Random STICK_RANDOM = new Random();
 
     public StickBlock(Block.Properties properties)
     {
@@ -99,6 +102,36 @@ public class StickBlock extends RockBlock
     public BlockState getStateForPlacement(BlockItemUseContext p_196258_1_)
     {
         return this.getDefaultState().with(FACING, p_196258_1_.getPlacementHorizontalFacing().getOpposite());
+    }
+
+    @Nonnull
+    public BlockState getStateWithRandomDirection()
+    {
+        return this.getStateWithRandomDirection(STICK_RANDOM);
+    }
+
+    @Nonnull
+    public BlockState getStateWithRandomDirection(@Nonnull Random random)
+    {
+        Direction direction;
+
+        switch (random.nextInt(4))
+        {
+            case 3:
+                direction = Direction.WEST;
+                break;
+            case 2:
+                direction = Direction.SOUTH;
+                break;
+            case 1:
+                direction = Direction.EAST;
+                break;
+            default:
+                direction = Direction.NORTH;
+                break;
+        }
+
+        return this.getDefaultState().with(FACING, direction);
     }
 
     /**
