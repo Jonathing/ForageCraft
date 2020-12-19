@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The more you learn about the world, the more you understand how beautiful, hostile, and strange it is. However, these is another world. Another side of the same coin, that is infinitely more hostile and stranger than The Overworld but with a sadistic sense of beauty. This is $(bold)The Nether,$() and it is arguably the incarnation of a deadly risk-reward system. Best of luck as you continue research here."
+      "text": "The more you learn about the world, the more you understand how beautiful, hostile, and strange it is. However, there is another world... Another side of the same coin, that is infinitely more hostile and stranger than The Overworld, but with a sadistic sense of beauty. This is $(bold)The Nether,$() and it is arguably the incarnation of a deadly \"risk-reward\" system. Best of luck as you continue research here."
     },
     {
       "type": "multiblock",
@@ -25,7 +25,7 @@
       "type": "entity",
       "entity": "minecraft:piglin",
       "name": "The Piglin",
-      "text": "A pig creature found in The Nether that is naturally hostile unless you have gold and can offer it to them."
+      "text": "A pig creature found in The Nether that is naturally hostile, unless you have gold and can offer it to them."
     }
   ]
 }

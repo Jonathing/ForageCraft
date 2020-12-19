@@ -6,23 +6,23 @@
   "pages": [
     {
       "type": "text",
-      "text": "Root vegetables are the second most common type of food that exist in the world as we know it. Unfortunately, they have proven themselves to be harder to acquire in the wilderness in comparison to meat, as the $(bold)villages$() seem to hold an unstoppable monopoly on these foodstuffs, since they have only ever been found in their communities with some rare exceptions."
+      "text": "Root vegetables are the second most common type of food that exists in the world as we know it. Unfortunately, they have proven themselves to be harder to acquire in the wilderness in comparison to meat, as the $(bold)villages$() seem to hold an unstoppable monopoly on these foodstuffs, since they have only ever been found in their communities with some rare exceptions."
     },
     {
       "type": "entity",
       "entity": "minecraft:villager{VillagerData:{profession:unemployed,type:plains}}",
       "name": "The Villager",
-      "text": "A farmer villager from the villages which hold a monopoly on root vegetables."
+      "text": "A farmer villager from the villages, which hold a monopoly on root vegetables."
     },
     {
       "type": "spotlight",
       "item": "minecraft:potato",
-      "text": "The glorious potato! The potato has been a staple crop of humanity for a very long time, but it can rarely be found in the wilderness of this world. Once thought to only be in the hands of the $(bold)zombies$() and the $(bold)villages,$() it is discovered that they can be dug up from the $(bold)grass blocks$() of the surface and the $(bold)dirt$() beneath it."
+      "text": "The glorious potato! The potato has been a staple crop of humanity for a very long time, but it can rarely be found in the wilderness of this world. Once thought to only be in the hands of the $(bold)zombies$() and the $(bold)villages,$() it has been discovered that they can be dug up from the $(bold)grass blocks$() of the surface and the $(bold)dirt$() beneath it."
     },
     {
       "type": "spotlight",
       "item": "minecraft:poisonous_potato",
-      "text": "Unfortunately, some potatoes have been cruelly stripped of their glory and have grown rotten for they naturally absorb harmful substances from $(bold)the earth they were dug up from.$() Maybe they might have some useful application in the future?"
+      "text": "Unfortunately, some potatoes have been cruelly stripped of their glory, and have grown rotten, for they naturally absorb harmful substances from $(bold)the earth they were dug up from.$() Maybe they might have some useful application in the future?"
     },
     {
       "type": "spotlight",
@@ -32,7 +32,7 @@
     {
       "type": "spotlight",
       "item": "minecraft:beetroot",
-      "text": "The beetroot is a mysterious plant. It grows from a large, spherical seed, which is are surprisingly tough, and can survive for years on its own. Although the $(bold)villages$() continue to hold a monopoly on the vast majority of root crops, beetroot can still be dug up from $(bold)the ground$() like the other foodstuffs thus far."
+      "text": "The beetroot is a mysterious plant. It grows from a large, spherical seed, which is surprisingly tough, and can survive for years on its own. Although the $(bold)villages$() continue to hold a monopoly on the vast majority of root crops, beetroot can still be dug up from $(bold)the ground$() like the other foodstuffs thus far."
     }
   ]
 }

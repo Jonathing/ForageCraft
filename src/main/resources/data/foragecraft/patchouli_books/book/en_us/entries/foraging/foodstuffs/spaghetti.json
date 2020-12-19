@@ -8,13 +8,13 @@
       "type": "spotlight",
       "item": "foragecraft:spaghetti",
       "title": "Spaghetti!",
-      "text": "Ah yes, spaghetti and meatblocks.$(br2)This should be pretty self explanatory, shouldn't it? What could be better for your roaring stomach than a nice, fresh boal of pasta?"
+      "text": "Ah yes, spaghetti and meatblocks!$(br2)This should be pretty self explanatory, shouldn't it? What could be better for your roaring stomach than a nice, fresh bowl of pasta?"
     },
     {
       "type": "crafting",
       "recipe": "foragecraft:spaghetti",
       "title": " ",
-      "text": "Buon appetito!"
+      "text": "Bon Appétit!"
     }
   ]
 }

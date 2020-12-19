@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "As you progress past learning about the surface and its foods and resources, you begin to dig deeper into $(bold)the underground$() of $(bold)The Overworld.$()$(br2)Immediately, you realize that being below the Earth is much more dangerous than being on the surface, but the underground is also a place of riches and treasures beyond one's imagination."
+      "text": "As you progress past learning about the surface and its foods and resources, you begin to dig deeper into $(bold)the underground$() of $(bold)The Overworld.$()$(br2)Immediately, you realize that being below the Earth is much more dangerous than being on the surface, but the underground is also a place of riches and treasures beyond your wildest dreams."
     },
     {
       "type": "multiblock",
@@ -31,7 +31,7 @@
       "type": "spotlight",
       "title": "Flint",
       "item": "minecraft:flint",
-      "text": "Flint, a necessary ingredient in crafting arrows, is can be retrieved not only from $(bold)gravel,$() but also from $(bold)the stone$() of the underground. It can also be used to create a certain tool that can be used to cause wildfires and even activate a mysterious obsidian structure..."
+      "text": "Flint, a necessary ingredient in crafting arrows, is can be retrieved not only from $(bold)gravel,$() but also from $(bold)the stone$() of the underground. It can also be used to create a certain tool that can be used to cause wildfires, and even activate a mysterious obsidian structure..."
     },
     {
       "type": "spotlight",
