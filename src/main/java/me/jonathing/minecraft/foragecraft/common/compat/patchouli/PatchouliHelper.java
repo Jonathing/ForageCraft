@@ -23,9 +23,12 @@ import vazkii.patchouli.api.PatchouliAPI;
 public class PatchouliHelper
 {
     /**
+     * This is the 2D {@link String} array, used to make a {@link IMultiblock} in {@link #registerMultiblocks()}, for
+     * the "The Surface" page in the Patchouli book.
+     *
      * @see #registerMultiblocks()
      */
-    private static final String[][] THE_SURFACE = new String[][]
+    public static final String[][] THE_SURFACE = new String[][]
             {
                     new String[] {" R Y ", "S PR ", " YFB ", "  As "},
                     new String[] {" GGG ", "GGGGG", "GG0GG", " GGG "},
@@ -33,16 +36,25 @@ public class PatchouliHelper
             };
 
     /**
+     * This is the 2D {@link String} array, used to make a {@link IMultiblock} in {@link #registerMultiblocks()}, for
+     * the "The Underground" page in the Patchouli book.
+     *
      * @see #registerMultiblocks()
      */
-    private static final String[][] THE_UNDERGROUND = new String[][]
+    public static final String[][] THE_UNDERGROUND = new String[][]
             {
                     new String[] {"     ", "1  G ", "G  S ", " C2  "},
                     new String[] {" SES ", "SCSdS", "SS0dS", " SSE "},
                     new String[] {"  S  ", " SSS ", " DSS ", "  S  "}
             };
 
-    private static final String[][] THE_NETHER = new String[][]
+    /**
+     * This is the 2D {@link String} array, used to make a {@link IMultiblock} in {@link #registerMultiblocks()}, for
+     * the "The Nether" page in the Patchouli book.
+     *
+     * @see #registerMultiblocks()
+     */
+    public static final String[][] THE_NETHER = new String[][]
             {
                     new String[] {"  1  ", "     ", "     ", "  1  "},
                     new String[] {"  N  ", "  O  ", "  O  ", "  N  "},
@@ -53,12 +65,23 @@ public class PatchouliHelper
                     new String[] {"  N  ", " QNN ", " NNG ", "  N  "}
             };
 
-    private static final String[][] SINGLE_BLOCK = new String[][]
+    /**
+     * This is the 2D {@link String} array, used to make a {@link IMultiblock} in {@link #registerMultiblocks()}, for
+     * any single block page in the Patchouli book.
+     *
+     * @see #registerMultiblocks()
+     */
+    public static final String[][] SINGLE_BLOCK = new String[][]
             {
                     new String[] {"   ", " 0 ", "   "},
                     new String[] {"111", "111", "111"}
             };
 
+    /**
+     * Registers all of the multiblocks into the game.
+     *
+     * @see PatchouliHelper
+     */
     public static void registerMultiblocks()
     {
         IMultiblock theSurface = PatchouliAPI.get()
@@ -103,7 +126,7 @@ public class PatchouliHelper
                         'P', Blocks.NETHER_PORTAL.getDefaultState().with(NetherPortalBlock.AXIS, Direction.Axis.X),
                         'f', Blocks.CRIMSON_FUNGUS,
                         'B', Blocks.BLACKSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM),
-                        'b', Blocks.POLISHED_BLACKSTONE_BRICK_SLAB,
+                        'b', Blocks.POLISHED_BLACKSTONE_BRICK_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM),
                         'r', Blocks.CRIMSON_ROOTS,
                         'L', Blocks.SOUL_LANTERN.getDefaultState().with(LanternBlock.HANGING, true),
                         'l', Blocks.LANTERN.getDefaultState().with(LanternBlock.HANGING, true),
