@@ -1,0 +1,7 @@
+{
+  "name": "Foodstuffs",
+  "description": "Okay, you've dug for potatoes and have all sorts of foods on your hands. Now, what will you do with them?",
+  "icon": "minecraft:baked_potato",
+  "parent": "foragecraft:inventions",
+  "sortnum": 1
+}
