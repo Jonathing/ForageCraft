@@ -39,6 +39,7 @@ public class ForageItems
 
         spaghetti = register("spaghetti",
                 new Item(new Item.Properties()
+                        .maxStackSize(1)
                         .group(ForageInfo.IDE ? ForageItemGroups.FORAGECRAFT : ItemGroup.FOOD)
                         .food(new Food.Builder().hunger(11).saturation(0.375F).build())));
         leek = register("leek",
