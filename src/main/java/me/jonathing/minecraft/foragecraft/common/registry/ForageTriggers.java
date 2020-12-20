@@ -1,7 +1,7 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
 import com.google.common.collect.Maps;
-import me.jonathing.minecraft.foragecraft.common.handler.trigger.ForagingTrigger;
+import me.jonathing.minecraft.foragecraft.common.trigger.ForagingTrigger;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.util.ResourceLocation;

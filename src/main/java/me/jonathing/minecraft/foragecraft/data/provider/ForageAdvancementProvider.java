@@ -5,11 +5,13 @@ import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.jonathing.minecraft.foragecraft.ForageCraft;
-import me.jonathing.minecraft.foragecraft.common.handler.trigger.ForagingTrigger;
+import me.jonathing.minecraft.foragecraft.common.trigger.ForagingTrigger;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
+import net.minecraft.advancements.IRequirementsStrategy;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
@@ -90,14 +92,30 @@ public class ForageAdvancementProvider implements IDataProvider
         private String section = "";
 
         @Override
+        @SuppressWarnings("unused")
         public void accept(Consumer<Advancement> consumer)
         {
-            Advancement test = builder(ForageItems.stick_bundle, "test", ForageCraft.locate("textures/block/fascine_side.png"), FrameType.TASK, false, false, false).withCriterion("forage_potato", ForagingTrigger.Instance.create(Blocks.DIRT, Items.POTATO)).register(consumer, ForageCraft.find("test"));
+            Advancement root = builder(ForageItems.stick_bundle, "root", ForageCraft.locate("textures/block/fascine_side.png"), FrameType.TASK, true, false, false)
+                    .withCriterion("has_" + Blocks.DIRT.asItem().getRegistryName().getPath(), InventoryChangeTrigger.Instance.forItems(Blocks.DIRT.asItem()))
+                    .register(consumer, ForageCraft.find("begin_research"));
+
+            Advancement root_vegetable = builder(Items.POTATO, "root_vegetable", FrameType.TASK, false, false, false)
+                    .withRequirementsStrategy(IRequirementsStrategy.OR)
+                    .withCriterion("forage_potato_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.POTATO))
+                    .withCriterion("forage_potato_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.POTATO))
+                    .withCriterion("forage_carrot", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.CARROT))
+                    .withCriterion("forage_beetroot", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.BEETROOT))
+                    .register(consumer, ForageCraft.find("root_vegetable"));
         }
 
         private Advancement.Builder builder(IItemProvider displayItem, String name, ResourceLocation background, FrameType frameType, boolean showToast, boolean announceToChat, boolean hidden)
         {
             return Advancement.Builder.builder().withDisplay(displayItem, translate(name), translate(name + ".desc"), background, frameType, showToast, announceToChat, hidden);
+        }
+
+        private Advancement.Builder builder(IItemProvider displayItem, String name, FrameType frameType, boolean showToast, boolean announceToChat, boolean hidden)
+        {
+            return builder(displayItem, name, (ResourceLocation) null, frameType, showToast, announceToChat, hidden);
         }
 
         private TranslationTextComponent translate(String key)

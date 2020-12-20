@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.common.handler.trigger;
+package me.jonathing.minecraft.foragecraft.common.trigger;
 
 import com.google.gson.JsonObject;
 import mcp.MethodsReturnNonnullByDefault;
@@ -14,7 +14,6 @@ import net.minecraft.loot.ConditionArrayParser;
 import net.minecraft.loot.ConditionArraySerializer;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;

@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "foragecraft:stick_bundle"
+    },
+    "title": {
+      "translate": "advancements.foragecraft.root"
+    },
+    "description": {
+      "translate": "advancements.foragecraft.root.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "foragecraft:textures/block/fascine_side.png"
+  },
+  "criteria": {
+    "has_dirt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:dirt"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dirt"
+    ]
+  ]
+}
