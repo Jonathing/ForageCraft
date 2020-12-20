@@ -31,27 +31,32 @@ public class ForageItems
 
         straw = register("straw",
                 new Item(new Item.Properties()
-                        .group(ForageInfo.IDE ? ForageItemGroups.FORAGECRAFT : ItemGroup.MISC)));
+                        .group(getItemGroup(ItemGroup.MISC))));
 
         stick_bundle = register("stick_bundle",
                 new Item(new Item.Properties()
-                        .group(ForageInfo.IDE ? ForageItemGroups.FORAGECRAFT : ItemGroup.MISC)));
+                        .group(getItemGroup(ItemGroup.MISC))));
 
         spaghetti = register("spaghetti",
                 new Item(new Item.Properties()
                         .maxStackSize(1)
-                        .group(ForageInfo.IDE ? ForageItemGroups.FORAGECRAFT : ItemGroup.FOOD)
+                        .group(getItemGroup(ItemGroup.FOOD))
                         .food(new Food.Builder().hunger(11).saturation(0.375F).build())));
         leek = register("leek",
                 new LeekItem(new Item.Properties()
-                        .group(ForageInfo.IDE ? ForageItemGroups.FORAGECRAFT : ItemGroup.FOOD)
+                        .group(getItemGroup(ItemGroup.FOOD))
                         .food(new Food.Builder().hunger(2).saturation(0.1F).build())));
 
         leek_seeds = register("leek_seeds",
                 new BlockNamedItem(ForageBlocks.leek_crop, new Item.Properties()
-                        .group(ForageInfo.IDE ? ForageItemGroups.FORAGECRAFT : ItemGroup.MISC)));
+                        .group(getItemGroup(ItemGroup.MISC))));
 
         registerBlockItems();
+    }
+
+    private static ItemGroup getItemGroup(ItemGroup itemGroup)
+    {
+        return ForageInfo.IDE && !ForageInfo.DATAGEN ? ForageItemGroups.FORAGECRAFT : itemGroup;
     }
 
     /**

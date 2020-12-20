@@ -1,4 +1,5 @@
 {
+  "parent": "foragecraft:begin_research",
   "display": {
     "icon": {
       "item": "minecraft:potato"
@@ -10,7 +11,7 @@
       "translate": "advancements.foragecraft.root_vegetable.desc"
     },
     "frame": "task",
-    "show_toast": false,
+    "show_toast": true,
     "announce_to_chat": false,
     "hidden": false
   },

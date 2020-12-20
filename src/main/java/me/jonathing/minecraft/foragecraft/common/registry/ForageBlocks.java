@@ -82,7 +82,7 @@ public class ForageBlocks
     public static <B extends Block> B register(String key, B block, ItemGroup defaultItemGroup, boolean registerItem)
     {
         if (registerItem)
-            blockItemMap.put(block, ForageInfo.IDE ? ForageItemGroups.FORAGECRAFT : defaultItemGroup);
+            blockItemMap.put(block, ForageInfo.IDE && !ForageInfo.DATAGEN ? ForageItemGroups.FORAGECRAFT : defaultItemGroup);
 
         ForageRegistry.register(iBlockRegistry, key, block);
         return block;
