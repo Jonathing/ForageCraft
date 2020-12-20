@@ -1,0 +1,80 @@
+{
+  "criteria": {
+    "forage_bone_from_grass_block": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:grass_block",
+        "item": "minecraft:bone"
+      }
+    },
+    "forage_bone_from_dirt": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:dirt",
+        "item": "minecraft:bone"
+      }
+    },
+    "forage_skeleton_skull_from_grass_block": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:grass_block",
+        "item": "minecraft:skeleton_skull"
+      }
+    },
+    "forage_skeleton_skull_from_dirt": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:dirt",
+        "item": "minecraft:skeleton_skull"
+      }
+    },
+    "forage_flint_from_dirt": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:dirt",
+        "item": "minecraft:flint"
+      }
+    },
+    "forage_flint_from_stone": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:stone",
+        "item": "minecraft:flint"
+      }
+    },
+    "forage_gold_nugget_from_stone": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:stone",
+        "item": "minecraft:gold_nugget"
+      }
+    },
+    "forage_diamond_from_coal_ore": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:coal_ore",
+        "item": "minecraft:diamond"
+      }
+    },
+    "forage_emerald_from_coal_ore": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:coal_ore",
+        "item": "minecraft:emerald"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "forage_bone_from_grass_block",
+      "forage_bone_from_dirt",
+      "forage_skeleton_skull_from_grass_block",
+      "forage_skeleton_skull_from_dirt",
+      "forage_flint_from_dirt",
+      "forage_flint_from_stone",
+      "forage_gold_nugget_from_stone",
+      "forage_diamond_from_coal_ore",
+      "forage_emerald_from_coal_ore"
+    ]
+  ]
+}

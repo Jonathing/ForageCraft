@@ -95,11 +95,12 @@ public class ForageAdvancementProvider implements IDataProvider
         @SuppressWarnings("unused")
         public void accept(Consumer<Advancement> consumer)
         {
+            // ForageCraft advancements
             Advancement root = builder(ForageItems.stick_bundle, "root", ForageCraft.locate("textures/block/fascine_side.png"), FrameType.TASK, true, false, false)
                     .withCriterion("has_" + Blocks.DIRT.asItem().getRegistryName().getPath(), InventoryChangeTrigger.Instance.forItems(Blocks.DIRT.asItem()))
                     .register(consumer, ForageCraft.find("begin_research"));
 
-            Advancement root_vegetable = builder(Items.POTATO, "root_vegetable", FrameType.TASK, false, false, false)
+            Advancement root_vegetable = builder(Items.POTATO, "root_vegetable", FrameType.TASK, true, false, false)
                     .withParent(root)
                     .withRequirementsStrategy(IRequirementsStrategy.OR)
                     .withCriterion("forage_potato_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.POTATO))
@@ -107,6 +108,20 @@ public class ForageAdvancementProvider implements IDataProvider
                     .withCriterion("forage_carrot", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.CARROT))
                     .withCriterion("forage_beetroot", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.BEETROOT))
                     .register(consumer, ForageCraft.find("root_vegetable"));
+
+            // Patchouli book exclusives
+            Advancement book_underground = Advancement.Builder.builder()
+                    .withRequirementsStrategy(IRequirementsStrategy.OR)
+                    .withCriterion("forage_bone_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.BONE))
+                    .withCriterion("forage_bone_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.BONE))
+                    .withCriterion("forage_skeleton_skull_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.SKELETON_SKULL))
+                    .withCriterion("forage_skeleton_skull_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.SKELETON_SKULL))
+                    .withCriterion("forage_flint_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.FLINT))
+                    .withCriterion("forage_flint_from_stone", ForagingTrigger.Instance.create(Blocks.STONE, Items.FLINT))
+                    .withCriterion("forage_gold_nugget_from_stone", ForagingTrigger.Instance.create(Blocks.STONE, Items.GOLD_NUGGET))
+                    .withCriterion("forage_diamond_from_coal_ore", ForagingTrigger.Instance.create(Blocks.COAL_ORE, Items.DIAMOND))
+                    .withCriterion("forage_emerald_from_coal_ore", ForagingTrigger.Instance.create(Blocks.COAL_ORE, Items.EMERALD))
+                    .register(consumer, ForageCraft.find("book_exclusive/underground"));
         }
 
         private Advancement.Builder builder(IItemProvider displayItem, String name, ResourceLocation background, FrameType frameType, boolean showToast, boolean announceToChat, boolean hidden)

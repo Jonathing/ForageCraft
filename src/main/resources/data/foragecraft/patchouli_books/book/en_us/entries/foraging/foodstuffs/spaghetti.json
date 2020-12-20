@@ -2,6 +2,7 @@
   "name": "Spaghetti and Meatblocks",
   "icon": "foragecraft:spaghetti",
   "category": "foragecraft:inv_food",
+  "advancement": "foragecraft:recipes/food/spaghetti",
   "sortnum": 0,
   "pages": [
     {

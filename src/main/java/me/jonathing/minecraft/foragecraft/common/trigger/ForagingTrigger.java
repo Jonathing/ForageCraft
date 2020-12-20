@@ -40,7 +40,7 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
 
     public void trigger(ServerPlayerEntity playerEntity, Block block, Item item)
     {
-        LogManager.getLogger().info("FIRING FORAGING TRIGGER WITH BLOCK " + block + " AND ITEM " + item);
+        LogManager.getLogger().debug("Triggering the foraging trigger with block `" + block + "` and item `" + item + "`.");
         this.test(playerEntity, (instance) -> instance.test(block, item));
     }
 

@@ -2,6 +2,7 @@
   "name": "The Underground",
   "icon": "minecraft:stone",
   "category": "foragecraft:resources",
+  "advancement": "foragecraft:book_exclusive/underground",
   "sortnum": 1,
   "pages": [
     {
@@ -31,7 +32,7 @@
       "type": "spotlight",
       "title": "Flint",
       "item": "minecraft:flint",
-      "text": "Flint, a necessary ingredient in crafting arrows, is can be retrieved not only from $(bold)gravel,$() but also from $(bold)the stone$() of the underground. It can also be used to create a certain tool that can be used to cause wildfires, and even activate a mysterious obsidian structure..."
+      "text": "Flint, a necessary ingredient in crafting arrows, is can be retrieved not only from $(bold)gravel,$() but also from $(bold)the dirt$() and $(bold)the stone$() of the underground. It can also be used to create a certain tool that can be used to cause wildfires, and even activate a mysterious obsidian structure..."
     },
     {
       "type": "spotlight",
