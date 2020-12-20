@@ -13,6 +13,11 @@ public class ForageTriggers
     private static final Map<ResourceLocation, ICriterionTrigger<?>> FORAGE_TRIGGERS_MAP = Maps.newHashMap();
     public static final ForagingTrigger FORAGING_TRIGGER = CriteriaTriggers.register(new ForagingTrigger());
 
+    public static void init()
+    {
+
+    }
+
     /**
      * @see CriteriaTriggers#getAll()
      * @return All of the values of {@link #FORAGE_TRIGGERS_MAP} in an {@link Iterable}.

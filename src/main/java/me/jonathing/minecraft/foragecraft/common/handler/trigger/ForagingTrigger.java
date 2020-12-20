@@ -13,6 +13,8 @@ import net.minecraft.item.Item;
 import net.minecraft.loot.ConditionArrayParser;
 import net.minecraft.loot.ConditionArraySerializer;
 import net.minecraft.util.ResourceLocation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -39,6 +41,7 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
 
     public void trigger(ServerPlayerEntity playerEntity, Block block, Item item)
     {
+        LogManager.getLogger().info("FIRING FORAGING TRIGGER WITH BLOCK " + block + " AND ITEM " + item);
         this.test(playerEntity, (instance) -> instance.test(block, item));
     }
 

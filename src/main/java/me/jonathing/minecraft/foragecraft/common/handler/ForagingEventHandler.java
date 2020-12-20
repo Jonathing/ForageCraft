@@ -1,8 +1,11 @@
 package me.jonathing.minecraft.foragecraft.common.handler;
 
+import com.google.common.collect.ImmutableList;
+import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -15,8 +18,8 @@ import org.apache.commons.lang3.tuple.Triple;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.function.Supplier;
 
 /**
  * This class handles the foraging loot for vanilla blocks in the game. If I ever need to make loot for any of my own
@@ -26,6 +29,7 @@ import java.util.List;
  * @see #onBlockBroken(BlockEvent.BreakEvent)
  * @since 2.0.0
  */
+// TODO Make configuration values.
 @Mod.EventBusSubscriber
 public class ForagingEventHandler
 {
@@ -33,50 +37,77 @@ public class ForagingEventHandler
 
     /**
      * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when grass is broken,
-     * and the item itself. The list uses {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
+     * and the item itself. The list uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
      */
-    private static final NonNullLazy<List<Triple<Float, Item, Integer>>> GRASS_BLOCK_DROPS = NonNullLazy.of(() -> Arrays.asList(
+    private static final Supplier<List<Triple<Float, Item, Integer>>> GRASS_BLOCK_DROPS = () -> Arrays.asList(
             Triple.of(0.09f, Items.STICK, 1),
             Triple.of(0.01f, Items.CARROT, 1),
             Triple.of(0.01f, Items.POTATO, 1),
             Triple.of(0.01f, Items.POISONOUS_POTATO, 1),
             Triple.of(0.01f, Items.BEETROOT, 1),
             Triple.of(0.005f, Items.BONE, 9),
-            Triple.of(0.005f, Items.SKELETON_SKULL, 1)));
+            Triple.of(0.005f, Items.SKELETON_SKULL, 1));
 
     /**
      * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when dirt is mined,
-     * and the item itself. The list uses {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
+     * and the item itself. The list uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
      */
-    private static final NonNullLazy<List<Triple<Float, Item, Integer>>> DIRT_DROPS = NonNullLazy.of(() -> Arrays.asList(
+    private static final Supplier<List<Triple<Float, Item, Integer>>> DIRT_DROPS = () -> Arrays.asList(
             Triple.of(0.07f, Items.STICK, 1),
             Triple.of(0.04f, Items.FLINT, 1),
             Triple.of(0.01f, Items.POTATO, 1),
             Triple.of(0.005f, Items.BONE, 9),
-            Triple.of(0.005f, Items.SKELETON_SKULL, 1)));
+            Triple.of(0.005f, Items.SKELETON_SKULL, 1));
 
     /**
      * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when stone is mined,
-     * and the item itself. The list uses {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
+     * and the item itself. The list uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
      */
-    private static final NonNullLazy<List<Triple<Float, Item, Integer>>> STONE_DROPS = NonNullLazy.of(() -> Arrays.asList(
+    private static final Supplier<List<Triple<Float, Item, Integer>>> STONE_DROPS = () -> Arrays.asList(
             Triple.of(0.005f, Items.GOLD_NUGGET, 1),
-            Triple.of(0.05f, Items.FLINT, 1)));
+            Triple.of(0.05f, Items.FLINT, 1));
 
     /**
      * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when coal ore is
-     * mined, and the item itself. The list uses {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
+     * mined, and the item itself. The list uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
      */
-    private static final NonNullLazy<List<Triple<Float, Item, Integer>>> COAL_ORE_DROPS = NonNullLazy.of(() -> Arrays.asList(
+    private static final Supplier<List<Triple<Float, Item, Integer>>> COAL_ORE_DROPS = () -> Arrays.asList(
             Triple.of(0.001f, Items.DIAMOND, 1),
-            Triple.of(0.001f, Items.EMERALD, 1)));
+            Triple.of(0.001f, Items.EMERALD, 1));
 
     /**
      * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when nether quartz ore
-     * is mined, and the item itself. The list uses {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
+     * is mined, and the item itself. The list uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
      */
-    private static final NonNullLazy<List<Triple<Float, Item, Integer>>> NETHER_QUARTZ_ORE_DROPS = NonNullLazy.of(() -> Arrays.asList(
-            Triple.of(0.5f, Items.GOLD_NUGGET, 9)));
+    private static final Supplier<List<Triple<Float, Item, Integer>>> NETHER_QUARTZ_ORE_DROPS = () -> Arrays.asList(
+            Triple.of(0.5f, Items.GOLD_NUGGET, 9));
+
+    // TODO: Document this.
+    private static final Map<Block, List<Triple<Float, Item, Integer>>> FORAGE_EVENT_REGISTRY = new HashMap<>();
+
+    // TODO: Document this
+    public static void init()
+    {
+        FORAGE_EVENT_REGISTRY.put(Blocks.GRASS_BLOCK, GRASS_BLOCK_DROPS.get());
+        FORAGE_EVENT_REGISTRY.put(Blocks.DIRT, DIRT_DROPS.get());
+        FORAGE_EVENT_REGISTRY.put(Blocks.STONE, STONE_DROPS.get());
+        FORAGE_EVENT_REGISTRY.put(Blocks.COAL_ORE, COAL_ORE_DROPS.get());
+        FORAGE_EVENT_REGISTRY.put(Blocks.NETHER_QUARTZ_ORE, NETHER_QUARTZ_ORE_DROPS.get());
+    }
+
+    // TODO: Document this
+    public static void registerDrop(Block block, List<Triple<Float, Item, Integer>> drop)
+    {
+        if (!FORAGE_EVENT_REGISTRY.containsKey(block))
+        {
+            FORAGE_EVENT_REGISTRY.put(block, drop);
+        }
+        else
+        {
+            // TODO: Test this later.
+            FORAGE_EVENT_REGISTRY.get(block).addAll(drop);
+        }
+    }
 
     /**
      * For vanilla blocks, I am not able to create JSON files through data generation. I could have
@@ -92,65 +123,33 @@ public class ForagingEventHandler
     public static void onBlockBroken(BlockEvent.BreakEvent event)
     {
         PlayerEntity player = event.getPlayer();
-        World world = (World) event.getWorld();
-        if (world.isRemote || player.isCreative() || player.isSpectator()) return;
+        if (((World) event.getWorld()).isRemote || player.isCreative() || player.isSpectator()) return;
 
-        // TODO Make configuration values.
         Block blockBroken = event.getState().getBlock();
-        if (Blocks.GRASS_BLOCK.equals(blockBroken))
+
+        if (FORAGE_EVENT_REGISTRY.containsKey(blockBroken))
+            forageDrop(FORAGE_EVENT_REGISTRY.get(blockBroken), event);
+    }
+
+    // TODO: Document this
+    private static void forageDrop(List<Triple<Float, Item, Integer>> dropList, BlockEvent.BreakEvent event)
+    {
+        World world = ((World) event.getWorld());
+        Random random = world.getRandom();
+        ServerPlayerEntity playerEntity = (ServerPlayerEntity) event.getPlayer();
+        Block blockBroken = event.getState().getBlock();
+
+        Triple<Float, Item, Integer> drop = dropList.get(world.getRandom().nextInt(dropList.size()));
+        float chance = drop.getLeft();
+        Item item = drop.getMiddle();
+        int maxStack = drop.getRight();
+
+        if (random.nextFloat() < chance)
         {
-            GRASS_BLOCK_DROPS.get().forEach(t ->
-            {
-                if (world.getRandom().nextFloat() < t.getLeft())
-                {
-                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), t.getMiddle().toString()));
-                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(t.getMiddle(), world.getRandom().nextInt(t.getRight() + 1)));
-                }
-            });
-        }
-        else if (Blocks.DIRT.equals(blockBroken))
-        {
-            DIRT_DROPS.get().forEach(t ->
-            {
-                if (world.getRandom().nextFloat() < t.getLeft())
-                {
-                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), t.getMiddle().toString()));
-                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(t.getMiddle(), world.getRandom().nextInt(t.getRight() + 1)));
-                }
-            });
-        }
-        else if (Blocks.STONE.equals(blockBroken))
-        {
-            STONE_DROPS.get().forEach(t ->
-            {
-                if (world.getRandom().nextFloat() < t.getLeft())
-                {
-                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), t.getMiddle().toString()));
-                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(t.getMiddle(), world.getRandom().nextInt(t.getRight() + 1)));
-                }
-            });
-        }
-        else if (Blocks.COAL_ORE.equals(blockBroken))
-        {
-            COAL_ORE_DROPS.get().forEach(t ->
-            {
-                if (world.getRandom().nextFloat() < t.getLeft())
-                {
-                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), t.getMiddle().toString()));
-                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(t.getMiddle(), world.getRandom().nextInt(t.getRight() + 1)));
-                }
-            });
-        }
-        else if (Blocks.NETHER_QUARTZ_ORE.equals(blockBroken))
-        {
-            NETHER_QUARTZ_ORE_DROPS.get().forEach(t ->
-            {
-                if (world.getRandom().nextFloat() < t.getLeft())
-                {
-                    LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), t.getMiddle().toString()));
-                    Block.spawnAsEntity(world, event.getPos(), new ItemStack(t.getMiddle(), world.getRandom().nextInt(t.getRight() + 1)));
-                }
-            });
+            LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), item.toString()));
+            Block.spawnAsEntity(world, event.getPos(), new ItemStack(item, random.nextInt(maxStack) + 1));
+
+            ForageTriggers.FORAGING_TRIGGER.trigger(playerEntity, blockBroken, item);
         }
     }
 }

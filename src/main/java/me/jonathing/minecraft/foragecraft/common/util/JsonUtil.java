@@ -60,7 +60,7 @@ public final class JsonUtil
         @ParametersAreNonnullByDefault
         public static void writeItem(JsonObject json, Item item) throws NullPointerException
         {
-            json.addProperty("block", ForgeRegistries.ITEMS.getKey(item).toString());
+            json.addProperty("item", ForgeRegistries.ITEMS.getKey(item).toString());
         }
     }
 }

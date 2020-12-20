@@ -2,8 +2,10 @@ package me.jonathing.minecraft.foragecraft;
 
 import me.jonathing.minecraft.foragecraft.client.ForageClient;
 import me.jonathing.minecraft.foragecraft.common.compat.ModCompatHandler;
+import me.jonathing.minecraft.foragecraft.common.handler.ForagingEventHandler;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageFeatures;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageRegistry;
+import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import me.jonathing.minecraft.foragecraft.common.security.VerificationUtil;
 import me.jonathing.minecraft.foragecraft.data.ForageCraftDataGen;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
@@ -50,6 +52,7 @@ public class ForageCraft
         mod.register(ForageCraftDataGen.class);
         mod.addListener(ForageCraft::commonSetup);
         mod.register(ForageRegistry.class);
+        ForageTriggers.init();
     }
 
     /**
@@ -62,6 +65,7 @@ public class ForageCraft
 
         ForageFeatures.initFeatures();
         ModCompatHandler.init();
+        ForagingEventHandler.init();
     }
 
     /**
