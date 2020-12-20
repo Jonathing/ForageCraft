@@ -30,6 +30,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
+/**
+ * The provider for all of the advancements in ForageCraft.
+ *
+ * @author Jonathing
+ * @author Silver_David
+ * @see IDataProvider
+ * @since 2.1.0
+ */
 public class ForageAdvancementProvider implements IDataProvider
 {
     private static final Logger LOGGER = LogManager.getLogger();

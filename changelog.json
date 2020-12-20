@@ -1,16 +1,24 @@
 {
   "version": {
-    "number": "2.0.1",
-    "name": "ForageCraft: Reborn",
+    "number": "2.1.0",
+    "name": "Foraging Research",
     "minecraft": "1.16.4",
-    "stable": false
+    "stable": true
   },
   "description": [
-    "ForageCraft, rewritten for modern Minecraft versions."
+    "Introducing a new journal to keep all of your foraging knowledge!"
   ],
   "changelog": [
-    "Added full compatibility with Patchouli.",
+    "Added full compatibility with Patchouli along with a new guide book named \"Foraging Research\".",
     "Fixed ForageEventHandler spamming the console with useless information. (#66)",
-    "Right-clicking the stick in the world no longer has unintended side-effects. (#64)"
+    "Right-clicking the stick in the world no longer has unintended side-effects. (#64)",
+    "The ForageCraft stick block now properly acts as if its related item is the Minecraft stick",
+    "Fixed stick blocks only ever facing north when naturally generating.",
+    "Fixed stick blocks ignoring the player's direction when being placed.",
+    "Leek seeds can now be crafted from leek.",
+    "Leek seeds now generate in generic village house chests.",
+    "The Spaghetti and Meatblocks max stack size is now 1.",
+    "Added a new advancement trigger exclusive to foraging.",
+    "Added new advancements for ForageCraft! The first one is unlocked by getting a piece of dirt."
   ]
 }

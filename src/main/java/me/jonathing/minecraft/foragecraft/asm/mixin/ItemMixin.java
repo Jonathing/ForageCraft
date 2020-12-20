@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  *
  * @author Jonathing
  * @see Item
- * @since 2.0.1
+ * @since 2.1.0
  */
 @Mixin(Item.class)
 public class ItemMixin
@@ -36,7 +36,7 @@ public class ItemMixin
     /**
      * The ForageCraft {@link ForageBlocks#stick} is a very special case. It does not have its own {@link BlockItem}
      * since we use the Minecraft {@link Items#STICK} to place it down in the world. This has led to issues in
-     * ForageCraft prior to version {@code 2.0.1} where right-clicking with the Minecraft stick in hand in certain
+     * ForageCraft prior to version {@code 2.1.0} where right-clicking with the Minecraft stick in hand in certain
      * situations.
      * <p>
      * The solution: Mixins!

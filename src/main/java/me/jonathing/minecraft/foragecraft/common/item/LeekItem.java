@@ -14,8 +14,10 @@ import net.minecraft.util.SoundEvents;
  * <p>
  * Anime.
  *
+ * @author Jonathing
  * @see me.jonathing.minecraft.foragecraft.common.registry.ForageItems#leek
  * @see Item
+ * @since 2.0.0
  */
 public class LeekItem extends Item
 {

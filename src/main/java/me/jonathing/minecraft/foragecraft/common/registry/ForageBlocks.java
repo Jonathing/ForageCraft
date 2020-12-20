@@ -72,12 +72,15 @@ public class ForageBlocks
     }
 
     /**
-     * Register a block and queue it for item registration.
+     * This method registers a {@link Block} and then queues it for block item registration.
      *
-     * @param key
-     * @param block
-     * @param defaultItemGroup
-     * @return
+     * @param key              The key to be used for the block's registration name.
+     * @param block            The block to be registered (i.e. {@link #rock}).
+     * @param defaultItemGroup The default item group that the block should be added to. If in a development environment
+     *                         ({@link ForageInfo#IDE}), all of the ForageCraft blocks and items will be put into the
+     *                         {@link ForageItemGroups#FORAGECRAFT} category.
+     * @param registerItem     If false, a block item will not be registered for the given block.
+     * @return The new registered {@link Block} that the assigned variable now holds.
      */
     public static <B extends Block> B register(String key, B block, ItemGroup defaultItemGroup, boolean registerItem)
     {
@@ -88,6 +91,19 @@ public class ForageBlocks
         return block;
     }
 
+    /**
+     * This method registers a {@link Block} with specific {@link Item.Properties} and then queues it for block item
+     * registration.
+     *
+     * @param key              The key to be used for the block's registration name.
+     * @param block            The block to be registered (i.e. {@link #rock}).
+     * @param itemProperties   The item properties that the specified block should hold.
+     * @param defaultItemGroup The default item group that the block should be added to. If in a development environment
+     *                         ({@link ForageInfo#IDE}), all of the ForageCraft blocks and items will be put into the
+     *                         {@link ForageItemGroups#FORAGECRAFT} category.
+     * @param registerItem     If false, a block item will not be registered for the given block.
+     * @return The new registered {@link Block} that the assigned variable now holds.
+     */
     public static <B extends Block> B register(String key, B block, Item.Properties itemProperties, ItemGroup defaultItemGroup, boolean registerItem)
     {
         blockItemPropertiesMap.put(block, itemProperties);

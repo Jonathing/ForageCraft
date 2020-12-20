@@ -34,8 +34,18 @@ public class ForagingEventHandler
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when grass is broken,
-     * and the item itself. The list uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
+     * If false, the {@link #init()} method will do nothing.
+     *
+     * @see #init()
+     * @since 2.1.0
+     */
+    private static boolean mainDropsInitialized = false;
+
+    /**
+     * Contains a {@link List} of {@link Triple}s containing drop information when a {@link Blocks#GRASS_BLOCK} is
+     * broken. The {@link Float} on the left is the chance of the item dropping (1.00F being 100%), the {@link Item} in
+     * the middle is the item to be dropped, and the {@link Integer} on the right is the max stack size. The list uses a
+     * {@link Supplier} to prevent {@link ExceptionInInitializerError}.
      */
     private static final Supplier<List<Triple<Float, Item, Integer>>> GRASS_BLOCK_DROPS = () -> Arrays.asList(
             Triple.of(0.09f, Items.STICK, 1),
@@ -47,8 +57,10 @@ public class ForagingEventHandler
             Triple.of(0.0025f, Items.SKELETON_SKULL, 1));
 
     /**
-     * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when dirt is mined,
-     * and the item itself. The list uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
+     * Contains a {@link List} of {@link Triple}s containing drop information when a {@link Blocks#DIRT} is broken. The
+     * {@link Float} on the left is the chance of the item dropping (1.00F being 100%), the {@link Item} in the middle
+     * is the item to be dropped, and the {@link Integer} on the right is the max stack size. The list uses a
+     * {@link Supplier} to prevent {@link ExceptionInInitializerError}.
      */
     private static final Supplier<List<Triple<Float, Item, Integer>>> DIRT_DROPS = () -> Arrays.asList(
             Triple.of(0.07f, Items.STICK, 1),
@@ -58,42 +70,82 @@ public class ForagingEventHandler
             Triple.of(0.005f, Items.SKELETON_SKULL, 1));
 
     /**
-     * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when stone is mined,
-     * and the item itself. The list uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
+     * Contains a {@link List} of {@link Triple}s containing drop information when a {@link Blocks#STONE} is broken. The
+     * {@link Float} on the left is the chance of the item dropping (1.00F being 100%), the {@link Item} in the middle
+     * is the item to be dropped, and the {@link Integer} on the right is the max stack size. The list uses a
+     * {@link Supplier} to prevent {@link ExceptionInInitializerError}.
      */
     private static final Supplier<List<Triple<Float, Item, Integer>>> STONE_DROPS = () -> Arrays.asList(
             Triple.of(0.005f, Items.GOLD_NUGGET, 1),
             Triple.of(0.05f, Items.FLINT, 1));
 
     /**
-     * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when coal ore is
-     * mined, and the item itself. The list uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
+     * Contains a {@link List} of {@link Triple}s containing drop information when a {@link Blocks#COAL_ORE} is broken.
+     * The {@link Float} on the left is the chance of the item dropping (1.00F being 100%), the {@link Item} in the
+     * middle is the item to be dropped, and the {@link Integer} on the right is the max stack size. The list uses a
+     * {@link Supplier} to prevent {@link ExceptionInInitializerError}.
      */
     private static final Supplier<List<Triple<Float, Item, Integer>>> COAL_ORE_DROPS = () -> Arrays.asList(
             Triple.of(0.001f, Items.DIAMOND, 1),
             Triple.of(0.001f, Items.EMERALD, 1));
 
     /**
-     * Contains a {@link List} of {@link Triple}s containing the chance for an item to be dropped when nether quartz ore
-     * is mined, and the item itself. The list uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
+     * Contains a {@link List} of {@link Triple}s containing drop information when a {@link Blocks#NETHER_QUARTZ_ORE} is
+     * broken. The {@link Float} on the left is the chance of the item dropping (1.00F being 100%), the {@link Item} in
+     * the middle is the item to be dropped, and the {@link Integer} on the right is the max stack size.
      */
     private static final Supplier<List<Triple<Float, Item, Integer>>> NETHER_QUARTZ_ORE_DROPS = () -> Arrays.asList(
             Triple.of(0.5f, Items.GOLD_NUGGET, 9));
 
-    // TODO: Document this.
+    /**
+     * This {@link Map} contains all of the {@link List}s for all of the block drops. This includes the constant lists
+     * specified in the class ({@link #GRASS_BLOCK_DROPS}, {@link #DIRT_DROPS}, {@link #STONE_DROPS},
+     * {@link #COAL_ORE_DROPS}, {@link #NETHER_QUARTZ_ORE_DROPS}), but also any other lists that might be added with the
+     * {{@link #registerDrop(Block, List)}.
+     *
+     * @see #init()
+     * @see #registerDrop(Block, List)
+     */
     private static final Map<Block, List<Triple<Float, Item, Integer>>> FORAGE_EVENT_REGISTRY = new HashMap<>();
 
-    // TODO: Document this
+    /**
+     * Registers all of the main ForageCraft drop lists into the {@link #FORAGE_EVENT_REGISTRY}. Can only be run once.
+     *
+     * @see #mainDropsInitialized
+     * @since 2.1.0
+     */
     public static void init()
     {
+        if (mainDropsInitialized) return;
+
+        LOGGER.info("Initializing ForageCraft foraging drops");
         FORAGE_EVENT_REGISTRY.put(Blocks.GRASS_BLOCK, GRASS_BLOCK_DROPS.get());
         FORAGE_EVENT_REGISTRY.put(Blocks.DIRT, DIRT_DROPS.get());
         FORAGE_EVENT_REGISTRY.put(Blocks.STONE, STONE_DROPS.get());
         FORAGE_EVENT_REGISTRY.put(Blocks.COAL_ORE, COAL_ORE_DROPS.get());
         FORAGE_EVENT_REGISTRY.put(Blocks.NETHER_QUARTZ_ORE, NETHER_QUARTZ_ORE_DROPS.get());
+        mainDropsInitialized = true;
     }
 
-    // TODO: Document this
+    /**
+     * This method is used to register additional foraging drops of your own!
+     * <p>
+     * Here's an example if how you would register a new drop for {@link Blocks#STONE} so that there is a 15% chance for
+     * it to drop a {@link Items#GOLD_NUGGET} with a max stack of 2. Please make sure that this is run in a method that
+     * is called after block and item registries have been run (i.e.
+     * {@link net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent}.
+     * <pre>
+     *     ForagingEventHandler.registerDrop(Blocks.STONE, ImmutableList.of(Triple.of(0.15F, Items.GOLD_NUGGET, 2)));
+     * </pre>
+     *
+     * @param block The block to register foraging drops for.
+     * @param drop  The {@link List} of {@link Triple}s which contains the drop information. The left of the triple must
+     *              be a {@link Float} with the chance of the drop (with 1.00F being 100%), the middle of the triple
+     *              must be the {@link Item} that could be dropped, and the right must be an {@link Integer} that
+     *              indicates the max stack of the dropped item.
+     * @see #FORAGE_EVENT_REGISTRY
+     * @since 2.1.0
+     */
     public static void registerDrop(Block block, List<Triple<Float, Item, Integer>> drop)
     {
         if (!FORAGE_EVENT_REGISTRY.containsKey(block))
@@ -129,7 +181,17 @@ public class ForagingEventHandler
             forageDrop(FORAGE_EVENT_REGISTRY.get(blockBroken), event);
     }
 
-    // TODO: Document this
+    /**
+     * This method runs through what happens when a block is broken and the block has a foraging drop that has been
+     * registered in the {@link #FORAGE_EVENT_REGISTRY}. This is also where the {@link ForageTriggers#FORAGING_TRIGGER}
+     * is triggered, but it is only triggered if the block actually succeeds in dropping a forage drop.
+     *
+     * @param dropList The {@link List} of {@link Triple}s that contain the drop information.
+     * @param event    The {@link BlockEvent.BreakEvent} that holds crucial information for the foraging drop such as
+     *                 the {@link World}, the {@link ServerPlayerEntity}, and the {@link net.minecraft.block.BlockState}
+     *                 which contains the {@link Block} that was broken.
+     * @since 2.1.0
+     */
     private static void forageDrop(List<Triple<Float, Item, Integer>> dropList, BlockEvent.BreakEvent event)
     {
         World world = ((World) event.getWorld());

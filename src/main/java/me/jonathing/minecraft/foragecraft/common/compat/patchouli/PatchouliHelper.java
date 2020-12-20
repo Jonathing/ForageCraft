@@ -18,7 +18,7 @@ import vazkii.patchouli.api.PatchouliAPI;
  *
  * @author Jonathing
  * @see ModCompatHandler#init()
- * @since 2.0.1
+ * @since 2.1.0
  */
 public class PatchouliHelper
 {
@@ -84,8 +84,8 @@ public class PatchouliHelper
      */
     public static void registerMultiblocks()
     {
-        IMultiblock theSurface = PatchouliAPI.get()
-                .makeMultiblock(THE_SURFACE,
+        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "the_surface"),
+                PatchouliAPI.get().makeMultiblock(THE_SURFACE,
                         '0', Blocks.GRASS_BLOCK, // center block
                         'D', Blocks.DIRT,
                         'G', Blocks.GRASS_BLOCK,
@@ -97,10 +97,10 @@ public class PatchouliHelper
                         'F', ForageBlocks.flat_rock,
                         'B', Blocks.BLUE_ORCHID,
                         'A', Blocks.ALLIUM)
-                .setSymmetrical(true);
+                        .setSymmetrical(true));
 
-        IMultiblock theUnderground = PatchouliAPI.get()
-                .makeMultiblock(THE_UNDERGROUND,
+        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "the_underground"),
+                PatchouliAPI.get().makeMultiblock(THE_UNDERGROUND,
                         '0', Blocks.GOLD_ORE, // center block
                         'S', Blocks.STONE,
                         'd', Blocks.DIRT,
@@ -110,10 +110,10 @@ public class PatchouliHelper
                         '1', Blocks.SKELETON_SKULL.getDefaultState().with(SkullBlock.ROTATION, 10),
                         'G', Blocks.GRAVEL,
                         '2', Blocks.SKELETON_SKULL.getDefaultState().with(SkullBlock.ROTATION, 13))
-                .setSymmetrical(true);
+                        .setSymmetrical(true));
 
-        IMultiblock theNether = PatchouliAPI.get()
-                .makeMultiblock(THE_NETHER,
+        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "the_nether"),
+                PatchouliAPI.get().makeMultiblock(THE_NETHER,
                         '0', Blocks.OBSIDIAN,
                         'N', Blocks.NETHERRACK,
                         'Q', Blocks.NETHER_QUARTZ_ORE,
@@ -133,28 +133,21 @@ public class PatchouliHelper
                         'I', Blocks.IRON_BARS.getDefaultState().with(PaneBlock.SOUTH, true),
                         'i', Blocks.IRON_BARS.getDefaultState().with(PaneBlock.NORTH, true),
                         '1', Blocks.FIRE.getDefaultState().with(FireBlock.AGE, 0))
-                .setSymmetrical(true);
+                        .setSymmetrical(true));
 
-        IMultiblock singleStick = PatchouliAPI.get()
-                .makeMultiblock(SINGLE_BLOCK,
+        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_stick"),
+                PatchouliAPI.get().makeMultiblock(SINGLE_BLOCK,
                         '0', ForageBlocks.stick.getDefaultState().with(StickBlock.FACING, Direction.SOUTH),
-                        '1', Blocks.GRASS_BLOCK);
+                        '1', Blocks.GRASS_BLOCK));
 
-        IMultiblock singleRock = PatchouliAPI.get()
-                .makeMultiblock(SINGLE_BLOCK,
+        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_rock"),
+                PatchouliAPI.get().makeMultiblock(SINGLE_BLOCK,
                         '0', ForageBlocks.rock,
-                        '1', Blocks.GRASS_BLOCK);
+                        '1', Blocks.GRASS_BLOCK));
 
-        IMultiblock singleFlatRock = PatchouliAPI.get()
-                .makeMultiblock(SINGLE_BLOCK,
+        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_flat_rock"),
+                PatchouliAPI.get().makeMultiblock(SINGLE_BLOCK,
                         '0', ForageBlocks.flat_rock,
-                        '1', Blocks.GRASS_BLOCK);
-
-        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "the_surface"), theSurface);
-        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "the_underground"), theUnderground);
-        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "the_nether"), theNether);
-        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_stick"), singleStick);
-        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_rock"), singleRock);
-        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_flat_rock"), singleFlatRock);
+                        '1', Blocks.GRASS_BLOCK));
     }
 }

@@ -27,6 +27,14 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber
 public class ForageFeatures
 {
+    /**
+     * The default random generation config that defines how the {@link ForageBlocks#rock}s,
+     * {@link ForageBlocks#flat_rock}s, and {@link ForageBlocks#stick}s are generated. The feature uses a
+     * {@link Supplier} to prevent {@link ExceptionInInitializerError}.
+     *
+     * @see #RANDOM_EARTH_PATCH
+     * @see #initFeatures()
+     */
     public static final Supplier<BlockClusterFeatureConfig> RANDOM_EARTH_CONFIG =
             () -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .addState(ForageBlocks.flat_rock.getDefaultState(), 1)
@@ -34,6 +42,13 @@ public class ForageFeatures
                     .addState(((StickBlock) ForageBlocks.stick).getStateWithRandomDirection(), 2),
                     new SimpleBlockPlacer())).tries(1).build();
 
+    /**
+     * The {@link ConfiguredFeature} that dictates how the {@link #RANDOM_EARTH_CONFIG} is placed in the world. The
+     * configured feature uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
+     *
+     * @see #RANDOM_EARTH_CONFIG
+     * @see #initFeatures()
+     */
     public static final Supplier<ConfiguredFeature<?, ?>> RANDOM_EARTH_PATCH = () -> Feature.RANDOM_PATCH
             .configure(RANDOM_EARTH_CONFIG.get())
             .decorate(Features.Placements.SQUARE_HEIGHTMAP_SPREAD_DOUBLE)

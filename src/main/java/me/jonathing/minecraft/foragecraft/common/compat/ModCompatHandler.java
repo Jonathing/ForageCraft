@@ -7,7 +7,7 @@ import net.minecraftforge.fml.ModList;
  * This class handles mod compatibility and executes setup events based on what mods are loaded.
  *
  * @author Jonathing
- * @since 2.0.1
+ * @since 2.1.0
  */
 public class ModCompatHandler
 {

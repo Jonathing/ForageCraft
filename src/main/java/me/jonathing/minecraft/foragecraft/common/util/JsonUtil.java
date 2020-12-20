@@ -13,6 +13,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+/*
+ * I don't feel the need to document this utility class. If you want to know how to use it, you can see my advancement
+ * data generation.
+ */
 public final class JsonUtil
 {
     @MethodsReturnNonnullByDefault
