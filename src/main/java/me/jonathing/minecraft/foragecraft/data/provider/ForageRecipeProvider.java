@@ -8,7 +8,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.item.Items;
 import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
 import vazkii.patchouli.api.PatchouliAPI;
 
 import javax.annotation.Nonnull;
@@ -72,11 +71,11 @@ public class ForageRecipeProvider extends RecipeProvider
 
         // Patchouli book. I couldn't find a way in data generation to add an nbt block, so what I do is I generate the
         // recipes, move them to the resources/data folder, and add the nbt tag there. Comment out when necessary.
-//        ShapelessRecipeBuilder.shapelessRecipe(PatchouliAPI.get().getBookStack(ForageCraft.locate("book")).getItem(), 1)
-//                .addIngredient(Items.PAPER)
-//                .addIngredient(Items.DIRT, 3)
-//                .addCriterion(hasItem, hasItem(Blocks.DIRT))
-//                .build(consumer, ForageCraft.find("guide_book"));
+        ShapelessRecipeBuilder.shapelessRecipe(PatchouliAPI.get().getBookStack(ForageCraft.locate("book")).getItem(), 1)
+                .addIngredient(Items.PAPER)
+                .addIngredient(Items.DIRT, 3)
+                .addCriterion(hasItem, hasItem(Blocks.DIRT))
+                .build(consumer, ForageCraft.find("guide_book"));
     }
 
     private void simpleInOut(IItemProvider in, IItemProvider out, int amount)

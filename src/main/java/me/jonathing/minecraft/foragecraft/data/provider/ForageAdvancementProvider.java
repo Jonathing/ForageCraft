@@ -5,8 +5,8 @@ import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.jonathing.minecraft.foragecraft.ForageCraft;
-import me.jonathing.minecraft.foragecraft.common.trigger.ForagingTrigger;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
+import me.jonathing.minecraft.foragecraft.common.trigger.ForagingTrigger;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
@@ -131,7 +131,7 @@ public class ForageAdvancementProvider implements IDataProvider
 
         private Advancement.Builder builder(IItemProvider displayItem, String name, FrameType frameType, boolean showToast, boolean announceToChat, boolean hidden)
         {
-            return builder(displayItem, name, (ResourceLocation) null, frameType, showToast, announceToChat, hidden);
+            return builder(displayItem, name, null, frameType, showToast, announceToChat, hidden);
         }
 
         private TranslationTextComponent translate(String key)

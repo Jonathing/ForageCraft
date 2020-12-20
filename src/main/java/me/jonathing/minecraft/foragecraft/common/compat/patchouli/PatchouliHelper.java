@@ -30,9 +30,9 @@ public class PatchouliHelper
      */
     public static final String[][] THE_SURFACE = new String[][]
             {
-                    new String[] {" R Y ", "S PR ", " YFB ", "  As "},
-                    new String[] {" GGG ", "GGGGG", "GG0GG", " GGG "},
-                    new String[] {"  D  ", " DDD ", " DDD ", "  D  "}
+                    new String[]{" R Y ", "S PR ", " YFB ", "  As "},
+                    new String[]{" GGG ", "GGGGG", "GG0GG", " GGG "},
+                    new String[]{"  D  ", " DDD ", " DDD ", "  D  "}
             };
 
     /**
@@ -43,9 +43,9 @@ public class PatchouliHelper
      */
     public static final String[][] THE_UNDERGROUND = new String[][]
             {
-                    new String[] {"     ", "1  G ", "G  S ", " C2  "},
-                    new String[] {" SES ", "SCSdS", "SS0dS", " SSE "},
-                    new String[] {"  S  ", " SSS ", " DSS ", "  S  "}
+                    new String[]{"     ", "1  G ", "G  S ", " C2  "},
+                    new String[]{" SES ", "SCSdS", "SS0dS", " SSE "},
+                    new String[]{"  S  ", " SSS ", " DSS ", "  S  "}
             };
 
     /**
@@ -56,13 +56,13 @@ public class PatchouliHelper
      */
     public static final String[][] THE_NETHER = new String[][]
             {
-                    new String[] {"  1  ", "     ", "     ", "  1  "},
-                    new String[] {"  N  ", "  O  ", "  O  ", "  N  "},
-                    new String[] {" IOi ", "  P  ", "  P  ", " IOi "},
-                    new String[] {" LOl ", "  P  ", "  P  ", " LOl "},
-                    new String[] {" FO  ", "R PfB", "  P  ", " bOr "},
-                    new String[] {" WNC ", "WWOCC", "WW0CC", " WNC "},
-                    new String[] {"  N  ", " QNN ", " NNG ", "  N  "}
+                    new String[]{"  1  ", "     ", "     ", "  1  "},
+                    new String[]{"  N  ", "  O  ", "  O  ", "  N  "},
+                    new String[]{" IOi ", "  P  ", "  P  ", " IOi "},
+                    new String[]{" LOl ", "  P  ", "  P  ", " LOl "},
+                    new String[]{" FO  ", "R PfB", "  P  ", " bOr "},
+                    new String[]{" WNC ", "WWOCC", "WW0CC", " WNC "},
+                    new String[]{"  N  ", " QNN ", " NNG ", "  N  "}
             };
 
     /**
@@ -73,8 +73,8 @@ public class PatchouliHelper
      */
     public static final String[][] SINGLE_BLOCK = new String[][]
             {
-                    new String[] {"   ", " 0 ", "   "},
-                    new String[] {"111", "111", "111"}
+                    new String[]{"   ", " 0 ", "   "},
+                    new String[]{"111", "111", "111"}
             };
 
     /**

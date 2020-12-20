@@ -1,7 +1,6 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
-import net.minecraft.util.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.biome.Biome;

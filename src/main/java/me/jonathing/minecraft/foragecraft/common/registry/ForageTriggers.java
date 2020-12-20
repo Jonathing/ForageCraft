@@ -19,10 +19,11 @@ public class ForageTriggers
     }
 
     /**
-     * @see CriteriaTriggers#getAll()
      * @return All of the values of {@link #FORAGE_TRIGGERS_MAP} in an {@link Iterable}.
+     * @see CriteriaTriggers#getAll()
      */
-    public static Iterable<? extends ICriterionTrigger<?>> getAll() {
+    public static Iterable<? extends ICriterionTrigger<?>> getAll()
+    {
         return FORAGE_TRIGGERS_MAP.values();
     }
 }
