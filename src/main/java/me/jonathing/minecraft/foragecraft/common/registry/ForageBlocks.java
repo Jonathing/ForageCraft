@@ -1,10 +1,11 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.block.*;
+import me.jonathing.minecraft.foragecraft.common.block.template.ForageHayBlock;
+import me.jonathing.minecraft.foragecraft.common.block.template.ForageSpeedBlock;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.HayBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
@@ -34,6 +35,11 @@ public class ForageBlocks
 
     private static IForgeRegistry<Block> iBlockRegistry;
 
+    /**
+     * This method registers all of the blocks into the block registry.
+     *
+     * @param event The {@link Register} event for block registration.
+     */
     public static void init(Register<Block> event)
     {
         ForageBlocks.iBlockRegistry = event.getRegistry();
@@ -52,16 +58,16 @@ public class ForageBlocks
                 false);
 
         straw_bale = register("straw_bale",
-                new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)),
+                new ForageHayBlock(0.3F, Block.Properties.from(Blocks.HAY_BLOCK)),
                 ItemGroup.BUILDING_BLOCKS,
                 true);
         fascine = register("fascine",
-                new HayBlock(Block.Properties.from(Blocks.HAY_BLOCK)),
+                new ForageHayBlock(0.5F, Block.Properties.from(Blocks.HAY_BLOCK)),
                 ItemGroup.BUILDING_BLOCKS,
                 true);
 
         paving_stones = register("paving_stones",
-                new PavingStoneBlock(Block.Properties.from(Blocks.STONE)),
+                new ForageSpeedBlock(1.5F, Block.Properties.from(Blocks.STONE)),
                 ItemGroup.BUILDING_BLOCKS,
                 true);
 
@@ -81,6 +87,7 @@ public class ForageBlocks
      *                         {@link ForageItemGroups#FORAGECRAFT} category.
      * @param registerItem     If false, a block item will not be registered for the given block.
      * @return The new registered {@link Block} that the assigned variable now holds.
+     * @see #init(Register)
      */
     public static <B extends Block> B register(String key, B block, ItemGroup defaultItemGroup, boolean registerItem)
     {
@@ -103,6 +110,8 @@ public class ForageBlocks
      *                         {@link ForageItemGroups#FORAGECRAFT} category.
      * @param registerItem     If false, a block item will not be registered for the given block.
      * @return The new registered {@link Block} that the assigned variable now holds.
+     * @see #register(String, Block, Item.Properties, ItemGroup, boolean)
+     * @see #init(Register)
      */
     public static <B extends Block> B register(String key, B block, Item.Properties itemProperties, ItemGroup defaultItemGroup, boolean registerItem)
     {

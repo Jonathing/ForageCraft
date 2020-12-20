@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.common.block;
+package me.jonathing.minecraft.foragecraft.common.block.template;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -17,11 +17,14 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @see Block
  * @since 2.0.0
  */
-public class PavingStoneBlock extends Block
+public class ForageSpeedBlock extends Block
 {
-    public PavingStoneBlock(Block.Properties properties)
+    private final float speedMultiplier;
+
+    public ForageSpeedBlock(float speedMultiplier, Block.Properties properties)
     {
         super(properties);
+        this.speedMultiplier = speedMultiplier;
     }
 
     /**
@@ -37,6 +40,6 @@ public class PavingStoneBlock extends Block
     {
         super.onEntityWalk(world, blockPos, entity);
 
-        entity.setVelocity(entity.getMotion().x * 1.5, 0, entity.getMotion().z * 1.5);
+        entity.setVelocity(entity.getMotion().x * speedMultiplier, 0, entity.getMotion().z * speedMultiplier);
     }
 }
