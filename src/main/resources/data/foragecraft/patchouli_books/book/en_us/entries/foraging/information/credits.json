@@ -1,0 +1,42 @@
+{
+  "name": "Credits",
+  "icon": "minecraft:filled_map",
+  "category": "foragecraft:information",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "text": "ForageCraft is a very small mod that makes surviving easier and more realistic by adding various extra block drops and items. This mod has come a long way from its inception in Minecraft 1.8.9 to its rebirth in Minecraft 1.16.4!"
+    },
+    {
+      "type": "spotlight",
+      "title": "Jonathing",
+      "item": "minecraft:player_head{SkullOwner:\"Jonathing\"}",
+      "text": "Jonathing is the current programmer and maintainer of ForageCraft. He joined theishiopian on the project back in Minecraft 1.10.2 and was an active contributor until development paused in Minecraft 1.12.2. He has since taken ForageCraft into his own hands and has rewriten it for Minecraft 1.16.4!"
+    },
+    {
+      "type": "spotlight",
+      "title": "theishiopian",
+      "item": "minecraft:player_head{SkullOwner:\"theishiopian\"}",
+      "text": "theishiopian is the original creator of ForageCraft. He started the project back in Minecraft 1.8.9 and kept steady development with it until Minecraft 1.12.2. He has since gone on to work on greater projects and is no longer a developer for the project, but was still an important player on getting this mod on its feet."
+    },
+    {
+      "type": "spotlight",
+      "title": "KingPhygieBoo",
+      "item": "minecraft:player_head{SkullOwner:\"Phygie\"}",
+      "text": "KingPhygieBoo is an occasional contributor for ForageCraft. He has helped with various bugs in past versions of ForageCraft, and he continues to help Jonathing whenever he gets stuck working with Forge."
+    },
+    {
+      "type": "spotlight",
+      "title": "Silver_David",
+      "item": "minecraft:player_head{SkullOwner:\"Silver_David\"}",
+      "text": "Silver_David is the texture artist for ForageCraft's Minecraft 1.14+ styled textures. He also occasionally helps Jonathing with programming if he gets stuck."
+    },
+    {
+      "type": "spotlight",
+      "title": "susieqt",
+      "item": "minecraft:player_head{SkullOwner:\"susieqt\"}",
+      "text": "susieqt is the proofreader for the Patchouli book's entries and helps with localization in general."
+    }
+  ]
+}
