@@ -23,7 +23,6 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber
 public class GeneralEventHandler
 {
-    //basicEntry(ForageItems.leek_seeds, 2, 4)
     private static final Supplier<LootPool> VILLAGE_HOUSE_CHESTS =
             () -> LootPool.builder().addEntry(
                     ItemLootEntry.builder(ForageItems.leek_seeds)

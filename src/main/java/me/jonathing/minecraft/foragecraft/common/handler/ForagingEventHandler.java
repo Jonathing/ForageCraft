@@ -140,17 +140,22 @@ public class ForagingEventHandler
         ServerPlayerEntity playerEntity = (ServerPlayerEntity) event.getPlayer();
         Block blockBroken = event.getState().getBlock();
 
-        Triple<Float, Item, Integer> drop = dropList.get(world.getRandom().nextInt(dropList.size()));
-        float chance = drop.getLeft();
-        Item item = drop.getMiddle();
-        int maxStack = drop.getRight();
+        Collections.shuffle(dropList, random);
 
-        if (random.nextFloat() < chance)
+        for (Triple<Float, Item, Integer> drop : dropList)
         {
-            LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), item.toString()));
-            Block.spawnAsEntity(world, event.getPos(), new ItemStack(item, random.nextInt(maxStack) + 1));
+            float chance = drop.getLeft();
+            Item item = drop.getMiddle();
+            int maxStack = drop.getRight();
 
-            ForageTriggers.FORAGING_TRIGGER.trigger(playerEntity, blockBroken, item);
+            if (random.nextFloat() < chance)
+            {
+                LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), item.toString()));
+                Block.spawnAsEntity(world, event.getPos(), new ItemStack(item, random.nextInt(maxStack) + 1));
+
+                ForageTriggers.FORAGING_TRIGGER.trigger(playerEntity, blockBroken, item);
+                break;
+            }
         }
     }
 }

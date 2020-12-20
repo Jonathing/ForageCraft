@@ -100,6 +100,7 @@ public class ForageAdvancementProvider implements IDataProvider
                     .register(consumer, ForageCraft.find("begin_research"));
 
             Advancement root_vegetable = builder(Items.POTATO, "root_vegetable", FrameType.TASK, false, false, false)
+                    .withParent(root)
                     .withRequirementsStrategy(IRequirementsStrategy.OR)
                     .withCriterion("forage_potato_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.POTATO))
                     .withCriterion("forage_potato_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.POTATO))
