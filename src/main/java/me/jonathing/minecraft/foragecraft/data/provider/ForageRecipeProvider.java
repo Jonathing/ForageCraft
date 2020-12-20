@@ -71,8 +71,10 @@ public class ForageRecipeProvider extends RecipeProvider
 
         simpleInOut(ForageItems.leek, ForageItems.leek_seeds, 1);
 
-        // Patchouli book. I couldn't find a way in data generation to add an nbt block, so what I do is I generate the
-        // recipes, move them to the resources/data folder, and add the nbt tag there. Comment out when necessary.
+        ShapedRecipeBuilder.shapedRecipe(ForageItems.cutting_knife, 1)
+                .key('s', Items.STICK).key('r', ForageBlocks.flat_rock)
+                .patternLine(" r").patternLine("s ").addCriterion(hasItem, hasItem(ForageBlocks.flat_rock.asItem())).build(consumer);
+
         ShapelessRecipeBuilder.shapelessRecipe(PatchouliAPI.get().getBookStack(ForageCraft.locate("book")).getItem(), 1)
                 .addIngredient(Items.PAPER)
                 .addIngredient(Items.DIRT, 3)

@@ -27,6 +27,11 @@ public class ForageItems
 
     private static IForgeRegistry<Item> iItemRegistry;
 
+    /**
+     * This method registers all of the items into the item registry.
+     *
+     * @param event The {@link Register} event for item registration.
+     */
     public static void init(Register<Item> event)
     {
         ForageItems.iItemRegistry = event.getRegistry();

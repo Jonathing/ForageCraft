@@ -27,6 +27,8 @@ import javax.annotation.Nonnull;
  */
 public class CuttingKnifeItem extends Item implements IVanishable
 {
+    private static final float STRAW_CHANCE = 0.55F;
+
     public CuttingKnifeItem(Properties properties)
     {
         super(properties);
@@ -37,11 +39,12 @@ public class CuttingKnifeItem extends Item implements IVanishable
     {
         if (!world.isRemote && blockState.getBlock().equals(Blocks.GRASS))
         {
-            Block.spawnAsEntity(world, pos, ForageItems.straw.getDefaultInstance());
+            if (world.getRandom().nextFloat() < STRAW_CHANCE)
+                Block.spawnAsEntity(world, pos, ForageItems.straw.getDefaultInstance());
+
             itemStack.damageItem(1, livingEntity, (onToolBroken) ->
-            {
-                onToolBroken.sendBreakAnimation(EquipmentSlotType.MAINHAND);
-            });
+                    onToolBroken.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+
             return true;
         }
 

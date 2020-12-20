@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " r",
+    "s "
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "r": {
+      "item": "foragecraft:flat_rock"
+    }
+  },
+  "result": {
+    "item": "foragecraft:cutting_knife"
+  }
+}
