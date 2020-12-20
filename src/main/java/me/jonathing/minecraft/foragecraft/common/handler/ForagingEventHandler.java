@@ -1,7 +1,5 @@
 package me.jonathing.minecraft.foragecraft.common.handler;
 
-import com.google.common.collect.ImmutableList;
-import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -11,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.NonNullLazy;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -42,11 +39,11 @@ public class ForagingEventHandler
      */
     private static final Supplier<List<Triple<Float, Item, Integer>>> GRASS_BLOCK_DROPS = () -> Arrays.asList(
             Triple.of(0.09f, Items.STICK, 1),
-            Triple.of(0.02f, Items.CARROT, 1),
-            Triple.of(0.025f, Items.POTATO, 1),
+            Triple.of(0.01f, Items.CARROT, 1),
+            Triple.of(0.01f, Items.POTATO, 1),
             Triple.of(0.01f, Items.POISONOUS_POTATO, 1),
-            Triple.of(0.02f, Items.BEETROOT, 1),
-            Triple.of(0.01f, Items.BONE, 9),
+            Triple.of(0.01f, Items.BEETROOT, 1),
+            Triple.of(0.005f, Items.BONE, 9),
             Triple.of(0.005f, Items.SKELETON_SKULL, 1));
 
     /**
@@ -56,8 +53,8 @@ public class ForagingEventHandler
     private static final Supplier<List<Triple<Float, Item, Integer>>> DIRT_DROPS = () -> Arrays.asList(
             Triple.of(0.07f, Items.STICK, 1),
             Triple.of(0.04f, Items.FLINT, 1),
-            Triple.of(0.02f, Items.POTATO, 1),
-            Triple.of(0.01f, Items.BONE, 9),
+            Triple.of(0.01f, Items.POTATO, 1),
+            Triple.of(0.005f, Items.BONE, 9),
             Triple.of(0.005f, Items.SKELETON_SKULL, 1));
 
     /**
