@@ -63,7 +63,7 @@ public class ForageCraft
         if (!ForageInfo.IDE)
             VerificationUtil.validateMod(ForageInfo.MOD_ID, ForageInfo.EXPECTED_SHA256);
 
-        ForageFeatures.initFeatures();
+        ForageFeatures.init();
         ModCompatHandler.init();
         ForagingEventHandler.init();
     }

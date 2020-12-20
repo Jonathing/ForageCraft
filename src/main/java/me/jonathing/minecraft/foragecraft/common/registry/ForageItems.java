@@ -1,5 +1,6 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
+import me.jonathing.minecraft.foragecraft.common.item.CuttingKnifeItem;
 import me.jonathing.minecraft.foragecraft.common.item.LeekItem;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
@@ -22,6 +23,7 @@ public class ForageItems
     public static Item stick_bundle;
     public static Item spaghetti, leek;
     public static Item leek_seeds;
+    public static Item cutting_knife;
 
     private static IForgeRegistry<Item> iItemRegistry;
 
@@ -39,8 +41,8 @@ public class ForageItems
 
         spaghetti = register("spaghetti",
                 new Item(new Item.Properties()
-                        .maxStackSize(1)
                         .group(getItemGroup(ItemGroup.FOOD))
+                        .maxStackSize(1)
                         .food(new Food.Builder().hunger(11).saturation(0.375F).build())));
         leek = register("leek",
                 new LeekItem(new Item.Properties()
@@ -50,6 +52,12 @@ public class ForageItems
         leek_seeds = register("leek_seeds",
                 new BlockNamedItem(ForageBlocks.leek_crop, new Item.Properties()
                         .group(getItemGroup(ItemGroup.MISC))));
+
+        cutting_knife = register("cutting_knife",
+                new CuttingKnifeItem(new Item.Properties()
+                        .group(getItemGroup(ItemGroup.TOOLS))
+                        .maxStackSize(1)
+                        .maxDamage(60)));
 
         registerBlockItems();
     }

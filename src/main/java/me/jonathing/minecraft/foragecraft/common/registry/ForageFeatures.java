@@ -21,7 +21,7 @@ import java.util.function.Supplier;
  * This class holds all of the world generation features for ForageCraft.
  *
  * @author Jonathing
- * @see #initFeatures()
+ * @see #init()
  * @since 2.0.0
  */
 @Mod.EventBusSubscriber
@@ -33,7 +33,7 @@ public class ForageFeatures
      * {@link Supplier} to prevent {@link ExceptionInInitializerError}.
      *
      * @see #RANDOM_EARTH_PATCH
-     * @see #initFeatures()
+     * @see #init()
      */
     public static final Supplier<BlockClusterFeatureConfig> RANDOM_EARTH_CONFIG =
             () -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
@@ -47,7 +47,7 @@ public class ForageFeatures
      * configured feature uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
      *
      * @see #RANDOM_EARTH_CONFIG
-     * @see #initFeatures()
+     * @see #init()
      */
     public static final Supplier<ConfiguredFeature<?, ?>> RANDOM_EARTH_PATCH = () -> Feature.RANDOM_PATCH
             .configure(RANDOM_EARTH_CONFIG.get())
@@ -66,7 +66,7 @@ public class ForageFeatures
      *
      * @see me.jonathing.minecraft.foragecraft.ForageCraft#commonSetup(FMLCommonSetupEvent)
      */
-    public static void initFeatures()
+    public static void init()
     {
         registerConfiguredFeature("forage_random_rocks", RANDOM_EARTH_PATCH.get());
     }
