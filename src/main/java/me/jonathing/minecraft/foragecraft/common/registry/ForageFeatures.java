@@ -42,9 +42,9 @@ public class ForageFeatures
      */
     public static final Supplier<BlockClusterFeatureConfig> RANDOM_EARTH_CONFIG =
             () -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
-                    .addState(ForageBlocks.flat_rock.getDefaultState(), 1)
-                    .addState(ForageBlocks.rock.getDefaultState(), 1)
-                    .addState(((StickBlock) ForageBlocks.stick).getStateWithRandomDirection(), 2),
+                    .addWeightedBlockstate(ForageBlocks.flat_rock.getDefaultState(), 1)
+                    .addWeightedBlockstate(ForageBlocks.rock.getDefaultState(), 1)
+                    .addWeightedBlockstate(((StickBlock) ForageBlocks.stick).getStateWithRandomDirection(), 2),
                     new SimpleBlockPlacer())).tries(1).build();
 
     /**
@@ -55,9 +55,9 @@ public class ForageFeatures
      * @see #init()
      */
     public static final Supplier<ConfiguredFeature<?, ?>> RANDOM_EARTH_PATCH = () -> Feature.RANDOM_PATCH
-            .configure(RANDOM_EARTH_CONFIG.get())
-            .decorate(Features.Placements.SQUARE_HEIGHTMAP_SPREAD_DOUBLE)
-            .decorate(Placement.COUNT_NOISE.configure(new NoiseDependant(-0.8D, 5, 10)));
+            .withConfiguration(RANDOM_EARTH_CONFIG.get())
+            .withPlacement(Features.Placements.PATCH_PLACEMENT)
+            .withPlacement(Placement.COUNT_NOISE.configure(new NoiseDependant(-0.8D, 5, 10)));
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> registerConfiguredFeature(String nameIn, ConfiguredFeature<FC, ?> featureIn)
     {
@@ -76,8 +76,6 @@ public class ForageFeatures
         registerConfiguredFeature("forage_random_rocks", RANDOM_EARTH_PATCH.get());
     }
 
-    private static List<ResourceLocation> overworldBiomes;
-
     /**
      * This event method ensures that specific features <em>do not</em> spawn on specific biomes.
      *
@@ -86,21 +84,14 @@ public class ForageFeatures
     @SubscribeEvent
     public static void biomeLoadingEvent(BiomeLoadingEvent event)
     {
-        if (overworldBiomes == null)
-        {
-            overworldBiomes = new ArrayList<>();
-            for (RegistryKey<Biome> biome : BiomeDictionary.getBiomes(BiomeDictionary.Type.OVERWORLD))
-            {
-                overworldBiomes.add(biome.getRegistryName());
-            }
-        }
-
-        if (overworldBiomes.contains(event.getName())
-                && !event.getCategory().equals(Biome.Category.BEACH)
+        // TODO: Check for overworld. Previous method did not work.
+        if (!event.getCategory().equals(Biome.Category.BEACH)
                 && !event.getCategory().equals(Biome.Category.DESERT)
                 && !event.getCategory().equals(Biome.Category.OCEAN)
                 && !event.getCategory().equals(Biome.Category.SAVANNA)
                 && !event.getCategory().equals(Biome.Category.NONE))
-            event.getGeneration().feature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, RANDOM_EARTH_PATCH.get());
+        {
+            event.getGeneration().withFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, RANDOM_EARTH_PATCH.get());
+        }
     }
 }

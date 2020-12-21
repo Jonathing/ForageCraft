@@ -14,7 +14,8 @@
     {
       "type": "crafting",
       "recipe": "foragecraft:gathering_knife",
-      "title": "Handle with care."
+      "title": " ",
+      "text": "Handle with care."
     }
   ]
 }

@@ -81,7 +81,7 @@ public class RockBlock extends FallingBlock
     @Nonnull
     @ParametersAreNonnullByDefault
     @SuppressWarnings("deprecation")
-    public ActionResultType onUse(BlockState blockState, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult)
+    public ActionResultType onBlockActivated(BlockState blockState, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult)
     {
         world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
         Block.spawnAsEntity(world, blockPos, new ItemStack(this.getRockItem(), 1));

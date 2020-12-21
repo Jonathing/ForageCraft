@@ -48,7 +48,7 @@ public class ForageBlocks
         ForageBlocks.iBlockRegistry = event.getRegistry();
 
         rock = register("rock",
-                new RockBlock(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).doesNotBlockMovement().nonOpaque().zeroHardnessAndResistance()),
+                new RockBlock(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).doesNotBlockMovement().notSolid().zeroHardnessAndResistance()),
                 ItemGroup.MISC,
                 true);
         flat_rock = register("flat_rock",
@@ -56,7 +56,7 @@ public class ForageBlocks
                 ItemGroup.MISC,
                 true);
         stick = register("stick",
-                new StickBlock(Block.Properties.from(Blocks.OAK_PLANKS).doesNotBlockMovement().nonOpaque().zeroHardnessAndResistance()),
+                new StickBlock(Block.Properties.from(Blocks.OAK_PLANKS).doesNotBlockMovement().notSolid().zeroHardnessAndResistance()),
                 null,
                 false);
 

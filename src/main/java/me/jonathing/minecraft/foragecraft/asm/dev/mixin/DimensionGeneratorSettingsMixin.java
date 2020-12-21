@@ -21,9 +21,9 @@ public class DimensionGeneratorSettingsMixin
     /**
      * Tells the game to skip the "experimental world settings" screen.
      *
-     * @see DimensionGeneratorSettings#method_28611()
+     * @see DimensionGeneratorSettings#func_236234_o_()
      */
-    @Inject(at = @At("HEAD"), method = "method_28611()Z", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "func_236234_o_()Z", cancellable = true)
     private void onCheckExperimental(CallbackInfoReturnable<Boolean> info)
     {
         info.setReturnValue(true);

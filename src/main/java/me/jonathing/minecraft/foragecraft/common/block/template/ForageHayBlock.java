@@ -35,11 +35,11 @@ public class ForageHayBlock extends HayBlock
      * @param pos    The {@link BlockPos} in which the entity has fallen upon the fascine block.
      * @param entity The {@link Entity} that has fallen upon the fascine block.
      * @param damage The amount of damage the entity would normally take from fall damage.
-     * @see Entity#handleFallDamage(float, float)
+     * @see Entity#onLivingFall(float, float)
      */
     @Override
     public void onFallenUpon(@Nonnull World world, @Nonnull BlockPos pos, Entity entity, float damage)
     {
-        entity.handleFallDamage(damage, this.fallDamageMultiplier);
+        entity.onLivingFall(damage, this.fallDamageMultiplier);
     }
 }

@@ -70,7 +70,7 @@ public class ForageLootProvider extends LootTableProvider
     {
         map.forEach((location, table) ->
         {
-            LootTableManager.validate(validationtracker, location, table);
+            LootTableManager.validateLootTable(validationtracker, location, table);
         });
     }
 
@@ -207,7 +207,7 @@ public class ForageLootProvider extends LootTableProvider
                 }
                 else if (block.equals(ForageBlocks.leek_crop))
                 {
-                    ILootCondition.IBuilder growthCondition = BlockStateProperty.builder(block).properties(StatePropertiesPredicate.Builder.create().exactMatch(LeekCropBlock.AGE, ((LeekCropBlock) block).getMaxAge()));
+                    ILootCondition.IBuilder growthCondition = BlockStateProperty.builder(block).fromProperties(StatePropertiesPredicate.Builder.newBuilder().withIntProp(LeekCropBlock.AGE, ((LeekCropBlock) block).getMaxAge()));
                     this.registerLootTable(block, (b) -> crop(growthCondition, b, ForageItems.leek, ForageItems.leek_seeds));
                 }
                 else
@@ -231,7 +231,7 @@ public class ForageLootProvider extends LootTableProvider
 
         private void droppingSeedTag(Block block, ITag.INamedTag<Item> tag)
         {
-            this.registerLootTable(block, droppingWithShears(block, withExplosionDecay(block, (TagLootEntry.func_216176_b(tag).acceptCondition(RandomChance.builder(0.125F))).acceptFunction(ApplyBonus.uniformBonusCount(Enchantments.FORTUNE, 2)))));
+            this.registerLootTable(block, droppingWithShears(block, withExplosionDecay(block, (TagLootEntry.getBuilder(tag).acceptCondition(RandomChance.builder(0.125F))).acceptFunction(ApplyBonus.uniformBonusCount(Enchantments.FORTUNE, 2)))));
         }
 
         private void silkOrElse(Block withSilk, IItemProvider without)

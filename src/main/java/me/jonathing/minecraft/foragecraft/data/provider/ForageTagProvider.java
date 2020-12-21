@@ -65,12 +65,12 @@ public class ForageTagProvider
 
         void forageCraft()
         {
-            this.getOrCreateTagBuilder(ForageItemTags.SCARECROW_CRAFTABLE).add(straw_bale.asItem(), fascine.asItem());
+            this.getOrCreateBuilder(ForageItemTags.SCARECROW_CRAFTABLE).add(straw_bale.asItem(), fascine.asItem());
         }
 
         void vanilla()
         {
-            this.getOrCreateTagBuilder(ForageItemTags.SCARECROW_CRAFTABLE).add(Blocks.HAY_BLOCK.asItem());
+            this.getOrCreateBuilder(ForageItemTags.SCARECROW_CRAFTABLE).add(Blocks.HAY_BLOCK.asItem());
         }
 
         @Override
