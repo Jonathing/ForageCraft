@@ -1,5 +1,6 @@
 package me.jonathing.minecraft.foragecraft.common.block;
 
+import me.jonathing.minecraft.foragecraft.common.block.template.DecorativeBlock;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -15,14 +16,13 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
+import java.util.function.Supplier;
 
 /**
  * This class holds the {@link ForageBlocks#stick} block. It is required so that it is able to have its own hitbox,
@@ -35,31 +35,19 @@ import java.util.Random;
  * @see RockBlock
  * @since 2.0.0
  */
-public class StickBlock extends RockBlock
+public class StickBlock extends DecorativeBlock
 {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
     private static final Random STICK_RANDOM = new Random();
 
-    public StickBlock(Block.Properties properties)
-    {
-        super(properties);
-    }
-
     /**
-     * This method defines the hitbox for the {@link ForageBlocks#stick}.
-     * <p>
-     * I'm not really sure what these numbers actually mean, but Bailey and I toyed with these values enough to get
-     * exactly what we needed for this item.
+     * Makes a new {@link DecorativeBlock} with features exclusive to the {@link ForageBlocks#stick}.
      *
-     * @see net.minecraft.block.FallingBlock#getShape(BlockState, IBlockReader, BlockPos, ISelectionContext)
+     * @see DecorativeBlock#DecorativeBlock(Properties, VoxelShape, Supplier)
      */
-    @Override
-    @Nonnull
-    @ParametersAreNonnullByDefault
-    @SuppressWarnings("deprecation")
-    public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_)
+    public StickBlock()
     {
-        return Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
+        super(Block.Properties.from(Blocks.OAK_PLANKS).doesNotBlockMovement().notSolid().zeroHardnessAndResistance(), DecorativeBlock.STICK_SHAPE, () -> Items.STICK);
     }
 
     /**
@@ -68,9 +56,9 @@ public class StickBlock extends RockBlock
     @Override
     @Nonnull
     @SuppressWarnings("deprecation")
-    public BlockState rotate(BlockState p_185499_1_, Rotation p_185499_2_)
+    public BlockState rotate(BlockState state, Rotation rot)
     {
-        return p_185499_1_.with(FACING, p_185499_2_.rotate(p_185499_1_.get(FACING)));
+        return state.with(FACING, rot.rotate(state.get(FACING)));
     }
 
     /**
@@ -79,35 +67,55 @@ public class StickBlock extends RockBlock
     @Override
     @Nonnull
     @SuppressWarnings("deprecation")
-    public BlockState mirror(BlockState p_185471_1_, Mirror p_185471_2_)
+    public BlockState mirror(BlockState state, Mirror mirrorIn)
     {
-        return p_185471_1_.rotate(p_185471_2_.toRotation(p_185471_1_.get(FACING)));
+        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
     }
 
     /**
      * @see net.minecraft.block.FallingBlock#fillStateContainer(StateContainer.Builder)
      */
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_)
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
     {
-        p_206840_1_.add(FACING);
+        builder.add(FACING);
     }
 
     /**
+     * Uses a {@link BlockItemUseContext} to get the {@link #FACING} for a {@link BlockState}.
+     *
+     * @see #FACING
      * @see net.minecraft.block.FallingBlock#getStateForPlacement(BlockItemUseContext)
      */
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext p_196258_1_)
+    public BlockState getStateForPlacement(BlockItemUseContext context)
     {
-        return this.getDefaultState().with(FACING, p_196258_1_.getPlacementHorizontalFacing().getOpposite());
+        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
 
+    /**
+     * Calls {@link #getStateWithRandomDirection(Random)} but with our own {@link Random} instead.
+     *
+     * @return The {@link BlockState} given by {@link #getStateWithRandomDirection(Random)}.
+     * @see #getStateWithRandomDirection(Random)
+     * @see #STICK_RANDOM
+     */
     @Nonnull
     public BlockState getStateWithRandomDirection()
     {
         return this.getStateWithRandomDirection(STICK_RANDOM);
     }
 
+    /**
+     * Gets the stick block's default {@link BlockState} along with a random {@link Direction}. It is preferrable to use
+     * this rather than {@link Block#getDefaultState()}.
+     *
+     * @param random The {@link Random} for determining which {@link Direction} to use. It is recommended to use a
+     *               {@link World#rand}.
+     * @return {@link Block#getDefaultState()} with a random {@link Direction}.
+     * @see Block#getDefaultState()
+     * @see #getStateWithRandomDirection()
+     */
     @Nonnull
     public BlockState getStateWithRandomDirection(@Nonnull Random random)
     {
@@ -145,25 +153,14 @@ public class StickBlock extends RockBlock
         if (!this.isValidPosition(state, world, pos))
         {
             world.setBlockState(pos, Blocks.AIR.getDefaultState());
-            Block.spawnAsEntity(world, pos, new ItemStack(this.getRockItem(), 1));
+            Block.spawnAsEntity(world, pos, new ItemStack(this.getDecorativeItem(), 1));
         }
-    }
-
-    /**
-     * This is our way of telling the game that this specific {@link RockBlock} is a {@link ForageBlocks#stick}.
-     *
-     * @see RockBlock#getRockItem()
-     */
-    @Override
-    public Item getRockItem()
-    {
-        return Items.STICK;
     }
 
     @Override
     @Nonnull
     public Item asItem()
     {
-        return Items.STICK;
+        return this.getDecorativeItem();
     }
 }

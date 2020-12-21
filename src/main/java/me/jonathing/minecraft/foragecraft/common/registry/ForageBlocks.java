@@ -1,16 +1,14 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
-import me.jonathing.minecraft.foragecraft.common.block.FlatRockBlock;
 import me.jonathing.minecraft.foragecraft.common.block.LeekCropBlock;
 import me.jonathing.minecraft.foragecraft.common.block.RockBlock;
 import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
+import me.jonathing.minecraft.foragecraft.common.block.template.DecorativeBlock;
 import me.jonathing.minecraft.foragecraft.common.block.template.ForageHayBlock;
 import me.jonathing.minecraft.foragecraft.common.block.template.ForageSpeedBlock;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -48,15 +46,15 @@ public class ForageBlocks
         ForageBlocks.iBlockRegistry = event.getRegistry();
 
         rock = register("rock",
-                new RockBlock(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).doesNotBlockMovement().notSolid().zeroHardnessAndResistance()),
+                new RockBlock(),
                 ItemGroup.MISC,
                 true);
         flat_rock = register("flat_rock",
-                new FlatRockBlock(Block.Properties.from(rock)),
+                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, () -> ForageBlocks.flat_rock.asItem()),
                 ItemGroup.MISC,
                 true);
         stick = register("stick",
-                new StickBlock(Block.Properties.from(Blocks.OAK_PLANKS).doesNotBlockMovement().notSolid().zeroHardnessAndResistance()),
+                new StickBlock(),
                 null,
                 false);
 

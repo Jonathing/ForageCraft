@@ -1,28 +1,31 @@
 package me.jonathing.minecraft.foragecraft.common.block;
 
+import me.jonathing.minecraft.foragecraft.common.block.template.DecorativeBlock;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FallingBlock;
+import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Random;
+import java.util.function.Supplier;
 
 /**
  * This class holds the {@link ForageBlocks#rock}. This class is the king of all rocks, as it is also integral to the
@@ -30,87 +33,134 @@ import java.util.Random;
  *
  * @author Jonathing
  * @see ForageBlocks#rock
- * @see FallingBlock
- * @since 2.0.0
+ * @see DecorativeBlock
+ * @see IWaterLoggable
+ * @since 2.1.0
  */
-public class RockBlock extends FallingBlock
+public class RockBlock extends DecorativeBlock implements IWaterLoggable
 {
-    public RockBlock(Block.Properties properties)
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
+    /**
+     * Makes a new {@link DecorativeBlock} with features exclusive to the {@link ForageBlocks#rock}.
+     *
+     * @see DecorativeBlock#DecorativeBlock(Properties, VoxelShape, Supplier)
+     */
+    public RockBlock()
     {
-        super(properties);
+        this(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).doesNotBlockMovement().notSolid().zeroHardnessAndResistance(), DecorativeBlock.ROCK_SHAPE, () -> ForageBlocks.rock.asItem());
     }
 
     /**
-     * This method defines the hitbox for the {@link ForageBlocks#rock}.
-     * <p>
-     * I'm not really sure what these numbers actually mean, but Bailey and I toyed with these values enough to get
-     * exactly what we needed for this item.
+     * Makes a new {@link DecorativeBlock} with features exclusive to the {@link ForageBlocks#rock} but with a different
+     * {@link VoxelShape} and a different {@link Item}. Primarily used to make the {@link ForageBlocks#flat_rock}.
      *
-     * @see net.minecraft.block.FallingBlock#getShape(BlockState, IBlockReader, BlockPos, ISelectionContext)
+     * @see DecorativeBlock#DecorativeBlock(Properties, VoxelShape, Supplier)
+     */
+    public RockBlock(VoxelShape shape, Supplier<Item> decorativeItem)
+    {
+        this(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).doesNotBlockMovement().notSolid().zeroHardnessAndResistance(), shape, decorativeItem);
+    }
+
+    public RockBlock(Properties properties, VoxelShape shape, Supplier<Item> decorativeItem)
+    {
+        super(properties, shape, decorativeItem);
+        this.setDefaultState(this.getStateContainer().getBaseState().with(WATERLOGGED, false));
+    }
+
+    /**
+     * Some nonsense from the {@link LanternBlock} that allowed me to add waterlogging support for rocks.
+     *
+     * @param context The {@link BlockItemUseContext} given to the method.
+     * @return Either a waterlogged or non-waterlogged rock based on the result of this method.
+     */
+    @Override
+    @Nullable
+    public BlockState getStateForPlacement(BlockItemUseContext context)
+    {
+        FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
+
+        for (Direction direction : context.getNearestLookingDirections())
+        {
+            if (direction.getAxis() == Direction.Axis.Y)
+            {
+                BlockState blockstate = this.getDefaultState();
+                if (blockstate.isValidPosition(context.getWorld(), context.getPos()))
+                {
+                    return blockstate.with(WATERLOGGED, fluidstate.getFluid() == Fluids.WATER);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    {
+        builder.add(WATERLOGGED);
+    }
+
+    /**
+     * Has the same logic as
+     * {@link DecorativeBlock#onBlockActivated(BlockState, World, BlockPos, PlayerEntity, Hand, BlockRayTraceResult)}
+     * but also accounts for waterlogging.
+     *
+     * @param blockState          The {@link BlockState} of the decorative block that was activated.
+     * @param world               The {@link World} in which the block was activated.
+     * @param blockPos            The {@link BlockPos} of the decorative block that was activated.
+     * @param player              The {@link PlayerEntity} that activated the block.
+     * @param hand                The {@link Hand} of the {@link PlayerEntity} that activated the block.
+     * @param blockRayTraceResult The {@link BlockRayTraceResult} given for the method.
+     * @return {@link ActionResultType#SUCCESS}
+     * @see DecorativeBlock#onBlockActivated(BlockState, World, BlockPos, PlayerEntity, Hand, BlockRayTraceResult)
      */
     @Override
     @Nonnull
     @ParametersAreNonnullByDefault
-    @SuppressWarnings("deprecation")
-    public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_)
-    {
-        return Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D);
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isValidPosition(BlockState blockState, IWorldReader world, BlockPos blockPos)
-    {
-        return world.getBlockState(blockPos).isAir() && world.getBlockState(blockPos.down()).isSolid();
-    }
-
-    /**
-     * This essentially just prevents particles from being spawned under a rock or stick floating in stasis. They're
-     * not really meant to do that.
-     *
-     * @see FallingBlock#animateTick(BlockState, World, BlockPos, Random)
-     */
-    @Override
-    @ParametersAreNonnullByDefault
-    @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState p_180655_1_, World p_180655_2_, BlockPos p_180655_3_, Random p_180655_4_)
-    {
-    }
-
-    @Override
-    @Nonnull
-    @ParametersAreNonnullByDefault
-    @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState blockState, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult)
     {
-        world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
-        Block.spawnAsEntity(world, blockPos, new ItemStack(this.getRockItem(), 1));
+        world.setBlockState(blockPos, this.getFluidState(blockState).equals(Fluids.EMPTY.getDefaultState()) ? Blocks.AIR.getDefaultState() : this.getFluidState(blockState).getBlockState());
+        Block.spawnAsEntity(world, blockPos, new ItemStack(this.getDecorativeItem(), 1));
         return ActionResultType.SUCCESS;
     }
 
     /**
-     * Instead of making the {@link ForageBlocks#flat_rock} and {@link ForageBlocks#stick} extend {@link FallingBlock}
-     * on their own, they instead extend this class because they're properties are so deathly similar that it allowed
-     * me to be lazy. This method, in turn, is our way of telling the game what is exactly what. For example, this
-     * specific instance of {@link RockBlock} will always be a {@link ForageBlocks#rock}. If {@link FlatRockBlock} and
-     * {@link StickBlock} want to say otherwise, they can just extend this method and say so themselves.
+     * Some nonsense from the {@link LanternBlock} that allowed me to add waterlogging support for rocks.
      *
-     * @return The {@link Item} that this specific {@link RockBlock} instance portrays itself as.
-     * @see FlatRockBlock#getRockItem()
-     * @see StickBlock#getRockItem()
-     */
-    public Item getRockItem()
-    {
-        return ForageBlocks.rock.asItem();
-    }
-
-    /**
-     * Get the OffsetType for this Block. Determines if the model is rendered slightly offset.
+     * @param stateIn     The {@link BlockState} of the rock to check if it is waterlogged.
+     * @param facing      A {@link Direction} given to the method.
+     * @param facingState A {@link BlockState} given to the method.
+     * @param worldIn     A {@link IWorld} given to the method.
+     * @param currentPos  A {@link BlockPos} given to the method.
+     * @param facingPos   A {@link BlockPos} given to the method.
+     * @return The {@link BlockState} returned by
+     * {@link FallingBlock#updatePostPlacement(BlockState, Direction, BlockState, IWorld, BlockPos, BlockPos)}
      */
     @Override
     @Nonnull
-    public Block.OffsetType getOffsetType()
+    public BlockState updatePostPlacement(BlockState stateIn, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull IWorld worldIn, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos)
     {
-        return Block.OffsetType.XZ;
+        if (stateIn.get(WATERLOGGED))
+        {
+            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+        }
+
+        return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+    }
+
+    /**
+     * Gets the {@link FluidState} of the {@link net.minecraft.fluid.Fluid} that is currently waterlogging the given
+     * {@link BlockState}.
+     *
+     * @param state The {@link BlockState} to get the {@link FluidState} of.
+     * @return The {@link FluidState} if the rock is waterlogged or {@link Fluids#EMPTY} otherwise.
+     */
+    @Override
+    @Nonnull
+    @SuppressWarnings("deprecation")
+    public FluidState getFluidState(BlockState state)
+    {
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
     }
 }
