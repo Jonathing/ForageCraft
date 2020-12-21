@@ -45,7 +45,7 @@ public class ForageItems
                         .group(getItemGroup(ItemGroup.MISC))));
 
         spaghetti = register("spaghetti",
-                new Item(new Item.Properties()
+                new SoupItem(new Item.Properties()
                         .group(getItemGroup(ItemGroup.FOOD))
                         .maxStackSize(1)
                         .food(new Food.Builder().hunger(11).saturation(0.375F).build())));
