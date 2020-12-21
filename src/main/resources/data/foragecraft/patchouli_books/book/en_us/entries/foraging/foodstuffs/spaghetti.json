@@ -3,6 +3,7 @@
   "icon": "foragecraft:spaghetti",
   "category": "foragecraft:inv_food",
   "advancement": "foragecraft:recipes/food/spaghetti",
+  "turnin": "foragecraft:main/has_spaghetti",
   "sortnum": 0,
   "pages": [
     {

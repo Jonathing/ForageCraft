@@ -3,6 +3,7 @@
   "icon": "foragecraft:stick_bundle",
   "category": "foragecraft:inv_misc",
   "advancement": "foragecraft:recipes/misc/stick_bundle",
+  "turnin": "foragecraft:recipes/misc/stick_from_stick_bundle",
   "pages": [
     {
       "type": "spotlight",

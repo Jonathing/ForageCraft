@@ -3,6 +3,7 @@
   "icon": "foragecraft:straw_bale",
   "category": "foragecraft:inv_blocks",
   "advancement": "foragecraft:recipes/building_blocks/straw_bale",
+  "turnin": "foragecraft:recipes/misc/straw_from_straw_bale",
   "pages": [
     {
       "type": "spotlight",

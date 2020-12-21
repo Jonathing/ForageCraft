@@ -3,6 +3,7 @@
   "icon": "foragecraft:fascine",
   "category": "foragecraft:inv_blocks",
   "advancement": "foragecraft:recipes/building_blocks/fascine",
+  "turnin": "foragecraft:recipes/misc/stick_bundle_from_fascine",
   "pages": [
     {
       "type": "spotlight",

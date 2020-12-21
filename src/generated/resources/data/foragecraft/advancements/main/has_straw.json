@@ -1,15 +1,14 @@
 {
-  "parent": "foragecraft:root",
+  "parent": "foragecraft:main/has_gathering_knife",
   "display": {
     "icon": {
-      "item": "foragecraft:gathering_knife",
-      "nbt": "{Damage:0}"
+      "item": "foragecraft:straw"
     },
     "title": {
-      "translate": "advancements.foragecraft.has_gathering_knife"
+      "translate": "advancements.foragecraft.has_straw"
     },
     "description": {
-      "translate": "advancements.foragecraft.has_gathering_knife.desc"
+      "translate": "advancements.foragecraft.has_straw.desc"
     },
     "frame": "task",
     "show_toast": true,
@@ -17,12 +16,12 @@
     "hidden": false
   },
   "criteria": {
-    "has_gathering_knife": {
+    "has_straw": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "foragecraft:gathering_knife"
+            "item": "foragecraft:straw"
           }
         ]
       }
@@ -30,7 +29,7 @@
   },
   "requirements": [
     [
-      "has_gathering_knife"
+      "has_straw"
     ]
   ]
 }

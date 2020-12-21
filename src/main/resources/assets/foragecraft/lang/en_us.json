@@ -16,13 +16,14 @@
   "item.foragecraft.spaghetti": "Spaghetti and Meatblocks",
   "item.foragecraft.leek_seeds": "Leek Seeds",
   "item.foragecraft.leek": "Leek",
+  "item.foragecraft.gathering_knife": "Gathering Knife",
 
   "_comment": "Advancements (advancements)",
 
   "advancements.foragecraft.root": "ForageCraft",
   "advancements.foragecraft.root.desc": "Hungry? Dig for potatoes!",
   "advancements.foragecraft.has_gathering_knife": "Foraging with Tools",
-  "advancements.foragecraft.has_gathering_knife.desc": "Craft a cutting knife with a stick and a flat rock.",
+  "advancements.foragecraft.has_gathering_knife.desc": "Craft a gathering knife with a stick and a flat rock.",
   "advancements.foragecraft.has_straw": "Your Local Wheat Rip-off",
   "advancements.foragecraft.has_straw.desc": "Use a cutting knife to get straw from some grass.",
   "advancements.foragecraft.foraged_root_vegetable": "Vegetables from the Ground",
@@ -45,6 +46,8 @@
   "advancements.foragecraft.has_leek_seeds.desc": "Steal some leek seeds from a village house chest.",
   "advancements.foragecraft.has_leek": "A Tasty Weapon",
   "advancements.foragecraft.has_leek.desc": "Get your hands on a leek.",
+  "advancements.foragecraft.has_spaghetti": "Bon Appétit!",
+  "advancements.foragecraft.has_spaghetti.desc": "Make yourself some Spaghetti and Meatblocks.",
 
   "_comment": "Patchouli Book (patchouli)",
 

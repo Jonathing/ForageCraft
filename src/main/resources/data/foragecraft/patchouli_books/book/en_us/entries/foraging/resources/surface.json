@@ -2,7 +2,7 @@
   "name": "The Surface",
   "icon": "minecraft:grass_block",
   "category": "foragecraft:resources",
-  "advancement": "foragecraft:root",
+  "advancement": "foragecraft:main/root",
   "sortnum": 0,
   "pages": [
     {

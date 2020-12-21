@@ -1,27 +1,27 @@
 {
-  "parent": "foragecraft:has_gathering_knife",
+  "parent": "foragecraft:main/has_leek_seeds",
   "display": {
     "icon": {
-      "item": "foragecraft:straw"
+      "item": "foragecraft:leek"
     },
     "title": {
-      "translate": "advancements.foragecraft.has_straw"
+      "translate": "advancements.foragecraft.has_leek"
     },
     "description": {
-      "translate": "advancements.foragecraft.has_straw.desc"
+      "translate": "advancements.foragecraft.has_leek.desc"
     },
     "frame": "task",
     "show_toast": true,
-    "announce_to_chat": false,
+    "announce_to_chat": true,
     "hidden": false
   },
   "criteria": {
-    "has_straw": {
+    "has_leek": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "foragecraft:straw"
+            "item": "foragecraft:leek"
           }
         ]
       }
@@ -29,7 +29,7 @@
   },
   "requirements": [
     [
-      "has_straw"
+      "has_leek"
     ]
   ]
 }

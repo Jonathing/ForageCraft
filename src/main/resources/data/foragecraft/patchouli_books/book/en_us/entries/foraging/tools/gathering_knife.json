@@ -3,6 +3,7 @@
   "icon": "foragecraft:gathering_knife",
   "category": "foragecraft:inv_tools",
   "advancement": "foragecraft:recipes/tools/gathering_knife",
+  "turnin": "foragecraft:main/has_gathering_knife",
   "pages": [
     {
       "type": "spotlight",

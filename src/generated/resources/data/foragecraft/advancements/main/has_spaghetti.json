@@ -1,0 +1,35 @@
+{
+  "parent": "foragecraft:main/root",
+  "display": {
+    "icon": {
+      "item": "foragecraft:spaghetti"
+    },
+    "title": {
+      "translate": "advancements.foragecraft.has_spaghetti"
+    },
+    "description": {
+      "translate": "advancements.foragecraft.has_spaghetti.desc"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "has_spaghetti": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "foragecraft:spaghetti"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_spaghetti"
+    ]
+  ]
+}

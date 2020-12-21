@@ -1,5 +1,5 @@
 {
-  "parent": "foragecraft:foraged_gold_nugget",
+  "parent": "foragecraft:main/foraged_gold_nugget",
   "display": {
     "icon": {
       "item": "minecraft:diamond"
@@ -12,7 +12,7 @@
     },
     "frame": "challenge",
     "show_toast": true,
-    "announce_to_chat": false,
+    "announce_to_chat": true,
     "hidden": false
   },
   "criteria": {

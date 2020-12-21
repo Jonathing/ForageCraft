@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "has_paving_stones": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "foragecraft:paving_stones"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_paving_stones"
+    ]
+  ]
+}

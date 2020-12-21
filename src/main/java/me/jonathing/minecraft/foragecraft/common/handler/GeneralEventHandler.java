@@ -31,7 +31,7 @@ public class GeneralEventHandler
      */
     private static final Supplier<LootPool> VILLAGE_HOUSE_CHESTS = () -> LootPool.builder().addEntry(
             ItemLootEntry.builder(ForageItems.leek_seeds)
-                    .acceptFunction(SetCount.builder(RandomValueRange.of(2, 4))))
+                    .acceptFunction(SetCount.builder(RandomValueRange.of(0, 2))))
             .build();
 
     /**

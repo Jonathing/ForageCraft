@@ -2,7 +2,7 @@
   "name": "Root Vegetables",
   "icon": "minecraft:carrot",
   "category": "foragecraft:foodstuffs",
-  "advancement": "foragecraft:foraged_root_vegetable",
+  "advancement": "foragecraft:book_exclusive/root_vegetables",
   "sortnum": 0,
   "pages": [
     {

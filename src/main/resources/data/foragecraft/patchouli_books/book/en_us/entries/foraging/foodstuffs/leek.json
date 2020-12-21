@@ -3,6 +3,7 @@
   "icon": "foragecraft:leek",
   "category": "foragecraft:discoveries",
   "advancement": "foragecraft:recipes/misc/leek_seeds_from_leek",
+  "turnin": "foragecraft:main/has_leek",
   "pages": [
     {
       "type": "spotlight",
