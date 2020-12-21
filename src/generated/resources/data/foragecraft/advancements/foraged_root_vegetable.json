@@ -1,14 +1,14 @@
 {
-  "parent": "foragecraft:begin_research",
+  "parent": "foragecraft:root",
   "display": {
     "icon": {
       "item": "minecraft:potato"
     },
     "title": {
-      "translate": "advancements.foragecraft.root_vegetable"
+      "translate": "advancements.foragecraft.foraged_root_vegetable"
     },
     "description": {
-      "translate": "advancements.foragecraft.root_vegetable.desc"
+      "translate": "advancements.foragecraft.foraged_root_vegetable.desc"
     },
     "frame": "task",
     "show_toast": true,
@@ -16,28 +16,28 @@
     "hidden": false
   },
   "criteria": {
-    "forage_potato_from_dirt": {
+    "foraged_potato_from_grass_block": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:grass_block",
+        "item": "minecraft:potato"
+      }
+    },
+    "foraged_potato_from_dirt": {
       "trigger": "foragecraft:foraging_trigger",
       "conditions": {
         "block": "minecraft:dirt",
         "item": "minecraft:potato"
       }
     },
-    "forage_potato_from_grass_block": {
-      "trigger": "foragecraft:foraging_trigger",
-      "conditions": {
-        "block": "minecraft:grass_block",
-        "item": "minecraft:potato"
-      }
-    },
-    "forage_carrot": {
+    "foraged_carrot_from_grass_block": {
       "trigger": "foragecraft:foraging_trigger",
       "conditions": {
         "block": "minecraft:grass_block",
         "item": "minecraft:carrot"
       }
     },
-    "forage_beetroot": {
+    "foraged_beetroot_from_grass_block": {
       "trigger": "foragecraft:foraging_trigger",
       "conditions": {
         "block": "minecraft:grass_block",
@@ -47,10 +47,10 @@
   },
   "requirements": [
     [
-      "forage_potato_from_dirt",
-      "forage_potato_from_grass_block",
-      "forage_carrot",
-      "forage_beetroot"
+      "foraged_potato_from_grass_block",
+      "foraged_potato_from_dirt",
+      "foraged_carrot_from_grass_block",
+      "foraged_beetroot_from_grass_block"
     ]
   ]
 }

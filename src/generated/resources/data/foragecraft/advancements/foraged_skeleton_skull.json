@@ -1,0 +1,40 @@
+{
+  "parent": "foragecraft:foraged_bone",
+  "display": {
+    "icon": {
+      "item": "minecraft:skeleton_skull"
+    },
+    "title": {
+      "translate": "advancements.foragecraft.foraged_skeleton_skull"
+    },
+    "description": {
+      "translate": "advancements.foragecraft.foraged_skeleton_skull.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "foraged_skeleton_skull_from_grass_block": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:grass_block",
+        "item": "minecraft:skeleton_skull"
+      }
+    },
+    "foraged_skeleton_skull_from_dirt": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:dirt",
+        "item": "minecraft:skeleton_skull"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "foraged_skeleton_skull_from_grass_block",
+      "foraged_skeleton_skull_from_dirt"
+    ]
+  ]
+}

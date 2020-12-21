@@ -1,0 +1,40 @@
+{
+  "parent": "foragecraft:foraged_root_vegetable",
+  "display": {
+    "icon": {
+      "item": "minecraft:poisonous_potato"
+    },
+    "title": {
+      "translate": "advancements.foragecraft.foraged_poisonous_potato"
+    },
+    "description": {
+      "translate": "advancements.foragecraft.foraged_poisonous_potato.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "foraged_poisonous_potato_from_grass_block": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:grass_block",
+        "item": "minecraft:poisonous_potato"
+      }
+    },
+    "foraged_poisonous_potato_from_dirt": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:dirt",
+        "item": "minecraft:poisonous_potato"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "foraged_poisonous_potato_from_grass_block",
+      "foraged_poisonous_potato_from_dirt"
+    ]
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "parent": "foragecraft:root",
+  "display": {
+    "icon": {
+      "item": "foragecraft:cutting_knife",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.foragecraft.has_cutting_knife"
+    },
+    "description": {
+      "translate": "advancements.foragecraft.has_cutting_knife.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_cutting_knife": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "foragecraft:cutting_knife"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cutting_knife"
+    ]
+  ]
+}

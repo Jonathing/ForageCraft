@@ -1,0 +1,35 @@
+{
+  "parent": "foragecraft:has_cutting_knife",
+  "display": {
+    "icon": {
+      "item": "foragecraft:straw"
+    },
+    "title": {
+      "translate": "advancements.foragecraft.has_straw"
+    },
+    "description": {
+      "translate": "advancements.foragecraft.has_straw.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_straw": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "foragecraft:straw"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_straw"
+    ]
+  ]
+}

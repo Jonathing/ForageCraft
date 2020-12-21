@@ -1,0 +1,40 @@
+{
+  "parent": "foragecraft:foraged_flint",
+  "display": {
+    "icon": {
+      "item": "minecraft:bone"
+    },
+    "title": {
+      "translate": "advancements.foragecraft.foraged_bone"
+    },
+    "description": {
+      "translate": "advancements.foragecraft.foraged_bone.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "foraged_bone_from_grass_block": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:grass_block",
+        "item": "minecraft:bone"
+      }
+    },
+    "foraged_bone_from_dirt": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:dirt",
+        "item": "minecraft:bone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "foraged_bone_from_grass_block",
+      "foraged_bone_from_dirt"
+    ]
+  ]
+}

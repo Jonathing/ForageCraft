@@ -2,7 +2,7 @@
   "name": "Root Vegetables",
   "icon": "minecraft:carrot",
   "category": "foragecraft:foodstuffs",
-  "advancement": "foragecraft:root_vegetable",
+  "advancement": "foragecraft:foraged_root_vegetable",
   "sortnum": 0,
   "pages": [
     {
@@ -43,7 +43,7 @@
       "type": "spotlight",
       "item": "foragecraft:leek",
       "title": "The Leek",
-      "text": "The leek is a root vegetable that isn't as well-known as the other four aforementioned root vegetables. It was introduced into the environment fairly recently, but the villages have already gathered for themselves some of the seeds used to plant them. If you're quick, you can $(bold)visit a village$() and steal some leeks seeds from one of the houses!"
+      "text": "The leek is a root vegetable that isn't as well-known as the other four aforementioned root vegetables. It was introduced into the environment fairly recently, but the villages have already gathered some of their seeds for themselves. If you're quick, you can $(bold)visit a village$() and steal some leek seeds from one of the houses!"
     }
   ]
 }

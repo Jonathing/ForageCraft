@@ -1,0 +1,40 @@
+{
+  "parent": "foragecraft:foraged_bone",
+  "display": {
+    "icon": {
+      "item": "minecraft:gold_nugget"
+    },
+    "title": {
+      "translate": "advancements.foragecraft.foraged_gold_nugget"
+    },
+    "description": {
+      "translate": "advancements.foragecraft.foraged_gold_nugget.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "foraged_gold_nugget_from_stone": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:stone",
+        "item": "minecraft:gold_nugget"
+      }
+    },
+    "foraged_gold_nugget_from_nether_quartz_ore": {
+      "trigger": "foragecraft:foraging_trigger",
+      "conditions": {
+        "block": "minecraft:nether_quartz_ore",
+        "item": "minecraft:gold_nugget"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "foraged_gold_nugget_from_stone",
+      "foraged_gold_nugget_from_nether_quartz_ore"
+    ]
+  ]
+}

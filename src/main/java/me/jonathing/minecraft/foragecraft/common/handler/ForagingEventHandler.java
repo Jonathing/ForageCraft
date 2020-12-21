@@ -66,6 +66,7 @@ public class ForagingEventHandler
             Triple.of(0.07f, Items.STICK, 1),
             Triple.of(0.04f, Items.FLINT, 1),
             Triple.of(0.01f, Items.POTATO, 1),
+            Triple.of(0.01f, Items.POISONOUS_POTATO, 1),
             Triple.of(0.005f, Items.BONE, 9),
             Triple.of(0.005f, Items.SKELETON_SKULL, 1));
 

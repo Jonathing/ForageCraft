@@ -1,0 +1,35 @@
+{
+  "parent": "foragecraft:has_leek_seeds",
+  "display": {
+    "icon": {
+      "item": "foragecraft:leek"
+    },
+    "title": {
+      "translate": "advancements.foragecraft.has_leek"
+    },
+    "description": {
+      "translate": "advancements.foragecraft.has_leek.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_leek": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "foragecraft:leek"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_leek"
+    ]
+  ]
+}

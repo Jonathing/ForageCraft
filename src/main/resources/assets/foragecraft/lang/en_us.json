@@ -17,16 +17,45 @@
   "item.foragecraft.leek_seeds": "Leek Seeds",
   "item.foragecraft.leek": "Leek",
 
-  "_comment": "Dev Environment Item Group",
+  "_comment": "Advancements (advancements)",
 
-  "itemGroup.foragecraft": "ForageCraft",
+  "advancements.foragecraft.root": "ForageCraft",
+  "advancements.foragecraft.root.desc": "Hungry? Dig for potatoes!",
+  "advancements.foragecraft.has_cutting_knife": "Foraging with Tools",
+  "advancements.foragecraft.has_cutting_knife.desc": "Craft a cutting knife with a stick and a flat rock.",
+  "advancements.foragecraft.has_straw": "Your Local Wheat Rip-off",
+  "advancements.foragecraft.has_straw.desc": "Use a cutting knife to get straw from some grass.",
+  "advancements.foragecraft.foraged_root_vegetable": "Vegetables from the Ground",
+  "advancements.foragecraft.foraged_root_vegetable.desc": "Forage a potato, carrot, or beetroot from the ground.",
+  "advancements.foragecraft.foraged_poisonous_potato": "An Unlucky Find",
+  "advancements.foragecraft.foraged_poisonous_potato.desc": "Forage a poisonous potato from the ground.",
+  "advancements.foragecraft.foraged_flint": "No Need For Gravel",
+  "advancements.foragecraft.foraged_flint.desc": "Forage a piece of flint from dirt or some stone.",
+  "advancements.foragecraft.foraged_bone": "Fossilized Bones",
+  "advancements.foragecraft.foraged_bone.desc": "Forage a bone from the ground.",
+  "advancements.foragecraft.foraged_gold_nugget": "A Glimmer in the Stone",
+  "advancements.foragecraft.foraged_gold_nugget.desc": "Forage a gold nugget from some stone.",
+  "advancements.foragecraft.foraged_skeleton_skull": "Fossilized Skulls",
+  "advancements.foragecraft.foraged_skeleton_skull.desc": "Forage a skeleton skull from the ground.",
+  "advancements.foragecraft.foraged_diamond": "A Coal Ore's Riches",
+  "advancements.foragecraft.foraged_diamond.desc": "Forage a diamond from some coal ore.",
+  "advancements.foragecraft.foraged_emerald": "A Lucky Find",
+  "advancements.foragecraft.foraged_emerald.desc": "Forage an emerald from some coal ore.",
+  "advancements.foragecraft.has_leek_seeds": "Justified Theft",
+  "advancements.foragecraft.has_leek_seeds.desc": "Steal some leek seeds from a village house chest.",
+  "advancements.foragecraft.has_leek": "A Tasty Weapon",
+  "advancements.foragecraft.has_leek.desc": "Get your hands on a leek.",
 
-  "_comment": "Patchouli Book",
+  "_comment": "Patchouli Book (patchouli)",
 
   "patchouli.foragecraft.name": "Foraging Research",
   "patchouli.foragecraft.landing_text": "Congratulations on crafting a piece of paper and shoving it with dirt to get here! Welcome to the $(bold)Foraging Research Journal!$() The more you learn, the more you uncover, so get digging!",
 
-  "_comment": "JEI Vanilla Localizations (jei)",
+  "_comment": "Dev Environment Item Group (itemGroup)",
+
+  "itemGroup.foragecraft": "ForageCraft",
+
+  "_comment": "JEI Vanilla Localizations (jei) (Unused, but kept in here for prosperity)",
 
   "jei.description.foraging.minecraft.stick": "The best way to get sticks is to go straight to the source and break them off of trees. However, for those of you who would rather hug trees than harm them, nature sometimes does the job for you. Often times, while rooting around in tall grass, you can find old sticks from long dead trees. Of course, not all sticks are of the leafy variety. Sometimes roots found underground are sturdy enough to qualify as sticks.",
   "jei.description.foraging.minecraft.carrot": "For hundreds of years, the testificate race has held a monopoly on carrots, potatoes, beetroots and various other root vegetables. The reason for this is that no one could find any seeds for them. However, one day a smart human put two and two together and realized that, as their name suggests, root veggies are found buried in the soil in nature. Carrots, being roots, are no exception to this, and can sometimes be found in the upper layers of soil while digging.",
@@ -40,7 +69,7 @@
   "jei.description.foraging.minecraft.diamond": "Legend states that diamonds are the remains of the dead, crushed and squeezed until they become unparalleled in sheer strength and beauty. The dwarves were the first to forge armor and weapons from this mighty material, and even though they have since faded from memory, their forging skills live on. To this day, diamonds are coveted as treasures of immeasurable value.",
   "jei.description.foraging.minecraft.emerald": "Emeralds are the most valuable gems in the world, provided you have a big nose and make grunting noises all day. They are often found in deep mountain caverns, and form in very similar ways to diamonds. The most significant source of emeralds today is the testificate mercantile community, which is pretty much all of the greedy little guys. How they got the emeralds in the first place is one of the greatest mysteries of our time.",
 
-  "_comment": "JEI Modded Localizations (jei)",
+  "_comment": "JEI Modded Localizations (jei) (Unused, but kept in here for prosperity)",
 
   "jei.description.foraging.foragecraft.stick_bundle": "In case you haven't noticed, sticks are extremely common. Fortunately, they are very easy to bundle together, and for whatever reason one bundle of sticks takes up no more space than a single stick. ",
   "jei.description.foraging.foragecraft.straw": "Not of the drinking variety. Straw, being grass that has had all the life sucked out of it, isn't very tasty to animals. However, it is just as soft as wheat (which is to say not very soft, but better than the ground), so it has some useful applications in halting falling objects. Its also relatively sturdy and cheap, making it the roofing material of choice for the next few minutes after you read this. You should then realize that wood is a far superior alternative, if more expensive. The testificates are indeed smarter than they look.",
