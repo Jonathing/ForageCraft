@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "minecraft:saplings"
+    },
+    {
+      "item": "foragecraft:gathering_knife"
+    }
+  ],
+  "result": {
+    "item": "minecraft:stick"
+  }
+}

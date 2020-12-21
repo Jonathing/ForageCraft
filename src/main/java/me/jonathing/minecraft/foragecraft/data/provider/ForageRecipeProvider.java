@@ -7,6 +7,7 @@ import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.item.Items;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import vazkii.patchouli.api.PatchouliAPI;
 
@@ -80,6 +81,12 @@ public class ForageRecipeProvider extends RecipeProvider
                 .addIngredient(Items.DIRT, 3)
                 .addCriterion(hasItem, hasItem(Blocks.DIRT))
                 .build(consumer, ForageCraft.find("guide_book"));
+
+        ShapelessRecipeBuilder.shapelessRecipe(Items.STICK, 1)
+                .addIngredient(ItemTags.SAPLINGS)
+                .addIngredient(ForageItems.gathering_knife)
+                .addCriterion(hasItem, hasItem(ForageItems.gathering_knife))
+                .build(consumer, ForageCraft.find("stick_from_gathering_knife_and_sapling"));
     }
 
     private void simpleInOut(IItemProvider in, IItemProvider out, int amount)

@@ -3,6 +3,8 @@ package me.jonathing.minecraft.foragecraft.common.handler;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
@@ -178,7 +180,7 @@ public class ForagingEventHandler
 
         Block blockBroken = event.getState().getBlock();
 
-        if (FORAGE_EVENT_REGISTRY.containsKey(blockBroken))
+        if (FORAGE_EVENT_REGISTRY.containsKey(blockBroken) && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, player.getHeldItemMainhand()) == 0)
             forageDrop(FORAGE_EVENT_REGISTRY.get(blockBroken), event);
     }
 

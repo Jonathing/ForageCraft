@@ -1,6 +1,9 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
-import me.jonathing.minecraft.foragecraft.common.block.*;
+import me.jonathing.minecraft.foragecraft.common.block.FlatRockBlock;
+import me.jonathing.minecraft.foragecraft.common.block.LeekCropBlock;
+import me.jonathing.minecraft.foragecraft.common.block.RockBlock;
+import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
 import me.jonathing.minecraft.foragecraft.common.block.template.ForageHayBlock;
 import me.jonathing.minecraft.foragecraft.common.block.template.ForageSpeedBlock;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;

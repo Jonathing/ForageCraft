@@ -34,6 +34,17 @@ public class GatheringKnifeItem extends Item implements IVanishable
         super(properties);
     }
 
+    /**
+     * This method holds the logic that is used whenever the gathering knife is used to break a specific block.
+     *
+     * @param itemStack    The {@link ItemStack} used by the {@link LivingEntity} when the block is destroyed.
+     * @param world        The {@link World} in which the block was broken.
+     * @param blockState   The {@link BlockState} of the broken block.
+     * @param pos          The {@link BlockPos} in which the block was broken.
+     * @param livingEntity The {@link LivingEntity} that used the {@link ItemStack} that broke the block.
+     * @return If true, update the statistics page saying that the item was used.
+     * @see Item#onBlockDestroyed(ItemStack, World, BlockState, BlockPos, LivingEntity)
+     */
     @Override
     public boolean onBlockDestroyed(@Nonnull ItemStack itemStack, World world, @Nonnull BlockState blockState, @Nonnull BlockPos pos, @Nonnull LivingEntity livingEntity)
     {
@@ -49,5 +60,27 @@ public class GatheringKnifeItem extends Item implements IVanishable
         }
 
         return false;
+    }
+
+    /**
+     * This method is used to return an {@link ItemStack} that acts as the result of the item used in crafting. In the
+     * case of the gathering knife, it uses durability and if it is at 0, it deletes the item.
+     *
+     * @param itemStack The current ItemStack
+     * @return The resulting ItemStack
+     * @see Item#getContainerItem(ItemStack)
+     */
+    @Override
+    public ItemStack getContainerItem(ItemStack itemStack)
+    {
+        itemStack.setDamage(itemStack.getDamage() + 1);
+        ItemStack result = itemStack.copy();
+        return result.getDamage() >= result.getMaxDamage() ? ItemStack.EMPTY : result;
+    }
+
+    @Override
+    public boolean hasContainerItem(ItemStack itemStack)
+    {
+        return true;
     }
 }
