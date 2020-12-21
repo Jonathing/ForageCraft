@@ -1,6 +1,8 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
+import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.biome.Biome;
@@ -10,11 +12,14 @@ import net.minecraft.world.gen.blockstateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placement.NoiseDependant;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -71,6 +76,8 @@ public class ForageFeatures
         registerConfiguredFeature("forage_random_rocks", RANDOM_EARTH_PATCH.get());
     }
 
+    private static List<ResourceLocation> overworldBiomes;
+
     /**
      * This event method ensures that specific features <em>do not</em> spawn on specific biomes.
      *
@@ -79,10 +86,20 @@ public class ForageFeatures
     @SubscribeEvent
     public static void biomeLoadingEvent(BiomeLoadingEvent event)
     {
-        if (!event.getCategory().equals(Biome.Category.BEACH)
+        if (overworldBiomes == null)
+        {
+            overworldBiomes = new ArrayList<>();
+            for (RegistryKey<Biome> biome : BiomeDictionary.getBiomes(BiomeDictionary.Type.OVERWORLD))
+            {
+                overworldBiomes.add(biome.getRegistryName());
+            }
+        }
+
+        if (overworldBiomes.contains(event.getName())
+                && !event.getCategory().equals(Biome.Category.BEACH)
                 && !event.getCategory().equals(Biome.Category.DESERT)
-                && !event.getCategory().equals(Biome.Category.NETHER)
-                && !event.getCategory().equals(Biome.Category.THEEND)
+                && !event.getCategory().equals(Biome.Category.OCEAN)
+                && !event.getCategory().equals(Biome.Category.SAVANNA)
                 && !event.getCategory().equals(Biome.Category.NONE))
             event.getGeneration().feature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, RANDOM_EARTH_PATCH.get());
     }
