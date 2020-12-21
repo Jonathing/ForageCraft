@@ -1,0 +1,19 @@
+{
+  "name": "Fascine",
+  "icon": "foragecraft:fascine",
+  "category": "foragecraft:inv_blocks",
+  "advancement": "foragecraft:recipes/building_blocks/fascine",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "foragecraft:fascine",
+      "title": "Fascine",
+      "text": "Fascine is nothing more than a plethera of stick bundles bundled together into a block. Despite this, it can be very useful in its application. Because Fascine is a block of sticks, just one can be used to smelt around 40 items! Too lazy to go digging for coal? Wonder around and collect a bunch of sticks instead!"
+    },
+    {
+      "type": "crafting",
+      "recipe": "foragecraft:fascine",
+      "title": " "
+    }
+  ]
+}

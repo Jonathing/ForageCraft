@@ -1,0 +1,19 @@
+{
+  "name": "Paving Stones",
+  "icon": "foragecraft:paving_stones",
+  "category": "foragecraft:inv_blocks",
+  "advancement": "foragecraft:recipes/building_blocks/paving_stones",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "foragecraft:paving_stones",
+      "title": "Paving Stones",
+      "text": "Although the villages have been able to hold their monopolies on various items for hundreds of years, they have not been able to make incredible inventions of their own. While they continue to use grass paths, you can instead use paving stones! Paving stones cause you and any other living being to walk faster."
+    },
+    {
+      "type": "crafting",
+      "recipe": "foragecraft:paving_stones",
+      "title": " "
+    }
+  ]
+}

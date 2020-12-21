@@ -2,6 +2,7 @@
   "name": "The Surface",
   "icon": "minecraft:grass_block",
   "category": "foragecraft:resources",
+  "advancement": "foragecraft:begin_research",
   "sortnum": 0,
   "pages": [
     {
@@ -18,6 +19,8 @@
     {
       "type": "spotlight",
       "item": "minecraft:stick",
+      "title": "Sticks",
+      "link_recipe": true,
       "text": "A simple glance at your environment and there are sticks everywhere. In the $(bold)leaves$() of the trees, lying on the fuzzy $(bold)grass$() the environment holds, or maybe even $(bold)within the Earth itself!$()"
     },
     {
@@ -29,6 +32,8 @@
     {
       "type": "spotlight",
       "item": "foragecraft:rock",
+      "title": "Rocks",
+      "link_recipe": true,
       "text": "Aside from sticks making their way across the landscape, various small rocks have also found their way onto $(bold)the surface$() of The Overworld. Perhaps if you collect enough of them, you might be able to make yourself some cobblestone?"
     },
     {
@@ -40,6 +45,8 @@
     {
       "type": "spotlight",
       "item": "foragecraft:flat_rock",
+      "title": "Flat Rocks",
+      "link_recipe": true,
       "text": "A direct cousin of the rocks on the surface, more commonly referred to as flat rocks, are found $(bold)just as often$() as normal rocks. You might be able to craft something other than cobblestone once you get you hands on enough of them..."
     },
     {

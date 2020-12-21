@@ -24,7 +24,7 @@
   "_comment": "Patchouli Book",
 
   "patchouli.foragecraft.name": "Foraging Research",
-  "patchouli.foragecraft.landing_text": "Congratulations on crafting/finding a book and shoving dirt with it to get here! Welcome to the $(bold)ForageCraft Research Journal!$() The more you learn, the more you uncover, so get digging!",
+  "patchouli.foragecraft.landing_text": "Congratulations on crafting a piece of paper and shoving it with dirt to get here! Welcome to the $(bold)Foraging Research Journal!$() The more you learn, the more you uncover, so get digging!",
 
   "_comment": "JEI Vanilla Localizations (jei)",
 

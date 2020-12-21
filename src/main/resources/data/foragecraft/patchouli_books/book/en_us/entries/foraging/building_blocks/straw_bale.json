@@ -1,0 +1,19 @@
+{
+  "name": "Straw Bale",
+  "icon": "foragecraft:straw_bale",
+  "category": "foragecraft:inv_blocks",
+  "advancement": "foragecraft:recipes/building_blocks/straw_bale",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "foragecraft:straw_bale",
+      "title": "Straw Bale",
+      "text": "The straw bale is a cheaper alternative to the standard hay bale. It is comprised solely of straw rather than of wheat. This means that although it might break your fall as much as the hay bale would, it is still better than nothing when you need something to work with."
+    },
+    {
+      "type": "crafting",
+      "recipe": "foragecraft:straw_bale",
+      "title": " "
+    }
+  ]
+}

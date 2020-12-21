@@ -1,0 +1,19 @@
+{
+  "name": "Stick Bundle",
+  "icon": "foragecraft:stick_bundle",
+  "category": "foragecraft:inv_misc",
+  "advancement": "foragecraft:recipes/misc/stick_bundle",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "foragecraft:stick_bundle",
+      "title": "The Stick Bundle",
+      "text": "The stick bundle is just a bundle of sticks. What else did you expect? If you're running low on coal, you can shove some stick bundles into the furnace to keep your items smelting, or you can combine stick bundles together to make something even more useful..."
+    },
+    {
+      "type": "crafting",
+      "recipe": "foragecraft:stick_bundle",
+      "title": " "
+    }
+  ]
+}

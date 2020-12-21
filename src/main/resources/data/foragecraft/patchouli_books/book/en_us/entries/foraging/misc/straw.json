@@ -1,0 +1,15 @@
+{
+  "name": "Straw",
+  "icon": "foragecraft:straw",
+  "category": "foragecraft:discoveries",
+  "advancement": "foragecraft:recipes/building_blocks/straw_bale",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "foragecraft:straw",
+      "title": "Straw",
+      "link_recipe": true,
+      "text": "Straw is dried grass that can be acquired by using a $(bold)cutting knife on some $(bold)grass.$() It seems to have a similar shape and feel to wheat, so it is entirely possible that it could have similar applications to wheat. It probably still can't be used as food, though..."
+    }
+  ]
+}

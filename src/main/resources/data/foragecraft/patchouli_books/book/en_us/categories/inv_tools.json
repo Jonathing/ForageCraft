@@ -1,0 +1,7 @@
+{
+  "name": "Tools",
+  "description": "Tools are probably the best solutions to a problem like foraging. Here are some tools you can use to make your foraging research experience a little bit easier.",
+  "icon": "foragecraft:cutting_knife",
+  "parent": "foragecraft:inventions",
+  "sortnum": 2
+}

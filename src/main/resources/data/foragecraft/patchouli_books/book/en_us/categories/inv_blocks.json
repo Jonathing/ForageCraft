@@ -1,0 +1,7 @@
+{
+  "name": "Building Blocks",
+  "description": "With all of these resources you've been able to acquire for yourself, you wonder... What will you do with them?",
+  "icon": "foragecraft:fascine",
+  "parent": "foragecraft:inventions",
+  "sortnum": 0
+}

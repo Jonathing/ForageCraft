@@ -20,36 +20,42 @@
       "type": "spotlight",
       "title": "Fossilized Bones",
       "item": "minecraft:bone",
+      "link_recipe": true,
       "text": "Bones, once thought to have only been collected by destroying $(bold)living skeletons,$() have been found in the $(bold)grass blocks$() on the surface and the $(bold)dirt$() right below it. However, they appear so rarely, it is arguably better to retrieve them by killing skeletons in the end."
     },
     {
       "type": "spotlight",
       "title": "Fossilized Skulls",
       "item": "minecraft:skeleton_skull",
+      "link_recipe": true,
       "text": "$(bold)Along with bones$(), fossilized skulls have also been found in the Earth. These skulls have an appearance like the living skeletons found on the surface and within the caves, although they could imply a much more sinister past..."
     },
     {
       "type": "spotlight",
       "title": "Flint",
       "item": "minecraft:flint",
+      "link_recipe": true,
       "text": "Flint, a necessary ingredient in crafting arrows, is can be retrieved not only from $(bold)gravel,$() but also from $(bold)the dirt$() and $(bold)the stone$() of the underground. It can also be used to create a certain tool that can be used to cause wildfires, and even activate a mysterious obsidian structure..."
     },
     {
       "type": "spotlight",
       "title": "Gold Nuggets",
       "item": "minecraft:gold_nugget",
+      "link_recipe": true,
       "text": "Throughout the years, gold was believed to be one of the most useless precious ores. That's been common sense for many years, but your gut feeling tells you that you might want a good amount of it. $(italic)Something somewhere else$() might want it, too... Regardless, gold has $(bold)its own ore$() you can mine, or you can mine some $(bold)stone$() and cross your fingers..."
     },
     {
       "type": "spotlight",
       "title": "Diamonds",
       "item": "minecraft:diamond",
+      "link_recipe": true,
       "text": "The most precious of all of the gems in this world, diamonds are among the most coveted treasures of the underground. As it turns out, there is a rough estimate of a 0.1% chance of foraging a diamond out from $(bold)coal ore.$() So, what are you still doing here? Mine some stone and maybe you'll get lucky today!"
     },
     {
       "type": "spotlight",
       "title": "Emeralds",
       "item": "minecraft:emerald",
+      "link_recipe": true,
       "text": "The most useless of all of the gems in this world... or so you might think. The villages of the world treasure the emerald as the most precious of gems as it is rarer than diamonds and stimulates the market. As of late, the villagers become much more generous the more you trade. Maybe you'll be lucky enough to forage emeralds from $(bold)coal ore.$()"
     }
   ]

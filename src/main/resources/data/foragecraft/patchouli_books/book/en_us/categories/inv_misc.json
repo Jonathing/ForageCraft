@@ -1,0 +1,7 @@
+{
+  "name": "Building Blocks",
+  "description": "There are some items you can craft for yourself that don't really fit into any category. You'll be able to find those items here.",
+  "icon": "foragecraft:stick_bundle",
+  "parent": "foragecraft:inventions",
+  "sortnum": 3
+}

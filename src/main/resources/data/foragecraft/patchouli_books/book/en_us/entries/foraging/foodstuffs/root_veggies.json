@@ -18,22 +18,32 @@
     {
       "type": "spotlight",
       "item": "minecraft:potato",
+      "title": "The Potato",
       "text": "The glorious potato! The potato has been a staple crop of humanity for a very long time, but it can rarely be found in the wilderness of this world. Once thought to only be in the hands of the $(bold)zombies$() and the $(bold)villages,$() it has been discovered that they can be dug up from the $(bold)grass blocks$() of the surface and the $(bold)dirt$() beneath it."
     },
     {
       "type": "spotlight",
       "item": "minecraft:poisonous_potato",
+      "title": "The Poisonous Potato",
       "text": "Unfortunately, some potatoes have been cruelly stripped of their glory, and have grown rotten, for they naturally absorb harmful substances from $(bold)the earth they were dug up from.$() Maybe they might have some useful application in the future?"
     },
     {
       "type": "spotlight",
       "item": "minecraft:carrot",
+      "title": "The Carrot",
       "text": "For hundreds of years, carrots have been hoarded by the small, compact, and arguably rare $(bold)villages$() that seem to hold so many root crops on their own. Fortunately, there is a new solution to this problem: foraging! Just like potatoes, they can be dug up from the $(bold)grass blocks$() of the surface and the $(bold)dirt$() beneath it."
     },
     {
       "type": "spotlight",
       "item": "minecraft:beetroot",
+      "title": "The Beetroot",
       "text": "The beetroot is a mysterious plant. It grows from a large, spherical seed, which is surprisingly tough, and can survive for years on its own. Although the $(bold)villages$() continue to hold a monopoly on the vast majority of root crops, beetroot can still be dug up from $(bold)the ground$() like the other foodstuffs thus far."
+    },
+    {
+      "type": "spotlight",
+      "item": "foragecraft:leek",
+      "title": "The Leek",
+      "text": "The leek is a root vegetable that isn't as well-known as the other four aforementioned root vegetables. It was introduced into the environment fairly recently, but the villages have already gathered for themselves some of the seeds used to plant them. If you're quick, you can $(bold)visit a village$() and steal some leeks seeds from one of the houses!"
     }
   ]
 }

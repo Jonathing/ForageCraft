@@ -1,0 +1,15 @@
+{
+  "name": "Leek",
+  "icon": "foragecraft:leek",
+  "category": "foragecraft:discoveries",
+  "advancement": "foragecraft:recipes/misc/leek_seeds_from_leek",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "foragecraft:leek",
+      "title": "The Leek",
+      "link_recipe": true,
+      "text": "After getting your hands on a leek, you notice that not only is it a pretty tasty food on its own, but it also seems like a very durable weapon on its own as well... a very fragile weapon at that, too. It might be useful to fend yourself off if you have nothing left, though."
+    }
+  ]
+}
