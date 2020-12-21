@@ -15,21 +15,21 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 /**
- * This is the class for the {@link ForageItems#cutting_knife} item. It is required specifically for specific drops that
+ * This is the class for the {@link ForageItems#gathering_knife} item. It is required specifically for specific drops that
  * are given when using this item, which are also done in the
  * {@link #onBlockDestroyed(ItemStack, World, BlockState, BlockPos, LivingEntity)} method.
  *
  * @author Jonathing
- * @see ForageItems#cutting_knife
+ * @see ForageItems#gathering_knife
  * @see Item
  * @see IVanishable
  * @since 2.1.0
  */
-public class CuttingKnifeItem extends Item implements IVanishable
+public class GatheringKnifeItem extends Item implements IVanishable
 {
     private static final float STRAW_CHANCE = 0.55F;
 
-    public CuttingKnifeItem(Properties properties)
+    public GatheringKnifeItem(Properties properties)
     {
         super(properties);
     }

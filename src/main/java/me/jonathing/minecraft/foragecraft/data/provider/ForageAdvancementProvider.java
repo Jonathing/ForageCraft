@@ -162,13 +162,13 @@ public class ForageAdvancementProvider implements IDataProvider
                     .withCriterion("foraged_emerald_from_coal_ore", ForagingTrigger.Instance.create(Blocks.COAL_ORE, Items.EMERALD))
                     .register(consumer, ForageCraft.find("foraged_emerald"));
 
-            Advancement cutting_knife = haveAnyItem(builder(ForageItems.cutting_knife, "has_cutting_knife", FrameType.TASK, true, false, false)
+            Advancement gathering_knife = haveAnyItem(builder(ForageItems.gathering_knife, "has_gathering_knife", FrameType.TASK, true, false, false)
                             .withParent(root),
-                    ImmutableList.of(ForageItems.cutting_knife))
-                    .register(consumer, ForageCraft.find("has_cutting_knife"));
+                    ImmutableList.of(ForageItems.gathering_knife))
+                    .register(consumer, ForageCraft.find("has_gathering_knife"));
 
             Advancement straw = haveAnyItem(builder(ForageItems.straw, "has_straw", FrameType.TASK, true, false, false)
-                            .withParent(cutting_knife),
+                            .withParent(gathering_knife),
                     ImmutableList.of(ForageItems.straw))
                     .register(consumer, ForageCraft.find("has_straw"));
 

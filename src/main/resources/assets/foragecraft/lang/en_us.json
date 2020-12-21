@@ -21,8 +21,8 @@
 
   "advancements.foragecraft.root": "ForageCraft",
   "advancements.foragecraft.root.desc": "Hungry? Dig for potatoes!",
-  "advancements.foragecraft.has_cutting_knife": "Foraging with Tools",
-  "advancements.foragecraft.has_cutting_knife.desc": "Craft a cutting knife with a stick and a flat rock.",
+  "advancements.foragecraft.has_gathering_knife": "Foraging with Tools",
+  "advancements.foragecraft.has_gathering_knife.desc": "Craft a cutting knife with a stick and a flat rock.",
   "advancements.foragecraft.has_straw": "Your Local Wheat Rip-off",
   "advancements.foragecraft.has_straw.desc": "Use a cutting knife to get straw from some grass.",
   "advancements.foragecraft.foraged_root_vegetable": "Vegetables from the Ground",

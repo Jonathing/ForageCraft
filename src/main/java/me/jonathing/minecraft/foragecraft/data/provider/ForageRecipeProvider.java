@@ -71,7 +71,7 @@ public class ForageRecipeProvider extends RecipeProvider
 
         simpleInOut(ForageItems.leek, ForageItems.leek_seeds, 1);
 
-        ShapedRecipeBuilder.shapedRecipe(ForageItems.cutting_knife, 1)
+        ShapedRecipeBuilder.shapedRecipe(ForageItems.gathering_knife, 1)
                 .key('s', Items.STICK).key('r', ForageBlocks.flat_rock)
                 .patternLine(" r").patternLine("s ").addCriterion(hasItem, hasItem(ForageBlocks.flat_rock.asItem())).build(consumer);
 

@@ -1,5 +1,5 @@
 {
-  "parent": "foragecraft:has_cutting_knife",
+  "parent": "foragecraft:has_gathering_knife",
   "display": {
     "icon": {
       "item": "foragecraft:straw"
