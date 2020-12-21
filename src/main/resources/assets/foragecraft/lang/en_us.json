@@ -25,7 +25,7 @@
   "advancements.foragecraft.has_gathering_knife": "Foraging with Tools",
   "advancements.foragecraft.has_gathering_knife.desc": "Craft a gathering knife with a stick and a flat rock.",
   "advancements.foragecraft.has_straw": "Your Local Wheat Rip-off",
-  "advancements.foragecraft.has_straw.desc": "Use a cutting knife to get straw from some grass.",
+  "advancements.foragecraft.has_straw.desc": "Use a gathering knife to get straw from some grass.",
   "advancements.foragecraft.foraged_root_vegetable": "Vegetables from the Ground",
   "advancements.foragecraft.foraged_root_vegetable.desc": "Forage a potato, carrot, or beetroot from the ground.",
   "advancements.foragecraft.foraged_poisonous_potato": "An Unlucky Find",

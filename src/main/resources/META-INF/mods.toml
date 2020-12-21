@@ -27,7 +27,7 @@ displayURL="https://www.curseforge.com/minecraft/mc-mods/foragecraft" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="logo.png" #optional
 # A text field displayed in the mod UI
-credits="Theishiopian, KingPhygieBoo, Silver_David, susieqt" #optional
+credits="theishiopian, KingPhygieBoo, Silver_David, susieqt" #optional
 # A text field displayed in the mod UI
 authors="Jonathing" #optional
 # The description text for the mod (multi line!) (#mandatory)
@@ -40,7 +40,7 @@ modId="forge" #mandatory
 # Does this dependency have to exist - if not, ordering below must be specified
 mandatory=true #mandatory
 # The version range of the dependency
-versionRange="[35.1.0,)" #mandatory
+versionRange="[35.1.4,)" #mandatory
 # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
 ordering="NONE"
 # Side this dependency is applied on - BOTH, CLIENT or SERVER
@@ -52,4 +52,11 @@ modId="minecraft"
 mandatory=true
 versionRange="[1.16.4]"
 ordering="NONE"
+side="BOTH"
+
+[[dependencies.foragecraft]]
+modId="patchouli"
+mandatory=false
+versionRange="[1.16.4-48,)"
+ordering="BEFORE"
 side="BOTH"
