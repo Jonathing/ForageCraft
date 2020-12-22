@@ -45,7 +45,7 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
     /**
      * Makes a new {@link DecorativeBlock} with features exclusive to the {@link ForageBlocks#rock}.
      *
-     * @see DecorativeBlock#DecorativeBlock(Properties, VoxelShape, Supplier)
+     * @see RockBlock#RockBlock(Properties, VoxelShape, Supplier)
      */
     public RockBlock()
     {
@@ -56,7 +56,7 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
      * Makes a new {@link DecorativeBlock} with features exclusive to the {@link ForageBlocks#rock} but with a different
      * {@link VoxelShape} and a different {@link Item}. Primarily used to make the {@link ForageBlocks#flat_rock}.
      *
-     * @see DecorativeBlock#DecorativeBlock(Properties, VoxelShape, Supplier)
+     * @see RockBlock#RockBlock(Properties, VoxelShape, Supplier)
      */
     public RockBlock(VoxelShape shape, Supplier<Item> decorativeItem)
     {

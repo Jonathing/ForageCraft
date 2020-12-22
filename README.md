@@ -26,6 +26,12 @@ ForageCraft's pivotal feature is the ability to gather resources by digging into
 
 Luckily, theishiopian was kind enough to leave a lot of comments explaining future plans he had for the mod, so I plan to continue off of what he had, as well as some of my own.
 
+## 📦 Mod Compatibility
+
+Since this mod is so small, I'm going to try a lot of things involving mod compatibility. The goal is to make compatible mods a completely optional dependency, but will add as much as I can with them to better improve the experience of the game.
+
+- [Patchouli by Vazkii](https://www.curseforge.com/minecraft/mc-mods/patchouli) - Adds a guide book named the Foraging Research Journal
+
 ## 🤷 FAQ (Frequently Asked Questions)
 
 **Can I use this mod in my modpack?**  
@@ -34,12 +40,16 @@ Of course! Bonus points if your modpack just so happens to be on CurseForge.
 **Can I take parts of this mod and use them in my own mod?**  
 Sure. This mod is licensed under the MIT License, so make sure whatever you do is under the restrictions of that license (which there aren't many of to begin with).
 
+**Is there more content coming for this mod?**  
+Yes. I like to consider this mod as my glorified guinea pig, and I usually do most of my Forge API learning here, so if there's something I want to do (i.e. entities, complex drops, etc.), I will most likely end up doing it. I even have some cool stuff planned for the Nether!
+
 ## 🗒️ Credits
 
 [Jonathing](https://github.com/Jonathing) - Project Maintainer  
 [theishiopian](https://github.com/theishiopian) - Former Project Maintainer  
+[KingPhygieBoo](https://gitlab.com/KingPhygieBoo) - Programming Assistance  
 [Silver_David](https://gitlab.com/SilverDavidMC) - Texture Artist  
-[KingPhygieBoo](https://gitlab.com/KingPhygieBoo) - Programming Assistance
+susieqt - Proofreader and Localization Assistance
 
 ## 💬 Support and Chat
 

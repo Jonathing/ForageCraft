@@ -65,9 +65,8 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
 
     /**
      * This static inner class contains information about an instance of a {@link ForagingTrigger}. This is mainly used
-     * for advancements.
-     *
-     * @see me.jonathing.minecraft.foragecraft.data.provider.ForageAdvancementProvider.ForageAdvancements#accept(Consumer)
+     * for advancements. See the {@code accept()} method in {@code ForageAdvancements} class in
+     * {@link me.jonathing.minecraft.foragecraft.data.provider.ForageAdvancementProvider}.
      */
     @MethodsReturnNonnullByDefault
     public static class Instance extends CriterionInstance

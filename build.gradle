@@ -305,7 +305,7 @@ jar {
                 "Implementation-Version"  : "${version}",
                 "Implementation-Vendor"   : "${jar_specification_vendor}",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "${mod_id}.mixins.json"
+                "MixinConnector"          : "me.jonathing.minecraft.foragecraft.asm.MixinConnector"
         ])
     }
 }
@@ -369,6 +369,12 @@ task javadocJar(type: Jar) {
     classifier = 'javadoc'
 }
 
+// shoves all of the sources in a jar
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
 // Ensures that the mod is built before it is published to the maven
 publish {
     dependsOn 'build'
@@ -384,6 +390,7 @@ publishing {
             version = "${mc_version}-${version}"
 
             artifact reobfFile
+            artifact sourcesJar
             artifact javadocJar
         }
     }
