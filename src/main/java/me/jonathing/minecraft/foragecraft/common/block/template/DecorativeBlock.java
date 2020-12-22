@@ -1,10 +1,7 @@
 package me.jonathing.minecraft.foragecraft.common.block.template;
 
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FallingBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -80,7 +77,8 @@ public class DecorativeBlock extends FallingBlock
     @SuppressWarnings("deprecation")
     public boolean isValidPosition(@Nonnull BlockState blockState, IWorldReader world, @Nonnull BlockPos blockPos)
     {
-        return world.getBlockState(blockPos).isAir() && world.getBlockState(blockPos.down()).isSolid();
+        return world.getBlockState(blockPos).getBlock() instanceof AirBlock
+                && world.getBlockState(blockPos.down()).isSolid();
     }
 
     /**

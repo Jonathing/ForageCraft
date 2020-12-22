@@ -20,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -66,6 +67,23 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
     {
         super(properties, shape, decorativeItem);
         this.setDefaultState(this.getStateContainer().getBaseState().with(WATERLOGGED, false));
+    }
+
+    /**
+     * This method checks if the decorative block can be placed by checking if the given {@link BlockState} is air and
+     * if the {@link BlockState} of the {@link BlockPos} right under it is solid. If the given {@link BlockState} is
+     * water, the rock will be waterlogged.
+     *
+     * @param blockState The {@link BlockState} to replace with the decorative block.
+     * @param world      The {@link IWorldReader} that the {@link BlockState} resides in.
+     * @param blockPos   The {@link BlockPos} of the {@link BlockState}.
+     * @return The result of the position validity check.
+     */
+    @Override
+    public boolean isValidPosition(@Nonnull BlockState blockState, IWorldReader world, @Nonnull BlockPos blockPos)
+    {
+        return (world.getBlockState(blockPos).getBlock() instanceof AirBlock || world.getBlockState(blockPos).getFluidState().equals(Fluids.WATER.getStillFluidState(false)))
+                && world.getBlockState(blockPos.down()).isSolid();
     }
 
     /**
