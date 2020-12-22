@@ -3,5 +3,6 @@
   "model": "foragecraft:book",
   "landing_text": "patchouli.foragecraft.landing_text",
   "version": 1,
-  "show_progress": false
+  "show_progress": false,
+  "pause_game": true
 }

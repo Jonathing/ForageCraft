@@ -1,0 +1,20 @@
+{
+  "name": "Support",
+  "icon": "minecraft:book",
+  "category": "foragecraft:information",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "link",
+      "text": "ForageCraft is still under constant development and I'd love to hear your feedback! If you want to view ForageCraft's source code, report an issue, or start a forum on the Discussions tab, feel free to check out ForageCraft's GitHub page!",
+      "url": "https://github.com/Jonathing/ForageCraft",
+      "link_text": "GitHub Repository"
+    },
+    {
+      "type": "link",
+      "text": "If you want to have a chat about the mod or anything at all, feel free to join the Jonathing Projects discord server. It's a server I opened up exclusively for my personal projects and I don't plan on expanding it to anything else, but feel free to hop on by to say hi!",
+      "url": "https://discord.gg/fNtXcJ3Fc6",
+      "link_text": "Discord Server"
+    }
+  ]
+}
