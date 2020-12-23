@@ -8,19 +8,16 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -138,23 +135,6 @@ public class StickBlock extends DecorativeBlock
         }
 
         return this.getDefaultState().with(FACING, direction);
-    }
-
-    /**
-     * This method ensures that if a neighbor to the stick block changes, the stick block will drop itself.
-     *
-     * @see net.minecraft.block.FallingBlock#neighborChanged(BlockState, World, BlockPos, Block, BlockPos, boolean)
-     */
-    @Override
-    @ParametersAreNonnullByDefault
-    @SuppressWarnings("deprecation")
-    public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving)
-    {
-        if (!this.isValidPosition(state, world, pos))
-        {
-            world.setBlockState(pos, Blocks.AIR.getDefaultState());
-            Block.spawnAsEntity(world, pos, new ItemStack(this.getDecorativeItem(), 1));
-        }
     }
 
     @Override
