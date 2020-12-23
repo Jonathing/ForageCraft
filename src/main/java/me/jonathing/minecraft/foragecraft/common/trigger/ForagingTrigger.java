@@ -19,7 +19,6 @@ import org.apache.logging.log4j.LogManager;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * This is the custom trigger that is exclusive to forage drops.
