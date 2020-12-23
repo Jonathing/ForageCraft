@@ -83,6 +83,9 @@ public class ForageFeatures
         if (!event.getCategory().equals(Biome.Category.BEACH)
                 && !event.getCategory().equals(Biome.Category.DESERT)
                 && !event.getCategory().equals(Biome.Category.OCEAN)
+                && !event.getCategory().equals(Biome.Category.NETHER)
+                && !event.getCategory().equals(Biome.Category.THEEND)
+                && !event.getCategory().equals(Biome.Category.ICY)
                 && !event.getCategory().equals(Biome.Category.NONE))
         {
             event.getGeneration().withFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, RANDOM_EARTH_PATCH.get());
