@@ -1,6 +1,6 @@
 {
   "version": {
-    "number": "2.1.0",
+    "number": "2.1.1",
     "name": "Foraging Research",
     "minecraft": "1.16.4",
     "stable": true
@@ -9,20 +9,7 @@
     "Introducing a new journal to keep all of your foraging knowledge!"
   ],
   "changelog": [
-    "Updated Minecraft Forge to 35.1.4",
-    "Added full compatibility with Patchouli along with a new guide book named \"Foraging Research\".",
-    "Fixed ForageEventHandler spamming the console with useless information. (#66)",
-    "Right-clicking the stick in the world no longer has unintended side-effects. (#64)",
-    "The ForageCraft stick block now properly acts as if its related item is the Minecraft stick",
-    "Fixed stick blocks only ever facing north when naturally generating.",
-    "Fixed stick blocks ignoring the player's direction when being placed.",
-    "Leek seeds can now be crafted from leek.",
-    "Leek seeds now generate in generic village house chests.",
-    "The Spaghetti and Meatblocks max stack size is now 1.",
-    "Added a new advancement trigger exclusive to foraging.",
-    "Added new advancements for ForageCraft! The first one is unlocked by getting a piece of dirt.",
-    "Added the gathering knife, a new tool used to obtain straw and salvage saplings. See Foraging Research and the recipe book for more info.",
-    "Fixed Spaghetti and Meatblocks not returning a bowl after having been eaten.",
-    "The rock and flat rock are now waterloggable."
+    "Fixed sticks and rocks spawning in the Nether and The End. (#71)",
+    "Stick blocks will no longer delete itself on any neighbor change. (#71)"
   ]
 }
