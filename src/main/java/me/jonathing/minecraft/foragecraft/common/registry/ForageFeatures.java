@@ -65,6 +65,8 @@ public class ForageFeatures
             .withPlacement(Features.Placements.PATCH_PLACEMENT)
             .withPlacement(Placement.COUNT_NOISE.configure(new NoiseDependant(-0.8D, 5, 10)));
 
+    public static ConfiguredFeature<?, ?> randomEarthPatch;
+
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> registerConfiguredFeature(String nameIn, ConfiguredFeature<FC, ?> featureIn)
     {
         return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, nameIn, featureIn);
@@ -79,7 +81,7 @@ public class ForageFeatures
      */
     public static void init()
     {
-        registerConfiguredFeature("forage_random_rocks", RANDOM_EARTH_PATCH.get());
+        randomEarthPatch = registerConfiguredFeature("forage_random_rocks", RANDOM_EARTH_PATCH.get());
     }
 
     private static List<ResourceLocation> overworldBiomes;
@@ -106,7 +108,7 @@ public class ForageFeatures
                 && !event.getCategory().equals(Biome.Category.ICY)
                 && !event.getCategory().equals(Biome.Category.NONE))
         {
-            event.getGeneration().withFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, RANDOM_EARTH_PATCH.get());
+            event.getGeneration().withFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, randomEarthPatch);
         }
     }
 }
