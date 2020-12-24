@@ -1,6 +1,7 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -17,9 +18,9 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -34,8 +35,6 @@ import java.util.stream.Collectors;
 @Mod.EventBusSubscriber
 public class ForageFeatures
 {
-    private static final Logger LOGGER = LogManager.getLogger();
-
     /**
      * The default random generation config that defines how the {@link ForageBlocks#rock}s,
      * {@link ForageBlocks#flat_rock}s, and {@link ForageBlocks#stick}s are generated. The feature uses a
@@ -49,7 +48,10 @@ public class ForageFeatures
                     .addWeightedBlockstate(ForageBlocks.flat_rock.getDefaultState(), 1)
                     .addWeightedBlockstate(ForageBlocks.rock.getDefaultState(), 1)
                     .addWeightedBlockstate(((StickBlock) ForageBlocks.stick).getStateWithRandomDirection(), 2),
-                    new SimpleBlockPlacer())).tries(1).build();
+                    new SimpleBlockPlacer()))
+                    .whitelist(new HashSet<>(Arrays.asList(Blocks.STONE, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.PODZOL, Blocks.MYCELIUM)))
+                    .tries(1)
+                    .build();
 
     /**
      * The {@link ConfiguredFeature} that dictates how the {@link #RANDOM_EARTH_CONFIG} is placed in the world. The
