@@ -5,6 +5,8 @@ import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,6 +25,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(ShapelessRecipeBuilder.class)
 public class ShapelessRecipeBuilderMixin
 {
+    private static final Logger LOGGER = LogManager.getLogger(ShapelessRecipeBuilder.class);
+
     /**
      * This mixin class is used to make certain modifications to the {@link ShapelessRecipeBuilder.Result} class, which
      * is an inner class of {@link ShapelessRecipeBuilder} to ForageCraft's needs. It is only used in datagen and there
@@ -66,6 +70,7 @@ public class ShapelessRecipeBuilderMixin
         {
             if (ForageInfo.DATAGEN && Registry.ITEM.getKey(this.result).toString().equals("patchouli:guide_book"))
             {
+                LOGGER.debug("Adding the NBT object to ForageCraft's Patchouli book recipe JSON.");
                 JsonObject nbtObject = new JsonObject();
                 nbtObject.addProperty("patchouli:book", "foragecraft:book");
                 jsonObject.add("nbt", nbtObject);

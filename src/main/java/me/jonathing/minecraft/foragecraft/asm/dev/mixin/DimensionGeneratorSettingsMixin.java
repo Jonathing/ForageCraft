@@ -1,6 +1,8 @@
 package me.jonathing.minecraft.foragecraft.asm.dev.mixin;
 
 import net.minecraft.world.gen.settings.DimensionGeneratorSettings;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,6 +20,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(DimensionGeneratorSettings.class)
 public class DimensionGeneratorSettingsMixin
 {
+    private static final Logger LOGGER = LogManager.getLogger(DimensionGeneratorSettings.class);
+
     /**
      * Tells the game to skip the "experimental world settings" screen.
      *
@@ -26,6 +30,7 @@ public class DimensionGeneratorSettingsMixin
     @Inject(at = @At("HEAD"), method = "func_236234_o_()Z", cancellable = true)
     private void onCheckExperimental(CallbackInfoReturnable<Boolean> info)
     {
+        LOGGER.debug("Skipping over the experimental settings screen since ForageCraft's development mixins have been enabled.");
         info.setReturnValue(true);
     }
 }

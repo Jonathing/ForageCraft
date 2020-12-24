@@ -44,11 +44,12 @@ public class ItemMixin
      * <p>
      * What I have done here is essentually copy-pasted a bunch of vanilla code that gives block items their
      * functionality, and I have tweaked it slightly to fit the ForageCraft's stick's needs. To summarize, this mixin
-     * fools Minecraft into believing that {@link Items#STICK} has a {@link BlockItem}, which in this case is
-     * {@link ForageBlocks#stick}.
+     * hooks into the {@link org.spongepowered.asm.mixin.injection.points.MethodHead} of the
+     * {@link Item#onItemUse(ItemUseContext)} method to fool Minecraft into believing that {@link Items#STICK} has a
+     * {@link BlockItem}, which in this case is the {@link ForageBlocks#stick}.
      *
      * @param itemUseContext The item context in which the player right clicks any block with an item in hand.
-     * @param callback       Returns the resulting {@link ActionResultType} of the action.
+     * @param callback       Mixin's way of returning the resulting {@link ActionResultType} of the action.
      */
     @Inject(at = @At("HEAD"), method = "onItemUse(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;", cancellable = true)
     public void onItemUse(ItemUseContext itemUseContext, CallbackInfoReturnable<ActionResultType> callback)

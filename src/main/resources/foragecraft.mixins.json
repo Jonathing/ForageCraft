@@ -5,7 +5,8 @@
   "refmap": "foragecraft.refmap.json",
   "mixins": [
     "EntityMixin",
-    "ItemMixin"
+    "ItemMixin",
+    "RecipeManagerMixin"
   ],
   "minVersion": "0.8.2"
 }
