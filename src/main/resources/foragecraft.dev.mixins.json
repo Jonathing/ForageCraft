@@ -4,7 +4,9 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "foragecraft.refmap.json",
   "mixins": [
-    "DimensionGeneratorSettingsMixin"
+    "DimensionGeneratorSettingsMixin",
+    "ShapelessRecipeBuilderMixin",
+    "ShapelessRecipeBuilderMixin$ResultMixin"
   ],
   "minVersion": "0.8.2"
 }
