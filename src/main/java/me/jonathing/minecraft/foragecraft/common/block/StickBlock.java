@@ -2,10 +2,9 @@ package me.jonathing.minecraft.foragecraft.common.block;
 
 import me.jonathing.minecraft.foragecraft.common.block.template.DecorativeBlock;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.*;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -18,6 +17,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -32,7 +32,7 @@ import java.util.function.Supplier;
  * @see RockBlock
  * @since 2.0.0
  */
-public class StickBlock extends DecorativeBlock
+public class StickBlock extends RockBlock implements IWaterLoggable
 {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
     private static final Random STICK_RANDOM = new Random();
@@ -75,18 +75,33 @@ public class StickBlock extends DecorativeBlock
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
     {
-        builder.add(FACING);
+        builder.add(RockBlock.WATERLOGGED, FACING);
     }
 
     /**
-     * Uses a {@link BlockItemUseContext} to get the {@link #FACING} for a {@link BlockState}.
+     * Some nonsense from the {@link LanternBlock} that allowed me to add waterlogging support for rocks.
      *
-     * @see #FACING
-     * @see net.minecraft.block.FallingBlock#getStateForPlacement(BlockItemUseContext)
+     * @param context The {@link BlockItemUseContext} given to the method.
+     * @return Either a waterlogged or non-waterlogged rock based on the result of this method.
      */
+    @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context)
     {
+        FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
+
+        for (Direction direction : context.getNearestLookingDirections())
+        {
+            if (direction.getAxis() == Direction.Axis.Y)
+            {
+                BlockState blockstate = this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+                if (blockstate.isValidPosition(context.getWorld(), context.getPos()))
+                {
+                    return blockstate.with(WATERLOGGED, fluidstate.getFluid() == Fluids.WATER);
+                }
+            }
+        }
+
         return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
 

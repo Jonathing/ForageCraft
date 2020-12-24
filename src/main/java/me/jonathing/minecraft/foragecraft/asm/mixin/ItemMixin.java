@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.Property;
@@ -111,7 +112,8 @@ public class ItemMixin
         World world = useContext.getWorld();
         BlockPos pos = useContext.getPos();
         return world.getBlockState(pos.down()).isSolid()
-                && world.getBlockState(pos).getBlock() instanceof AirBlock
+                && (world.getBlockState(pos).getBlock() instanceof AirBlock
+                || world.getBlockState(pos).getFluidState().equals(Fluids.WATER.getStillFluidState(false)))
                 && useContext.canPlace();
     }
 
