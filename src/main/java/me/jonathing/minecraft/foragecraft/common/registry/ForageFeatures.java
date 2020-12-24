@@ -1,6 +1,8 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
+import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.biome.Biome;
@@ -10,12 +12,17 @@ import net.minecraft.world.gen.blockstateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placement.NoiseDependant;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * This class holds all of the world generation features for ForageCraft.
@@ -27,6 +34,8 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber
 public class ForageFeatures
 {
+    private static final Logger LOGGER = LogManager.getLogger();
+
     /**
      * The default random generation config that defines how the {@link ForageBlocks#rock}s,
      * {@link ForageBlocks#flat_rock}s, and {@link ForageBlocks#stick}s are generated. The feature uses a
@@ -71,6 +80,8 @@ public class ForageFeatures
         registerConfiguredFeature("forage_random_rocks", RANDOM_EARTH_PATCH.get());
     }
 
+    private static List<ResourceLocation> overworldBiomes;
+
     /**
      * This event method ensures that specific features <em>do not</em> spawn on specific biomes.
      *
@@ -79,12 +90,17 @@ public class ForageFeatures
     @SubscribeEvent
     public static void biomeLoadingEvent(BiomeLoadingEvent event)
     {
-        // TODO: Check for overworld. Previous method did not work.
-        if (!event.getCategory().equals(Biome.Category.BEACH)
+        if (overworldBiomes == null)
+        {
+            overworldBiomes = BiomeDictionary.getBiomes(BiomeDictionary.Type.OVERWORLD)
+                    .stream().map(RegistryKey::getLocation)
+                    .distinct().collect(Collectors.toList());
+        }
+
+        if (overworldBiomes.contains(event.getName())
+                && !event.getCategory().equals(Biome.Category.BEACH)
                 && !event.getCategory().equals(Biome.Category.DESERT)
                 && !event.getCategory().equals(Biome.Category.OCEAN)
-                && !event.getCategory().equals(Biome.Category.NETHER)
-                && !event.getCategory().equals(Biome.Category.THEEND)
                 && !event.getCategory().equals(Biome.Category.ICY)
                 && !event.getCategory().equals(Biome.Category.NONE))
         {
