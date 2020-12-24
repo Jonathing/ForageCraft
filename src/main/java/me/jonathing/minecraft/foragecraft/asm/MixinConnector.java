@@ -30,6 +30,7 @@ public class MixinConnector implements IMixinConnector
     public void connect()
     {
         Mixins.addConfiguration(ForageInfo.MOD_ID + ".mixins.json");
+        LOGGER.info("ForageCraft's mixins have been enabled.");
 
         if (ForageInfo.IDE || ForageInfo.FORCE_DEV_MIXINS)
         {

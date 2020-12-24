@@ -23,7 +23,9 @@ public class DimensionGeneratorSettingsMixin
     private static final Logger LOGGER = LogManager.getLogger(DimensionGeneratorSettings.class);
 
     /**
-     * Tells the game to skip the "experimental world settings" screen.
+     * This method hooks into the {@link org.spongepowered.asm.mixin.injection.points.MethodHead} of the
+     * {@link DimensionGeneratorSettings#func_236234_o_()} method to tell the game to skip the "experimental world
+     * settings" screen.
      *
      * @see DimensionGeneratorSettings#func_236234_o_()
      */

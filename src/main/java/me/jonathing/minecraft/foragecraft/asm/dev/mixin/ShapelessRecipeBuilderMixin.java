@@ -54,10 +54,12 @@ public class ShapelessRecipeBuilderMixin
         /**
          * The way the {@link ShapelessRecipeBuilder} is written does not allow us to add NBT to our items by default.
          * In the case of the Patchouli book, the only way I am able to get my version of the book is with NBT, so it's
-         * quite important that we take care of that. This mixin does exactly that. If it checks true that ForageCraft
-         * is running datagen and the given {@link Item}'s key is "{@code patchouli:guide_book}", it modifies the local
-         * {@link JsonObject} variable containing the {@code "result"} object which holds the {@code "code"} property to
-         * include a new JSON object that contains the NBT information for the Patchouli book.
+         * quite important that we take care of that. That's what this is mixin for. This method hooks into a local
+         * variable on its third call of {@link org.spongepowered.asm.mixin.injection.modify.BeforeLoadLocal} and checks
+         * if ForageCraft is running datagen and the given {@link Item}'s key is "{@code patchouli:guide_book}". If that
+         * condition is met, it modifies the local {@link JsonObject} variable containing the {@code "result"} object
+         * which holds the {@code "code"} property to include a new JSON object that contains the NBT information for
+         * the Patchouli book.
          *
          * @param jsonObject The {@link JsonObject} containing the {@code "result"} object that we will add our NBT JSON
          *                   object to.
@@ -66,6 +68,7 @@ public class ShapelessRecipeBuilderMixin
          * @see ShapelessRecipeBuilder.Result#serialize(JsonObject)
          */
         @ModifyVariable(at = @At(value = "LOAD", ordinal = 2), method = "serialize(Lcom/google/gson/JsonObject;)V", index = 3)
+        @SuppressWarnings("deprecation")
         private JsonObject modify$jsonObject(JsonObject jsonObject)
         {
             if (ForageInfo.DATAGEN && Registry.ITEM.getKey(this.result).toString().equals("patchouli:guide_book"))
