@@ -67,7 +67,6 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
      * for advancements. See the {@code accept()} method in {@code ForageAdvancements} class in
      * {@link me.jonathing.minecraft.foragecraft.data.provider.ForageAdvancementProvider}.
      */
-    @MethodsReturnNonnullByDefault
     public static class Instance extends CriterionInstance
     {
         private final Block block;

@@ -8,6 +8,7 @@ import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
 import me.jonathing.minecraft.foragecraft.common.trigger.ForagingTrigger;
+import me.jonathing.minecraft.foragecraft.common.trigger.LeekTrigger;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
@@ -182,6 +183,11 @@ public class ForageAdvancementProvider implements IDataProvider
                             .withParent(seeds_stolen),
                     ImmutableList.of(ForageItems.leek))
                     .register(consumer, ForageCraft.find("main/has_leek"));
+
+            Advancement baka_baka_baka = builder(ForageItems.leek, "triple_baka", FrameType.GOAL, true, true, true)
+                    .withParent(leek)
+                    .withCriterion("hit_entity_with_leek", LeekTrigger.Instance.create())
+                    .register(consumer, ForageCraft.find("main/triple_baka"));
 
             Advancement spaghetti = haveAnyItem(builder(ForageItems.spaghetti, "has_spaghetti", FrameType.GOAL, true, true, true)
                             .withParent(root),

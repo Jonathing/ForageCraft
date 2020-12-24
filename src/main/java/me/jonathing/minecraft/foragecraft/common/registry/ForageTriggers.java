@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 
 import com.google.common.collect.Maps;
 import me.jonathing.minecraft.foragecraft.common.trigger.ForagingTrigger;
+import me.jonathing.minecraft.foragecraft.common.trigger.LeekTrigger;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.util.ResourceLocation;
@@ -26,7 +27,8 @@ public class ForageTriggers
     /**
      * This is the public reference to the {@link ForagingTrigger} that is registered into the game.
      */
-    public static final ForagingTrigger FORAGING_TRIGGER = CriteriaTriggers.register(new ForagingTrigger());
+    public static final ForagingTrigger FORAGING_TRIGGER = register(new ForagingTrigger());
+    public static final LeekTrigger LEEK_TRIGGER = register(new LeekTrigger());
 
     /**
      * This empty method makes sure that the {@link #FORAGING_TRIGGER} is registered into the game by initializing this
@@ -36,7 +38,17 @@ public class ForageTriggers
      */
     public static void init()
     {
+    }
 
+    private static <T extends ICriterionTrigger<?>> T register(T criterion)
+    {
+        if (FORAGE_TRIGGERS_MAP.containsKey(criterion.getId()))
+        {
+            throw new IllegalArgumentException("Duplicate criterion id " + criterion.getId());
+        }
+
+        FORAGE_TRIGGERS_MAP.put(criterion.getId(), criterion);
+        return CriteriaTriggers.register(criterion);
     }
 
     /**
