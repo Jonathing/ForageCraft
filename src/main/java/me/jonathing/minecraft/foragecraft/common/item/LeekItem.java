@@ -32,6 +32,9 @@ public class LeekItem extends Item
 
     /**
      * This method contains the logic that is used for the easter egg of the leek item.
+     * <p>
+     * Since version {@code 2.1.2}, it also fires the
+     * {@link me.jonathing.minecraft.foragecraft.common.trigger.LeekTrigger} specific to the easter egg advancement.
      *
      * @see Item#hitEntity(ItemStack, LivingEntity, LivingEntity)
      */

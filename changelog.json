@@ -1,15 +1,19 @@
 {
   "version": {
-    "number": "2.1.1",
-    "name": "Foraging Research",
+    "number": "2.1.2",
+    "name": "Foraging Research (Patch 2)",
     "minecraft": "1.16.4",
     "stable": true
   },
   "description": [
-    "Introducing a new journal to keep all of your foraging knowledge!"
+    "The second patch to Foraging Research with bug fixes and minor improvements."
   ],
   "changelog": [
-    "Fixed sticks and rocks spawning in the Nether and The End. (#71)",
-    "Stick blocks will no longer delete itself on any neighbor change. (#71)"
+    "Sticks and rocks will now only generate in the overworld and has no chance to spawn in any modded biome. (#72)",
+    "Sticks are now waterloggable.",
+    "Sticks and rocks no longer spawn on top of snow and have a whitelist of blocks for where they can spawn.",
+    "Added a new hidden advancement involving the leek.",
+    "Made sure that the configured feature for the stick and rock random patch is properly registered. (#66)",
+    "Minecraft will now skip parsing any mod-compat related recipes if you do not have their related mod installed (i.e. Patchouli)."
   ]
 }

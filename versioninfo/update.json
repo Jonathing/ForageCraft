@@ -14,8 +14,8 @@
     "1.12-latest": "1.14.0.1-dev",
     "1.12.1-latest": "1.14.0.1-dev",
     "1.12.2-latest": "1.14.0.1-dev",
-    "1.16.4-latest": "2.1.1",
-    "1.16.4-recommended": "2.1.1"
+    "1.16.4-latest": "2.1.2",
+    "1.16.4-recommended": "2.1.2"
   },
   "1.9": {
     "1.9": "Added support for Minecraft 1.9, 1.9.4, and 1.10.",
@@ -57,6 +57,7 @@
   "1.16.4": {
     "2.0.0": "2.0.0 - ForageCraft: Reborn: ForageCraft, rewritten for modern Minecraft versions.\n- Updated Minecraft to 1.16.4\n- Updated Minecraft Forge to 35.1.0\n- ForageCraft's jars are now signed.\n- Added a check to make sure that the mod is signed.\n- Fixed any potential issues with recipes and loot tables.\n- Removed the scarecrow until I properly learn entities.\n- All of the textures have been redesigned by Silver_David.\n- Added full compatibility with mods that add their own overworld biomes.",
     "2.1.0": "2.1.0 - Foraging Research: Introducing a new journal to keep all of your foraging knowledge!\n- Updated Minecraft Forge to 35.1.4\n- Added full compatibility with Patchouli along with a new guide book named \"Foraging Research\".\n- Fixed ForageEventHandler spamming the console with useless information. (#66)\n- Right-clicking the stick in the world no longer has unintended side-effects. (#64)\n- The ForageCraft stick block now properly acts as if its related item is the Minecraft stick\n- Fixed stick blocks only ever facing north when naturally generating.\n- Fixed stick blocks ignoring the player's direction when being placed.\n- Leek seeds can now be crafted from leek.\n- Leek seeds now generate in generic village house chests.\n- The Spaghetti and Meatblocks max stack size is now 1.\n- Added a new advancement trigger exclusive to foraging.\n- Added new advancements for ForageCraft! The first one is unlocked by getting a piece of dirt.\n- Added the gathering knife, a new tool used to obtain straw and salvage saplings. See Foraging Research and the recipe book for more info.\n- Fixed Spaghetti and Meatblocks not returning a bowl after having been eaten.\n- The rock and flat rock are now waterloggable.",
-    "2.1.1": "2.1.1 - Foraging Research: Introducing a new journal to keep all of your foraging knowledge!\n- Fixed sticks and rocks spawning in the Nether and The End. (#71)\n- Stick blocks will no longer delete itself on any neighbor change. (#71)"
+    "2.1.1": "2.1.1 - Foraging Research (Patch 1): The first patch to Foraging Research that fixes a few major bugs.\n- Fixed sticks and rocks spawning in the Nether and The End. (#71)\n- Stick blocks will no longer delete itself on any neighbor change. (#71)",
+    "2.1.2": "2.1.2 - Foraging Research (Patch 2): The second patch to Foraging Research with bug fixes and minor improvements.\n- Sticks and rocks will now only generate in the overworld and has no chance to spawn in any modded biome. (#72)\n- Sticks are now waterloggable.\n- Sticks and rocks no longer spawn on top of snow and have a whitelist of blocks for where they can spawn.\n- Added a new hidden advancement involving the leek.\n- Made sure that the configured feature for the stick and rock random patch is properly registered. (#66)\n- Minecraft will now skip parsing any mod-compat related recipes if you do not have their related mod installed (i.e. Patchouli)."
   }
 }

@@ -18,9 +18,7 @@
   "criteria": {
     "hit_entity_with_leek": {
       "trigger": "foragecraft:leek_trigger",
-      "conditions": {
-        "item": "foragecraft:leek"
-      }
+      "conditions": {}
     }
   },
   "requirements": [

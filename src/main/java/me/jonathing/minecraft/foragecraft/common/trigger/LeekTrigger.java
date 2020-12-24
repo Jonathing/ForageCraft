@@ -6,18 +6,14 @@ import me.jonathing.minecraft.foragecraft.ForageCraft;
 import net.minecraft.advancements.criterion.AbstractCriterionTrigger;
 import net.minecraft.advancements.criterion.CriterionInstance;
 import net.minecraft.advancements.criterion.EntityPredicate;
-import net.minecraft.block.Block;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.ConditionArrayParser;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.world.BlockEvent;
 import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
 
 /**
  * This is the custom trigger that is exclusive to the triple baka goal advancement.

@@ -84,7 +84,31 @@ public class ForageFeatures
         randomEarthPatch = registerConfiguredFeature("forage_random_rocks", RANDOM_EARTH_PATCH.get());
     }
 
+    /**
+     * This list is populated on the first {@link BiomeLoadingEvent} and is given all of the {@link ResourceLocation}s
+     * of every biome that belongs to the {@link BiomeDictionary.Type#OVERWORLD} type. This way, I can prevent
+     * decorative blocks from spawning in modded dimensions, which is something I do not want unless I have specific mod
+     * compatibility.
+     *
+     * @since 2.1.2
+     */
     private static List<ResourceLocation> overworldBiomes;
+
+    /**
+     * This list is populated on the first {@link BiomeLoadingEvent} and is given all of the {@link ResourceLocation}s
+     * of every biome that belongs to the {@link BiomeDictionary.Type#NETHER} type.
+     *
+     * @since Not Yet Implemented
+     */
+    private static List<ResourceLocation> netherBiomes;
+
+    /**
+     * This list is populated on the first {@link BiomeLoadingEvent} and is given all of the {@link ResourceLocation}s
+     * of every biome that belongs to the {@link BiomeDictionary.Type#END} type.
+     *
+     * @since Not Yet Implemented
+     */
+    private static List<ResourceLocation> theEndBiomes;
 
     /**
      * This event method ensures that specific features <em>do not</em> spawn on specific biomes.
@@ -97,6 +121,20 @@ public class ForageFeatures
         if (overworldBiomes == null)
         {
             overworldBiomes = BiomeDictionary.getBiomes(BiomeDictionary.Type.OVERWORLD)
+                    .stream().map(RegistryKey::getLocation)
+                    .distinct().collect(Collectors.toList());
+        }
+
+        if (netherBiomes == null)
+        {
+            netherBiomes = BiomeDictionary.getBiomes(BiomeDictionary.Type.NETHER)
+                    .stream().map(RegistryKey::getLocation)
+                    .distinct().collect(Collectors.toList());
+        }
+
+        if (theEndBiomes == null)
+        {
+            theEndBiomes = BiomeDictionary.getBiomes(BiomeDictionary.Type.END)
                     .stream().map(RegistryKey::getLocation)
                     .distinct().collect(Collectors.toList());
         }
