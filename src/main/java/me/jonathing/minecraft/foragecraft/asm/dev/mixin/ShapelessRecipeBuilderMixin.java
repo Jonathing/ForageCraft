@@ -25,8 +25,6 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(ShapelessRecipeBuilder.class)
 public class ShapelessRecipeBuilderMixin
 {
-    private static final Logger LOGGER = LogManager.getLogger(ShapelessRecipeBuilder.class);
-
     /**
      * This mixin class is used to make certain modifications to the {@link ShapelessRecipeBuilder.Result} class, which
      * is an inner class of {@link ShapelessRecipeBuilder} to ForageCraft's needs. It is only used in datagen and there
@@ -73,7 +71,6 @@ public class ShapelessRecipeBuilderMixin
         {
             if (ForageInfo.DATAGEN && Registry.ITEM.getKey(this.result).toString().equals("patchouli:guide_book"))
             {
-                LOGGER.debug("Adding the NBT object to ForageCraft's Patchouli book recipe JSON.");
                 JsonObject nbtObject = new JsonObject();
                 nbtObject.addProperty("patchouli:book", "foragecraft:book");
                 jsonObject.add("nbt", nbtObject);
