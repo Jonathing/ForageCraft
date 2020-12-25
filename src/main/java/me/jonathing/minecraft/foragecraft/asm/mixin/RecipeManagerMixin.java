@@ -54,7 +54,7 @@ public class RecipeManagerMixin
      * @param callback          Mixin's way of returning a method. <strong>Unused in this mixin.</strong>
      * @see RecipeManager#apply(Map, IResourceManager, IProfiler)
      */
-    @Inject(at = @At("HEAD"), method = "Lnet/minecraft/item/crafting/RecipeManager;apply(Ljava/util/Map;Lnet/minecraft/resources/IResourceManager;Lnet/minecraft/profiler/IProfiler;)V")
+    @Inject(at = @At("HEAD"), method = "apply(Ljava/util/Map;Lnet/minecraft/resources/IResourceManager;Lnet/minecraft/profiler/IProfiler;)V")
     private void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn, CallbackInfo callback)
     {
         if (!ModList.get().isLoaded("patchouli"))
