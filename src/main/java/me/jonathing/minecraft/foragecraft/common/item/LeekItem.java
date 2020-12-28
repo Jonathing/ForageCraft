@@ -45,7 +45,7 @@ public class LeekItem extends Item
 
         if (attacker instanceof PlayerEntity)
         {
-            if (!((PlayerEntity) attacker).isCreative() && target.isLiving())
+            if (!((PlayerEntity) attacker).isCreative())
             {
                 stack.shrink(1);
                 attacker.getEntityWorld().playSound(null, attacker.getPosX(), attacker.getPosY(), attacker.getPosZ(), SoundEvents.ENTITY_WITHER_BREAK_BLOCK, SoundCategory.HOSTILE, 1, 1);
