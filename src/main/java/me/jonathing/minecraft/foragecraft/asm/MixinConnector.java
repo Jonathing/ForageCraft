@@ -1,6 +1,7 @@
 package me.jonathing.minecraft.foragecraft.asm;
 
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
+import net.minecraftforge.fml.StartupMessageManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Mixins;
@@ -30,7 +31,7 @@ public class MixinConnector implements IMixinConnector
     public void connect()
     {
         Mixins.addConfiguration(ForageInfo.MOD_ID + ".mixins.json");
-        LOGGER.info("ForageCraft's mixins have been enabled.");
+        StartupMessageManager.addModMessage("Connecting ForageCraft mixins");
 
         if (ForageInfo.IDE || ForageInfo.FORCE_DEV_MIXINS)
         {

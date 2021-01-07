@@ -29,10 +29,11 @@ public class GeneralEventHandler
      *
      * @see #onLootTableLoad(LootTableLoadEvent)
      */
-    private static final Supplier<LootPool> VILLAGE_HOUSE_CHESTS = () -> LootPool.builder().addEntry(
-            ItemLootEntry.builder(ForageItems.leek_seeds)
-                    .acceptFunction(SetCount.builder(RandomValueRange.of(0, 2))))
-            .build();
+    private static final Supplier<LootPool> VILLAGE_HOUSE_CHESTS = () ->
+            LootPool.builder().name("village_leek_seeds").addEntry(
+                    ItemLootEntry.builder(ForageItems.leek_seeds)
+                            .acceptFunction(SetCount.builder(RandomValueRange.of(0, 2))))
+                    .build();
 
     /**
      * This event method sets the fuel burn time for specific items or blocks in ForageCraft. Since they cannot be

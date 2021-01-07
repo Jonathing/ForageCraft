@@ -84,6 +84,7 @@ public final class VerificationUtil
             return;
         }
 
+        StartupMessageManager.addModMessage(String.format("Validating mod signature: %s", modId));
         ModContainer modContainer = ModList.get().getModContainerById(modId).get();
 
         if (expectedSHA256.isEmpty())
