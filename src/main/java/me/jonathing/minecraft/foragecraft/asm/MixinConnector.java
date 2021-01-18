@@ -1,9 +1,7 @@
 package me.jonathing.minecraft.foragecraft.asm;
 
+import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
-import net.minecraftforge.fml.StartupMessageManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Mixins;
 import org.spongepowered.asm.mixin.connect.IMixinConnector;
 
@@ -18,8 +16,6 @@ import org.spongepowered.asm.mixin.connect.IMixinConnector;
  */
 public class MixinConnector implements IMixinConnector
 {
-    public static final Logger LOGGER = LogManager.getLogger("ForageCraft Mixins");
-
     /**
      * Connects ForageCraft's mixins to the environment. The workspace is configured to use this in the IDE since it is
      * manually specified in the {@code MANIFEST.MF} file in the {@code META-INF} folder.
@@ -31,12 +27,11 @@ public class MixinConnector implements IMixinConnector
     public void connect()
     {
         Mixins.addConfiguration(ForageInfo.MOD_ID + ".mixins.json");
-        StartupMessageManager.addModMessage("Connecting ForageCraft mixins");
 
         if (ForageInfo.IDE || ForageInfo.FORCE_DEV_MIXINS)
         {
             Mixins.addConfiguration(ForageInfo.MOD_ID + ".dev.mixins.json");
-            LOGGER.warn("ForageCraft's dev-environment mixins have been enabled.");
+            ForageCraft.LOGGER.warn("ForageCraft's dev-environment mixins have been enabled.");
         }
     }
 }

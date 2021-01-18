@@ -93,15 +93,6 @@ public final class ForageInfo implements IForageInfo
     @DynamicConstant("build_time")
     public static final String BUILD_DATE = "2038-01-19T03:14:08Z";
 
-    /**
-     * The expected SHA256 is dynamically injected on build and is used by
-     * {@link me.jonathing.minecraft.foragecraft.common.security.VerificationUtil} to check the mod jar's validity.
-     *
-     * @see #expectedSHA256()
-     */
-    @DynamicConstant("expected_sha256")
-    public static final String EXPECTED_SHA256 = "UNKNOWN";
-
     private ForageInfo()
     {
     }
@@ -190,16 +181,6 @@ public final class ForageInfo implements IForageInfo
     public String buildDate()
     {
         return BUILD_DATE;
-    }
-
-    /**
-     * @return {@link #EXPECTED_SHA256}
-     * @see IForageInfo#expectedSHA256()
-     */
-    @Override
-    public String expectedSHA256()
-    {
-        return EXPECTED_SHA256;
     }
 
     /**

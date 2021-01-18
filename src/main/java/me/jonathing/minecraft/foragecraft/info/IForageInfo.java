@@ -36,11 +36,6 @@ public interface IForageInfo
     String buildDate();
 
     /**
-     * Returns the expected SHA256 for the mod to be signed with.
-     */
-    String expectedSHA256();
-
-    /**
      * Returns whether ForageCraft is running from the IDE or not. When this returns true, ForageCraft provides
      * additinonal tools and features intended for debugging. To enable these features, set the {@code midnight.iside}
      * system property to {@code true}.

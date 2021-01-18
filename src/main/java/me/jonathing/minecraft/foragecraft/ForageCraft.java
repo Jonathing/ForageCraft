@@ -6,7 +6,6 @@ import me.jonathing.minecraft.foragecraft.common.handler.ForagingEventHandler;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageFeatures;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageRegistry;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
-import me.jonathing.minecraft.foragecraft.common.security.VerificationUtil;
 import me.jonathing.minecraft.foragecraft.data.ForageCraftDataGen;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.util.ResourceLocation;
@@ -60,9 +59,6 @@ public class ForageCraft
      */
     public static void commonSetup(final FMLCommonSetupEvent event)
     {
-        if (!ForageInfo.IDE)
-            VerificationUtil.validateMod(ForageInfo.MOD_ID, ForageInfo.EXPECTED_SHA256);
-
         ForageFeatures.init();
         ModCompatHandler.init();
         ForagingEventHandler.init();

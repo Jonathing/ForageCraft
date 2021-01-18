@@ -122,7 +122,6 @@ modutil {
     constant('version_name', changelogInfo.versionName)
     constant('group', project.group)
     constant('build_time', project.ext.timeOfExecution)
-    constant('expected_sha256', getProjectFingerprint())
 
     // DynamicConstant annotation class
     constantAnnotation 'me.jonathing.minecraft.foragecraft.info.DynamicConstant'
