@@ -3,6 +3,7 @@ package me.jonathing.minecraft.foragecraft.asm.mixin;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonElement;
 import me.jonathing.minecraft.foragecraft.ForageCraft;
+import me.jonathing.minecraft.foragecraft.data.ForageDataLists;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
@@ -10,7 +11,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.ModList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -28,16 +31,9 @@ import java.util.Map;
 @Mixin(RecipeManager.class)
 public class RecipeManagerMixin
 {
-    private static final Logger LOGGER = LogManager.getLogger(RecipeManager.class);
-
-    /**
-     * List of all of the Patchouli recipes to skip parsing if Patchouli is not installed.
-     *
-     * @see #apply(Map, IResourceManager, IProfiler, CallbackInfo)
-     */
-    private static final List<ResourceLocation> PATCHOULI_RECIPES = ImmutableList.of(
-            ForageCraft.locate("guide_book")
-    );
+    @Shadow
+    @Final
+    private static Logger LOGGER;
 
     /**
      * This method hooks into the {@link org.spongepowered.asm.mixin.injection.points.MethodHead} of the
@@ -45,6 +41,10 @@ public class RecipeManagerMixin
      * {@link ResourceLocation}s and {@link JsonElement}s containing all of the recipes to be parsed on world load. It
      * uses the {@link ModList} to check if a particular mod is <em>not</em> loaded. This way, I can disable recipes
      * specific to that mod so the console doesn't shit itself when it tries to parse through that recipe.
+     *
+     * For some reason, I am unable to use {@link org.spongepowered.asm.mixin.injection.ModifyArg} with this mixin
+     * because in the method signature for the apply method in the bytecode, the map doesn't show up as a valid
+     * argument.
      *
      * @param objectIn          The {@link Map} of {@link ResourceLocation}s and {@link JsonElement} to edit.
      * @param resourceManagerIn The {@link IResourceManager} that handles the recipes. <strong>Unused in this
@@ -60,7 +60,7 @@ public class RecipeManagerMixin
         if (!ModList.get().isLoaded("patchouli"))
         {
             LOGGER.debug("Skipping over ForageCraft's Patchouli recipe since Patchouli is not installed.");
-            PATCHOULI_RECIPES.forEach(objectIn::remove);
+            ForageDataLists.PATCHOULI_RECIPES.forEach(objectIn::remove);
         }
     }
 }
