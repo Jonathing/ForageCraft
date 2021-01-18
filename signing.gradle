@@ -1,0 +1,60 @@
+/*
+ * This gradle file contains additional instructions for signing builds of this mod. For more information on how to do
+ * this, talk to Jonathing.
+ */
+
+// Get a variable from gradle.properties, or return null if it doesn't exist.
+String getVariable(String key) {
+	return rootProject.hasProperty(key) ? rootProject.property(key) : null
+}
+
+project.ext.canJarBeSigned = { return canJarBeSigned() }
+project.ext.getProjectFingerprint = { return getProjectFingerprint() }
+project.ext.sign = { File jar -> return sign(jar) }
+
+// Ensures that the signJar task will run on every build
+// REMINDER: the jar will not be signed if the mlKeyStore key in gradle.properties does not exist
+build {
+	dependsOn 'signJar'
+}
+
+// detects if the mlKeyStore key in gradle.properties exists so the jar can be signed
+def canJarBeSigned() {
+	return getVariable('mlKeyStore') != null
+}
+
+// Returns the public fingerprint, may be empty ("")
+def getProjectFingerprint() {
+	if (canJarBeSigned()) {
+		def sha256 = getVariable('mlKeyStoreSHA256')
+		return sha256 != null ? sha256 : ''
+	}
+}
+
+// Signs a jar file
+def sign(File jar) {
+	if (canJarBeSigned()) {
+		println "Attempting to sign jar: ${jar}"
+		ant.signjar(
+				destDir: "${jar.parentFile}",
+				jar: "${jar}",
+				alias: getVariable('mlKeyStoreAlias'),
+				storetype: "jks",
+				keystore: getVariable("mlKeyStore"),
+				storepass: getVariable('mlKeyStorePass'),
+				keypass: getVariable('mlKeyStoreKeyPass'),
+				verbose: true,
+				preservelastmodified: "true"
+		)
+		println "Jar signed: ${jar}"
+	} else {
+		println "No keystore property found, jar will not be signed"
+	}
+}
+
+// Gradle task to sign the jar.
+task signJar(dependsOn: 'reobfJar') {
+	doLast {
+		project.ext.sign(jar.archivePath)
+	}
+}

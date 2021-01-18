@@ -1,0 +1,46 @@
+/*
+ * This gradle file contains additional instructions for publishing builds of this mod to the Modding Legacy Maven
+ * repository. To enable publishing to the maven, uncomment the respective lines at the top of the build.gradle file.
+ * For more information on publishing to the ML Maven, talk to Jonathing.
+ */
+
+// shoves all of the sources in a jar
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+
+// generates the javadocs and shoves them in a jar
+task javadocJar(type: Jar) {
+	from javadoc
+	classifier = 'javadoc'
+}
+
+// Ensures that the mod is built before it is published to the maven
+publish {
+	dependsOn 'build'
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			groupId = "${maven_group}"
+			artifactId = "${maven_artifact_id}"
+			version = "${mc_version}-${version}"
+
+			artifact reobfFile
+			artifact sourcesJar
+			artifact javadocJar
+		}
+	}
+	repositories {
+		maven {
+			name = "ModdingLegacyMaven"
+			url = uri("https://maven.moddinglegacy.com/artifactory/modding-legacy/")
+			credentials {
+				username = project.findProperty("mlm.user") ?: System.getenv("ML_USERNAME")
+				password = project.findProperty("mlm.key") ?: System.getenv("ML_TOKEN")
+			}
+		}
+	}
+}

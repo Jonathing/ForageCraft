@@ -1,3 +1,9 @@
+/**
+ * This is a custom, automatable buildscript written by Jonathing for use in his mods and in Modding Legacy mods.
+ * There's a lot of hacky shit in here, so I've made sure to comment as much as I can.
+ */
+
+// Buildscript setup
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
@@ -13,31 +19,51 @@ buildscript {
     }
 }
 
+plugins {
+    // Gradle Download Task - Used to download sources and javadoc jars for Structure Gel API.
+    id 'de.undercouch.download' version '4.1.1'
+
+    // CurseMaven - Adds the ability to use any file on CurseForge as a dependency.
+    id 'com.wynprice.cursemaven' version '2.1.1'
+}
+
 ext {
     timeOfExecution = new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
 }
 
-apply plugin: 'net.minecraftforge.gradle' // ForgeGradle
-apply plugin: 'org.spongepowered.mixin' // MixinGradle
-apply plugin: 'net.shadew.modutil' // ModUtil
+// ForgeGradle - The heart and soul of the buildscript and the development environment.
+apply plugin: 'net.minecraftforge.gradle'
+// MixinGradle - Adds mixin support to the development environment.
+apply plugin: 'org.spongepowered.mixin'
+// ModUtil - Adds some useful utilities for managing the mod via the buildscript
+apply plugin: 'net.shadew.modutil'
 
-// This plugin is used to add compatibility for Eclipse workspaces.
+// Eclipse - Adds compatibility for Eclipse workspaces.
 apply plugin: 'eclipse'
-// This plugin is used to add the ability to sign jars.
+// Signing - Adds the ability to sign jars.
 apply plugin: 'signing'
-// This plugin is used to be able to publish to the Modding Legacy Maven (ask Jonathing for details).
+// Maven Publishing - Used to be able to publish to the Modding Legacy Maven (ask Jonathing for details).
 apply plugin: 'maven-publish'
 
-// Get a variable from gradle.properties, or return null if it doesn't exist.
-String getVariable(String key) {
-    return rootProject.hasProperty(key) ? rootProject.property(key) : null
+// This file contains additional instructions for getting Structure Gel API's sources and javadoc jars (uncomment if using Strcture Gel API, see the file for more details).
+//apply from: 'eclipse.gradle'
+// This file contains additional instructions for signing builds of this mod (see the file for more details).
+apply from: 'signing.gradle'
+// This file contains additional instructions for publishing builds of this mod to the Manen (commented out by default, see the file for more details).
+apply from: 'publish.gradle'
+
+// Detects if the OS is macOS. Required for the workaround in genData.
+static def isOsx() {
+    def osProp = System.properties['os.name'].toLowerCase()
+    return osProp.contains('darwin') || osProp.contains('osx') || osProp.contains('mac')
 }
 
-// Get the Minecraft version from gradle.properties
-def mc_version = "${mc_version_major}.${mc_version_minor}.${mc_version_patch}"
-// Get the Minecraft Forge version from gradle.properties
-def forge_version = project.hasProperty('forge_version_build') ? "${forge_version_major}.${forge_version_minor}.${forge_version_patch}.${forge_version_build}" : "${forge_version_major}.${forge_version_minor}.${forge_version_patch}"
+project.ext.isOsx = { return isOsx() }
 
+// Get the Minecraft version from gradle.properties
+project.ext.mc_version = "${mc_version_major}.${mc_version_minor}.${mc_version_patch}"
+// Get the Minecraft Forge version from gradle.properties
+project.ext.forge_version = project.hasProperty('forge_version_build') ? "${forge_version_major}.${forge_version_minor}.${forge_version_patch}.${forge_version_build}" : "${forge_version_major}.${forge_version_minor}.${forge_version_patch}"
 
 // Get the mod version from gradle.properties
 version = project.hasProperty('mod_version_modifier') ? "${mod_version_major}.${mod_version_minor}.${mod_version_patch}-${mod_version_modifier}" : "${mod_version_major}.${mod_version_minor}.${mod_version_patch}"
@@ -46,13 +72,11 @@ group = "${mod_group}"
 // Get the archives base name from the mod id and the Minecraft version.
 archivesBaseName = "${mod_id}-${mc_version}"
 
-// Ensure that the IDE knows that this project is for Java 8 and not anything else.
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+// this variable points to where the latest built file is placed for usage in publish.gradle
+project.ext.reobfFile = file("build/libs/${archivesBaseName}-${version}.jar")
 
-project.ext.canJarBeSigned = { return canJarBeSigned() }
-project.ext.getProjectFingerprint = { return getProjectFingerprint() }
-project.ext.sign = { File jar -> return sign(jar) }
-project.ext.isOsx = { return isOsx() }
+// Ensure that the IDE knows that this project is for Java 8 (or at the least, SDK level 8) and nothing else.
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 // This section prints out the Java, Minecraft, and Mod info just to double check all the values are correct.
 // It is printed on every build, so make sure you double check!
@@ -73,36 +97,44 @@ println('- Name: ' + "${mod_name}".toString())
 println('- Version: ' + "${version}".toString())
 println('')
 
+// This section prints out information for Structure Gel API to make sure its values are correct.
+// It is commented out by default in case this specific project does not need compatibility with Structure Gel API.
+//println('Structure Gel API Information')
+//println('- ID: structure_gel')
+//println('- Name: Structure Gel API')
+//println('- Version: ' + "${mc_version}-${gel_version}".toString())
+//println('')
+
 // Any repositories for dependencies go here.
 repositories {
-    mavenLocal()
+    // Central Maven Repository
     mavenCentral()
+
+    // JCenter Repository
+    jcenter()
+
+    // Modding Legacy Maven
     maven {
-        name = "Modding Legacy Maven"
         url = "https://maven.moddinglegacy.com/artifactory/modding-legacy/"
     }
+
+    // Shadew's Maven Repository
     maven {
-        name = "Modding Legacy Mirror Maven"
-        url = "https://maven.moddinglegacy.com/artifactory/mirror/"
-    }
-    maven {
-        name = "Shadew's Maven Repo"
         url = "https://maven.shadew.net/"
     }
+
+    // tterrag's Maven Repository
     maven {
-        name = "tterrag's Maven Repo"
         url = "https://maven.tterrag.com/"
     }
+
+    // Progwml6's Maven Repository
     maven {
-        name = "ModMaven"
-        url = "https://modmaven.k-4u.nl/"
-    }
-    maven {
-        name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
     }
+
+    // Jared's Maven Repository
     maven {
-        name = "Jared's Maven Repo"
         url = "https://maven.blamejared.com"
     }
 }
@@ -144,7 +176,6 @@ minecraft {
 
             // Enable mixins (comment out if using a Mixin connector)
             //arg "-mixin.config=${mod_id}.mixins.json".toString()
-            //arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
 
             // Enable Structure Gel API mixins (commented out by default)
             //arg '-mixin.config=structure_gel.mixins.json'
@@ -176,10 +207,12 @@ minecraft {
 
             // Enable mixins (comment out if using a Mixin connector)
             //arg "-mixin.config=${mod_id}.mixins.json".toString()
-            //arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
 
             // Enable Structure Gel API mixins (commented out by default)
             //arg '-mixin.config=structure_gel.mixins.json'
+
+            // Additional arguments exclusive to the server (nogui by default, separated by ",")
+            args 'nogui'
 
             // Disable refmaps for mixin in a dev environment
             property 'mixin.env.disableRefMap', 'true'
@@ -192,9 +225,6 @@ minecraft {
 
             // Tell Minecraft if it is running in an IDE (must be configured in your project)
             property "${mod_id}.iside".toString(), 'true'
-
-            // Additional arguments exclusive to the server (nogui by default, separated by ",")
-            args 'nogui'
 
             mods {
                 // you will NEED to change this to your mod id. Unfortunately, this is not automated.
@@ -220,10 +250,12 @@ minecraft {
 
             // Enable mixins (comment out if using a Mixin connector)
             //arg "-mixin.config=${mod_id}.mixins.json".toString()
-            //arg "-mixin.config=${mod_id}.dev.mixins.json".toString()
 
             // Enable Structure Gel API mixins (commented out by default)
             //arg '-mixin.config=structure_gel.mixins.json'
+
+            // Additional arguments exclusive to data generation (do NOT change these unless necessary)
+            args '--mod', "${mod_id}".toString(), '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             // Disable refmaps for mixin in a dev environment
             property 'mixin.env.disableRefMap', 'true'
@@ -245,9 +277,6 @@ minecraft {
             if (project.ext.isOsx()) {
                 jvmArg("-XstartOnFirstThread")
             }
-
-            // Additional arguments exclusive to data generation (do NOT change these unless necessary)
-            args '--mod', "${mod_id}".toString(), '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 // you will NEED to change this to your mod id. Unfortunately, this is not automated.
@@ -278,20 +307,26 @@ dependencies {
     // Minecraft Forge
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}".toString()
 
+    // Smooth Boot (Forge)
+    runtime fg.deobf("io.github.ultimateboomer:smoothboot-forge:${mc_version}-${smoothboot_version}".toString())
+
+    // Structure Gel API (commented out by default)
+    //compile fg.deobf("com.legacy:structure-gel:${mc_version}-${gel_version}".toString())
+
     // CI Test Server Plugin
-    compile fg.deobf("me.jonathing.minecraft:ci_testserver:1.16.4-1.0.1")
+    compile fg.deobf("me.jonathing.minecraft:ci_testserver:${mc_version}-${ci_testserver_version}")
 
     // JEI
-    compileOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 
     // Biomes O' Plenty
-    compileOnly fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.4-13.0.0.420:api-obf")
-    compile fg.deobf("com.github.glitchfiend:biomesoplenty:1.16.4-13.0.0.420:universal-obf")
+    compileOnly fg.deobf("com.github.glitchfiend:biomesoplenty:${mc_version}-${bop_version}:api-obf")
+    compile fg.deobf("com.github.glitchfiend:biomesoplenty:${mc_version}-${bop_version}:universal-obf")
 
     // Patchouli
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}")
 }
 
 jar {
@@ -306,101 +341,5 @@ jar {
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 "MixinConnector"          : "me.jonathing.minecraft.foragecraft.asm.MixinConnector"
         ])
-    }
-}
-
-// Detects if the OS is macOS. Required for the workaround in genData.
-static def isOsx() {
-    def osProp = System.properties['os.name'].toLowerCase()
-    return osProp.contains('darwin') || osProp.contains('osx') || osProp.contains('mac')
-}
-
-// Ensures that the signJar task will run on every build
-// REMINDER: the jar will not be signed if the jcKeyStore key in gradle.properties does not exist
-build {
-    dependsOn 'signJar'
-}
-
-// detects if the jcKeyStore key in gradle.properties exists so the jar can be signed
-def canJarBeSigned() {
-    return getVariable('jcKeyStore') != null
-}
-
-// Returns the public fingerprint, may be empty ("")
-def getProjectFingerprint() {
-    if (canJarBeSigned()) {
-        def sha256 = getVariable('jcKeyStoreSHA256')
-        return sha256 != null ? sha256 : ''
-    }
-}
-
-// Signs a jar file
-def sign(File jar) {
-    if (canJarBeSigned()) {
-        println "Attempting to sign jar: ${jar}"
-        ant.signjar(
-                destDir: "${jar.parentFile}",
-                jar: "${jar}",
-                alias: getVariable('jcKeyStoreAlias'),
-                storetype: "jks",
-                keystore: getVariable("jcKeyStore"),
-                storepass: getVariable('jcKeyStorePass'),
-                keypass: getVariable('jcKeyStoreKeyPass'),
-                verbose: true,
-                preservelastmodified: "true"
-        )
-        println "Jar signed: ${jar}"
-    } else {
-        println "No keystore property found, jar will not be signed"
-    }
-}
-
-// Gradle task to sign the jar.
-task signJar(dependsOn: 'reobfJar') {
-    doLast {
-        project.ext.sign(jar.archivePath)
-    }
-}
-
-// generates the javadocs and shoves them in a jar
-task javadocJar(type: Jar) {
-    from javadoc
-    classifier = 'javadoc'
-}
-
-// shoves all of the sources in a jar
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-// Ensures that the mod is built before it is published to the maven
-publish {
-    dependsOn 'build'
-}
-
-// the reobfFile takes the built file (from the build task) and uses that to publish it to the maven
-def reobfFile = file("build/libs/${archivesBaseName}-${version}.jar")
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId = "${maven_group}"
-            artifactId = "${maven_artifact_id}"
-            version = "${mc_version}-${version}"
-
-            artifact reobfFile
-            artifact sourcesJar
-            artifact javadocJar
-        }
-    }
-    repositories {
-        maven {
-            name = "ModdingLegacyMaven"
-            url = uri("https://maven.moddinglegacy.com/artifactory/modding-legacy/")
-            credentials {
-                username = project.findProperty("mlm.user") ?: System.getenv("USERNAME")
-                password = project.findProperty("mlm.key") ?: System.getenv("TOKEN")
-            }
-        }
     }
 }

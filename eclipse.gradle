@@ -1,0 +1,40 @@
+/*
+ * This gradle file contains additional instructions relating to getting Structure Gel's Javadoc and Sources jars. This
+ * is a workaround for ForgeGradle ignoring those dependency files
+ * (https://github.com/MinecraftForge/ForgeGradle/issues/736).
+ */
+
+// Download additional sources and javadoc jars
+eclipse {
+	classpath {
+		file {
+			whenMerged {
+				def lib = entries.find { it.path.contains "structure-gel-${mc_version}-${gel_version}_mapped_${mappings_channel}_${mappings_version}.jar".toString() }
+				lib.sourcePath = fileReference(file("libs/structure-gel-${mc_version}-${gel_version}-sources.jar".toString()))
+				lib.javadocPath = fileReference(file("libs/structure-gel-${mc_version}-${gel_version}-javadoc.jar".toString()))
+			}
+		}
+	}
+}
+
+// Make sure to download Structure Gel additional files for eclipse before continuing
+eclipseClasspath {
+	dependsOn 'sgDownloadFiles'
+}
+
+// Download additional files for Structure Gel
+task sgDownloadFiles {
+	doLast {
+		download {
+			src "https://maven.moddinglegacy.com/artifactory/modding-legacy/com/legacy/structure-gel/${mc_version}-${gel_version}/structure-gel-${mc_version}-${gel_version}-sources.jar".toString()
+			dest new File("libs/structure-gel-${mc_version}-${gel_version}-sources.jar".toString())
+			overwrite true
+		}
+
+		download {
+			src "https://maven.moddinglegacy.com/artifactory/modding-legacy/com/legacy/structure-gel/${mc_version}-${gel_version}/structure-gel-${mc_version}-${gel_version}-javadoc.jar".toString()
+			dest new File("libs/structure-gel-${mc_version}-${gel_version}-javadoc.jar".toString())
+			overwrite true
+		}
+	}
+}
