@@ -16,7 +16,7 @@ public final class ForageInfo implements IForageInfo
     public static final ForageInfo INSTANCE = new ForageInfo();
 
     /**
-     * The Mod ID of the Midnight, which is fixed to {@code midnight}.
+     * The Mod ID of ForageCraft, which is fixed to {@code foragecraft}.
      *
      * @see #modId()
      */
@@ -48,7 +48,7 @@ public final class ForageInfo implements IForageInfo
     public static final boolean FORCE_DEV_MIXINS = wantsDevMixins();
 
     /**
-     * This constant is true when the system property {@code midnight.datagen} is {@code "true"}. This property is set
+     * This constant is true when the system property {@code foragecraft.datagen} is {@code "true"}. This property is set
      * in the {@code data} run configration (for the {@code runData} task).
      *
      * @see #isRunningDatagen()
@@ -57,7 +57,7 @@ public final class ForageInfo implements IForageInfo
     public static final boolean DATAGEN = isRunningDatagen();
 
     /**
-     * This constant is true when the system property {@code midnight.istestserver} is {@code "true"}. This property is
+     * This constant is true when the system property {@code foragecraft.istestserver} is {@code "true"}. This property is
      * set in the {@code testserver} run configration (for the {@code runTestServer} task).
      *
      * @see #isRunningTestServer()
@@ -66,7 +66,7 @@ public final class ForageInfo implements IForageInfo
     public static final boolean TESTSERVER = isRunningTestServer();
 
     /**
-     * The version of the Midnight (ex. {@code 0.6.0}), which is dynamically injected on build. Defaults to {@code
+     * The version of the ForageCraft (ex. {@code 2.0.0}), which is dynamically injected on build. Defaults to {@code
      * NOT.A.VERSION}.
      *
      * @see #version()
@@ -84,7 +84,7 @@ public final class ForageInfo implements IForageInfo
     public static final String VERSION_NAME = "Not A Version";
 
     /**
-     * The build time of the Midnight, which is dynamically injected on build. Defaults to {@code 2038-01-19T03:14:08Z},
+     * The build time of ForageCraft, which is dynamically injected on build. Defaults to {@code 2038-01-19T03:14:08Z},
      * referring to the <a href="https://en.wikipedia.org/wiki/Year_2038_problem">2038 Problem</a>.
      *
      * @see #buildDate()

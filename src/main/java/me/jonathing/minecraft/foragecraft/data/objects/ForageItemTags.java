@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.data.tag;
+package me.jonathing.minecraft.foragecraft.data.objects;
 
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import net.minecraft.item.Item;

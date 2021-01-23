@@ -1,11 +1,13 @@
 package me.jonathing.minecraft.foragecraft.data.provider;
 
-import me.jonathing.minecraft.foragecraft.data.tag.ForageItemTags;
+import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
+import me.jonathing.minecraft.foragecraft.data.objects.ForageItemTags;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nonnull;
@@ -38,7 +40,12 @@ public class ForageTagProvider
         @Override
         protected void registerTags()
         {
-            // Skipping for now...
+            vanilla();
+        }
+
+        private void vanilla()
+        {
+            this.getOrCreateBuilder(BlockTags.CROPS).add(ForageBlocks.leek_crop);
         }
 
         @Override

@@ -15,7 +15,7 @@ public class ForageDataLists
 	/**
 	 * List of all of the Patchouli recipes to skip parsing if Patchouli is not installed.
 	 *
-	 * @see me.jonathing.minecraft.foragecraft.asm.mixin.RecipeManagerMixin#modify$objectIn(Map)
+	 * @see me.jonathing.minecraft.foragecraft.asm.mixin.RecipeManagerMixin#apply(Map, IResourceManager, IProfiler, CallbackInfo)
 	 */
 	public static final List<ResourceLocation> PATCHOULI_RECIPES = ImmutableList.of(
 			ForageCraft.locate("guide_book")
