@@ -5,8 +5,9 @@
  *
  * <h2>SpongePowered Mixin</h2>
  * Mixin is SpongePowered's method of using a Java interface to modify bytecode instead of injecting raw ASM. In
- * ForageCraft, the main mixins can be found in the package {@link me.jonathing.minecraft.foragecraft.asm.mixin} and the
- * development environment mixins can be found in the package {@link me.jonathing.minecraft.foragecraft.asm.dev.mixin}.
+ * ForageCraft, the main mixins can be found in the package {@link me.jonathing.minecraft.foragecraft.asm.mixin.main},
+ * the development environment mixins can be found in the package
+ * {@link me.jonathing.minecraft.foragecraft.asm.mixin.dev}, and the data generation mixins can be found in the package.
  * <p>
  * Everything in the mixin packages is documented as clearly as possible so that any viewers of the source code will be
  * able to understand what I am doing with ease and will be able to learn from the examples provided here.

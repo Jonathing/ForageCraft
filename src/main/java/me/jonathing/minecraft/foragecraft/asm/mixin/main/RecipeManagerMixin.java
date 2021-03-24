@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.asm.mixin;
+package me.jonathing.minecraft.foragecraft.asm.mixin.main;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonElement;

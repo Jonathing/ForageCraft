@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.asm.dev.mixin;
+package me.jonathing.minecraft.foragecraft.asm.mixin.data;
 
 import com.google.gson.JsonObject;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
@@ -61,9 +61,9 @@ public class ShapelessRecipeBuilderMixin
          *                   object to.
          * @return The new {@link JsonObject} with the NBT object if the given conditions are met, or the original
          * JSON object otherwise.
-         * @see ShapelessRecipeBuilder.Result#serialize(JsonObject)
+         * @see ShapelessRecipeBuilder.Result#serializeRecipeData(JsonObject)
          */
-        @ModifyVariable(at = @At(value = "LOAD", ordinal = 2), method = "serialize(Lcom/google/gson/JsonObject;)V", index = 3)
+        @ModifyVariable(at = @At(value = "LOAD", ordinal = 2), method = "serializeRecipeData(Lcom/google/gson/JsonObject;)V", index = 3)
         @SuppressWarnings("deprecation")
         private JsonObject modify$jsonObject(JsonObject jsonObject)
         {

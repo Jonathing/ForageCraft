@@ -26,12 +26,18 @@ public class MixinConnector implements IMixinConnector
     @Override
     public void connect()
     {
-        Mixins.addConfiguration(ForageInfo.MOD_ID + ".mixins.json");
+        Mixins.addConfiguration(ForageInfo.MOD_ID + ".main.mixins.json");
 
         if (ForageInfo.IDE || ForageInfo.FORCE_DEV_MIXINS)
         {
             Mixins.addConfiguration(ForageInfo.MOD_ID + ".dev.mixins.json");
             ForageCraft.LOGGER.warn("ForageCraft's dev-environment mixins have been enabled.");
+        }
+
+        if (ForageInfo.DATAGEN)
+        {
+            Mixins.addConfiguration(ForageInfo.MOD_ID + ".data.mixins.json");
+            ForageCraft.LOGGER.warn("ForageCraft's datagen mixins have been enabled.");
         }
     }
 }

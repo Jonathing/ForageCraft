@@ -5,4 +5,4 @@
  *
  * @see me.jonathing.minecraft.foragecraft.asm
  */
-package me.jonathing.minecraft.foragecraft.asm.mixin;
+package me.jonathing.minecraft.foragecraft.asm.mixin.main;

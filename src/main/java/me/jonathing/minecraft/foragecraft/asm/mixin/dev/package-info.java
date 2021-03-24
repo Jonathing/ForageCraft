@@ -7,4 +7,4 @@
  * @see me.jonathing.minecraft.foragecraft.asm
  * @see me.jonathing.minecraft.foragecraft.info.ForageInfo#IDE
  */
-package me.jonathing.minecraft.foragecraft.asm.dev.mixin;
+package me.jonathing.minecraft.foragecraft.asm.mixin.dev;

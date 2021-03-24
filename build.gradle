@@ -181,7 +181,7 @@ minecraft {
     mappings channel: "${mappings_channel}".toString(), version: "${mappings_version}".toString()
 
     // Access Transformer (commented out by default)
-    //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Run configurations
     runs {
@@ -336,7 +336,6 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62")
 
     // Biomes O' Plenty
-    //compileOnly fg.deobf("curse.maven:bop-220318:3135701")
     runtimeOnly fg.deobf("curse.maven:bop-220318:3135698")
 
     // Patchouli

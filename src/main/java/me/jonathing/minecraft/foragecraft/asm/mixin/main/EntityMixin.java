@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.asm.mixin;
+package me.jonathing.minecraft.foragecraft.asm.mixin.main;
 
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import net.minecraft.entity.Entity;
@@ -28,29 +28,19 @@ public abstract class EntityMixin
     private static final Logger LOGGER = LogManager.getLogger(Entity.class);
 
     /**
-     * @see Entity#entityDropItem(IItemProvider, int)
-     */
-    @Shadow
-    @Nullable
-    public ItemEntity entityDropItem(IItemProvider p_199702_1_, int p_199702_2_)
-    {
-        throw new IllegalStateException("Mixin was unable to shadow method entityDropItem(IItemProvider, int)");
-    }
-
-    /**
      * This method hook into the {@link org.spongepowered.asm.mixin.injection.points.MethodHead} of the
-     * {@link Entity#entityDropItem(IItemProvider)} method to tell the game that if an {@link IItemProvider} ever wants
+     * {@link Entity#spawnAtLocation(IItemProvider)} method to tell the game that if an {@link IItemProvider} ever wants
      * to drop a {@link ForageBlocks#stick} to stop what its doing and to drop a {@link Items#STICK} instead.
      *
-     * @see Entity#entityDropItem(IItemProvider)
+     * @see Entity#spawnAtLocation(IItemProvider)
      */
-    @Inject(at = @At("HEAD"), method = "entityDropItem(Lnet/minecraft/util/IItemProvider;)Lnet/minecraft/entity/item/ItemEntity;", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "spawnAtLocation(Lnet/minecraft/util/IItemProvider;)Lnet/minecraft/entity/item/ItemEntity;", cancellable = true)
     private void entityDropItem(IItemProvider itemProvider, CallbackInfoReturnable<ItemEntity> callback)
     {
         if (itemProvider.asItem().equals(ForageBlocks.stick.asItem()))
         {
             LOGGER.trace("Forcing `" + itemProvider.asItem() + "` to drop as `" + Items.STICK + "` instead.");
-            callback.setReturnValue(this.entityDropItem(Items.STICK, 0));
+            callback.setReturnValue(((Entity) (Object) this).spawnAtLocation(Items.STICK, 0));
         }
     }
 }

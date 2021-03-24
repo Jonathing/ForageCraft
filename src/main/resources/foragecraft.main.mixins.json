@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "me.jonathing.minecraft.foragecraft.asm.mixin",
+  "package": "me.jonathing.minecraft.foragecraft.asm.mixin.main",
   "compatibilityLevel": "JAVA_8",
   "refmap": "foragecraft.refmap.json",
   "mixins": [
