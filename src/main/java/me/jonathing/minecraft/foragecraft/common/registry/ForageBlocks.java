@@ -29,6 +29,7 @@ import net.minecraft.block.AbstractBlock;
 public class ForageBlocks
 {
     public static Block rock, flat_rock, stick;
+    public static Block blackstone_rock, blackstone_flat_rock;
     public static Block straw_bale, fascine;
     public static Block paving_stones;
     public static Block leek_crop;
@@ -59,6 +60,15 @@ public class ForageBlocks
                 new StickBlock(),
                 null,
                 false);
+
+        blackstone_rock = register("blackstone_rock",
+                new RockBlock(DecorativeBlock.ROCK_SHAPE, () -> ForageBlocks.blackstone_rock.asItem()),
+                ItemGroup.MISC,
+                true);
+        blackstone_flat_rock = register("blackstone_flat_rock",
+                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, () -> ForageBlocks.blackstone_flat_rock.asItem()),
+                ItemGroup.MISC,
+                true);
 
         straw_bale = register("straw_bale",
                 new ForageHayBlock(0.3F, AbstractBlock.Properties.copy(Blocks.HAY_BLOCK)),
