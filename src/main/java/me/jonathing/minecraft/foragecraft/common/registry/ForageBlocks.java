@@ -63,11 +63,11 @@ public class ForageBlocks
 
         blackstone_rock = register("blackstone_rock",
                 new RockBlock(DecorativeBlock.ROCK_SHAPE, () -> ForageBlocks.blackstone_rock.asItem()),
-                ItemGroup.MISC,
+                ItemGroup.TAB_MISC,
                 true);
         blackstone_flat_rock = register("blackstone_flat_rock",
                 new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, () -> ForageBlocks.blackstone_flat_rock.asItem()),
-                ItemGroup.MISC,
+                ItemGroup.TAB_MISC,
                 true);
 
         straw_bale = register("straw_bale",
