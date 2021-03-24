@@ -35,7 +35,7 @@ public class LeekTrigger extends AbstractCriterionTrigger<LeekTrigger.Instance>
 
     @Override
     @ParametersAreNonnullByDefault
-    protected LeekTrigger.Instance deserializeTrigger(JsonObject json, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser)
+    protected LeekTrigger.Instance createInstance(JsonObject json, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser)
     {
         return new Instance(entityPredicate);
     }
@@ -51,7 +51,7 @@ public class LeekTrigger extends AbstractCriterionTrigger<LeekTrigger.Instance>
     public void trigger(ServerPlayerEntity playerEntity)
     {
         LogManager.getLogger().debug("Triggering the leek trigger.");
-        this.triggerListeners(playerEntity, (instance) -> true);
+        this.trigger(playerEntity, (instance) -> true);
     }
 
     public static class Instance extends CriterionInstance
@@ -70,7 +70,7 @@ public class LeekTrigger extends AbstractCriterionTrigger<LeekTrigger.Instance>
         @ParametersAreNonnullByDefault
         public static Instance create()
         {
-            return new Instance(EntityPredicate.AndPredicate.ANY_AND);
+            return new Instance(EntityPredicate.AndPredicate.ANY);
         }
     }
 }

@@ -14,6 +14,8 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.item.Item.Properties;
+
 /**
  * This is the class for the {@link ForageItems#gathering_knife} item. It is required specifically for specific drops that
  * are given when using this item, which are also done in the
@@ -46,15 +48,15 @@ public class GatheringKnifeItem extends Item implements IVanishable
      * @see Item#onBlockDestroyed(ItemStack, World, BlockState, BlockPos, LivingEntity)
      */
     @Override
-    public boolean onBlockDestroyed(@Nonnull ItemStack itemStack, World world, @Nonnull BlockState blockState, @Nonnull BlockPos pos, @Nonnull LivingEntity livingEntity)
+    public boolean mineBlock(@Nonnull ItemStack itemStack, World world, @Nonnull BlockState blockState, @Nonnull BlockPos pos, @Nonnull LivingEntity livingEntity)
     {
-        if (!world.isRemote && blockState.getBlock().equals(Blocks.GRASS))
+        if (!world.isClientSide && blockState.getBlock().equals(Blocks.GRASS))
         {
             if (world.getRandom().nextFloat() < STRAW_CHANCE)
-                Block.spawnAsEntity(world, pos, ForageItems.straw.getDefaultInstance());
+                Block.popResource(world, pos, ForageItems.straw.getDefaultInstance());
 
-            itemStack.damageItem(1, livingEntity, (onToolBroken) ->
-                    onToolBroken.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+            itemStack.hurtAndBreak(1, livingEntity, (onToolBroken) ->
+                    onToolBroken.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 
             return true;
         }
@@ -73,9 +75,9 @@ public class GatheringKnifeItem extends Item implements IVanishable
     @Override
     public ItemStack getContainerItem(ItemStack itemStack)
     {
-        itemStack.setDamage(itemStack.getDamage() + 1);
+        itemStack.setDamageValue(itemStack.getDamageValue() + 1);
         ItemStack result = itemStack.copy();
-        return result.getDamage() >= result.getMaxDamage() ? ItemStack.EMPTY : result;
+        return result.getDamageValue() >= result.getMaxDamage() ? ItemStack.EMPTY : result;
     }
 
     @Override

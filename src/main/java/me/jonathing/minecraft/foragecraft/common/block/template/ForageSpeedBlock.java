@@ -7,6 +7,8 @@ import net.minecraft.world.World;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.minecraft.block.AbstractBlock;
+
 /**
  * This class holds the {@link me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks#paving_stones} block. It
  * is required so that the player is able to walk faster on them as intended.
@@ -21,7 +23,7 @@ public class ForageSpeedBlock extends Block
 {
     private final float speedMultiplier;
 
-    public ForageSpeedBlock(float speedMultiplier, Block.Properties properties)
+    public ForageSpeedBlock(float speedMultiplier, AbstractBlock.Properties properties)
     {
         super(properties);
         this.speedMultiplier = speedMultiplier;
@@ -36,10 +38,10 @@ public class ForageSpeedBlock extends Block
      */
     @Override
     @ParametersAreNonnullByDefault
-    public void onEntityWalk(World world, BlockPos blockPos, Entity entity)
+    public void stepOn(World world, BlockPos blockPos, Entity entity)
     {
-        super.onEntityWalk(world, blockPos, entity);
+        super.stepOn(world, blockPos, entity);
 
-        entity.setVelocity(entity.getMotion().x * speedMultiplier, 0, entity.getMotion().z * speedMultiplier);
+        entity.lerpMotion(entity.getDeltaMovement().x * speedMultiplier, 0, entity.getDeltaMovement().z * speedMultiplier);
     }
 }

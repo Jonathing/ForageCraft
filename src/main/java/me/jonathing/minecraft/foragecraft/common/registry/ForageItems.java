@@ -38,31 +38,31 @@ public class ForageItems
 
         straw = register("straw",
                 new Item(new Item.Properties()
-                        .group(getItemGroup(ItemGroup.MISC))));
+                        .tab(getItemGroup(ItemGroup.TAB_MISC))));
 
         stick_bundle = register("stick_bundle",
                 new Item(new Item.Properties()
-                        .group(getItemGroup(ItemGroup.MISC))));
+                        .tab(getItemGroup(ItemGroup.TAB_MISC))));
 
         spaghetti = register("spaghetti",
                 new SoupItem(new Item.Properties()
-                        .group(getItemGroup(ItemGroup.FOOD))
-                        .maxStackSize(1)
-                        .food(new Food.Builder().hunger(11).saturation(0.375F).build())));
+                        .tab(getItemGroup(ItemGroup.TAB_FOOD))
+                        .stacksTo(1)
+                        .food(new Food.Builder().nutrition(11).saturationMod(0.375F).build())));
         leek = register("leek",
                 new LeekItem(new Item.Properties()
-                        .group(getItemGroup(ItemGroup.FOOD))
-                        .food(new Food.Builder().hunger(2).saturation(0.1F).build())));
+                        .tab(getItemGroup(ItemGroup.TAB_FOOD))
+                        .food(new Food.Builder().nutrition(2).saturationMod(0.1F).build())));
 
         leek_seeds = register("leek_seeds",
                 new BlockNamedItem(ForageBlocks.leek_crop, new Item.Properties()
-                        .group(getItemGroup(ItemGroup.MISC))));
+                        .tab(getItemGroup(ItemGroup.TAB_MISC))));
 
         gathering_knife = register("gathering_knife",
                 new GatheringKnifeItem(new Item.Properties()
-                        .group(getItemGroup(ItemGroup.TOOLS))
-                        .maxStackSize(1)
-                        .maxDamage(60)));
+                        .tab(getItemGroup(ItemGroup.TAB_TOOLS))
+                        .stacksTo(1)
+                        .durability(60)));
 
         registerBlockItems();
     }
@@ -82,7 +82,7 @@ public class ForageItems
         for (Map.Entry<Block, ItemGroup> entry : ForageBlocks.blockItemMap.entrySet())
         {
             Block block = entry.getKey();
-            ForageRegistry.register(iItemRegistry, block.getRegistryName(), new BlockItem(block, new Item.Properties().group(entry.getValue())));
+            ForageRegistry.register(iItemRegistry, block.getRegistryName(), new BlockItem(block, new Item.Properties().tab(entry.getValue())));
         }
         ForageBlocks.blockItemMap.clear();
 

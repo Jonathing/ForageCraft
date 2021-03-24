@@ -17,6 +17,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import net.minecraft.block.AbstractBlock;
+
 /**
  * This class holds all of the blocks in ForageCraft.
  *
@@ -47,11 +49,11 @@ public class ForageBlocks
 
         rock = register("rock",
                 new RockBlock(),
-                ItemGroup.MISC,
+                ItemGroup.TAB_MISC,
                 true);
         flat_rock = register("flat_rock",
                 new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, () -> ForageBlocks.flat_rock.asItem()),
-                ItemGroup.MISC,
+                ItemGroup.TAB_MISC,
                 true);
         stick = register("stick",
                 new StickBlock(),
@@ -59,21 +61,21 @@ public class ForageBlocks
                 false);
 
         straw_bale = register("straw_bale",
-                new ForageHayBlock(0.3F, Block.Properties.from(Blocks.HAY_BLOCK)),
-                ItemGroup.BUILDING_BLOCKS,
+                new ForageHayBlock(0.3F, AbstractBlock.Properties.copy(Blocks.HAY_BLOCK)),
+                ItemGroup.TAB_BUILDING_BLOCKS,
                 true);
         fascine = register("fascine",
-                new ForageHayBlock(0.5F, Block.Properties.from(Blocks.HAY_BLOCK)),
-                ItemGroup.BUILDING_BLOCKS,
+                new ForageHayBlock(0.5F, AbstractBlock.Properties.copy(Blocks.HAY_BLOCK)),
+                ItemGroup.TAB_BUILDING_BLOCKS,
                 true);
 
         paving_stones = register("paving_stones",
-                new ForageSpeedBlock(1.5F, Block.Properties.from(Blocks.STONE)),
-                ItemGroup.BUILDING_BLOCKS,
+                new ForageSpeedBlock(1.5F, AbstractBlock.Properties.copy(Blocks.STONE)),
+                ItemGroup.TAB_BUILDING_BLOCKS,
                 true);
 
         leek_crop = register("leek_crop",
-                new LeekCropBlock(Block.Properties.from(Blocks.WHEAT)),
+                new LeekCropBlock(AbstractBlock.Properties.copy(Blocks.WHEAT)),
                 null,
                 false);
     }

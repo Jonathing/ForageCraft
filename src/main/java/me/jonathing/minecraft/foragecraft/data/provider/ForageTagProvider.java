@@ -38,14 +38,14 @@ public class ForageTagProvider
          * @see BlockTagsProvider#registerTags()
          */
         @Override
-        protected void registerTags()
+        protected void addTags()
         {
             vanilla();
         }
 
         private void vanilla()
         {
-            this.getOrCreateBuilder(BlockTags.CROPS).add(ForageBlocks.leek_crop);
+            this.tag(BlockTags.CROPS).add(ForageBlocks.leek_crop);
         }
 
         @Override
@@ -64,7 +64,7 @@ public class ForageTagProvider
         }
 
         @Override
-        protected void registerTags()
+        protected void addTags()
         {
             forageCraft();
             vanilla();
@@ -72,12 +72,12 @@ public class ForageTagProvider
 
         void forageCraft()
         {
-            this.getOrCreateBuilder(ForageItemTags.SCARECROW_CRAFTABLE).add(straw_bale.asItem(), fascine.asItem());
+            this.tag(ForageItemTags.SCARECROW_CRAFTABLE).add(straw_bale.asItem(), fascine.asItem());
         }
 
         void vanilla()
         {
-            this.getOrCreateBuilder(ForageItemTags.SCARECROW_CRAFTABLE).add(Blocks.HAY_BLOCK.asItem());
+            this.tag(ForageItemTags.SCARECROW_CRAFTABLE).add(Blocks.HAY_BLOCK.asItem());
         }
 
         @Override

@@ -26,7 +26,7 @@ public final class JsonUtil
         {
             if (json.has("block"))
             {
-                ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getString(json, "block"));
+                ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getAsString(json, "block"));
                 Block block = ForgeRegistries.BLOCKS.getValue(resourcelocation);
 
                 if (block == null) throw new JsonSyntaxException("Unknown block type '" + resourcelocation + "'");
@@ -41,7 +41,7 @@ public final class JsonUtil
         {
             if (json.has("item"))
             {
-                ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getString(json, "item"));
+                ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getAsString(json, "item"));
                 Item item = ForgeRegistries.ITEMS.getValue(resourcelocation);
 
                 if (item == null) throw new JsonSyntaxException("Unknown item type '" + resourcelocation + "'");

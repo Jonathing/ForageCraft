@@ -41,7 +41,7 @@ public class ForageRecipeProvider extends RecipeProvider
      */
     @Override
     @ParametersAreNonnullByDefault
-    protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
+    protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer)
     {
         this.consumer = consumer;
 
@@ -60,9 +60,9 @@ public class ForageRecipeProvider extends RecipeProvider
 //                .key('l', Items.LEATHER).key('p', Items.PUMPKIN).key('f', ForageItems.stick_bundle).key('b', ForageBlocks.straw_bale).key('s', Items.STICK)
 //                .patternLine("lpl").patternLine("fbf").patternLine("lsl").addCriterion(hasItem, hasItem(Items.PUMPKIN)).build(consumer);
 
-        ShapedRecipeBuilder.shapedRecipe(ForageItems.spaghetti, 1)
-                .key('s', Items.COOKED_BEEF).key('w', Items.WHEAT).key('b', Items.BOWL)
-                .patternLine(" s ").patternLine("www").patternLine(" b ").addCriterion(hasItem, hasItem(Items.WHEAT)).build(consumer);
+        ShapedRecipeBuilder.shaped(ForageItems.spaghetti, 1)
+                .define('s', Items.COOKED_BEEF).define('w', Items.WHEAT).define('b', Items.BOWL)
+                .pattern(" s ").pattern("www").pattern(" b ").unlockedBy(hasItem, has(Items.WHEAT)).save(consumer);
 
         simple3x3(Items.STICK, ForageItems.stick_bundle);
         simpleInOut(ForageItems.stick_bundle, Items.STICK, 9);
@@ -72,21 +72,21 @@ public class ForageRecipeProvider extends RecipeProvider
 
         simpleInOut(ForageItems.leek, ForageItems.leek_seeds, 1);
 
-        ShapedRecipeBuilder.shapedRecipe(ForageItems.gathering_knife, 1)
-                .key('s', Items.STICK).key('r', ForageBlocks.flat_rock)
-                .patternLine(" r").patternLine("s ").addCriterion(hasItem, hasItem(ForageBlocks.flat_rock.asItem())).build(consumer);
+        ShapedRecipeBuilder.shaped(ForageItems.gathering_knife, 1)
+                .define('s', Items.STICK).define('r', ForageBlocks.flat_rock)
+                .pattern(" r").pattern("s ").unlockedBy(hasItem, has(ForageBlocks.flat_rock.asItem())).save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(PatchouliAPI.get().getBookStack(ForageCraft.locate("book")).getItem(), 1)
-                .addIngredient(Items.PAPER)
-                .addIngredient(Items.DIRT, 3)
-                .addCriterion(hasItem, hasItem(Blocks.DIRT))
-                .build(consumer, ForageCraft.find("guide_book"));
+        ShapelessRecipeBuilder.shapeless(PatchouliAPI.get().getBookStack(ForageCraft.locate("book")).getItem(), 1)
+                .requires(Items.PAPER)
+                .requires(Items.DIRT, 3)
+                .unlockedBy(hasItem, has(Blocks.DIRT))
+                .save(consumer, ForageCraft.find("guide_book"));
 
-        ShapelessRecipeBuilder.shapelessRecipe(Items.STICK, 1)
-                .addIngredient(ItemTags.SAPLINGS)
-                .addIngredient(ForageItems.gathering_knife)
-                .addCriterion(hasItem, hasItem(ForageItems.gathering_knife))
-                .build(consumer, ForageCraft.find("stick_from_gathering_knife_and_sapling"));
+        ShapelessRecipeBuilder.shapeless(Items.STICK, 1)
+                .requires(ItemTags.SAPLINGS)
+                .requires(ForageItems.gathering_knife)
+                .unlockedBy(hasItem, has(ForageItems.gathering_knife))
+                .save(consumer, ForageCraft.find("stick_from_gathering_knife_and_sapling"));
     }
 
     private void simpleInOut(IItemProvider in, IItemProvider out, int amount)
@@ -96,15 +96,15 @@ public class ForageRecipeProvider extends RecipeProvider
 
     private void simpleInOut(IItemProvider in, IItemProvider out, int amount, IItemProvider criterion)
     {
-        ShapelessRecipeBuilder.shapelessRecipe(out, amount)
-                .addIngredient(in)
-                .addCriterion(hasItem, hasItem(criterion))
-                .build(consumer, ForageCraft.find(out.asItem().getRegistryName().getPath() + "_from_" + in.asItem().getRegistryName().getPath()));
+        ShapelessRecipeBuilder.shapeless(out, amount)
+                .requires(in)
+                .unlockedBy(hasItem, has(criterion))
+                .save(consumer, ForageCraft.find(out.asItem().getRegistryName().getPath() + "_from_" + in.asItem().getRegistryName().getPath()));
     }
 
     private void simple3x3withResourceLoc(IItemProvider in, IItemProvider out, int amount)
     {
-        ShapedRecipeBuilder.shapedRecipe(out, amount).key('#', in).patternLine("###").patternLine("###").patternLine("###").addCriterion(hasItem, hasItem(in)).build(consumer, ForageCraft.find(out.asItem().getRegistryName().getPath() + "_from_" + in.asItem().getRegistryName().getPath()));
+        ShapedRecipeBuilder.shaped(out, amount).define('#', in).pattern("###").pattern("###").pattern("###").unlockedBy(hasItem, has(in)).save(consumer, ForageCraft.find(out.asItem().getRegistryName().getPath() + "_from_" + in.asItem().getRegistryName().getPath()));
     }
 
     private void simple3x3withResourceLoc(IItemProvider in, IItemProvider out)
@@ -114,7 +114,7 @@ public class ForageRecipeProvider extends RecipeProvider
 
     private void simple3x3(IItemProvider in, IItemProvider out, int amount)
     {
-        ShapedRecipeBuilder.shapedRecipe(out, amount).key('#', in).patternLine("###").patternLine("###").patternLine("###").addCriterion(hasItem, hasItem(in)).build(consumer);
+        ShapedRecipeBuilder.shaped(out, amount).define('#', in).pattern("###").pattern("###").pattern("###").unlockedBy(hasItem, has(in)).save(consumer);
     }
 
     private void simple3x3(IItemProvider in, IItemProvider out)
@@ -123,9 +123,9 @@ public class ForageRecipeProvider extends RecipeProvider
     }
 
     @Override
-    protected void saveRecipeAdvancement(DirectoryCache p_208310_0_, JsonObject p_208310_1_, Path p_208310_2_)
+    protected void saveAdvancement(DirectoryCache p_208310_0_, JsonObject p_208310_1_, Path p_208310_2_)
     {
-        super.saveRecipeAdvancement(p_208310_0_, p_208310_1_, p_208310_2_);
+        super.saveAdvancement(p_208310_0_, p_208310_1_, p_208310_2_);
     }
 
     @Override

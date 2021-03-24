@@ -34,7 +34,7 @@ import java.util.function.Supplier;
  */
 public class StickBlock extends RockBlock implements IWaterLoggable
 {
-    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = HorizontalBlock.FACING;
     private static final Random STICK_RANDOM = new Random();
 
     /**
@@ -44,7 +44,7 @@ public class StickBlock extends RockBlock implements IWaterLoggable
      */
     public StickBlock()
     {
-        super(Block.Properties.from(Blocks.OAK_PLANKS).doesNotBlockMovement().notSolid().zeroHardnessAndResistance(), DecorativeBlock.STICK_SHAPE, () -> Items.STICK);
+        super(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS).noCollission().noOcclusion().instabreak(), DecorativeBlock.STICK_SHAPE, () -> Items.STICK);
     }
 
     /**
@@ -55,7 +55,7 @@ public class StickBlock extends RockBlock implements IWaterLoggable
     @SuppressWarnings("deprecation")
     public BlockState rotate(BlockState state, Rotation rot)
     {
-        return state.with(FACING, rot.rotate(state.get(FACING)));
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     /**
@@ -66,14 +66,14 @@ public class StickBlock extends RockBlock implements IWaterLoggable
     @SuppressWarnings("deprecation")
     public BlockState mirror(BlockState state, Mirror mirrorIn)
     {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 
     /**
      * @see net.minecraft.block.FallingBlock#fillStateContainer(StateContainer.Builder)
      */
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder)
     {
         builder.add(RockBlock.WATERLOGGED, FACING);
     }
@@ -88,21 +88,21 @@ public class StickBlock extends RockBlock implements IWaterLoggable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context)
     {
-        FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
+        FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
 
         for (Direction direction : context.getNearestLookingDirections())
         {
             if (direction.getAxis() == Direction.Axis.Y)
             {
-                BlockState blockstate = this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
-                if (blockstate.isValidPosition(context.getWorld(), context.getPos()))
+                BlockState blockstate = this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+                if (blockstate.canSurvive(context.getLevel(), context.getClickedPos()))
                 {
-                    return blockstate.with(WATERLOGGED, fluidstate.getFluid() == Fluids.WATER);
+                    return blockstate.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
                 }
             }
         }
 
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     /**
@@ -149,7 +149,7 @@ public class StickBlock extends RockBlock implements IWaterLoggable
                 break;
         }
 
-        return this.getDefaultState().with(FACING, direction);
+        return this.defaultBlockState().setValue(FACING, direction);
     }
 
     @Override

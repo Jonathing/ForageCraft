@@ -176,11 +176,11 @@ public class ForagingEventHandler
     public static void onBlockBroken(BlockEvent.BreakEvent event)
     {
         PlayerEntity player = event.getPlayer();
-        if (((World) event.getWorld()).isRemote || player.isCreative() || player.isSpectator()) return;
+        if (((World) event.getWorld()).isClientSide || player.isCreative() || player.isSpectator()) return;
 
         Block blockBroken = event.getState().getBlock();
 
-        if (FORAGE_EVENT_REGISTRY.containsKey(blockBroken) && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, player.getHeldItemMainhand()) == 0)
+        if (FORAGE_EVENT_REGISTRY.containsKey(blockBroken) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, player.getMainHandItem()) == 0)
             forageDrop(FORAGE_EVENT_REGISTRY.get(blockBroken), event);
     }
 
@@ -213,7 +213,7 @@ public class ForagingEventHandler
             if (random.nextFloat() < chance)
             {
                 LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), item.toString()));
-                Block.spawnAsEntity(world, event.getPos(), new ItemStack(item, random.nextInt(maxStack) + 1));
+                Block.popResource(world, event.getPos(), new ItemStack(item, random.nextInt(maxStack) + 1));
 
                 ForageTriggers.FORAGING_TRIGGER.trigger(playerEntity, blockBroken, item);
                 break;

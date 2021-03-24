@@ -7,6 +7,8 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 /**
  * This class holds the {@link me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks#fascine} and
  * {@link me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks#straw_bale} blocks. It is required to give it
@@ -38,8 +40,8 @@ public class ForageHayBlock extends HayBlock
      * @see Entity#onLivingFall(float, float)
      */
     @Override
-    public void onFallenUpon(@Nonnull World world, @Nonnull BlockPos pos, Entity entity, float damage)
+    public void fallOn(@Nonnull World world, @Nonnull BlockPos pos, Entity entity, float damage)
     {
-        entity.onLivingFall(damage, this.fallDamageMultiplier);
+        entity.causeFallDamage(damage, this.fallDamageMultiplier);
     }
 }

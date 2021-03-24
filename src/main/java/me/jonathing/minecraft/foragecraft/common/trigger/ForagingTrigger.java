@@ -40,7 +40,7 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
 
     @Override
     @ParametersAreNonnullByDefault
-    protected Instance deserializeTrigger(JsonObject json, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser)
+    protected Instance createInstance(JsonObject json, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser)
     {
         Block block = JsonUtil.Reader.getBlock(json);
         Item item = JsonUtil.Reader.getItem(json);
@@ -59,7 +59,7 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
     public void trigger(ServerPlayerEntity playerEntity, Block block, Item item)
     {
         LogManager.getLogger().debug("Triggering the foraging trigger with block `" + block + "` and item `" + item + "`.");
-        this.triggerListeners(playerEntity, (instance) -> instance.test(block, item));
+        this.trigger(playerEntity, (instance) -> instance.test(block, item));
     }
 
     /**
@@ -106,13 +106,13 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
         @ParametersAreNonnullByDefault
         public static Instance create(Block block, Item item)
         {
-            return new Instance(EntityPredicate.AndPredicate.ANY_AND, block, item);
+            return new Instance(EntityPredicate.AndPredicate.ANY, block, item);
         }
 
         @Override
-        public JsonObject serialize(@Nonnull ConditionArraySerializer conditionSerializer)
+        public JsonObject serializeToJson(@Nonnull ConditionArraySerializer conditionSerializer)
         {
-            JsonObject jsonObject = super.serialize(conditionSerializer);
+            JsonObject jsonObject = super.serializeToJson(conditionSerializer);
             JsonUtil.Writer.writeBlock(jsonObject, block);
             JsonUtil.Writer.writeItem(jsonObject, item);
             return jsonObject;

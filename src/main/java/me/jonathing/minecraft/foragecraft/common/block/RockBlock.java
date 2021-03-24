@@ -28,6 +28,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 /**
  * This class holds the {@link ForageBlocks#rock}. This class is the king of all rocks, as it is also integral to the
  * how {@link ForageBlocks#flat_rock} and {@link ForageBlocks#stick} function.
@@ -49,7 +51,7 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
      */
     public RockBlock()
     {
-        this(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).doesNotBlockMovement().notSolid().zeroHardnessAndResistance(), DecorativeBlock.ROCK_SHAPE, () -> ForageBlocks.rock.asItem());
+        this(AbstractBlock.Properties.of(Material.STONE).sound(SoundType.STONE).noCollission().noOcclusion().instabreak(), DecorativeBlock.ROCK_SHAPE, () -> ForageBlocks.rock.asItem());
     }
 
     /**
@@ -60,13 +62,13 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
      */
     public RockBlock(VoxelShape shape, Supplier<Item> decorativeItem)
     {
-        this(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).doesNotBlockMovement().notSolid().zeroHardnessAndResistance(), shape, decorativeItem);
+        this(AbstractBlock.Properties.of(Material.STONE).sound(SoundType.STONE).noCollission().noOcclusion().instabreak(), shape, decorativeItem);
     }
 
     public RockBlock(Properties properties, VoxelShape shape, Supplier<Item> decorativeItem)
     {
         super(properties, shape, decorativeItem);
-        this.setDefaultState(this.getStateContainer().getBaseState().with(WATERLOGGED, false));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false));
     }
 
     /**
@@ -80,10 +82,10 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
      * @return The result of the position validity check.
      */
     @Override
-    public boolean isValidPosition(@Nonnull BlockState blockState, IWorldReader world, @Nonnull BlockPos blockPos)
+    public boolean canSurvive(@Nonnull BlockState blockState, IWorldReader world, @Nonnull BlockPos blockPos)
     {
-        return (world.getBlockState(blockPos).getBlock() instanceof AirBlock || world.getBlockState(blockPos).getFluidState().equals(Fluids.WATER.getStillFluidState(false)))
-                && world.getBlockState(blockPos.down()).isSolid();
+        return (world.getBlockState(blockPos).getBlock() instanceof AirBlock || world.getBlockState(blockPos).getFluidState().equals(Fluids.WATER.getSource(false)))
+                && world.getBlockState(blockPos.below()).canOcclude();
     }
 
     /**
@@ -96,16 +98,16 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
     @Nullable
     public BlockState getStateForPlacement(BlockItemUseContext context)
     {
-        FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
+        FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
 
         for (Direction direction : context.getNearestLookingDirections())
         {
             if (direction.getAxis() == Direction.Axis.Y)
             {
-                BlockState blockstate = this.getDefaultState();
-                if (blockstate.isValidPosition(context.getWorld(), context.getPos()))
+                BlockState blockstate = this.defaultBlockState();
+                if (blockstate.canSurvive(context.getLevel(), context.getClickedPos()))
                 {
-                    return blockstate.with(WATERLOGGED, fluidstate.getFluid() == Fluids.WATER);
+                    return blockstate.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
                 }
             }
         }
@@ -114,7 +116,7 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder)
     {
         builder.add(WATERLOGGED);
     }
@@ -136,10 +138,10 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
     @Override
     @Nonnull
     @ParametersAreNonnullByDefault
-    public ActionResultType onBlockActivated(BlockState blockState, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult)
+    public ActionResultType use(BlockState blockState, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult)
     {
-        world.setBlockState(blockPos, this.getFluidState(blockState).equals(Fluids.EMPTY.getDefaultState()) ? Blocks.AIR.getDefaultState() : this.getFluidState(blockState).getBlockState());
-        Block.spawnAsEntity(world, blockPos, new ItemStack(this.getDecorativeItem(), 1));
+        world.setBlockAndUpdate(blockPos, this.getFluidState(blockState).equals(Fluids.EMPTY.defaultFluidState()) ? Blocks.AIR.defaultBlockState() : this.getFluidState(blockState).createLegacyBlock());
+        Block.popResource(world, blockPos, new ItemStack(this.getDecorativeItem(), 1));
         return ActionResultType.SUCCESS;
     }
 
@@ -157,14 +159,14 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
      */
     @Override
     @Nonnull
-    public BlockState updatePostPlacement(BlockState stateIn, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull IWorld worldIn, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos)
+    public BlockState updateShape(BlockState stateIn, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull IWorld worldIn, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos)
     {
-        if (stateIn.get(WATERLOGGED))
+        if (stateIn.getValue(WATERLOGGED))
         {
-            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+            worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
 
-        return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+        return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
     /**
@@ -179,6 +181,6 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 }

@@ -39,27 +39,27 @@ public class LeekItem extends Item
      * @see Item#hitEntity(ItemStack, LivingEntity, LivingEntity)
      */
     @Override
-    public boolean hitEntity(@Nonnull ItemStack stack, LivingEntity target, @Nonnull LivingEntity attacker)
+    public boolean hurtEnemy(@Nonnull ItemStack stack, LivingEntity target, @Nonnull LivingEntity attacker)
     {
-        target.attackEntityFrom(DamageSource.GENERIC, 4);
+        target.hurt(DamageSource.GENERIC, 4);
 
         if (attacker instanceof PlayerEntity)
         {
             if (!((PlayerEntity) attacker).isCreative())
             {
                 stack.shrink(1);
-                attacker.getEntityWorld().playSound(null, attacker.getPosX(), attacker.getPosY(), attacker.getPosZ(), SoundEvents.ENTITY_WITHER_BREAK_BLOCK, SoundCategory.HOSTILE, 1, 1);
+                attacker.getCommandSenderWorld().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.WITHER_BREAK_BLOCK, SoundCategory.HOSTILE, 1, 1);
                 ForageTriggers.LEEK_TRIGGER.trigger((ServerPlayerEntity) attacker);
                 return true;
             }
             else
             {
-                return super.hitEntity(stack, target, attacker);
+                return super.hurtEnemy(stack, target, attacker);
             }
         }
         else
         {
-            return super.hitEntity(stack, target, attacker);
+            return super.hurtEnemy(stack, target, attacker);
         }
     }
 }

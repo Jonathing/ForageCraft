@@ -45,9 +45,9 @@ public class ForageFeatures
      */
     public static final Supplier<BlockClusterFeatureConfig> RANDOM_EARTH_CONFIG =
             () -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
-                    .addWeightedBlockstate(ForageBlocks.flat_rock.getDefaultState(), 1)
-                    .addWeightedBlockstate(ForageBlocks.rock.getDefaultState(), 1)
-                    .addWeightedBlockstate(((StickBlock) ForageBlocks.stick).getStateWithRandomDirection(), 2),
+                    .add(ForageBlocks.flat_rock.defaultBlockState(), 1)
+                    .add(ForageBlocks.rock.defaultBlockState(), 1)
+                    .add(((StickBlock) ForageBlocks.stick).getStateWithRandomDirection(), 2),
                     new SimpleBlockPlacer()))
                     .whitelist(new HashSet<>(Arrays.asList(Blocks.STONE, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.PODZOL, Blocks.MYCELIUM)))
                     .tries(1)
@@ -61,9 +61,9 @@ public class ForageFeatures
      * @see #init()
      */
     public static final Supplier<ConfiguredFeature<?, ?>> RANDOM_EARTH_PATCH = () -> Feature.RANDOM_PATCH
-            .withConfiguration(RANDOM_EARTH_CONFIG.get())
-            .withPlacement(Features.Placements.PATCH_PLACEMENT)
-            .withPlacement(Placement.COUNT_NOISE.configure(new NoiseDependant(-0.8D, 5, 10)));
+            .configured(RANDOM_EARTH_CONFIG.get())
+            .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
+            .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10)));
 
     public static ConfiguredFeature<?, ?> randomEarthPatch;
 
@@ -121,21 +121,21 @@ public class ForageFeatures
         if (overworldBiomes == null)
         {
             overworldBiomes = BiomeDictionary.getBiomes(BiomeDictionary.Type.OVERWORLD)
-                    .stream().map(RegistryKey::getLocation)
+                    .stream().map(RegistryKey::location)
                     .distinct().collect(Collectors.toList());
         }
 
         if (netherBiomes == null)
         {
             netherBiomes = BiomeDictionary.getBiomes(BiomeDictionary.Type.NETHER)
-                    .stream().map(RegistryKey::getLocation)
+                    .stream().map(RegistryKey::location)
                     .distinct().collect(Collectors.toList());
         }
 
         if (theEndBiomes == null)
         {
             theEndBiomes = BiomeDictionary.getBiomes(BiomeDictionary.Type.END)
-                    .stream().map(RegistryKey::getLocation)
+                    .stream().map(RegistryKey::location)
                     .distinct().collect(Collectors.toList());
         }
 
@@ -146,7 +146,7 @@ public class ForageFeatures
                 && !event.getCategory().equals(Biome.Category.ICY)
                 && !event.getCategory().equals(Biome.Category.NONE))
         {
-            event.getGeneration().withFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, randomEarthPatch);
+            event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, randomEarthPatch);
         }
     }
 }

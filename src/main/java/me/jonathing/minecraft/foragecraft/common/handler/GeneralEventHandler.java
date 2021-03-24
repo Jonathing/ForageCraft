@@ -30,9 +30,9 @@ public class GeneralEventHandler
      * @see #onLootTableLoad(LootTableLoadEvent)
      */
     private static final Supplier<LootPool> VILLAGE_HOUSE_CHESTS = () ->
-            LootPool.builder().name("village_leek_seeds").addEntry(
-                    ItemLootEntry.builder(ForageItems.leek_seeds)
-                            .acceptFunction(SetCount.builder(RandomValueRange.of(0, 2))))
+            LootPool.lootPool().name("village_leek_seeds").add(
+                    ItemLootEntry.lootTableItem(ForageItems.leek_seeds)
+                            .apply(SetCount.setCount(RandomValueRange.between(0, 2))))
                     .build();
 
     /**
@@ -64,11 +64,11 @@ public class GeneralEventHandler
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event)
     {
-        if (event.getName().equals(LootTables.CHESTS_VILLAGE_VILLAGE_DESERT_HOUSE)
-                || event.getName().equals(LootTables.CHESTS_VILLAGE_VILLAGE_PLAINS_HOUSE)
-                || event.getName().equals(LootTables.CHESTS_VILLAGE_VILLAGE_SAVANNA_HOUSE)
-                || event.getName().equals(LootTables.CHESTS_VILLAGE_VILLAGE_SNOWY_HOUSE)
-                || event.getName().equals(LootTables.CHESTS_VILLAGE_VILLAGE_TAIGA_HOUSE))
+        if (event.getName().equals(LootTables.VILLAGE_DESERT_HOUSE)
+                || event.getName().equals(LootTables.VILLAGE_PLAINS_HOUSE)
+                || event.getName().equals(LootTables.VILLAGE_SAVANNA_HOUSE)
+                || event.getName().equals(LootTables.VILLAGE_SNOWY_HOUSE)
+                || event.getName().equals(LootTables.VILLAGE_TAIGA_HOUSE))
         {
             event.getTable().addPool(VILLAGE_HOUSE_CHESTS.get());
         }

@@ -24,12 +24,12 @@ public class DimensionGeneratorSettingsMixin
 
     /**
      * This method hooks into the {@link org.spongepowered.asm.mixin.injection.points.MethodHead} of the
-     * {@link DimensionGeneratorSettings#func_236234_o_()} method to tell the game to skip the "experimental world
+     * {@link DimensionGeneratorSettings#stable()} method to tell the game to skip the "experimental world
      * settings" screen.
      *
-     * @see DimensionGeneratorSettings#func_236234_o_()
+     * @see DimensionGeneratorSettings#stable()
      */
-    @Inject(at = @At("HEAD"), method = "func_236234_o_()Z", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "stable()Z", cancellable = true)
     private void onCheckExperimental(CallbackInfoReturnable<Boolean> info)
     {
         LOGGER.debug("Skipping over the experimental settings screen since ForageCraft's development mixins have been enabled.");

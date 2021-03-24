@@ -53,7 +53,7 @@ public class ForageAdvancementProvider implements IDataProvider
     }
 
     @Override
-    public void act(@Nonnull DirectoryCache cache) throws IOException
+    public void run(@Nonnull DirectoryCache cache) throws IOException
     {
         Path path = this.generator.getOutputFolder();
         Set<ResourceLocation> set = Sets.newHashSet();
@@ -69,7 +69,7 @@ public class ForageAdvancementProvider implements IDataProvider
 
                 try
                 {
-                    IDataProvider.save(GSON, cache, a.copy().serialize(), path1);
+                    IDataProvider.save(GSON, cache, a.deconstruct().serializeToJson(), path1);
                 }
                 catch (IOException ioexception)
                 {
@@ -107,125 +107,125 @@ public class ForageAdvancementProvider implements IDataProvider
         {
             // ForageCraft advancements
             Advancement root = builder(ForageItems.stick_bundle, "root", ForageCraft.locate("textures/block/fascine_side.png"), FrameType.TASK, false, false, false)
-                    .withCriterion("has_" + Blocks.DIRT.asItem().getRegistryName().getPath(), InventoryChangeTrigger.Instance.forItems(Blocks.DIRT.asItem()))
-                    .register(consumer, ForageCraft.find("main/root"));
+                    .addCriterion("has_" + Blocks.DIRT.asItem().getRegistryName().getPath(), InventoryChangeTrigger.Instance.hasItems(Blocks.DIRT.asItem()))
+                    .save(consumer, ForageCraft.find("main/root"));
 
             Advancement root_vegetable = builder(Items.POTATO, "foraged_root_vegetable", FrameType.TASK, true, false, false)
-                    .withParent(root)
-                    .withRequirementsStrategy(IRequirementsStrategy.OR)
-                    .withCriterion("foraged_potato_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.POTATO))
-                    .withCriterion("foraged_potato_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.POTATO))
-                    .withCriterion("foraged_carrot_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.CARROT))
-                    .withCriterion("foraged_beetroot_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.BEETROOT))
-                    .register(consumer, ForageCraft.find("main/foraged_root_vegetable"));
+                    .parent(root)
+                    .requirements(IRequirementsStrategy.OR)
+                    .addCriterion("foraged_potato_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.POTATO))
+                    .addCriterion("foraged_potato_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.POTATO))
+                    .addCriterion("foraged_carrot_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.CARROT))
+                    .addCriterion("foraged_beetroot_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.BEETROOT))
+                    .save(consumer, ForageCraft.find("main/foraged_root_vegetable"));
 
             Advancement poisonous_potato = builder(Items.POISONOUS_POTATO, "foraged_poisonous_potato", FrameType.TASK, true, false, false)
-                    .withParent(root_vegetable)
-                    .withRequirementsStrategy(IRequirementsStrategy.OR)
-                    .withCriterion("foraged_poisonous_potato_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.POISONOUS_POTATO))
-                    .withCriterion("foraged_poisonous_potato_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.POISONOUS_POTATO))
-                    .register(consumer, ForageCraft.find("main/foraged_poisonous_potato"));
+                    .parent(root_vegetable)
+                    .requirements(IRequirementsStrategy.OR)
+                    .addCriterion("foraged_poisonous_potato_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.POISONOUS_POTATO))
+                    .addCriterion("foraged_poisonous_potato_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.POISONOUS_POTATO))
+                    .save(consumer, ForageCraft.find("main/foraged_poisonous_potato"));
 
             Advancement flint = builder(Items.FLINT, "foraged_flint", FrameType.TASK, true, false, false)
-                    .withParent(root)
-                    .withRequirementsStrategy(IRequirementsStrategy.OR)
-                    .withCriterion("foraged_flint_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.FLINT))
-                    .withCriterion("foraged_flint_from_stone", ForagingTrigger.Instance.create(Blocks.STONE, Items.FLINT))
-                    .register(consumer, ForageCraft.find("main/foraged_flint"));
+                    .parent(root)
+                    .requirements(IRequirementsStrategy.OR)
+                    .addCriterion("foraged_flint_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.FLINT))
+                    .addCriterion("foraged_flint_from_stone", ForagingTrigger.Instance.create(Blocks.STONE, Items.FLINT))
+                    .save(consumer, ForageCraft.find("main/foraged_flint"));
 
             Advancement bone = builder(Items.BONE, "foraged_bone", FrameType.TASK, true, true, false)
-                    .withParent(flint)
-                    .withRequirementsStrategy(IRequirementsStrategy.OR)
-                    .withCriterion("foraged_bone_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.BONE))
-                    .withCriterion("foraged_bone_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.BONE))
-                    .register(consumer, ForageCraft.find("main/foraged_bone"));
+                    .parent(flint)
+                    .requirements(IRequirementsStrategy.OR)
+                    .addCriterion("foraged_bone_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.BONE))
+                    .addCriterion("foraged_bone_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.BONE))
+                    .save(consumer, ForageCraft.find("main/foraged_bone"));
 
             Advancement skeleton_skull = builder(Items.SKELETON_SKULL, "foraged_skeleton_skull", FrameType.TASK, true, true, false)
-                    .withParent(bone)
-                    .withRequirementsStrategy(IRequirementsStrategy.OR)
-                    .withCriterion("foraged_skeleton_skull_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.SKELETON_SKULL))
-                    .withCriterion("foraged_skeleton_skull_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.SKELETON_SKULL))
-                    .register(consumer, ForageCraft.find("main/foraged_skeleton_skull"));
+                    .parent(bone)
+                    .requirements(IRequirementsStrategy.OR)
+                    .addCriterion("foraged_skeleton_skull_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.SKELETON_SKULL))
+                    .addCriterion("foraged_skeleton_skull_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.SKELETON_SKULL))
+                    .save(consumer, ForageCraft.find("main/foraged_skeleton_skull"));
 
             Advancement gold_nugget = builder(Items.GOLD_NUGGET, "foraged_gold_nugget", FrameType.TASK, true, true, false)
-                    .withParent(bone)
-                    .withRequirementsStrategy(IRequirementsStrategy.OR)
-                    .withCriterion("foraged_gold_nugget_from_stone", ForagingTrigger.Instance.create(Blocks.STONE, Items.GOLD_NUGGET))
-                    .withCriterion("foraged_gold_nugget_from_nether_quartz_ore", ForagingTrigger.Instance.create(Blocks.NETHER_QUARTZ_ORE, Items.GOLD_NUGGET))
-                    .register(consumer, ForageCraft.find("main/foraged_gold_nugget"));
+                    .parent(bone)
+                    .requirements(IRequirementsStrategy.OR)
+                    .addCriterion("foraged_gold_nugget_from_stone", ForagingTrigger.Instance.create(Blocks.STONE, Items.GOLD_NUGGET))
+                    .addCriterion("foraged_gold_nugget_from_nether_quartz_ore", ForagingTrigger.Instance.create(Blocks.NETHER_QUARTZ_ORE, Items.GOLD_NUGGET))
+                    .save(consumer, ForageCraft.find("main/foraged_gold_nugget"));
 
             Advancement diamond = builder(Items.DIAMOND, "foraged_diamond", FrameType.CHALLENGE, true, true, false)
-                    .withParent(gold_nugget)
-                    .withCriterion("foraged_diamond_from_coal_ore", ForagingTrigger.Instance.create(Blocks.COAL_ORE, Items.DIAMOND))
-                    .register(consumer, ForageCraft.find("main/foraged_diamond"));
+                    .parent(gold_nugget)
+                    .addCriterion("foraged_diamond_from_coal_ore", ForagingTrigger.Instance.create(Blocks.COAL_ORE, Items.DIAMOND))
+                    .save(consumer, ForageCraft.find("main/foraged_diamond"));
 
             Advancement emerald = builder(Items.EMERALD, "foraged_emerald", FrameType.CHALLENGE, true, true, false)
-                    .withParent(gold_nugget)
-                    .withCriterion("foraged_emerald_from_coal_ore", ForagingTrigger.Instance.create(Blocks.COAL_ORE, Items.EMERALD))
-                    .register(consumer, ForageCraft.find("main/foraged_emerald"));
+                    .parent(gold_nugget)
+                    .addCriterion("foraged_emerald_from_coal_ore", ForagingTrigger.Instance.create(Blocks.COAL_ORE, Items.EMERALD))
+                    .save(consumer, ForageCraft.find("main/foraged_emerald"));
 
             Advancement gathering_knife = haveAnyItem(builder(ForageItems.gathering_knife, "has_gathering_knife", FrameType.TASK, true, false, false)
-                            .withParent(root),
+                            .parent(root),
                     ImmutableList.of(ForageItems.gathering_knife))
-                    .register(consumer, ForageCraft.find("main/has_gathering_knife"));
+                    .save(consumer, ForageCraft.find("main/has_gathering_knife"));
 
             Advancement straw = haveAnyItem(builder(ForageItems.straw, "has_straw", FrameType.TASK, true, false, false)
-                            .withParent(gathering_knife),
+                            .parent(gathering_knife),
                     ImmutableList.of(ForageItems.straw))
-                    .register(consumer, ForageCraft.find("main/has_straw"));
+                    .save(consumer, ForageCraft.find("main/has_straw"));
 
             Advancement seeds_stolen = haveAnyItem(builder(ForageItems.leek_seeds, "has_leek_seeds", FrameType.TASK, true, true, false)
-                            .withParent(root),
+                            .parent(root),
                     ImmutableList.of(ForageItems.leek_seeds))
-                    .register(consumer, ForageCraft.find("main/has_leek_seeds"));
+                    .save(consumer, ForageCraft.find("main/has_leek_seeds"));
 
             Advancement leek = haveAnyItem(builder(ForageItems.leek, "has_leek", FrameType.TASK, true, true, false)
-                            .withParent(seeds_stolen),
+                            .parent(seeds_stolen),
                     ImmutableList.of(ForageItems.leek))
-                    .register(consumer, ForageCraft.find("main/has_leek"));
+                    .save(consumer, ForageCraft.find("main/has_leek"));
 
             Advancement baka_baka_baka = builder(ForageItems.leek, "triple_baka", FrameType.GOAL, true, true, true)
-                    .withParent(leek)
-                    .withCriterion("hit_entity_with_leek", LeekTrigger.Instance.create())
-                    .register(consumer, ForageCraft.find("main/triple_baka"));
+                    .parent(leek)
+                    .addCriterion("hit_entity_with_leek", LeekTrigger.Instance.create())
+                    .save(consumer, ForageCraft.find("main/triple_baka"));
 
             Advancement spaghetti = haveAnyItem(builder(ForageItems.spaghetti, "has_spaghetti", FrameType.GOAL, true, true, true)
-                            .withParent(root),
+                            .parent(root),
                     ImmutableList.of(ForageItems.spaghetti))
-                    .register(consumer, ForageCraft.find("main/has_spaghetti"));
+                    .save(consumer, ForageCraft.find("main/has_spaghetti"));
 
             // Patchouli book exclusives
-            Advancement book_underground = Advancement.Builder.builder()
-                    .withRequirementsStrategy(IRequirementsStrategy.OR)
-                    .withCriterion("forage_bone_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.BONE))
-                    .withCriterion("forage_bone_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.BONE))
-                    .withCriterion("forage_skeleton_skull_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.SKELETON_SKULL))
-                    .withCriterion("forage_skeleton_skull_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.SKELETON_SKULL))
-                    .withCriterion("forage_flint_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.FLINT))
-                    .withCriterion("forage_flint_from_stone", ForagingTrigger.Instance.create(Blocks.STONE, Items.FLINT))
-                    .withCriterion("forage_gold_nugget_from_stone", ForagingTrigger.Instance.create(Blocks.STONE, Items.GOLD_NUGGET))
-                    .withCriterion("forage_diamond_from_coal_ore", ForagingTrigger.Instance.create(Blocks.COAL_ORE, Items.DIAMOND))
-                    .withCriterion("forage_emerald_from_coal_ore", ForagingTrigger.Instance.create(Blocks.COAL_ORE, Items.EMERALD))
-                    .register(consumer, ForageCraft.find("book_exclusive/underground"));
+            Advancement book_underground = Advancement.Builder.advancement()
+                    .requirements(IRequirementsStrategy.OR)
+                    .addCriterion("forage_bone_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.BONE))
+                    .addCriterion("forage_bone_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.BONE))
+                    .addCriterion("forage_skeleton_skull_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.SKELETON_SKULL))
+                    .addCriterion("forage_skeleton_skull_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.SKELETON_SKULL))
+                    .addCriterion("forage_flint_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.FLINT))
+                    .addCriterion("forage_flint_from_stone", ForagingTrigger.Instance.create(Blocks.STONE, Items.FLINT))
+                    .addCriterion("forage_gold_nugget_from_stone", ForagingTrigger.Instance.create(Blocks.STONE, Items.GOLD_NUGGET))
+                    .addCriterion("forage_diamond_from_coal_ore", ForagingTrigger.Instance.create(Blocks.COAL_ORE, Items.DIAMOND))
+                    .addCriterion("forage_emerald_from_coal_ore", ForagingTrigger.Instance.create(Blocks.COAL_ORE, Items.EMERALD))
+                    .save(consumer, ForageCraft.find("book_exclusive/underground"));
 
-            Advancement book_root_vegetables = Advancement.Builder.builder()
-                    .withRequirementsStrategy(IRequirementsStrategy.OR)
-                    .withCriterion("foraged_potato_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.POTATO))
-                    .withCriterion("foraged_potato_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.POTATO))
-                    .withCriterion("foraged_carrot_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.CARROT))
-                    .withCriterion("foraged_beetroot_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.BEETROOT))
-                    .withCriterion("foraged_poisonous_potato_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.POISONOUS_POTATO))
-                    .withCriterion("foraged_poisonous_potato_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.POISONOUS_POTATO))
-                    .register(consumer, ForageCraft.find("book_exclusive/root_vegetables"));
+            Advancement book_root_vegetables = Advancement.Builder.advancement()
+                    .requirements(IRequirementsStrategy.OR)
+                    .addCriterion("foraged_potato_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.POTATO))
+                    .addCriterion("foraged_potato_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.POTATO))
+                    .addCriterion("foraged_carrot_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.CARROT))
+                    .addCriterion("foraged_beetroot_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.BEETROOT))
+                    .addCriterion("foraged_poisonous_potato_from_grass_block", ForagingTrigger.Instance.create(Blocks.GRASS_BLOCK, Items.POISONOUS_POTATO))
+                    .addCriterion("foraged_poisonous_potato_from_dirt", ForagingTrigger.Instance.create(Blocks.DIRT, Items.POISONOUS_POTATO))
+                    .save(consumer, ForageCraft.find("book_exclusive/root_vegetables"));
 
-            Advancement book_paving_stones = Advancement.Builder.builder()
-                    .withCriterion("has_paving_stones", InventoryChangeTrigger.Instance.forItems(ForageBlocks.paving_stones))
-                    .register(consumer, ForageCraft.find("book_exclusive/has_paving_stones"));
+            Advancement book_paving_stones = Advancement.Builder.advancement()
+                    .addCriterion("has_paving_stones", InventoryChangeTrigger.Instance.hasItems(ForageBlocks.paving_stones))
+                    .save(consumer, ForageCraft.find("book_exclusive/has_paving_stones"));
         }
 
         private Advancement.Builder builder(IItemProvider displayItem, String name, ResourceLocation background, FrameType frameType, boolean showToast, boolean announceToChat, boolean hidden)
         {
-            return Advancement.Builder.builder().withDisplay(displayItem, translate(name), translate(name + ".desc"), background, frameType, showToast, announceToChat, hidden);
+            return Advancement.Builder.advancement().display(displayItem, translate(name), translate(name + ".desc"), background, frameType, showToast, announceToChat, hidden);
         }
 
         private Advancement.Builder builder(IItemProvider displayItem, String name, FrameType frameType, boolean showToast, boolean announceToChat, boolean hidden)
@@ -235,7 +235,7 @@ public class ForageAdvancementProvider implements IDataProvider
 
         private Advancement.Builder haveAnyItem(Advancement.Builder builder, List<IItemProvider> items)
         {
-            items.forEach(item -> builder.withCriterion("has_" + item.asItem().getRegistryName().getPath(), InventoryChangeTrigger.Instance.forItems(item)));
+            items.forEach(item -> builder.addCriterion("has_" + item.asItem().getRegistryName().getPath(), InventoryChangeTrigger.Instance.hasItems(item)));
             return builder;
         }
 

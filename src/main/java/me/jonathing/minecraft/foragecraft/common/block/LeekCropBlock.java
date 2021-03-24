@@ -7,6 +7,8 @@ import net.minecraft.util.IItemProvider;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.block.AbstractBlock;
+
 /**
  * This class holds the {@link me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks#leek_crop} block. It is
  * required to ensure that the seeds item for it is {@link ForageItems#leek_seeds}.
@@ -19,14 +21,14 @@ import javax.annotation.Nonnull;
  */
 public class LeekCropBlock extends CropsBlock
 {
-    public LeekCropBlock(Block.Properties properties)
+    public LeekCropBlock(AbstractBlock.Properties properties)
     {
         super(properties);
     }
 
     @Override
     @Nonnull
-    protected IItemProvider getSeedsItem()
+    protected IItemProvider getBaseSeedId()
     {
         return ForageItems.leek_seeds;
     }

@@ -42,7 +42,7 @@ public class ForageItemGroups extends ItemGroup
      */
     @Override
     @Nonnull
-    public ItemStack createIcon()
+    public ItemStack makeIcon()
     {
         return new ItemStack(ForgeRegistries.ITEMS.getValue(ForageCraft.locate(iconName)));
     }

@@ -91,8 +91,8 @@ public class PatchouliHelper
                         'G', Blocks.GRASS_BLOCK,
                         'R', ForageBlocks.rock,
                         'Y', Blocks.DANDELION,
-                        'S', ForageBlocks.stick.getDefaultState(),
-                        's', ForageBlocks.stick.getDefaultState().with(StickBlock.FACING, Direction.SOUTH),
+                        'S', ForageBlocks.stick.defaultBlockState(),
+                        's', ForageBlocks.stick.defaultBlockState().setValue(StickBlock.FACING, Direction.SOUTH),
                         'P', Blocks.POPPY,
                         'F', ForageBlocks.flat_rock,
                         'B', Blocks.BLUE_ORCHID,
@@ -107,9 +107,9 @@ public class PatchouliHelper
                         'D', Blocks.DIAMOND_ORE,
                         'E', Blocks.EMERALD_ORE,
                         'C', Blocks.COAL_ORE,
-                        '1', Blocks.SKELETON_SKULL.getDefaultState().with(SkullBlock.ROTATION, 10),
+                        '1', Blocks.SKELETON_SKULL.defaultBlockState().setValue(SkullBlock.ROTATION, 10),
                         'G', Blocks.GRAVEL,
-                        '2', Blocks.SKELETON_SKULL.getDefaultState().with(SkullBlock.ROTATION, 13))
+                        '2', Blocks.SKELETON_SKULL.defaultBlockState().setValue(SkullBlock.ROTATION, 13))
                         .setSymmetrical(true));
 
         PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "the_nether"),
@@ -123,21 +123,21 @@ public class PatchouliHelper
                         'O', Blocks.OBSIDIAN,
                         'R', Blocks.WARPED_ROOTS,
                         'F', Blocks.WARPED_FUNGUS,
-                        'P', Blocks.NETHER_PORTAL.getDefaultState().with(NetherPortalBlock.AXIS, Direction.Axis.X),
+                        'P', Blocks.NETHER_PORTAL.defaultBlockState().setValue(NetherPortalBlock.AXIS, Direction.Axis.X),
                         'f', Blocks.CRIMSON_FUNGUS,
-                        'B', Blocks.BLACKSTONE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM),
-                        'b', Blocks.POLISHED_BLACKSTONE_BRICK_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM),
+                        'B', Blocks.BLACKSTONE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.BOTTOM),
+                        'b', Blocks.POLISHED_BLACKSTONE_BRICK_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.BOTTOM),
                         'r', Blocks.CRIMSON_ROOTS,
-                        'L', Blocks.SOUL_LANTERN.getDefaultState().with(LanternBlock.HANGING, true),
-                        'l', Blocks.LANTERN.getDefaultState().with(LanternBlock.HANGING, true),
-                        'I', Blocks.IRON_BARS.getDefaultState().with(PaneBlock.SOUTH, true),
-                        'i', Blocks.IRON_BARS.getDefaultState().with(PaneBlock.NORTH, true),
-                        '1', Blocks.FIRE.getDefaultState().with(FireBlock.AGE, 0))
+                        'L', Blocks.SOUL_LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true),
+                        'l', Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true),
+                        'I', Blocks.IRON_BARS.defaultBlockState().setValue(PaneBlock.SOUTH, true),
+                        'i', Blocks.IRON_BARS.defaultBlockState().setValue(PaneBlock.NORTH, true),
+                        '1', Blocks.FIRE.defaultBlockState().setValue(FireBlock.AGE, 0))
                         .setSymmetrical(true));
 
         PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_stick"),
                 PatchouliAPI.get().makeMultiblock(SINGLE_BLOCK,
-                        '0', ForageBlocks.stick.getDefaultState().with(StickBlock.FACING, Direction.SOUTH),
+                        '0', ForageBlocks.stick.defaultBlockState().setValue(StickBlock.FACING, Direction.SOUTH),
                         '1', Blocks.GRASS_BLOCK));
 
         PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_rock"),

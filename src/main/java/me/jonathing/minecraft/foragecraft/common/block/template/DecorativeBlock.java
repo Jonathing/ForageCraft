@@ -22,6 +22,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import net.minecraft.block.AbstractBlock.OffsetType;
+import net.minecraft.block.AbstractBlock.Properties;
+
 /**
  * This class holds the template for any decorative blocks in ForageCraft. This includes blocks such as
  * {@link ForageBlocks#rock}, {@link ForageBlocks#flat_rock}, and {@link ForageBlocks#stick}.
@@ -32,9 +35,9 @@ import java.util.function.Supplier;
  */
 public class DecorativeBlock extends FallingBlock
 {
-    public static final VoxelShape STICK_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
-    public static final VoxelShape ROCK_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D);
-    public static final VoxelShape FLAT_ROCK_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
+    public static final VoxelShape STICK_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
+    public static final VoxelShape ROCK_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D);
+    public static final VoxelShape FLAT_ROCK_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
 
     private final VoxelShape shape;
     private final Supplier<Item> decorativeItem;
@@ -75,10 +78,10 @@ public class DecorativeBlock extends FallingBlock
      */
     @Override
     @SuppressWarnings("deprecation")
-    public boolean isValidPosition(@Nonnull BlockState blockState, IWorldReader world, @Nonnull BlockPos blockPos)
+    public boolean canSurvive(@Nonnull BlockState blockState, IWorldReader world, @Nonnull BlockPos blockPos)
     {
         return world.getBlockState(blockPos).getBlock() instanceof AirBlock
-                && world.getBlockState(blockPos.down()).isSolid();
+                && world.getBlockState(blockPos.below()).canOcclude();
     }
 
     /**
@@ -111,10 +114,10 @@ public class DecorativeBlock extends FallingBlock
     @Nonnull
     @ParametersAreNonnullByDefault
     @SuppressWarnings("deprecation")
-    public ActionResultType onBlockActivated(BlockState blockState, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult)
+    public ActionResultType use(BlockState blockState, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult)
     {
-        world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
-        Block.spawnAsEntity(world, blockPos, new ItemStack(this.getDecorativeItem(), 1));
+        world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+        Block.popResource(world, blockPos, new ItemStack(this.getDecorativeItem(), 1));
         return ActionResultType.SUCCESS;
     }
 

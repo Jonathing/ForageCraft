@@ -54,7 +54,7 @@ public class ItemMixin
     @Inject(at = @At("HEAD"), method = "onItemUse(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;", cancellable = true)
     public void onItemUse(ItemUseContext itemUseContext, CallbackInfoReturnable<ActionResultType> callback)
     {
-        if (itemUseContext.getItem().getItem().equals(Items.STICK))
+        if (itemUseContext.getItemInHand().getItem().equals(Items.STICK))
         {
             BlockItemUseContext useContext = new BlockItemUseContext(itemUseContext);
 
@@ -66,23 +66,23 @@ public class ItemMixin
             {
                 BlockState blockstate = ForageBlocks.stick.getStateForPlacement(useContext);
                 blockstate = blockstate == null ? ((StickBlock) ForageBlocks.stick).getStateWithRandomDirection() : blockstate;
-                if (!useContext.getWorld().setBlockState(useContext.getPos(), blockstate, 11))
+                if (!useContext.getLevel().setBlock(useContext.getClickedPos(), blockstate, 11))
                 {
                     callback.setReturnValue(ActionResultType.FAIL);
                 }
                 else
                 {
-                    BlockPos blockpos = useContext.getPos();
-                    World world = useContext.getWorld();
+                    BlockPos blockpos = useContext.getClickedPos();
+                    World world = useContext.getLevel();
                     PlayerEntity playerentity = useContext.getPlayer();
-                    ItemStack itemstack = useContext.getItem();
+                    ItemStack itemstack = useContext.getItemInHand();
                     BlockState blockstate1 = world.getBlockState(blockpos);
                     Block block = blockstate1.getBlock();
                     if (block == blockstate.getBlock())
                     {
-                        blockstate1 = this.func_219985_a(blockpos, world, itemstack, blockstate1);
-                        BlockItem.setTileEntityNBT(world, playerentity, blockpos, itemstack);
-                        block.onBlockPlacedBy(world, blockpos, blockstate1, playerentity, itemstack);
+                        blockstate1 = this.updateBlockStateFromTag(blockpos, world, itemstack, blockstate1);
+                        BlockItem.updateCustomBlockEntityTag(world, playerentity, blockpos, itemstack);
+                        block.setPlacedBy(world, blockpos, blockstate1, playerentity, itemstack);
                         if (playerentity instanceof ServerPlayerEntity)
                         {
                             CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity) playerentity, blockpos, itemstack);
@@ -90,13 +90,13 @@ public class ItemMixin
                     }
 
                     SoundType soundtype = blockstate1.getSoundType(world, blockpos, useContext.getPlayer());
-                    world.playSound(playerentity, blockpos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
-                    if (playerentity == null || !playerentity.abilities.isCreativeMode)
+                    world.playSound(playerentity, blockpos, SoundEvents.WOOD_PLACE, SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+                    if (playerentity == null || !playerentity.abilities.instabuild)
                     {
                         itemstack.shrink(1);
                     }
 
-                    callback.setReturnValue(ActionResultType.success(world.isRemote));
+                    callback.setReturnValue(ActionResultType.sidedSuccess(world.isClientSide));
                 }
             }
         }
@@ -110,42 +110,42 @@ public class ItemMixin
      */
     private static boolean canPlace(BlockItemUseContext useContext)
     {
-        World world = useContext.getWorld();
-        BlockPos pos = useContext.getPos();
-        return world.getBlockState(pos.down()).isSolid()
+        World world = useContext.getLevel();
+        BlockPos pos = useContext.getClickedPos();
+        return world.getBlockState(pos.below()).canOcclude()
                 && (world.getBlockState(pos).getBlock() instanceof AirBlock
-                || world.getBlockState(pos).getFluidState().equals(Fluids.WATER.getStillFluidState(false)))
+                || world.getBlockState(pos).getFluidState().equals(Fluids.WATER.getSource(false)))
                 && useContext.canPlace();
     }
 
     /**
      * Copy-pasted vanilla code from the {@link BlockItem} class.
      *
-     * @see BlockItem#func_219985_a(BlockPos, World, ItemStack, BlockState)
+     * @see BlockItem#updateBlockStateFromTag(BlockPos, World, ItemStack, BlockState)
      */
-    private BlockState func_219985_a(BlockPos blockPos, World world, ItemStack itemStack, BlockState blockState)
+    private BlockState updateBlockStateFromTag(BlockPos blockPos, World world, ItemStack itemStack, BlockState blockState)
     {
         BlockState blockstate = blockState;
         CompoundNBT compoundnbt = itemStack.getTag();
         if (compoundnbt != null)
         {
             CompoundNBT compoundnbt1 = compoundnbt.getCompound("BlockStateTag");
-            StateContainer<Block, BlockState> statecontainer = blockState.getBlock().getStateContainer();
+            StateContainer<Block, BlockState> statecontainer = blockState.getBlock().getStateDefinition();
 
-            for (String s : compoundnbt1.keySet())
+            for (String s : compoundnbt1.getAllKeys())
             {
                 Property<?> property = statecontainer.getProperty(s);
                 if (property != null)
                 {
-                    String s1 = compoundnbt1.get(s).getString();
-                    blockstate = func_219988_a(blockstate, property, s1);
+                    String s1 = compoundnbt1.get(s).getAsString();
+                    blockstate = updateState(blockstate, property, s1);
                 }
             }
         }
 
         if (blockstate != blockState)
         {
-            world.setBlockState(blockPos, blockstate, 2);
+            world.setBlock(blockPos, blockstate, 2);
         }
 
         return blockstate;
@@ -154,10 +154,10 @@ public class ItemMixin
     /**
      * Copy-pasted vanilla code from the {@link BlockItem} class.
      *
-     * @see BlockItem#func_219988_a(BlockState, Property, String)
+     * @see BlockItem#updateState(BlockState, Property, String)
      */
-    private static <T extends Comparable<T>> BlockState func_219988_a(BlockState blockState, Property<T> property, String s)
+    private static <T extends Comparable<T>> BlockState updateState(BlockState blockState, Property<T> property, String s)
     {
-        return property.parseValue(s).map((p_219986_2_) -> blockState.with(property, p_219986_2_)).orElse(blockState);
+        return property.getValue(s).map((p_219986_2_) -> blockState.setValue(property, p_219986_2_)).orElse(blockState);
     }
 }

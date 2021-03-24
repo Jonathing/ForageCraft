@@ -24,6 +24,6 @@ public class ForageClient
      */
     public static void clientSetup(final FMLClientSetupEvent event)
     {
-        RenderTypeLookup.setRenderLayer(ForageBlocks.leek_crop, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ForageBlocks.leek_crop, RenderType.cutout());
     }
 }

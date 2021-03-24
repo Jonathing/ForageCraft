@@ -70,7 +70,7 @@ public class ForageLootProvider extends LootTableProvider
     {
         map.forEach((location, table) ->
         {
-            LootTableManager.validateLootTable(validationtracker, location, table);
+            LootTableManager.validate(validationtracker, location, table);
         });
     }
 
@@ -96,8 +96,8 @@ public class ForageLootProvider extends LootTableProvider
          */
         default LootTable.Builder tableOf(List<LootPool.Builder> pools)
         {
-            LootTable.Builder table = LootTable.builder();
-            pools.forEach(pool -> table.addLootPool(pool));
+            LootTable.Builder table = LootTable.lootTable();
+            pools.forEach(pool -> table.withPool(pool));
             return table;
         }
 
@@ -109,7 +109,7 @@ public class ForageLootProvider extends LootTableProvider
          */
         default LootTable.Builder tableOf(LootPool.Builder pool)
         {
-            return LootTable.builder().addLootPool(pool);
+            return LootTable.lootTable().withPool(pool);
         }
 
         /**
@@ -123,7 +123,7 @@ public class ForageLootProvider extends LootTableProvider
          */
         default LootPool.Builder basicPool(IItemProvider item, int min, int max)
         {
-            return LootPool.builder().addEntry(basicEntry(item, min, max));
+            return LootPool.lootPool().add(basicEntry(item, min, max));
         }
 
         /**
@@ -134,7 +134,7 @@ public class ForageLootProvider extends LootTableProvider
          */
         default LootPool.Builder basicPool(IItemProvider item)
         {
-            return LootPool.builder().addEntry(basicEntry(item));
+            return LootPool.lootPool().add(basicEntry(item));
         }
 
         /**
@@ -157,8 +157,8 @@ public class ForageLootProvider extends LootTableProvider
          */
         default LootPool.Builder poolOf(List<LootEntry.Builder<?>> lootEntries)
         {
-            LootPool.Builder pool = LootPool.builder();
-            lootEntries.forEach(entry -> pool.addEntry(entry));
+            LootPool.Builder pool = LootPool.lootPool();
+            lootEntries.forEach(entry -> pool.add(entry));
             return pool;
         }
 
@@ -171,9 +171,9 @@ public class ForageLootProvider extends LootTableProvider
          * @param max
          * @return
          */
-        default ItemLootEntry.Builder<?> basicEntry(IItemProvider item, int min, int max)
+        default StandaloneLootEntry.Builder<?> basicEntry(IItemProvider item, int min, int max)
         {
-            return basicEntry(item).acceptFunction(SetCount.builder(RandomValueRange.of(min, max)));
+            return basicEntry(item).apply(SetCount.setCount(RandomValueRange.between(min, max)));
         }
 
         /**
@@ -182,18 +182,18 @@ public class ForageLootProvider extends LootTableProvider
          * @param item
          * @return
          */
-        default ItemLootEntry.Builder<?> basicEntry(IItemProvider item)
+        default StandaloneLootEntry.Builder<?> basicEntry(IItemProvider item)
         {
-            return ItemLootEntry.builder(item);
+            return ItemLootEntry.lootTableItem(item);
         }
     }
 
     private static class BlockLoot extends BlockLootTables implements LootPoolUtil
     {
-        private final ILootCondition.IBuilder SILK_TOUCH = MatchTool.builder(ItemPredicate.Builder.create().enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1))));
-        private final ILootCondition.IBuilder SHEARS = MatchTool.builder(ItemPredicate.Builder.create().item(Items.SHEARS));
-        private final ILootCondition.IBuilder SILK_TOUCH_OR_SHEARS = SHEARS.alternative(SILK_TOUCH);
-        private final ILootCondition.IBuilder NOT_SILK_TOUCH_OR_SHEARS = SILK_TOUCH_OR_SHEARS.inverted();
+        private final ILootCondition.IBuilder SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1))));
+        private final ILootCondition.IBuilder SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS));
+        private final ILootCondition.IBuilder SILK_TOUCH_OR_SHEARS = SHEARS.or(SILK_TOUCH);
+        private final ILootCondition.IBuilder NOT_SILK_TOUCH_OR_SHEARS = SILK_TOUCH_OR_SHEARS.invert();
         private final float[] DEFAULT_SAPLING_DROP_RATES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
 
         @Override
@@ -203,16 +203,16 @@ public class ForageLootProvider extends LootTableProvider
             {
                 if (block.equals(ForageBlocks.stick))
                 {
-                    registerDropping(block, Items.STICK);
+                    dropOther(block, Items.STICK);
                 }
                 else if (block.equals(ForageBlocks.leek_crop))
                 {
-                    ILootCondition.IBuilder growthCondition = BlockStateProperty.builder(block).fromProperties(StatePropertiesPredicate.Builder.newBuilder().withIntProp(LeekCropBlock.AGE, ((LeekCropBlock) block).getMaxAge()));
-                    this.registerLootTable(block, (b) -> crop(growthCondition, b, ForageItems.leek, ForageItems.leek_seeds));
+                    ILootCondition.IBuilder growthCondition = BlockStateProperty.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(LeekCropBlock.AGE, ((LeekCropBlock) block).getMaxAge()));
+                    this.add(block, (b) -> crop(growthCondition, b, ForageItems.leek, ForageItems.leek_seeds));
                 }
                 else
                 {
-                    registerDropSelfLootTable(block);
+                    dropSelf(block);
                 }
             });
         }
@@ -231,24 +231,24 @@ public class ForageLootProvider extends LootTableProvider
 
         private void droppingSeedTag(Block block, ITag.INamedTag<Item> tag)
         {
-            this.registerLootTable(block, droppingWithShears(block, withExplosionDecay(block, (TagLootEntry.getBuilder(tag).acceptCondition(RandomChance.builder(0.125F))).acceptFunction(ApplyBonus.uniformBonusCount(Enchantments.FORTUNE, 2)))));
+            this.add(block, createShearsDispatchTable(block, applyExplosionDecay(block, (TagLootEntry.expandTag(tag).when(RandomChance.randomChance(0.125F))).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 2)))));
         }
 
         private void silkOrElse(Block withSilk, IItemProvider without)
         {
-            this.registerLootTable(withSilk, (b) -> droppingWithSilkTouch(b, without));
+            this.add(withSilk, (b) -> createSingleItemTableWithSilkTouch(b, without));
         }
 
         private LootTable.Builder leaves(Block block, IItemProvider sapling, IItemProvider stick)
         {
-            return droppingWithSilkTouchOrShears(block, withSurvivesExplosion(block, ItemLootEntry.builder(sapling)).acceptCondition(TableBonus.builder(Enchantments.FORTUNE, DEFAULT_SAPLING_DROP_RATES))).addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).acceptCondition(NOT_SILK_TOUCH_OR_SHEARS).addEntry(withExplosionDecay(block, ItemLootEntry.builder(stick).acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 2.0F)))).acceptCondition(TableBonus.builder(Enchantments.FORTUNE, 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))));
+            return createSilkTouchOrShearsDispatchTable(block, applyExplosionCondition(block, ItemLootEntry.lootTableItem(sapling)).when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, DEFAULT_SAPLING_DROP_RATES))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).when(NOT_SILK_TOUCH_OR_SHEARS).add(applyExplosionDecay(block, ItemLootEntry.lootTableItem(stick).apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F)))).when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))));
         }
 
         private LootTable.Builder leavesFruit(Block block, IItemProvider sapling, IItemProvider stick, IItemProvider fruit)
         {
             float baseChance = 0.05F;
             float[] fortuneChances = new float[]{1.11111114F, 1.25F, 1.6666668F, 5.0F};
-            return leaves(block, sapling, stick).addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).acceptCondition(NOT_SILK_TOUCH_OR_SHEARS).addEntry(withSurvivesExplosion(block, ItemLootEntry.builder(fruit)).acceptCondition(TableBonus.builder(Enchantments.FORTUNE, baseChance, baseChance * fortuneChances[0], baseChance * fortuneChances[1], baseChance * fortuneChances[2], baseChance * fortuneChances[3]))));
+            return leaves(block, sapling, stick).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).when(NOT_SILK_TOUCH_OR_SHEARS).add(applyExplosionCondition(block, ItemLootEntry.lootTableItem(fruit)).when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, baseChance, baseChance * fortuneChances[0], baseChance * fortuneChances[1], baseChance * fortuneChances[2], baseChance * fortuneChances[3]))));
         }
 
         private LootTable.Builder crop(ILootCondition.IBuilder growthCondition, Block block, IItemProvider food)
@@ -258,10 +258,10 @@ public class ForageLootProvider extends LootTableProvider
 
         private LootTable.Builder crop(ILootCondition.IBuilder growthCondition, Block block, IItemProvider food, IItemProvider seed)
         {
-            LootPool.Builder seedPool = LootPool.builder().addEntry(ItemLootEntry.builder(seed).acceptFunction(ApplyBonus.binomialWithBonusCount(Enchantments.FORTUNE, 0.5714286F, 3).acceptCondition(growthCondition)));
-            LootPool.Builder foodPool = LootPool.builder().acceptCondition(growthCondition).addEntry(ItemLootEntry.builder(food).acceptFunction(ApplyBonus.binomialWithBonusCount(Enchantments.FORTUNE, 0.5714286F, 1)));
+            LootPool.Builder seedPool = LootPool.lootPool().add(ItemLootEntry.lootTableItem(seed).apply(ApplyBonus.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3).when(growthCondition)));
+            LootPool.Builder foodPool = LootPool.lootPool().when(growthCondition).add(ItemLootEntry.lootTableItem(food).apply(ApplyBonus.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 1)));
 
-            return withExplosionDecay(block, LootTable.builder().addLootPool(seedPool).addLootPool(foodPool));
+            return applyExplosionDecay(block, LootTable.lootTable().withPool(seedPool).withPool(foodPool));
         }
 
 //        private LootTable.Builder doubleCrop(ILootCondition.IBuilder growthCondition, Block block, IItemProvider food, IItemProvider seed)
