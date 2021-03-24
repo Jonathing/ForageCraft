@@ -1,39 +1,68 @@
 /*
- * This gradle file contains additional instructions for publishing builds of this mod to the Modding Legacy Maven
- * repository. To enable publishing to the maven, uncomment the respective lines at the top of the build.gradle file.
- * For more information on publishing to the ML Maven, talk to Jonathing.
+ * GradleWorks for ForgeGradle 4/3
+ * Written by Jonathing
+ * Version 3.3.0
+ *
+ * This gradle file contains additional instructions for publishing builds of this mod to maven repositories.
  */
 
 // shoves all of the sources in a jar
 task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = 'sources'
-	from sourceSets.main.allSource
+    if (!(project.hasProperty('use_forgegradle3') && "${use_forgegradle3}".toString() == 'true')) {
+        archiveClassifier.set('sources')
+    } else {
+        classifier = 'sources'
+    }
+    from sourceSets.main.allSource
+}
+
+// shoves all of the sources and deobf compiled classes in a jar
+task deobfJar(type: Jar, dependsOn: classes) {
+    if (!(project.hasProperty('use_forgegradle3') && "${use_forgegradle3}".toString() == 'true')) {
+        archiveClassifier.set('deobf')
+    } else {
+        classifier = 'deobf'
+    }
+    from sourceSets.main.java.sourceDirectories
+    from sourceSets.main.output
 }
 
 // generates the javadocs and shoves them in a jar
 task javadocJar(type: Jar) {
-	from javadoc
-	classifier = 'javadoc'
+    from javadoc
+    if (!(project.hasProperty('use_forgegradle3') && "${use_forgegradle3}".toString() == 'true')) {
+        archiveClassifier.set('javadoc')
+    } else {
+        classifier = 'javadoc'
+    }
 }
 
 // Ensures that the mod is built before it is published to the maven
 publish {
-	dependsOn 'build'
+    dependsOn 'build'
 }
 
 publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			groupId = "${maven_group}"
-			artifactId = "${maven_artifact_id}"
-			version = "${mc_version}-${version}"
+    publications {
+        // Get the main jar, sources jar, and javadoc jars for publishing
+        mavenJava(MavenPublication) {
+            groupId = "${maven_group}".toString()
+            artifactId = "${maven_artifact_id}".toString()
+            version = "${mc_version}-${version}".toString()
 
-			artifact reobfFile
-			artifact sourcesJar
-			artifact javadocJar
-		}
-	}
-	repositories {
+            artifact reobfFile // main jar
+            artifact sourcesJar // sources jar
+            artifact javadocJar // javadoc jar
+        }
+    }
+    repositories {
+        // Test Maven repository located in the "mcmodsrepo" folder
+        maven {
+            name "TestMaven"
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+		
+		// Modding Legacy Maven
 		maven {
 			name = "ModdingLegacyMaven"
 			url = uri("https://maven.moddinglegacy.com/artifactory/modding-legacy/")
@@ -42,5 +71,5 @@ publishing {
 				password = project.findProperty("mlm.key") ?: System.getenv("ML_TOKEN")
 			}
 		}
-	}
+    }
 }

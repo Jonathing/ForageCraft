@@ -1,1 +1,15 @@
-rootProject.name = 'ForageCraft'
+/*
+ * GradleWorks for ForgeGradle 4/3
+ * Written by Jonathing
+ * Version 3.3.0
+ *
+ * This gradle file contains specific settings for GradleWorks that allow specific backports or preview features that
+ * were introduced in Gradle 5.0+.
+ */
+
+import org.gradle.util.GradleVersion
+
+// Enable the stable publishing preview feature
+if (GradleVersion.current().getVersion().split('\\.').head().toInteger() < 5) {
+    enableFeaturePreview('STABLE_PUBLISHING')
+}
