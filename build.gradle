@@ -188,7 +188,7 @@ minecraft {
         // Client run configuration
         client {
             // The directory for Minecraft to run in
-            workingDirectory project.file('run')
+            workingDirectory project.file('run/client')
 
             // Enable mixins if installed (comment out if using a MixinConnector)
             if (project.hasProperty('mixin_version')) {
@@ -218,7 +218,7 @@ minecraft {
         // Server run configuration
         server {
             // The directory for Minecraft to run in
-            workingDirectory project.file('run')
+            workingDirectory project.file('run/server')
 
             // Enable mixins if installed (comment out if using a MixinConnector)
             if (project.hasProperty('mixin_version')) {
@@ -260,7 +260,7 @@ minecraft {
         // Data run configuration
         data {
             // The directory for Minecraft to run in
-            workingDirectory project.file('run')
+            workingDirectory project.file('run/data')
 
             // Enable mixins if installed (comment out if using a MixinConnector)
             if (project.hasProperty('mixin_version')) {
