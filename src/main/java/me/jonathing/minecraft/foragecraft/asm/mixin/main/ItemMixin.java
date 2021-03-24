@@ -11,6 +11,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.state.Property;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -78,7 +81,7 @@ public class ItemMixin
                     Block block = blockStateInWorld.getBlock();
                     if (block == blockState.getBlock())
                     {
-                        blockStateInWorld = ((BlockItem) (Object) this).updateBlockStateFromTag(pos, world, itemStack, blockStateInWorld);
+                        blockStateInWorld = updateBlockStateFromTag(pos, world, itemStack, blockStateInWorld);
                         BlockItem.updateCustomBlockEntityTag(world, player, pos, itemStack);
                         block.setPlacedBy(world, pos, blockStateInWorld, player, itemStack);
                         if (player instanceof ServerPlayerEntity)
@@ -114,5 +117,39 @@ public class ItemMixin
                 && (world.getBlockState(pos).getBlock() instanceof AirBlock
                 || world.getBlockState(pos).getFluidState().equals(Fluids.WATER.getSource(false)))
                 && useContext.canPlace();
+    }
+
+    /**
+     * Copy-pasted vanilla code from the {@link BlockItem} class. For some reason this method wasn't static so I can't
+     * access-transform it.
+     *
+     * @see BlockItem#updateBlockStateFromTag(BlockPos, World, ItemStack, BlockState)
+     */
+    private static BlockState updateBlockStateFromTag(BlockPos blockPos, World world, ItemStack itemStack, BlockState blockState)
+    {
+        BlockState blockstate = blockState;
+        CompoundNBT compoundnbt = itemStack.getTag();
+        if (compoundnbt != null)
+        {
+            CompoundNBT compoundnbt1 = compoundnbt.getCompound("BlockStateTag");
+            StateContainer<Block, BlockState> statecontainer = blockState.getBlock().getStateDefinition();
+
+            for (String s : compoundnbt1.getAllKeys())
+            {
+                Property<?> property = statecontainer.getProperty(s);
+                if (property != null)
+                {
+                    String s1 = compoundnbt1.get(s).getAsString();
+                    blockstate = BlockItem.updateState(blockstate, property, s1);
+                }
+            }
+        }
+
+        if (blockstate != blockState)
+        {
+            world.setBlock(blockPos, blockstate, 2);
+        }
+
+        return blockstate;
     }
 }
