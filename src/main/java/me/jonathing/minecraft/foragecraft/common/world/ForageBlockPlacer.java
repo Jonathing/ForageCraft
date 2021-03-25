@@ -1,6 +1,5 @@
 package me.jonathing.minecraft.foragecraft.common.world;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.tags.ITag;
@@ -9,7 +8,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
 import java.util.Random;
 
 public class ForageBlockPlacer extends SimpleBlockPlacer

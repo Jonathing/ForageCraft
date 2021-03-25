@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "foragecraft:item/blackstone_flat_rock"
+  }
+}

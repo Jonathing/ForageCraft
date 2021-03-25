@@ -2,9 +2,7 @@ package me.jonathing.minecraft.foragecraft.data.objects;
 
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags.IOptionalNamedTag;
 
 /**
