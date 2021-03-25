@@ -16,14 +16,11 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.util.Lazy;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
-import java.util.function.Supplier;
-
-import net.minecraft.block.AbstractBlock.OffsetType;
-import net.minecraft.block.AbstractBlock.Properties;
 
 /**
  * This class holds the template for any decorative blocks in ForageCraft. This includes blocks such as
@@ -40,9 +37,9 @@ public class DecorativeBlock extends FallingBlock
     public static final VoxelShape FLAT_ROCK_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
 
     private final VoxelShape shape;
-    private final Supplier<Item> decorativeItem;
+    private final Lazy<Item> decorativeItem;
 
-    public DecorativeBlock(Properties properties, VoxelShape shape, Supplier<Item> decorativeItem)
+    public DecorativeBlock(Properties properties, VoxelShape shape, Lazy<Item> decorativeItem)
     {
         super(properties);
         this.shape = shape;

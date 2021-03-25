@@ -7,17 +7,17 @@ import me.jonathing.minecraft.foragecraft.common.block.template.DecorativeBlock;
 import me.jonathing.minecraft.foragecraft.common.block.template.ForageHayBlock;
 import me.jonathing.minecraft.foragecraft.common.block.template.ForageSpeedBlock;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import net.minecraft.block.AbstractBlock;
 
 /**
  * This class holds all of the blocks in ForageCraft.
@@ -29,6 +29,7 @@ import net.minecraft.block.AbstractBlock;
 public class ForageBlocks
 {
     public static Block rock, flat_rock, stick;
+    public static Block blackstone_rock, blackstone_flat_rock;
     public static Block straw_bale, fascine;
     public static Block paving_stones;
     public static Block leek_crop;
@@ -52,13 +53,22 @@ public class ForageBlocks
                 ItemGroup.TAB_MISC,
                 true);
         flat_rock = register("flat_rock",
-                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, () -> ForageBlocks.flat_rock.asItem()),
+                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, Lazy.of(() -> ForageBlocks.flat_rock.asItem())),
                 ItemGroup.TAB_MISC,
                 true);
         stick = register("stick",
                 new StickBlock(),
                 null,
                 false);
+
+        blackstone_rock = register("blackstone_rock",
+                new RockBlock(DecorativeBlock.ROCK_SHAPE, Lazy.of(() -> ForageBlocks.blackstone_rock.asItem())),
+                ItemGroup.TAB_MISC,
+                true);
+        blackstone_flat_rock = register("blackstone_flat_rock",
+                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, Lazy.of(() -> ForageBlocks.blackstone_flat_rock.asItem())),
+                ItemGroup.TAB_MISC,
+                true);
 
         straw_bale = register("straw_bale",
                 new ForageHayBlock(0.3F, AbstractBlock.Properties.copy(Blocks.HAY_BLOCK)),

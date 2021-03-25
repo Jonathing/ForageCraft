@@ -14,8 +14,6 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.item.Item.Properties;
-
 /**
  * This is the class for the {@link ForageItems#gathering_knife} item. It is required specifically for specific drops that
  * are given when using this item, which are also done in the

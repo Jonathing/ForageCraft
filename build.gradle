@@ -197,7 +197,8 @@ minecraft {
 
             // Disables refmaps for mixin in a dev environment (commented out by default, uncomment if using mixin)
             if (project.hasProperty('mixin_version')) {
-                property 'mixin.env.disableRefMap', 'true'
+                property 'mixin.env.remapRefMap', 'true'
+                property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg".toString()
             }
 
             // Logging markers for Forge. See default MDK for instructions
