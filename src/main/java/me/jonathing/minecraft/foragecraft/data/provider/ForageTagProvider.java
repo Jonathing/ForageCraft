@@ -52,8 +52,9 @@ public class ForageTagProvider
 
         private void foragecraft()
         {
-            this.tag(ForageBlockTags.ROCK_PLACEABLE).add(Blocks.STONE, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.PODZOL, Blocks.MYCELIUM);
-            this.tag(ForageBlockTags.NETHER_ROCK_PLACEABLE).add(Blocks.NETHERRACK, Blocks.CRIMSON_NYLIUM, Blocks.WARPED_NYLIUM, Blocks.BLACKSTONE);
+            this.tag(ForageBlockTags.ROCK_PLACEABLE).add(Blocks.STONE, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.PODZOL, Blocks.MYCELIUM, Blocks.GRAVEL);
+            this.tag(ForageBlockTags.STICK_PLACEABLE).add(Blocks.STONE, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.PODZOL, Blocks.MYCELIUM, Blocks.COARSE_DIRT);
+            this.tag(ForageBlockTags.BLACKSTONE_ROCK_PLACEABLE).add(Blocks.NETHERRACK, Blocks.CRIMSON_NYLIUM, Blocks.WARPED_NYLIUM, Blocks.BLACKSTONE);
         }
 
         @Override

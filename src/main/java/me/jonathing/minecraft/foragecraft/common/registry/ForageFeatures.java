@@ -1,6 +1,5 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
-import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
 import me.jonathing.minecraft.foragecraft.common.world.ForageBlockPlacer;
 import me.jonathing.minecraft.foragecraft.data.objects.ForageBlockTags;
 import net.minecraft.util.RegistryKey;
@@ -39,23 +38,29 @@ public class ForageFeatures
      * {@link ForageBlocks#flat_rock}s, and {@link ForageBlocks#stick}s are generated. The feature uses a
      * {@link Supplier} to prevent {@link ExceptionInInitializerError}.
      *
-     * @see #RANDOM_EARTH_PATCH
+     * @see #ROCK_FEATURE
      * @see #init()
      */
-    public static final NonNullLazy<BlockClusterFeatureConfig> RANDOM_EARTH_CONFIG =
+    public static final NonNullLazy<BlockClusterFeatureConfig> ROCK_CONFIG =
             NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .add(ForageBlocks.flat_rock.defaultBlockState(), 1)
-                    .add(ForageBlocks.rock.defaultBlockState(), 1)
-                    .add(ForageBlocks.stick.defaultBlockState(), 2),
+                    .add(ForageBlocks.rock.defaultBlockState(), 1),
                     new ForageBlockPlacer(ForageBlockTags.ROCK_PLACEABLE)))
                     .tries(1)
                     .build());
 
-    public static final NonNullLazy<BlockClusterFeatureConfig> RANDOM_BLACKSTONE_CONFIG =
+    public static final NonNullLazy<BlockClusterFeatureConfig> STICK_CONFIG =
+            NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
+                    .add(ForageBlocks.stick.defaultBlockState(), 1),
+                    new ForageBlockPlacer(ForageBlockTags.STICK_PLACEABLE)))
+                    .tries(2)
+                    .build());
+
+    public static final NonNullLazy<BlockClusterFeatureConfig> BLACKSTONE_CONFIG =
             NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .add(ForageBlocks.blackstone_flat_rock.defaultBlockState(), 1)
                     .add(ForageBlocks.blackstone_rock.defaultBlockState(), 1),
-                    new ForageBlockPlacer(ForageBlockTags.NETHER_ROCK_PLACEABLE)))
+                    new ForageBlockPlacer(ForageBlockTags.BLACKSTONE_ROCK_PLACEABLE)))
                     .xspread(12).zspread(12)
                     .yspread(10)
                     .tries(82)
@@ -63,25 +68,32 @@ public class ForageFeatures
                     .build());
 
     /**
-     * The {@link ConfiguredFeature} that dictates how the {@link #RANDOM_EARTH_CONFIG} is placed in the world. The
+     * The {@link ConfiguredFeature} that dictates how the {@link #ROCK_CONFIG} is placed in the world. The
      * configured feature uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
      *
-     * @see #RANDOM_EARTH_CONFIG
+     * @see #ROCK_CONFIG
      * @see #init()
      */
-    public static final NonNullLazy<ConfiguredFeature<?, ?>> RANDOM_EARTH_PATCH =
+    public static final NonNullLazy<ConfiguredFeature<?, ?>> ROCK_FEATURE =
             NonNullLazy.of(() -> Feature.RANDOM_PATCH
-                    .configured(RANDOM_EARTH_CONFIG.get())
+                    .configured(ROCK_CONFIG.get())
                     .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
                     .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))));
 
-    public static final NonNullLazy<ConfiguredFeature<?, ?>> RANDOM_BLACKSTONE_PATCH =
-            NonNullLazy.of(() -> Feature.RANDOM_PATCH.configured(RANDOM_BLACKSTONE_CONFIG.get())
+    public static final NonNullLazy<ConfiguredFeature<?, ?>> STICK_FEATURE =
+            NonNullLazy.of(() -> Feature.RANDOM_PATCH
+                    .configured(STICK_CONFIG.get())
+                    .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
+                    .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))));
+
+    public static final NonNullLazy<ConfiguredFeature<?, ?>> BLACKSTONE_FEATURE =
+            NonNullLazy.of(() -> Feature.RANDOM_PATCH.configured(BLACKSTONE_CONFIG.get())
                     .range(126)
                     .chance(1));
 
-    public static ConfiguredFeature<?, ?> randomEarthPatch;
-    public static ConfiguredFeature<?, ?> randomBlackstonePatch;
+    public static ConfiguredFeature<?, ?> rockConfiguredFeature;
+    public static ConfiguredFeature<?, ?> stickConfiguredFeature;
+    public static ConfiguredFeature<?, ?> blackstoneConfiguredFeature;
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> registerConfiguredFeature(String nameIn, ConfiguredFeature<FC, ?> featureIn)
     {
@@ -97,8 +109,9 @@ public class ForageFeatures
      */
     public static void init()
     {
-        randomEarthPatch = registerConfiguredFeature("forage_random_rocks", RANDOM_EARTH_PATCH.get());
-        randomBlackstonePatch = registerConfiguredFeature("forage_random_blackstone_rocks", RANDOM_BLACKSTONE_PATCH.get());
+        rockConfiguredFeature = registerConfiguredFeature("forage_random_rocks", ROCK_FEATURE.get());
+        stickConfiguredFeature = registerConfiguredFeature("forage_random_sticks", STICK_FEATURE.get());
+        blackstoneConfiguredFeature = registerConfiguredFeature("forage_random_blackstone_rocks", BLACKSTONE_FEATURE.get());
     }
 
     /**
@@ -163,12 +176,12 @@ public class ForageFeatures
                 && !event.getCategory().equals(Biome.Category.ICY)
                 && !event.getCategory().equals(Biome.Category.NONE))
         {
-            event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, randomEarthPatch);
+            event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, rockConfiguredFeature);
+            event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, stickConfiguredFeature);
         }
         else if (netherBiomes.contains(event.getName()))
         {
-            System.out.println("event.getName() = " + event.getName());
-            event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, randomBlackstonePatch);
+            event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, blackstoneConfiguredFeature);
         }
     }
 }

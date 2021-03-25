@@ -15,7 +15,8 @@ import net.minecraftforge.common.Tags.IOptionalNamedTag;
 public class ForageBlockTags
 {
     public static final IOptionalNamedTag<Block> ROCK_PLACEABLE = tag("rock_placeable");
-    public static final IOptionalNamedTag<Block> NETHER_ROCK_PLACEABLE = tag("nether_rock_placeable");
+    public static final IOptionalNamedTag<Block> STICK_PLACEABLE = tag("stick_placeable");
+    public static final IOptionalNamedTag<Block> BLACKSTONE_ROCK_PLACEABLE = tag("blackstone_rock_placeable");
 
     public static void init()
     {
