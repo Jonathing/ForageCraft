@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.block.template;
 
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import net.minecraft.block.*;
+import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -64,6 +65,15 @@ public class DecorativeBlock extends FallingBlock
     {
         Vector3d offset = state.getOffset(worldIn, pos);
         return this.shape.move(offset.x(), 0, offset.z());
+    }
+
+    @Override
+    @Nonnull
+    @ParametersAreNonnullByDefault
+    @SuppressWarnings("deprecation")
+    public PushReaction getPistonPushReaction(BlockState p_149656_1_)
+    {
+        return PushReaction.DESTROY;
     }
 
     /**
