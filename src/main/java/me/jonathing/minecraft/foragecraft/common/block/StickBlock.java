@@ -41,7 +41,7 @@ public class StickBlock extends RockBlock implements IWaterLoggable
     /**
      * Makes a new {@link DecorativeBlock} with features exclusive to the {@link ForageBlocks#stick}.
      *
-     * @see DecorativeBlock#DecorativeBlock(Properties, VoxelShape, Supplier)
+     * @see DecorativeBlock#DecorativeBlock(Properties, VoxelShape, Lazy)
      */
     public StickBlock()
     {
@@ -71,7 +71,7 @@ public class StickBlock extends RockBlock implements IWaterLoggable
     }
 
     /**
-     * @see net.minecraft.block.FallingBlock#fillStateContainer(StateContainer.Builder)
+     * @see net.minecraft.block.FallingBlock#createBlockStateDefinition(StateContainer.Builder)
      */
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder)
@@ -121,36 +121,18 @@ public class StickBlock extends RockBlock implements IWaterLoggable
 
     /**
      * Gets the stick block's default {@link BlockState} along with a random {@link Direction}. It is preferrable to use
-     * this rather than {@link Block#getDefaultState()}.
+     * this rather than {@link Block#defaultBlockState()}.
      *
      * @param random The {@link Random} for determining which {@link Direction} to use. It is recommended to use a
-     *               {@link World#rand}.
-     * @return {@link Block#getDefaultState()} with a random {@link Direction}.
-     * @see Block#getDefaultState()
+     *               {@link World#random}.
+     * @return {@link Block#defaultBlockState()} with a random {@link Direction}.
+     * @see Block#defaultBlockState()
      * @see #getStateWithRandomDirection()
      */
     @Nonnull
     public BlockState getStateWithRandomDirection(@Nonnull Random random)
     {
-        Direction direction;
-
-        switch (random.nextInt(4))
-        {
-            case 3:
-                direction = Direction.WEST;
-                break;
-            case 2:
-                direction = Direction.SOUTH;
-                break;
-            case 1:
-                direction = Direction.EAST;
-                break;
-            default:
-                direction = Direction.NORTH;
-                break;
-        }
-
-        return this.defaultBlockState().setValue(FACING, direction);
+        return this.defaultBlockState().setValue(FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random));
     }
 
     @Override

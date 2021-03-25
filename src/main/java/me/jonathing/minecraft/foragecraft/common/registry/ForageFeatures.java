@@ -46,7 +46,7 @@ public class ForageFeatures
             NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .add(ForageBlocks.flat_rock.defaultBlockState(), 1)
                     .add(ForageBlocks.rock.defaultBlockState(), 1)
-                    .add(((StickBlock) ForageBlocks.stick).getStateWithRandomDirection(), 2),
+                    .add(ForageBlocks.stick.defaultBlockState(), 2),
                     new ForageBlockPlacer(ForageBlockTags.ROCK_PLACEABLE)))
                     .tries(1)
                     .build());
