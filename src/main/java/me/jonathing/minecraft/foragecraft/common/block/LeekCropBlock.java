@@ -1,13 +1,11 @@
 package me.jonathing.minecraft.foragecraft.common.block;
 
 import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
-import net.minecraft.block.Block;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.util.IItemProvider;
 
 import javax.annotation.Nonnull;
-
-import net.minecraft.block.AbstractBlock;
 
 /**
  * This class holds the {@link me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks#leek_crop} block. It is

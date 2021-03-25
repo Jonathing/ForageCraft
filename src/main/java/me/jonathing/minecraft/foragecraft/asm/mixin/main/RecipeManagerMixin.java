@@ -1,15 +1,12 @@
 package me.jonathing.minecraft.foragecraft.asm.mixin.main;
 
-import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonElement;
-import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.data.ForageDataLists;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.ModList;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,7 +37,7 @@ public class RecipeManagerMixin
      * {@link ResourceLocation}s and {@link JsonElement}s containing all of the recipes to be parsed on world load. It
      * uses the {@link ModList} to check if a particular mod is <em>not</em> loaded. This way, I can disable recipes
      * specific to that mod so the console doesn't shit itself when it tries to parse through that recipe.
-     *
+     * <p>
      * For some reason, I am unable to use {@link org.spongepowered.asm.mixin.injection.ModifyArg} with this mixin
      * because in the method signature for the apply method in the bytecode, the map doesn't show up as a valid
      * argument.

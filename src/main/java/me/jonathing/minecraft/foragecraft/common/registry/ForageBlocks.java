@@ -7,17 +7,17 @@ import me.jonathing.minecraft.foragecraft.common.block.template.DecorativeBlock;
 import me.jonathing.minecraft.foragecraft.common.block.template.ForageHayBlock;
 import me.jonathing.minecraft.foragecraft.common.block.template.ForageSpeedBlock;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import net.minecraft.block.AbstractBlock;
 
 /**
  * This class holds all of the blocks in ForageCraft.
@@ -53,7 +53,7 @@ public class ForageBlocks
                 ItemGroup.TAB_MISC,
                 true);
         flat_rock = register("flat_rock",
-                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, () -> ForageBlocks.flat_rock.asItem()),
+                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, Lazy.of(() -> ForageBlocks.flat_rock.asItem())),
                 ItemGroup.TAB_MISC,
                 true);
         stick = register("stick",
@@ -62,11 +62,11 @@ public class ForageBlocks
                 false);
 
         blackstone_rock = register("blackstone_rock",
-                new RockBlock(DecorativeBlock.ROCK_SHAPE, () -> ForageBlocks.blackstone_rock.asItem()),
+                new RockBlock(DecorativeBlock.ROCK_SHAPE, Lazy.of(() -> ForageBlocks.blackstone_rock.asItem())),
                 ItemGroup.TAB_MISC,
                 true);
         blackstone_flat_rock = register("blackstone_flat_rock",
-                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, () -> ForageBlocks.blackstone_flat_rock.asItem()),
+                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, Lazy.of(() -> ForageBlocks.blackstone_flat_rock.asItem())),
                 ItemGroup.TAB_MISC,
                 true);
 

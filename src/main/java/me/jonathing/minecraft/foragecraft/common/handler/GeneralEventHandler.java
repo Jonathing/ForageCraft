@@ -7,6 +7,7 @@ import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.RandomValueRange;
 import net.minecraft.loot.functions.SetCount;
+import net.minecraftforge.common.util.NonNullLazy;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,11 +30,11 @@ public class GeneralEventHandler
      *
      * @see #onLootTableLoad(LootTableLoadEvent)
      */
-    private static final Supplier<LootPool> VILLAGE_HOUSE_CHESTS = () ->
+    private static final NonNullLazy<LootPool> VILLAGE_HOUSE_CHESTS = NonNullLazy.of(() ->
             LootPool.lootPool().name("village_leek_seeds").add(
                     ItemLootEntry.lootTableItem(ForageItems.leek_seeds)
                             .apply(SetCount.setCount(RandomValueRange.between(0, 2))))
-                    .build();
+                    .build());
 
     /**
      * This event method sets the fuel burn time for specific items or blocks in ForageCraft. Since they cannot be

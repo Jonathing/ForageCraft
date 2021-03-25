@@ -14,6 +14,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placement.NoiseDependant;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.util.NonNullLazy;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -43,15 +44,15 @@ public class ForageFeatures
      * @see #RANDOM_EARTH_PATCH
      * @see #init()
      */
-    public static final Supplier<BlockClusterFeatureConfig> RANDOM_EARTH_CONFIG =
-            () -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
+    public static final NonNullLazy<BlockClusterFeatureConfig> RANDOM_EARTH_CONFIG =
+            NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .add(ForageBlocks.flat_rock.defaultBlockState(), 1)
                     .add(ForageBlocks.rock.defaultBlockState(), 1)
                     .add(((StickBlock) ForageBlocks.stick).getStateWithRandomDirection(), 2),
                     new SimpleBlockPlacer()))
                     .whitelist(new HashSet<>(Arrays.asList(Blocks.STONE, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.PODZOL, Blocks.MYCELIUM)))
                     .tries(1)
-                    .build();
+                    .build());
 
     /**
      * The {@link ConfiguredFeature} that dictates how the {@link #RANDOM_EARTH_CONFIG} is placed in the world. The
@@ -60,10 +61,11 @@ public class ForageFeatures
      * @see #RANDOM_EARTH_CONFIG
      * @see #init()
      */
-    public static final Supplier<ConfiguredFeature<?, ?>> RANDOM_EARTH_PATCH = () -> Feature.RANDOM_PATCH
-            .configured(RANDOM_EARTH_CONFIG.get())
-            .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
-            .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10)));
+    public static final NonNullLazy<ConfiguredFeature<?, ?>> RANDOM_EARTH_PATCH =
+            NonNullLazy.of(() -> Feature.RANDOM_PATCH
+                    .configured(RANDOM_EARTH_CONFIG.get())
+                    .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
+                    .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))));
 
     public static ConfiguredFeature<?, ?> randomEarthPatch;
 

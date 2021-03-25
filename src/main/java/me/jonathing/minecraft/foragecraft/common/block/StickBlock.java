@@ -15,6 +15,7 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Lazy;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -44,7 +45,7 @@ public class StickBlock extends RockBlock implements IWaterLoggable
      */
     public StickBlock()
     {
-        super(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS).noCollission().noOcclusion().instabreak(), DecorativeBlock.STICK_SHAPE, () -> Items.STICK);
+        super(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS).noCollission().noOcclusion().instabreak(), DecorativeBlock.STICK_SHAPE, Lazy.of(() -> Items.STICK));
     }
 
     /**

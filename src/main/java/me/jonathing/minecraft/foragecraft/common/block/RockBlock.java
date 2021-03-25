@@ -22,13 +22,11 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Lazy;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.function.Supplier;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 /**
  * This class holds the {@link ForageBlocks#rock}. This class is the king of all rocks, as it is also integral to the
@@ -47,25 +45,25 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
     /**
      * Makes a new {@link DecorativeBlock} with features exclusive to the {@link ForageBlocks#rock}.
      *
-     * @see RockBlock#RockBlock(Properties, VoxelShape, Supplier)
+     * @see RockBlock#RockBlock(Properties, VoxelShape, Lazy)
      */
     public RockBlock()
     {
-        this(AbstractBlock.Properties.of(Material.STONE).sound(SoundType.STONE).noCollission().noOcclusion().instabreak(), DecorativeBlock.ROCK_SHAPE, () -> ForageBlocks.rock.asItem());
+        this(AbstractBlock.Properties.of(Material.STONE).sound(SoundType.STONE).noCollission().noOcclusion().instabreak(), DecorativeBlock.ROCK_SHAPE, Lazy.of(() -> ForageBlocks.rock.asItem()));
     }
 
     /**
      * Makes a new {@link DecorativeBlock} with features exclusive to the {@link ForageBlocks#rock} but with a different
      * {@link VoxelShape} and a different {@link Item}. Primarily used to make the {@link ForageBlocks#flat_rock}.
      *
-     * @see RockBlock#RockBlock(Properties, VoxelShape, Supplier)
+     * @see RockBlock#RockBlock(Properties, VoxelShape, Lazy)
      */
-    public RockBlock(VoxelShape shape, Supplier<Item> decorativeItem)
+    public RockBlock(VoxelShape shape, Lazy<Item> decorativeItem)
     {
         this(AbstractBlock.Properties.of(Material.STONE).sound(SoundType.STONE).noCollission().noOcclusion().instabreak(), shape, decorativeItem);
     }
 
-    public RockBlock(Properties properties, VoxelShape shape, Supplier<Item> decorativeItem)
+    public RockBlock(Properties properties, VoxelShape shape, Lazy<Item> decorativeItem)
     {
         super(properties, shape, decorativeItem);
         this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false));
@@ -123,7 +121,7 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
 
     /**
      * Has the same logic as
-     * {@link DecorativeBlock#onBlockActivated(BlockState, World, BlockPos, PlayerEntity, Hand, BlockRayTraceResult)}
+     * {@link DecorativeBlock#use(BlockState, World, BlockPos, PlayerEntity, Hand, BlockRayTraceResult)}
      * but also accounts for waterlogging.
      *
      * @param blockState          The {@link BlockState} of the decorative block that was activated.
@@ -133,7 +131,7 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
      * @param hand                The {@link Hand} of the {@link PlayerEntity} that activated the block.
      * @param blockRayTraceResult The {@link BlockRayTraceResult} given for the method.
      * @return {@link ActionResultType#SUCCESS}
-     * @see DecorativeBlock#onBlockActivated(BlockState, World, BlockPos, PlayerEntity, Hand, BlockRayTraceResult)
+     * @see DecorativeBlock#use(BlockState, World, BlockPos, PlayerEntity, Hand, BlockRayTraceResult)
      */
     @Override
     @Nonnull
@@ -155,7 +153,7 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
      * @param currentPos  A {@link BlockPos} given to the method.
      * @param facingPos   A {@link BlockPos} given to the method.
      * @return The {@link BlockState} returned by
-     * {@link FallingBlock#updatePostPlacement(BlockState, Direction, BlockState, IWorld, BlockPos, BlockPos)}
+     * {@link FallingBlock#updateShape(BlockState, Direction, BlockState, IWorld, BlockPos, BlockPos)}
      */
     @Override
     @Nonnull
