@@ -1,6 +1,8 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
+import me.jonathing.minecraft.foragecraft.common.world.ForageBlockPlacer;
+import me.jonathing.minecraft.foragecraft.data.objects.ForageBlockTags;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
@@ -51,8 +53,7 @@ public class ForageFeatures
                     .add(ForageBlocks.flat_rock.defaultBlockState(), 1)
                     .add(ForageBlocks.rock.defaultBlockState(), 1)
                     .add(((StickBlock) ForageBlocks.stick).getStateWithRandomDirection(), 2),
-                    new SimpleBlockPlacer()))
-                    .whitelist(new HashSet<>(Arrays.asList(Blocks.STONE, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.PODZOL, Blocks.MYCELIUM)))
+                    new ForageBlockPlacer(ForageBlockTags.ROCK_PLACEABLE)))
                     .tries(1)
                     .build());
 
@@ -60,7 +61,7 @@ public class ForageFeatures
             NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .add(ForageBlocks.blackstone_flat_rock.defaultBlockState(), 1)
                     .add(ForageBlocks.blackstone_rock.defaultBlockState(), 1),
-                    new SimpleBlockPlacer()))
+                    new ForageBlockPlacer(ForageBlockTags.NETHER_ROCK_PLACEABLE)))
                     .xspread(12).zspread(12)
                     .yspread(10)
                     .tries(82)

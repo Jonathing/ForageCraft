@@ -1,6 +1,7 @@
 package me.jonathing.minecraft.foragecraft.data.provider;
 
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
+import me.jonathing.minecraft.foragecraft.data.objects.ForageBlockTags;
 import me.jonathing.minecraft.foragecraft.data.objects.ForageItemTags;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Blocks;
@@ -41,11 +42,18 @@ public class ForageTagProvider
         protected void addTags()
         {
             vanilla();
+            foragecraft();
         }
 
         private void vanilla()
         {
             this.tag(BlockTags.CROPS).add(ForageBlocks.leek_crop);
+        }
+
+        private void foragecraft()
+        {
+            this.tag(ForageBlockTags.ROCK_PLACEABLE).add(Blocks.STONE, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.PODZOL, Blocks.MYCELIUM);
+            this.tag(ForageBlockTags.NETHER_ROCK_PLACEABLE).add(Blocks.NETHERRACK, Blocks.CRIMSON_NYLIUM, Blocks.WARPED_NYLIUM, Blocks.BLACKSTONE);
         }
 
         @Override
