@@ -37,7 +37,7 @@ public class ForageItemGroups extends ItemGroup
      * This method creates an icon for a specific item group. In this case,  only the dev-environment group is needed
      * here.
      *
-     * @see ItemGroup#createIcon()
+     * @see ItemGroup#makeIcon()
      * @see #FORAGECRAFT
      */
     @Override

@@ -37,7 +37,7 @@ public class ForageRecipeProvider extends RecipeProvider
     /**
      * This method runs through all of the recipes within it and generates data based off of them.
      *
-     * @see RecipeProvider#registerRecipes(Consumer)
+     * @see RecipeProvider#buildShapelessRecipes(Consumer)
      */
     @Override
     @ParametersAreNonnullByDefault

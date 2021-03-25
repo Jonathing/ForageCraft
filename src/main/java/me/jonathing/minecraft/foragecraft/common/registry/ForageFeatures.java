@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.world.ForageBlockPlacer;
 import me.jonathing.minecraft.foragecraft.data.objects.ForageBlockTags;
+import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -20,7 +21,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -30,13 +30,13 @@ import java.util.stream.Collectors;
  * @see #init()
  * @since 2.0.0
  */
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = ForageInfo.MOD_ID)
 public class ForageFeatures
 {
     /**
-     * The default random generation config that defines how the {@link ForageBlocks#rock}s,
-     * {@link ForageBlocks#flat_rock}s, and {@link ForageBlocks#stick}s are generated. The feature uses a
-     * {@link Supplier} to prevent {@link ExceptionInInitializerError}.
+     * The default random generation config that defines how the {@link ForageBlocks#rock}s and
+     * {@link ForageBlocks#flat_rock}s are generated. The feature uses a {@link NonNullLazy} to prevent an
+     * {@link ExceptionInInitializerError}.
      *
      * @see #ROCK_FEATURE
      * @see #init()
@@ -49,6 +49,13 @@ public class ForageFeatures
                     .tries(1)
                     .build());
 
+    /**
+     * The default random generation config that defines how the {@link ForageBlocks#stick}s are generated. The feature
+     * uses a {@link NonNullLazy} to prevent an {@link ExceptionInInitializerError}.
+     *
+     * @see #STICK_FEATURE
+     * @see #init()
+     */
     public static final NonNullLazy<BlockClusterFeatureConfig> STICK_CONFIG =
             NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .add(ForageBlocks.stick.defaultBlockState(), 1),
@@ -56,6 +63,14 @@ public class ForageFeatures
                     .tries(2)
                     .build());
 
+    /**
+     * The default random generation config that defines how the {@link ForageBlocks#blackstone_rock}s and
+     * {@link ForageBlocks#blackstone_flat_rock}s are generated. The feature uses a {@link NonNullLazy} to prevent an
+     * {@link ExceptionInInitializerError}.
+     *
+     * @see #BLACKSTONE_FEATURE
+     * @see #init()
+     */
     public static final NonNullLazy<BlockClusterFeatureConfig> BLACKSTONE_CONFIG =
             NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .add(ForageBlocks.blackstone_flat_rock.defaultBlockState(), 1)
@@ -69,7 +84,7 @@ public class ForageFeatures
 
     /**
      * The {@link ConfiguredFeature} that dictates how the {@link #ROCK_CONFIG} is placed in the world. The
-     * configured feature uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
+     * configured feature uses a {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
      *
      * @see #ROCK_CONFIG
      * @see #init()
@@ -80,12 +95,26 @@ public class ForageFeatures
                     .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
                     .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))));
 
+    /**
+     * The {@link ConfiguredFeature} that dictates how the {@link #STICK_CONFIG} is placed in the world. The
+     * configured feature uses a {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
+     *
+     * @see #ROCK_CONFIG
+     * @see #init()
+     */
     public static final NonNullLazy<ConfiguredFeature<?, ?>> STICK_FEATURE =
             NonNullLazy.of(() -> Feature.RANDOM_PATCH
                     .configured(STICK_CONFIG.get())
                     .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
                     .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))));
 
+    /**
+     * The {@link ConfiguredFeature} that dictates how the {@link #BLACKSTONE_CONFIG} is placed in the world. The
+     * configured feature uses a {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
+     *
+     * @see #ROCK_CONFIG
+     * @see #init()
+     */
     public static final NonNullLazy<ConfiguredFeature<?, ?>> BLACKSTONE_FEATURE =
             NonNullLazy.of(() -> Feature.RANDOM_PATCH.configured(BLACKSTONE_CONFIG.get())
                     .range(126)
@@ -128,7 +157,7 @@ public class ForageFeatures
      * This list is populated on the first {@link BiomeLoadingEvent} and is given all of the {@link ResourceLocation}s
      * of every biome that belongs to the {@link BiomeDictionary.Type#NETHER} type.
      *
-     * @since Not Yet Implemented
+     * @since 2.2.0
      */
     private static List<ResourceLocation> netherBiomes;
 
@@ -143,6 +172,7 @@ public class ForageFeatures
     /**
      * This event method ensures that specific features <em>do not</em> spawn on specific biomes.
      *
+     * @param event The biome loading event to use to add the features into the biomes.
      * @see BiomeLoadingEvent
      */
     @SubscribeEvent

@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.handler;
 
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
+import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.loot.ItemLootEntry;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
@@ -21,7 +22,7 @@ import java.util.function.Supplier;
  * @author Jonathing
  * @since 2.0.0
  */
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = ForageInfo.MOD_ID)
 public class GeneralEventHandler
 {
     /**

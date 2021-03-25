@@ -15,6 +15,7 @@ import net.minecraft.loot.ConditionArraySerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.world.BlockEvent;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -30,6 +31,7 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.Instance>
 {
+    private static final Logger LOGGER = LogManager.getLogger();
     private static final ResourceLocation ID = ForageCraft.locate("foraging_trigger");
 
     @Override
@@ -58,7 +60,7 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
      */
     public void trigger(ServerPlayerEntity playerEntity, Block block, Item item)
     {
-        LogManager.getLogger().debug("Triggering the foraging trigger with block `" + block + "` and item `" + item + "`.");
+        LOGGER.debug("Triggering the foraging trigger with block `" + block + "` and item `" + item + "`.");
         this.trigger(playerEntity, (instance) -> instance.test(block, item));
     }
 

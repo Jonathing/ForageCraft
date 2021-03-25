@@ -14,13 +14,13 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Lazy;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
-import java.util.function.Supplier;
 
 /**
  * This class holds the {@link ForageBlocks#stick} block. It is required so that it is able to have its own hitbox,
@@ -80,10 +80,11 @@ public class StickBlock extends RockBlock implements IWaterLoggable
     }
 
     /**
-     * Some nonsense from the {@link LanternBlock} that allowed me to add waterlogging support for rocks.
+     * Contains the same logic from {@link RockBlock#getStateForPlacement(BlockItemUseContext)} but also accounts for
+     * the {@link StickBlock#FACING} property.
      *
-     * @param context The {@link BlockItemUseContext} given to the method.
-     * @return Either a waterlogged or non-waterlogged rock based on the result of this method.
+     * @param context The item use context given to the method.
+     * @return Either a waterlogged or non-waterlogged stick based on the result of this method.
      */
     @Nullable
     @Override
@@ -109,7 +110,7 @@ public class StickBlock extends RockBlock implements IWaterLoggable
     /**
      * Calls {@link #getStateWithRandomDirection(Random)} but with our own {@link Random} instead.
      *
-     * @return The {@link BlockState} given by {@link #getStateWithRandomDirection(Random)}.
+     * @return The {@link BlockState} given by {@link #getStateWithRandomDirection(Random)} using our own random.
      * @see #getStateWithRandomDirection(Random)
      * @see #STICK_RANDOM
      */
@@ -120,7 +121,20 @@ public class StickBlock extends RockBlock implements IWaterLoggable
     }
 
     /**
-     * Gets the stick block's default {@link BlockState} along with a random {@link Direction}. It is preferrable to use
+     * Calls {@link #getStateWithRandomDirection(Random)} using a given {@link IWorld}'s {@link IWorld#getRandom()}.
+     *
+     * @param level The level to use its {@link IWorld#getRandom()} for.
+     * @return The blockstate given by {@link #getStateWithRandomDirection(Random)} using the level's random.
+     * @see IWorld#getRandom()
+     */
+    @Nonnull
+    public BlockState getStateWithRandomDirection(@Nonnull IWorld level)
+    {
+        return this.getStateWithRandomDirection(level.getRandom());
+    }
+
+    /**
+     * Gets the stick block's default {@link BlockState} along with a random {@link Direction}. It is preferable to use
      * this rather than {@link Block#defaultBlockState()}.
      *
      * @param random The {@link Random} for determining which {@link Direction} to use. It is recommended to use a

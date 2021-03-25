@@ -10,7 +10,7 @@ import net.minecraftforge.common.Tags.IOptionalNamedTag;
  *
  * @author Jonathing
  * @author Silver_David
- * @since Not yet implemented.
+ * @since 2.2.0
  */
 public class ForageBlockTags
 {

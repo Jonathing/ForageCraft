@@ -49,11 +49,7 @@ public class DecorativeBlock extends FallingBlock
     }
 
     /**
-     * This method defines the hitbox for a default decorative block. The placeholder is the hitbox for
-     * {@link ForageBlocks#rock}.
-     * <p>
-     * I'm not really sure what these numbers actually mean, but Bailey and I toyed with these values enough to get
-     * exactly what we needed for this item.
+     * This method defines the hitbox for a decorative block along with its offset.
      *
      * @see FallingBlock#getShape(BlockState, IBlockReader, BlockPos, ISelectionContext)
      */
@@ -61,17 +57,24 @@ public class DecorativeBlock extends FallingBlock
     @Nonnull
     @ParametersAreNonnullByDefault
     @SuppressWarnings("deprecation")
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+    public VoxelShape getShape(BlockState blockState, IBlockReader level, BlockPos pos, ISelectionContext context)
     {
-        Vector3d offset = state.getOffset(worldIn, pos);
+        Vector3d offset = blockState.getOffset(level, pos);
         return this.shape.move(offset.x(), 0, offset.z());
     }
 
+    /**
+     * This method defines for all decorative blocks that if a piston is to attempt to push them, they should have a
+     * {@link PushReaction} of {@link PushReaction#DESTROY}.
+     *
+     * @param blockState The blockstate of the block being pushed.
+     * @return The reaction value when the block is pushed ({@link PushReaction#DESTROY}).
+     */
     @Override
     @Nonnull
     @ParametersAreNonnullByDefault
     @SuppressWarnings("deprecation")
-    public PushReaction getPistonPushReaction(BlockState p_149656_1_)
+    public PushReaction getPistonPushReaction(BlockState blockState)
     {
         return PushReaction.DESTROY;
     }
@@ -80,53 +83,58 @@ public class DecorativeBlock extends FallingBlock
      * This method checks if the decorative block can be placed by checking if the given {@link BlockState} is air and
      * if the {@link BlockState} of the {@link BlockPos} right under it is solid.
      *
-     * @param blockState The {@link BlockState} to replace with the decorative block.
-     * @param world      The {@link IWorldReader} that the {@link BlockState} resides in.
+     * @param blockState The blockstate to replace with the decorative block.
+     * @param level      The level reader that the {@link BlockState} resides in.
      * @param blockPos   The {@link BlockPos} of the {@link BlockState}.
      * @return The result of the position validity check.
+     * @see FallingBlock#canSurvive(BlockState, IWorldReader, BlockPos)
      */
     @Override
     @SuppressWarnings("deprecation")
-    public boolean canSurvive(@Nonnull BlockState blockState, IWorldReader world, @Nonnull BlockPos blockPos)
+    public boolean canSurvive(@Nonnull BlockState blockState, IWorldReader level, @Nonnull BlockPos blockPos)
     {
-        return world.getBlockState(blockPos).getBlock() instanceof AirBlock
-                && world.getBlockState(blockPos.below()).canOcclude();
+        return level.getBlockState(blockPos).getBlock() instanceof AirBlock
+                && level.getBlockState(blockPos.below()).canOcclude();
     }
 
     /**
      * This essentially just prevents particles from being spawned under a decorative block floating in stasis. They're
      * not really meant to do that.
      *
+     * @param blockState The blockstate of the block that would have animated particles.
+     * @param level      The level the blockstate is in.
+     * @param blockPos   The position of the block in the level.
+     * @param random     The random to use, most likely the level's {@link World#random}.
      * @see FallingBlock#animateTick(BlockState, World, BlockPos, Random)
      */
     @Override
     @ParametersAreNonnullByDefault
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState p_180655_1_, World p_180655_2_, BlockPos p_180655_3_, Random p_180655_4_)
+    public void animateTick(BlockState blockState, World level, BlockPos blockPos, Random random)
     {
     }
 
     /**
      * This method contains the logic that takes place when a block is activated by a player right-clicking on it. By
-     * default, when right clicking on a decorative block, it will delete itself from the world and drop it's related
+     * default, when right clicking on a decorative block, it will delete itself from the level and drop it's related
      * item given from the {@link #getDecorativeItem()} method.
      *
-     * @param blockState          The {@link BlockState} of the decorative block that was activated.
-     * @param world               The {@link World} in which the block was activated.
-     * @param blockPos            The {@link BlockPos} of the decorative block that was activated.
-     * @param player              The {@link PlayerEntity} that activated the block.
-     * @param hand                The {@link Hand} of the {@link PlayerEntity} that activated the block.
-     * @param blockRayTraceResult The {@link BlockRayTraceResult} given for the method.
+     * @param blockState          The blockstate of the decorative block that was activated.
+     * @param level               The level in which the block was activated.
+     * @param blockPos            The position in the level of the decorative block that was activated.
+     * @param player              The player that activated the block.
+     * @param hand                The hand of the {@link PlayerEntity} that activated the block.
+     * @param blockRayTraceResult The ray trace result given for the method.
      * @return {@link ActionResultType#SUCCESS}
      */
     @Override
     @Nonnull
     @ParametersAreNonnullByDefault
     @SuppressWarnings("deprecation")
-    public ActionResultType use(BlockState blockState, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult)
+    public ActionResultType use(BlockState blockState, World level, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult)
     {
-        world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
-        Block.popResource(world, blockPos, new ItemStack(this.getDecorativeItem(), 1));
+        level.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+        Block.popResource(level, blockPos, new ItemStack(this.getDecorativeItem(), 1));
         return ActionResultType.SUCCESS;
     }
 

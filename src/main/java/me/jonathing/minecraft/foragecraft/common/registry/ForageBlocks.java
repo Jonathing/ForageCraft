@@ -42,14 +42,14 @@ public class ForageBlocks
     /**
      * This method registers all of the blocks into the block registry.
      *
-     * @param event The {@link Register} event for block registration.
+     * @param event The register event for block registration.
      */
     public static void init(Register<Block> event)
     {
         ForageBlocks.iBlockRegistry = event.getRegistry();
 
         rock = register("rock",
-                new RockBlock(),
+                new RockBlock(DecorativeBlock.ROCK_SHAPE, Lazy.of(() -> ForageBlocks.rock.asItem())),
                 ItemGroup.TAB_MISC,
                 true);
         flat_rock = register("flat_rock",
@@ -99,7 +99,7 @@ public class ForageBlocks
      *                         ({@link ForageInfo#IDE}), all of the ForageCraft blocks and items will be put into the
      *                         {@link ForageItemGroups#FORAGECRAFT} category.
      * @param registerItem     If false, a block item will not be registered for the given block.
-     * @return The new registered {@link Block} that the assigned variable now holds.
+     * @return The new registered block that the assigned variable now holds.
      * @see #init(Register)
      */
     public static <B extends Block> B register(String key, B block, ItemGroup defaultItemGroup, boolean registerItem)

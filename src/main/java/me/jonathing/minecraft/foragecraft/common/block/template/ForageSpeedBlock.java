@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  *
  * @author Jonathing
  * @see me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks#paving_stones
- * @see #onEntityWalk(World, BlockPos, Entity)
+ * @see #stepOn(World, BlockPos, Entity)
  * @see Block
  * @since 2.0.0
  */
@@ -33,13 +33,16 @@ public class ForageSpeedBlock extends Block
      * {@link me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks#paving_stones} block, they move at 1.5
      * times their normal speed.
      *
-     * @see Block#onEntityWalk(World, BlockPos, Entity)
+     * @param level    The level in which the speed block exists.
+     * @param blockPos The position in the level where the speed block exists.
+     * @param entity   The entity that is stepping on the block.
+     * @see Block#stepOn(World, BlockPos, Entity)
      */
     @Override
     @ParametersAreNonnullByDefault
-    public void stepOn(World world, BlockPos blockPos, Entity entity)
+    public void stepOn(World level, BlockPos blockPos, Entity entity)
     {
-        super.stepOn(world, blockPos, entity);
+        super.stepOn(level, blockPos, entity);
 
         entity.lerpMotion(entity.getDeltaMovement().x * speedMultiplier, 0, entity.getDeltaMovement().z * speedMultiplier);
     }

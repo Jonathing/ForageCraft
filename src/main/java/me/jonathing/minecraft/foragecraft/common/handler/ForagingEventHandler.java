@@ -1,6 +1,7 @@
 package me.jonathing.minecraft.foragecraft.common.handler;
 
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
+import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -30,13 +31,13 @@ import java.util.function.Supplier;
  * @since 2.0.0
  */
 // TODO Make configuration values.
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = ForageInfo.MOD_ID)
 public class ForagingEventHandler
 {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * If false, the {@link #init()} method will do nothing.
+     * Once true, the {@link #init()} method will do nothing.
      *
      * @see #init()
      * @since 2.1.0
@@ -142,10 +143,10 @@ public class ForagingEventHandler
      * </pre>
      *
      * @param block The block to register foraging drops for.
-     * @param drop  The {@link List} of {@link Triple}s which contains the drop information. The left of the triple must
-     *              be a {@link Float} with the chance of the drop (with 1.00F being 100%), the middle of the triple
-     *              must be the {@link Item} that could be dropped, and the right must be an {@link Integer} that
-     *              indicates the max stack of the dropped item.
+     * @param drop  The list of tripless which contains the drop information. The left of the triple must be a
+     *              {@link Float} with the chance of the drop (with 1.00F being 100%), the middle of the triple must be
+     *              the {@link Item} that could be dropped, and the right must be an {@link Integer} that indicates the
+     *              max stack of the dropped item.
      * @see #FORAGE_EVENT_REGISTRY
      * @since 2.1.0
      */
@@ -168,8 +169,7 @@ public class ForagingEventHandler
      * Forge do all of the work. Essentially, this method runs at the block broken event, checks
      * to see if a random percentage is met, and if it is, drop an extra item.
      *
-     * @param event The {@code BlockEvent.BreakEvent} event that carries the information about the
-     *              broken block.
+     * @param event The block break event that carries the information about the broken block.
      * @see net.minecraftforge.event.world.BlockEvent.BreakEvent
      */
     @SubscribeEvent
@@ -189,16 +189,17 @@ public class ForagingEventHandler
      * registered in the {@link #FORAGE_EVENT_REGISTRY}. This is also where the {@link ForageTriggers#FORAGING_TRIGGER}
      * is triggered, but it is only triggered if the block actually succeeds in dropping a forage drop.
      *
-     * @param dropList The {@link List} of {@link Triple}s that contain the drop information.
-     * @param event    The {@link BlockEvent.BreakEvent} that holds crucial information for the foraging drop such as
-     *                 the {@link World}, the {@link ServerPlayerEntity}, and the {@link net.minecraft.block.BlockState}
+     * @param dropList The list of tripless that contain the drop information.
+     * @param event    The block break event that holds crucial information for the foraging drop such as the
+     *                 {@link World}, the {@link ServerPlayerEntity}, and the {@link net.minecraft.block.BlockState}
      *                 which contains the {@link Block} that was broken.
+     * @see #onBlockBroken(BlockEvent.BreakEvent)
      * @since 2.1.0
      */
     private static void forageDrop(List<Triple<Float, Item, Integer>> dropList, BlockEvent.BreakEvent event)
     {
-        World world = ((World) event.getWorld());
-        Random random = world.getRandom();
+        World level = ((World) event.getWorld());
+        Random random = level.getRandom();
         ServerPlayerEntity playerEntity = (ServerPlayerEntity) event.getPlayer();
         Block blockBroken = event.getState().getBlock();
 
@@ -212,8 +213,8 @@ public class ForagingEventHandler
 
             if (random.nextFloat() < chance)
             {
-                LOGGER.trace(String.format("%s DROPPING %s", blockBroken.toString(), item.toString()));
-                Block.popResource(world, event.getPos(), new ItemStack(item, random.nextInt(maxStack) + 1));
+                LOGGER.trace(String.format("%s DROPPING %s with chance %f", blockBroken, item, chance));
+                Block.popResource(level, event.getPos(), new ItemStack(item, random.nextInt(maxStack) + 1));
 
                 ForageTriggers.FORAGING_TRIGGER.trigger(playerEntity, blockBroken, item);
                 break;

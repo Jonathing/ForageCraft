@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
 /**
  * This is the class for the {@link ForageItems#gathering_knife} item. It is required specifically for specific drops that
  * are given when using this item, which are also done in the
- * {@link #onBlockDestroyed(ItemStack, World, BlockState, BlockPos, LivingEntity)} method.
+ * {@link #mineBlock(ItemStack, World, BlockState, BlockPos, LivingEntity)} method.
  *
  * @author Jonathing
  * @see ForageItems#gathering_knife
@@ -37,21 +37,21 @@ public class GatheringKnifeItem extends Item implements IVanishable
     /**
      * This method holds the logic that is used whenever the gathering knife is used to break a specific block.
      *
-     * @param itemStack    The {@link ItemStack} used by the {@link LivingEntity} when the block is destroyed.
-     * @param world        The {@link World} in which the block was broken.
-     * @param blockState   The {@link BlockState} of the broken block.
-     * @param pos          The {@link BlockPos} in which the block was broken.
-     * @param livingEntity The {@link LivingEntity} that used the {@link ItemStack} that broke the block.
+     * @param itemStack    The itemstack used by the {@link LivingEntity} when the block is destroyed.
+     * @param level        The level in which the block was broken.
+     * @param blockState   The blockstate of the broken block.
+     * @param pos          The position in the level in which the block was broken.
+     * @param livingEntity The entity that used the {@link ItemStack} that broke the block.
      * @return If true, update the statistics page saying that the item was used.
-     * @see Item#onBlockDestroyed(ItemStack, World, BlockState, BlockPos, LivingEntity)
+     * @see Item#mineBlock(ItemStack, World, BlockState, BlockPos, LivingEntity)
      */
     @Override
-    public boolean mineBlock(@Nonnull ItemStack itemStack, World world, @Nonnull BlockState blockState, @Nonnull BlockPos pos, @Nonnull LivingEntity livingEntity)
+    public boolean mineBlock(@Nonnull ItemStack itemStack, World level, @Nonnull BlockState blockState, @Nonnull BlockPos pos, @Nonnull LivingEntity livingEntity)
     {
-        if (!world.isClientSide && blockState.getBlock().equals(Blocks.GRASS))
+        if (!level.isClientSide && blockState.getBlock().equals(Blocks.GRASS))
         {
-            if (world.getRandom().nextFloat() < STRAW_CHANCE)
-                Block.popResource(world, pos, ForageItems.straw.getDefaultInstance());
+            if (level.getRandom().nextFloat() < STRAW_CHANCE)
+                Block.popResource(level, pos, ForageItems.straw.getDefaultInstance());
 
             itemStack.hurtAndBreak(1, livingEntity, (onToolBroken) ->
                     onToolBroken.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
@@ -66,8 +66,8 @@ public class GatheringKnifeItem extends Item implements IVanishable
      * This method is used to return an {@link ItemStack} that acts as the result of the item used in crafting. In the
      * case of the gathering knife, it uses durability and if it is at 0, it deletes the item.
      *
-     * @param itemStack The current ItemStack
-     * @return The resulting ItemStack
+     * @param itemStack The current itemstack.
+     * @return The resulting itemstack.
      * @see Item#getContainerItem(ItemStack)
      */
     @Override

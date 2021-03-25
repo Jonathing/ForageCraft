@@ -36,7 +36,7 @@ public class ForageTagProvider
         }
 
         /**
-         * @see BlockTagsProvider#registerTags()
+         * @see BlockTagsProvider#addTags()
          */
         @Override
         protected void addTags()

@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -44,18 +43,8 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     /**
-     * Makes a new {@link DecorativeBlock} with features exclusive to the {@link ForageBlocks#rock}.
-     *
-     * @see RockBlock#RockBlock(Properties, VoxelShape, Lazy)
-     */
-    public RockBlock()
-    {
-        this(AbstractBlock.Properties.of(Material.STONE).sound(SoundType.STONE).noCollission().noOcclusion().instabreak(), DecorativeBlock.ROCK_SHAPE, Lazy.of(() -> ForageBlocks.rock.asItem()));
-    }
-
-    /**
-     * Makes a new {@link DecorativeBlock} with features exclusive to the {@link ForageBlocks#rock} but with a different
-     * {@link VoxelShape} and a different {@link Item}. Primarily used to make the {@link ForageBlocks#flat_rock}.
+     * Makes a new {@link DecorativeBlock} with features exclusive to the {@link ForageBlocks#rock} with a gicen
+     * {@link VoxelShape} and decorative {@link Item} supplied by a {@link Lazy}.
      *
      * @see RockBlock#RockBlock(Properties, VoxelShape, Lazy)
      */
@@ -75,9 +64,9 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
      * if the {@link BlockState} of the {@link BlockPos} right under it is solid. If the given {@link BlockState} is
      * water, the rock will be waterlogged.
      *
-     * @param blockState The {@link BlockState} to replace with the decorative block.
-     * @param level      The {@link IWorldReader} that the {@link BlockState} resides in.
-     * @param blockPos   The {@link BlockPos} of the {@link BlockState}.
+     * @param blockState The blockstate to replace with the decorative block.
+     * @param level      The level that the {@link BlockState} resides in.
+     * @param blockPos   The position in the level of the {@link BlockState}.
      * @return The result of the position validity check.
      */
     @Override
@@ -90,10 +79,12 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
     }
 
     /**
-     * Some nonsense from the {@link LanternBlock} that allowed me to add waterlogging support for rocks.
+     * Some nonsense from the {@link LanternBlock} that allows adding waterlogging support for rocks.
      *
-     * @param context The {@link BlockItemUseContext} given to the method.
+     * @param context The item use context given to the method.
      * @return Either a waterlogged or non-waterlogged rock based on the result of this method.
+     * @see LanternBlock#getStateForPlacement(BlockItemUseContext)
+     * @see Block#getStateForPlacement(BlockItemUseContext)
      */
     @Override
     @Nullable
@@ -116,6 +107,12 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
         return null;
     }
 
+    /**
+     * Some nonsense to add waterlogging support for rocks.
+     *
+     * @param builder The state container builder to add the waterlogged property to.
+     * @see Block#createBlockStateDefinition(StateContainer.Builder)
+     */
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder)
     {
@@ -123,59 +120,60 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
     }
 
     /**
-     * Has the same logic as
+     * Contains the same logic from
      * {@link DecorativeBlock#use(BlockState, World, BlockPos, PlayerEntity, Hand, BlockRayTraceResult)}
-     * but also accounts for waterlogging.
+     * but also has nonsense that accounts for waterlogging.
      *
-     * @param blockState          The {@link BlockState} of the decorative block that was activated.
-     * @param world               The {@link World} in which the block was activated.
-     * @param blockPos            The {@link BlockPos} of the decorative block that was activated.
-     * @param player              The {@link PlayerEntity} that activated the block.
-     * @param hand                The {@link Hand} of the {@link PlayerEntity} that activated the block.
-     * @param blockRayTraceResult The {@link BlockRayTraceResult} given for the method.
+     * @param blockState          The blockstate of the decorative block that was activated.
+     * @param level               The level in which the block was activated.
+     * @param blockPos            The position in the level of the decorative block that was activated.
+     * @param player              The player that activated the block.
+     * @param hand                The hand of the {@link PlayerEntity} that activated the block.
+     * @param blockRayTraceResult The ray trace result given for the method.
      * @return {@link ActionResultType#SUCCESS}
      * @see DecorativeBlock#use(BlockState, World, BlockPos, PlayerEntity, Hand, BlockRayTraceResult)
      */
     @Override
     @Nonnull
     @ParametersAreNonnullByDefault
-    public ActionResultType use(BlockState blockState, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult)
+    public ActionResultType use(BlockState blockState, World level, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult)
     {
-        world.setBlockAndUpdate(blockPos, this.getFluidState(blockState).equals(Fluids.EMPTY.defaultFluidState()) ? Blocks.AIR.defaultBlockState() : this.getFluidState(blockState).createLegacyBlock());
-        Block.popResource(world, blockPos, new ItemStack(this.getDecorativeItem(), 1));
+        level.setBlockAndUpdate(blockPos, this.getFluidState(blockState).equals(Fluids.EMPTY.defaultFluidState()) ? Blocks.AIR.defaultBlockState() : this.getFluidState(blockState).createLegacyBlock());
+        Block.popResource(level, blockPos, new ItemStack(this.getDecorativeItem(), 1));
         return ActionResultType.SUCCESS;
     }
 
     /**
      * Some nonsense from the {@link LanternBlock} that allowed me to add waterlogging support for rocks.
      *
-     * @param stateIn     The {@link BlockState} of the rock to check if it is waterlogged.
-     * @param facing      A {@link Direction} given to the method.
-     * @param facingState A {@link BlockState} given to the method.
-     * @param worldIn     A {@link IWorld} given to the method.
-     * @param currentPos  A {@link BlockPos} given to the method.
-     * @param facingPos   A {@link BlockPos} given to the method.
+     * @param stateIn     The blockstate of the rock to check if it is waterlogged.
+     * @param facing      A horizontal-facing direction given to the method that is used in the superclass's method.
+     * @param facingState A blockstate given to the method that is used in the superclass's method.
+     * @param level       The level where the blockstates reside in.
+     * @param currentPos  A position in the level given to the method that also accounts for waterlogging.
+     * @param facingPos   A position in the level given to the method that is used in the superclass's method.
      * @return The {@link BlockState} returned by
      * {@link FallingBlock#updateShape(BlockState, Direction, BlockState, IWorld, BlockPos, BlockPos)}
+     * @see FallingBlock#updateShape(BlockState, Direction, BlockState, IWorld, BlockPos, BlockPos)
      */
     @Override
     @Nonnull
-    public BlockState updateShape(BlockState stateIn, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull IWorld worldIn, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos)
+    public BlockState updateShape(BlockState stateIn, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull IWorld level, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos)
     {
         if (stateIn.getValue(WATERLOGGED))
         {
-            worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+            level.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+        return super.updateShape(stateIn, facing, facingState, level, currentPos, facingPos);
     }
 
     /**
      * Gets the {@link FluidState} of the {@link net.minecraft.fluid.Fluid} that is currently waterlogging the given
      * {@link BlockState}.
      *
-     * @param state The {@link BlockState} to get the {@link FluidState} of.
-     * @return The {@link FluidState} if the rock is waterlogged or {@link Fluids#EMPTY} otherwise.
+     * @param state The blockstate to get the {@link FluidState} of.
+     * @return The fluidstate if the rock is waterlogged or {@link Fluids#EMPTY} otherwise.
      */
     @Override
     @Nonnull

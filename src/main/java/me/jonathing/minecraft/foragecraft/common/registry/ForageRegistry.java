@@ -23,6 +23,7 @@ public class ForageRegistry
      * This event method calls the {@link ForageBlocks#init(RegistryEvent.Register)} method and prepares to register all
      * of the {@link Block}s of ForageCraft into the game.
      *
+     * @param event The register event for blocks to register the blocks into.
      * @see RegistryEvent.Register
      */
     @SubscribeEvent
@@ -35,6 +36,7 @@ public class ForageRegistry
      * This event method calls the {@link ForageItems#init(RegistryEvent.Register)} method and prepares to register all
      * of the {@link Item}s of ForageCraft into the game.
      *
+     * @param event The register event for items to register the items and block items into.
      * @see RegistryEvent.Register
      */
     @SubscribeEvent

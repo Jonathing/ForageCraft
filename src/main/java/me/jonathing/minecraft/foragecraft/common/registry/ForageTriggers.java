@@ -21,7 +21,7 @@ public class ForageTriggers
     /**
      * This is a map that holds all of the triggers registered by ForageCraft only.
      *
-     * @see #getAll()
+     * @see #all()
      */
     private static final Map<ResourceLocation, ICriterionTrigger<?>> FORAGE_TRIGGERS_MAP = Maps.newHashMap();
     /**
@@ -53,10 +53,10 @@ public class ForageTriggers
 
     /**
      * @return All of the values of {@link #FORAGE_TRIGGERS_MAP} in an {@link Iterable}.
-     * @see CriteriaTriggers#getAll()
+     * @see CriteriaTriggers#all()
      * @see #FORAGE_TRIGGERS_MAP
      */
-    public static Iterable<? extends ICriterionTrigger<?>> getAll()
+    public static Iterable<? extends ICriterionTrigger<?>> all()
     {
         return FORAGE_TRIGGERS_MAP.values();
     }

@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.loot.ConditionArrayParser;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -25,6 +26,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class LeekTrigger extends AbstractCriterionTrigger<LeekTrigger.Instance>
 {
+    private static final Logger LOGGER = LogManager.getLogger();
     private static final ResourceLocation ID = ForageCraft.locate("leek_trigger");
 
     @Override
@@ -42,16 +44,16 @@ public class LeekTrigger extends AbstractCriterionTrigger<LeekTrigger.Instance>
 
     /**
      * Triggers the {@link LeekTrigger} for a specific {@link ServerPlayerEntity} when the
-     * {@link me.jonathing.minecraft.foragecraft.common.item.LeekItem#hitEntity(ItemStack, LivingEntity, LivingEntity)}
+     * {@link me.jonathing.minecraft.foragecraft.common.item.LeekItem#hurtEnemy(ItemStack, LivingEntity, LivingEntity)}
      * method is called.
      *
-     * @param playerEntity The {@link ServerPlayerEntity} that caused the trigger by hitting an entity with a leek.
-     * @see me.jonathing.minecraft.foragecraft.common.item.LeekItem#hitEntity(ItemStack, LivingEntity, LivingEntity)
+     * @param player The player that caused the trigger by hitting an entity with a leek.
+     * @see me.jonathing.minecraft.foragecraft.common.item.LeekItem#hurtEnemy(ItemStack, LivingEntity, LivingEntity)
      */
-    public void trigger(ServerPlayerEntity playerEntity)
+    public void trigger(ServerPlayerEntity player)
     {
-        LogManager.getLogger().debug("Triggering the leek trigger.");
-        this.trigger(playerEntity, (instance) -> true);
+        LOGGER.debug("Triggering the leek trigger.");
+        this.trigger(player, (instance) -> true);
     }
 
     public static class Instance extends CriterionInstance

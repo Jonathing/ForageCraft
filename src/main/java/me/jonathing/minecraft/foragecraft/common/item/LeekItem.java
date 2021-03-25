@@ -36,30 +36,30 @@ public class LeekItem extends Item
      * Since version {@code 2.1.2}, it also fires the
      * {@link me.jonathing.minecraft.foragecraft.common.trigger.LeekTrigger} specific to the easter egg advancement.
      *
-     * @see Item#hitEntity(ItemStack, LivingEntity, LivingEntity)
+     * @see Item#hurtEnemy(ItemStack, LivingEntity, LivingEntity)
      */
     @Override
-    public boolean hurtEnemy(@Nonnull ItemStack stack, LivingEntity target, @Nonnull LivingEntity attacker)
+    public boolean hurtEnemy(@Nonnull ItemStack itemStack, LivingEntity target, @Nonnull LivingEntity attacker)
     {
         target.hurt(DamageSource.GENERIC, 4);
 
         if (attacker instanceof PlayerEntity)
         {
-            if (!((PlayerEntity) attacker).isCreative())
+            if (!((PlayerEntity) attacker).isCreative() && !attacker.isSpectator())
             {
-                stack.shrink(1);
+                itemStack.shrink(1);
                 attacker.getCommandSenderWorld().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.WITHER_BREAK_BLOCK, SoundCategory.HOSTILE, 1, 1);
                 ForageTriggers.LEEK_TRIGGER.trigger((ServerPlayerEntity) attacker);
                 return true;
             }
             else
             {
-                return super.hurtEnemy(stack, target, attacker);
+                return super.hurtEnemy(itemStack, target, attacker);
             }
         }
         else
         {
-            return super.hurtEnemy(stack, target, attacker);
+            return super.hurtEnemy(itemStack, target, attacker);
         }
     }
 }
