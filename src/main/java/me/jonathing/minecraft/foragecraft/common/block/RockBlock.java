@@ -86,9 +86,7 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
         BlockState blockStateBelow = level.getBlockState(blockPos.below());
         return (level.getBlockState(blockPos).getBlock() instanceof AirBlock
                 || level.getBlockState(blockPos).getFluidState().equals(Fluids.WATER.getSource(false)))
-                && blockStateBelow.canOcclude()
-                && !blockStateBelow.is(BlockTags.WART_BLOCKS)
-                && !blockStateBelow.is(BlockTags.GOLD_ORES);
+                && blockStateBelow.canOcclude();
     }
 
     /**

@@ -11,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
@@ -32,9 +33,9 @@ import java.util.Random;
  */
 public class DecorativeBlock extends FallingBlock
 {
-    public static final VoxelShape STICK_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
-    public static final VoxelShape ROCK_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D);
-    public static final VoxelShape FLAT_ROCK_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
+    public static final VoxelShape STICK_SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 1.0D, 14.0D);
+    public static final VoxelShape ROCK_SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 4.0D, 11.0D);
+    public static final VoxelShape FLAT_ROCK_SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 2.0D, 12.0D);
 
     private final VoxelShape shape;
     private final Lazy<Item> decorativeItem;
@@ -61,7 +62,8 @@ public class DecorativeBlock extends FallingBlock
     @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
     {
-        return this.shape;
+        Vector3d offset = state.getOffset(worldIn, pos);
+        return this.shape.move(offset.x(), 0, offset.z());
     }
 
     /**
