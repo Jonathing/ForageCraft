@@ -9,6 +9,7 @@ import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
+import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.blockstateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placement.NoiseDependant;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.Supplier;
@@ -54,6 +56,17 @@ public class ForageFeatures
                     .tries(1)
                     .build());
 
+    public static final NonNullLazy<BlockClusterFeatureConfig> RANDOM_BLACKSTONE_CONFIG =
+            NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
+                    .add(ForageBlocks.blackstone_flat_rock.defaultBlockState(), 1)
+                    .add(ForageBlocks.blackstone_rock.defaultBlockState(), 1),
+                    new SimpleBlockPlacer()))
+                    .xspread(12).zspread(12)
+                    .yspread(10)
+                    .tries(82)
+                    .noProjection()
+                    .build());
+
     /**
      * The {@link ConfiguredFeature} that dictates how the {@link #RANDOM_EARTH_CONFIG} is placed in the world. The
      * configured feature uses a {@link Supplier} to prevent {@link ExceptionInInitializerError}.
@@ -67,7 +80,13 @@ public class ForageFeatures
                     .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
                     .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))));
 
+    public static final NonNullLazy<ConfiguredFeature<?, ?>> RANDOM_BLACKSTONE_PATCH =
+            NonNullLazy.of(() -> Feature.RANDOM_PATCH.configured(RANDOM_BLACKSTONE_CONFIG.get())
+                    .range(126)
+                    .chance(1));
+
     public static ConfiguredFeature<?, ?> randomEarthPatch;
+    public static ConfiguredFeature<?, ?> randomBlackstonePatch;
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> registerConfiguredFeature(String nameIn, ConfiguredFeature<FC, ?> featureIn)
     {
@@ -84,6 +103,7 @@ public class ForageFeatures
     public static void init()
     {
         randomEarthPatch = registerConfiguredFeature("forage_random_rocks", RANDOM_EARTH_PATCH.get());
+        randomBlackstonePatch = registerConfiguredFeature("forage_random_blackstone_rocks", RANDOM_BLACKSTONE_PATCH.get());
     }
 
     /**
@@ -149,6 +169,11 @@ public class ForageFeatures
                 && !event.getCategory().equals(Biome.Category.NONE))
         {
             event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, randomEarthPatch);
+        }
+        else if (netherBiomes.contains(event.getName()))
+        {
+            System.out.println("event.getName() = " + event.getName());
+            event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, randomBlackstonePatch);
         }
     }
 }

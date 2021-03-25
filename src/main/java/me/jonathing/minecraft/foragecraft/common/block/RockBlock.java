@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -75,15 +76,19 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
      * water, the rock will be waterlogged.
      *
      * @param blockState The {@link BlockState} to replace with the decorative block.
-     * @param world      The {@link IWorldReader} that the {@link BlockState} resides in.
+     * @param level      The {@link IWorldReader} that the {@link BlockState} resides in.
      * @param blockPos   The {@link BlockPos} of the {@link BlockState}.
      * @return The result of the position validity check.
      */
     @Override
-    public boolean canSurvive(@Nonnull BlockState blockState, IWorldReader world, @Nonnull BlockPos blockPos)
+    public boolean canSurvive(@Nonnull BlockState blockState, IWorldReader level, @Nonnull BlockPos blockPos)
     {
-        return (world.getBlockState(blockPos).getBlock() instanceof AirBlock || world.getBlockState(blockPos).getFluidState().equals(Fluids.WATER.getSource(false)))
-                && world.getBlockState(blockPos.below()).canOcclude();
+        BlockState blockStateBelow = level.getBlockState(blockPos.below());
+        return (level.getBlockState(blockPos).getBlock() instanceof AirBlock
+                || level.getBlockState(blockPos).getFluidState().equals(Fluids.WATER.getSource(false)))
+                && blockStateBelow.canOcclude()
+                && !blockStateBelow.is(BlockTags.WART_BLOCKS)
+                && !blockStateBelow.is(BlockTags.GOLD_ORES);
     }
 
     /**
