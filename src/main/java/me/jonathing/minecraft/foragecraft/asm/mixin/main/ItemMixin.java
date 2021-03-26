@@ -52,7 +52,11 @@ public class ItemMixin
      * @param callback       Mixin's way of returning the resulting {@link ActionResultType} of the action.
      * @see Item#useOn(ItemUseContext)
      */
-    @Inject(at = @At("HEAD"), method = "useOn(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;", cancellable = true)
+    @Inject(
+            method = "useOn(Lnet/minecraft/item/ItemUseContext;)Lnet/minecraft/util/ActionResultType;",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     public void useOn(ItemUseContext itemUseContext, CallbackInfoReturnable<ActionResultType> callback)
     {
         if (itemUseContext.getItemInHand().getItem().equals(Items.STICK))

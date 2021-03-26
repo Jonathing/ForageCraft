@@ -37,10 +37,6 @@ public class RecipeManagerMixin
      * {@link ResourceLocation}s and {@link JsonElement}s containing all of the recipes to be parsed on world load. It
      * uses the {@link ModList} to check if a particular mod is <em>not</em> loaded. This way, I can disable recipes
      * specific to that mod so the console doesn't shit itself when it tries to parse through that recipe.
-     * <p>
-     * For some reason, I am unable to use {@link org.spongepowered.asm.mixin.injection.ModifyArg} with this mixin
-     * because in the method signature for the apply method in the bytecode, the map doesn't show up as a valid
-     * argument.
      *
      * @param objectIn          The {@link Map} of {@link ResourceLocation}s and {@link JsonElement} to edit.
      * @param resourceManagerIn The {@link IResourceManager} that handles the recipes. <strong>Unused in this
@@ -50,7 +46,10 @@ public class RecipeManagerMixin
      * @param callback          Mixin's way of returning a method. <strong>Unused in this mixin.</strong>
      * @see RecipeManager#apply(Map, IResourceManager, IProfiler)
      */
-    @Inject(at = @At("HEAD"), method = "apply(Ljava/util/Map;Lnet/minecraft/resources/IResourceManager;Lnet/minecraft/profiler/IProfiler;)V")
+    @Inject(
+            method = "apply(Ljava/util/Map;Lnet/minecraft/resources/IResourceManager;Lnet/minecraft/profiler/IProfiler;)V",
+            at = @At("HEAD")
+    )
     private void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn, CallbackInfo callback)
     {
         if (!ModList.get().isLoaded("patchouli"))

@@ -63,7 +63,13 @@ public class ShapelessRecipeBuilderMixin
          * JSON object otherwise.
          * @see ShapelessRecipeBuilder.Result#serializeRecipeData(JsonObject)
          */
-        @ModifyVariable(at = @At(value = "LOAD", ordinal = 2), method = "serializeRecipeData(Lcom/google/gson/JsonObject;)V", index = 3)
+        @ModifyVariable(
+                method = "serializeRecipeData(Lcom/google/gson/JsonObject;)V",
+                at = @At(
+                        value = "LOAD",
+                        ordinal = 2
+                ),
+                index = 3)
         @SuppressWarnings("deprecation")
         private JsonObject modify$jsonObject(JsonObject jsonObject)
         {
