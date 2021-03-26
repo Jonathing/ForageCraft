@@ -1,19 +1,29 @@
 {
   "version": {
-    "number": "2.1.2",
-    "name": "Foraging Research (Patch 2)",
-    "minecraft": "1.16.4",
+    "number": "2.2.0",
+    "name": "Chipped Blackstone",
+    "minecraft": "1.16.5",
     "stable": true
   },
   "description": [
-    "The second patch to Foraging Research with bug fixes and minor improvements."
+    "Introducing blackstone rocks and flat rocks in the Nether, along with several major bug fixes and performance improvements!"
   ],
   "changelog": [
-    "Sticks and rocks will now only generate in the overworld and has no chance to spawn in any modded biome. (#72)",
-    "Sticks are now waterloggable.",
-    "Sticks and rocks no longer spawn on top of snow and have a whitelist of blocks for where they can spawn.",
-    "Added a new hidden advancement involving the leek.",
-    "Made sure that the configured feature for the stick and rock random patch is properly registered. (#66)",
-    "Minecraft will now skip parsing any mod-compat related recipes if you do not have their related mod installed (i.e. Patchouli)."
+    "Updated Minecraft to 1.16.5.",
+    "Updated Minecraft Forge to 36.1.0.",
+    "Forgo using JS ASM entirely in favor of using mixins.",
+    "Removed an unnecessary LivingEntity check for the leek trigger (#74).",
+    "Gave a name to the village houses loot pool (#75).",
+    "Removed VerificationUtil since it is unnecessary for this mod.",
+    "Added leek to crop tag (#78).",
+    "Better organized the mixins to prevent some dev-only mixins from activating in a normal environment.",
+    "Added Blackstone Rock.",
+    "Added Flat Blackstone Rock.",
+    "Changed most Supplies to Lazies, should help with world loading.",
+    "Blackstone rocks and flat rocks generate in small batches in the Nether.",
+    "Improved the hitboxes for the decorative blocks.",
+    "Fixed stick blocks all facing a single direction.",
+    "Rocks and sticks now use a custom block placer to avoid random incorrect placements.",
+    "Fixed the paving stones Patchouli book entry not being able to be completed."
   ]
 }
