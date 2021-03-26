@@ -20,7 +20,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * This is the custom trigger that is exclusive to the triple baka goal advancement.
  *
  * @author Jonathing
- * @see me.jonathing.minecraft.foragecraft.common.item.LeekItem#hitEntity(ItemStack, LivingEntity, LivingEntity)
+ * @see me.jonathing.minecraft.foragecraft.common.item.LeekItem#hurtEnemy(ItemStack, LivingEntity, LivingEntity)
  * @since 2.1.2
  */
 @MethodsReturnNonnullByDefault

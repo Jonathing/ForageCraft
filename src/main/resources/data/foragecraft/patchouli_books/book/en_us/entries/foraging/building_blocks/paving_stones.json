@@ -3,7 +3,7 @@
   "icon": "foragecraft:paving_stones",
   "category": "foragecraft:inv_blocks",
   "advancement": "foragecraft:recipes/building_blocks/paving_stones",
-  "turnin": "foragecraft:recipes/book_exclusive/has_paving_stones",
+  "turnin": "foragecraft:book_exclusive/has_paving_stones",
   "pages": [
     {
       "type": "spotlight",

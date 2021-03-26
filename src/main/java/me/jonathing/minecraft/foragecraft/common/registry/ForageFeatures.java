@@ -78,7 +78,7 @@ public class ForageFeatures
                     new ForageBlockPlacer(ForageBlockTags.BLACKSTONE_ROCK_PLACEABLE)))
                     .xspread(12).zspread(12)
                     .yspread(10)
-                    .tries(82)
+                    .tries(115)
                     .noProjection()
                     .build());
 
