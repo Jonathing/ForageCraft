@@ -91,8 +91,8 @@ public class ForageLootProvider extends LootTableProvider
         /**
          * Creates a table from the given loot pools.
          *
-         * @param pools
-         * @return
+         * @param pools The list of loot pool builders.
+         * @return The table of the list of builders.
          */
         default LootTable.Builder tableOf(List<LootPool.Builder> pools)
         {
@@ -104,8 +104,8 @@ public class ForageLootProvider extends LootTableProvider
         /**
          * Creates a table from the given loot pool.
          *
-         * @param pool
-         * @return
+         * @param pool The loot pool builder to get the table of.
+         * @return The table of the loot pool builder.
          */
         default LootTable.Builder tableOf(LootPool.Builder pool)
         {
@@ -113,13 +113,12 @@ public class ForageLootProvider extends LootTableProvider
         }
 
         /**
-         * Creates a loot pool with the given item. Gives an amount between the min and
-         * max.
+         * Creates a loot pool with the given item. Gives an amount between the min and max.
          *
-         * @param item
-         * @param min
-         * @param max
-         * @return
+         * @param item The item to be used in the loot pool.
+         * @param min  The minimum amount the loot pool should have.
+         * @param max  The maximum amount the loot pool should have.
+         * @return The builder with the new loot pool.
          */
         default LootPool.Builder basicPool(IItemProvider item, int min, int max)
         {
@@ -129,8 +128,8 @@ public class ForageLootProvider extends LootTableProvider
         /**
          * Creates a loot pool with the given item. Will only give one item.
          *
-         * @param item
-         * @return
+         * @param item The item to make the loot pool with.
+         * @return The builder containing the new loot pool.
          */
         default LootPool.Builder basicPool(IItemProvider item)
         {
@@ -140,8 +139,8 @@ public class ForageLootProvider extends LootTableProvider
         /**
          * Creates a loot pool that will give a random item from the list.
          *
-         * @param items
-         * @return
+         * @param items The list of items to make the loot pool with.
+         * @return The builder containing the new loot pool.
          */
         default LootPool.Builder randItemPool(List<IItemProvider> items)
         {
@@ -149,11 +148,11 @@ public class ForageLootProvider extends LootTableProvider
         }
 
         /**
-         * Creates a loot pool with multiple entries. One of these entries will be
-         * picked at random each time the pool rolls.
+         * Creates a loot pool with multiple entries. One of these entries will be picked at random each time the pool
+         * rolls.
          *
-         * @param lootEntries
-         * @return
+         * @param lootEntries The list of loot entries to use in the loot pool.
+         * @return The new loot pool with the entries added.
          */
         default LootPool.Builder poolOf(List<LootEntry.Builder<?>> lootEntries)
         {
@@ -163,13 +162,12 @@ public class ForageLootProvider extends LootTableProvider
         }
 
         /**
-         * Creates a loot entry for the given item. Gives an amount between the min and
-         * max.
+         * Creates a loot entry for the given item. Gives an amount between the min and max.
          *
-         * @param item
-         * @param min
-         * @param max
-         * @return
+         * @param item The item that should be used in the loot pool.
+         * @param min The minimum amount that the loot entry should have.
+         * @param max The maximum amount that the loot entry should have.
+         * @return The new loot entry.
          */
         default StandaloneLootEntry.Builder<?> basicEntry(IItemProvider item, int min, int max)
         {
@@ -179,8 +177,8 @@ public class ForageLootProvider extends LootTableProvider
         /**
          * Creates a loot entry for the given item. Will only give one item.
          *
-         * @param item
-         * @return
+         * @param item The item to use for the loot entry.
+         * @return The new loot entry.
          */
         default StandaloneLootEntry.Builder<?> basicEntry(IItemProvider item)
         {

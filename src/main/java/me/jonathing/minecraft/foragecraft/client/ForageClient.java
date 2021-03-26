@@ -19,6 +19,7 @@ public class ForageClient
     /**
      * Runs tasks specific to the client. It is called from {@link ForageCraft#ForageCraft()}.
      *
+     * @param event The modloader client setup event to use for client setup.
      * @see ForageCraft#ForageCraft()
      * @see FMLClientSetupEvent
      */

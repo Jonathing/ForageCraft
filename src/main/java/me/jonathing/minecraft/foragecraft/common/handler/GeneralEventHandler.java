@@ -41,6 +41,7 @@ public class GeneralEventHandler
      * This event method sets the fuel burn time for specific items or blocks in ForageCraft. Since they cannot be
      * defined in item properties, they are instead defined here.
      *
+     * @param event The furnace fuel burn time event to use to add the burn times to.
      * @see FurnaceFuelBurnTimeEvent
      */
     @SubscribeEvent
@@ -59,6 +60,7 @@ public class GeneralEventHandler
     /**
      * This event method is used to add some of ForageCraft's own loot pools into existing loot tables.
      *
+     * @param event The loot table load event to use to add the {@link #VILLAGE_HOUSE_CHESTS} to.
      * @see LootTableLoadEvent
      * @see #VILLAGE_HOUSE_CHESTS
      * @since 2.1.0

@@ -18,6 +18,8 @@ public @interface DynamicConstant
 {
     /**
      * The constant name to inject, set in the Gradle buildscript.
+     *
+     * @return The name to inject.
      */
     String value();
 }

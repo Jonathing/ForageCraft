@@ -46,6 +46,8 @@ public class RockBlock extends DecorativeBlock implements IWaterLoggable
      * Makes a new {@link DecorativeBlock} with features exclusive to the {@link ForageBlocks#rock} with a gicen
      * {@link VoxelShape} and decorative {@link Item} supplied by a {@link Lazy}.
      *
+     * @param shape          The shape to use for this rock block.
+     * @param decorativeItem The item to use as the decorative item, provided in a Lazy.
      * @see RockBlock#RockBlock(Properties, VoxelShape, Lazy)
      */
     public RockBlock(VoxelShape shape, Lazy<Item> decorativeItem)

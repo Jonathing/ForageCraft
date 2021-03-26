@@ -56,6 +56,8 @@ public class ForageCraft
 
     /**
      * Runs methods that are designed to be run on the {@link FMLCommonSetupEvent}.
+     *
+     * @param event The modloader common setup event to use for common setup.
      */
     public static void commonSetup(final FMLCommonSetupEvent event)
     {

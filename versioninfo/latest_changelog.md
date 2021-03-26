@@ -20,5 +20,6 @@ Introducing blackstone rocks and flat rocks in the Nether, along with several ma
 - Blackstone rocks and flat rocks generate in small batches in the Nether.
 - Improved the hitboxes for the decorative blocks.
 - Fixed stick blocks all facing a single direction.
+- Fixed decorative blocks being able to be pushed by pistons.
 - Rocks and sticks now use a custom block placer to avoid random incorrect placements.
 - Fixed the paving stones Patchouli book entry not being able to be completed.

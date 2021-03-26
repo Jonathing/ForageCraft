@@ -20,6 +20,7 @@ public class ForageCraftDataGen
     /**
      * This is where we begin our data generation. Pretty important for this mod in particular.
      *
+     * @param event The gather data event to use to run data generation with.
      * @see GatherDataEvent
      */
     @SubscribeEvent

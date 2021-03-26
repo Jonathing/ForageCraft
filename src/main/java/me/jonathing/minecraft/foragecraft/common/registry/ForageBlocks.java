@@ -99,6 +99,7 @@ public class ForageBlocks
      *                         ({@link ForageInfo#IDE}), all of the ForageCraft blocks and items will be put into the
      *                         {@link ForageItemGroups#FORAGECRAFT} category.
      * @param registerItem     If false, a block item will not be registered for the given block.
+     * @param <B>              The generic type that extends {@link Block} for registration.
      * @return The new registered block that the assigned variable now holds.
      * @see #init(Register)
      */
@@ -122,6 +123,7 @@ public class ForageBlocks
      *                         ({@link ForageInfo#IDE}), all of the ForageCraft blocks and items will be put into the
      *                         {@link ForageItemGroups#FORAGECRAFT} category.
      * @param registerItem     If false, a block item will not be registered for the given block.
+     * @param <B>              The generic type that extends {@link Block} for registration.
      * @return The new registered {@link Block} that the assigned variable now holds.
      * @see #register(String, Block, Item.Properties, ItemGroup, boolean)
      * @see #init(Register)
