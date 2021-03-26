@@ -9,6 +9,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.blockstateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placement.NoiseDependant;
@@ -64,21 +65,34 @@ public class ForageFeatures
                     .build());
 
     /**
-     * The default random generation config that defines how the {@link ForageBlocks#blackstone_rock}s and
-     * {@link ForageBlocks#blackstone_flat_rock}s are generated. The feature uses a {@link NonNullLazy} to prevent an
-     * {@link ExceptionInInitializerError}.
+     * The default random generation config that defines how the {@link ForageBlocks#blackstone_rock}s are generated.
+     * The feature uses a {@link NonNullLazy} to prevent an {@link ExceptionInInitializerError}.
      *
      * @see #BLACKSTONE_FEATURE
      * @see #init()
      */
     public static final NonNullLazy<BlockClusterFeatureConfig> BLACKSTONE_CONFIG =
-            NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
-                    .add(ForageBlocks.blackstone_flat_rock.defaultBlockState(), 1)
-                    .add(ForageBlocks.blackstone_rock.defaultBlockState(), 1),
+            NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new SimpleBlockStateProvider(ForageBlocks.blackstone_rock.defaultBlockState())),
                     new ForageBlockPlacer(ForageBlockTags.BLACKSTONE_ROCK_PLACEABLE)))
                     .xspread(12).zspread(12)
                     .yspread(10)
-                    .tries(115)
+                    .tries(90)
+                    .noProjection()
+                    .build());
+
+    /**
+     * The default random generation config that defines how the {@link ForageBlocks#blackstone_flat_rock}s are
+     * generated. The feature uses a {@link NonNullLazy} to prevent an {@link ExceptionInInitializerError}.
+     *
+     * @see #BLACKSTONE_FLAT_FEATURE
+     * @see #init()
+     */
+    public static final NonNullLazy<BlockClusterFeatureConfig> BLACKSTONE_FLAT_CONFIG =
+            NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new SimpleBlockStateProvider(ForageBlocks.blackstone_flat_rock.defaultBlockState())),
+                    new ForageBlockPlacer(ForageBlockTags.BLACKSTONE_ROCK_PLACEABLE)))
+                    .xspread(12).zspread(12)
+                    .yspread(10)
+                    .tries(90)
                     .noProjection()
                     .build());
 
@@ -99,7 +113,7 @@ public class ForageFeatures
      * The {@link ConfiguredFeature} that dictates how the {@link #STICK_CONFIG} is placed in the world. The
      * configured feature uses a {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
      *
-     * @see #ROCK_CONFIG
+     * @see #STICK_CONFIG
      * @see #init()
      */
     public static final NonNullLazy<ConfiguredFeature<?, ?>> STICK_FEATURE =
@@ -112,7 +126,7 @@ public class ForageFeatures
      * The {@link ConfiguredFeature} that dictates how the {@link #BLACKSTONE_CONFIG} is placed in the world. The
      * configured feature uses a {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
      *
-     * @see #ROCK_CONFIG
+     * @see #BLACKSTONE_CONFIG
      * @see #init()
      */
     public static final NonNullLazy<ConfiguredFeature<?, ?>> BLACKSTONE_FEATURE =
@@ -120,9 +134,22 @@ public class ForageFeatures
                     .range(126)
                     .chance(1));
 
+    /**
+     * The {@link ConfiguredFeature} that dictates how the {@link #BLACKSTONE_FLAT_CONFIG} is placed in the world. The
+     * configured feature uses a {@link NonNullLazy} to prevent {@link ExceptionInInitializerError}.
+     *
+     * @see #BLACKSTONE_FLAT_CONFIG
+     * @see #init()
+     */
+    public static final NonNullLazy<ConfiguredFeature<?, ?>> BLACKSTONE_FLAT_FEATURE =
+            NonNullLazy.of(() -> Feature.RANDOM_PATCH.configured(BLACKSTONE_FLAT_CONFIG.get())
+                    .range(126)
+                    .chance(1));
+
     public static ConfiguredFeature<?, ?> rockConfiguredFeature;
     public static ConfiguredFeature<?, ?> stickConfiguredFeature;
     public static ConfiguredFeature<?, ?> blackstoneConfiguredFeature;
+    public static ConfiguredFeature<?, ?> blackstoneFlatConfiguredFeature;
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> registerConfiguredFeature(String nameIn, ConfiguredFeature<FC, ?> featureIn)
     {
@@ -141,6 +168,7 @@ public class ForageFeatures
         rockConfiguredFeature = registerConfiguredFeature("forage_random_rocks", ROCK_FEATURE.get());
         stickConfiguredFeature = registerConfiguredFeature("forage_random_sticks", STICK_FEATURE.get());
         blackstoneConfiguredFeature = registerConfiguredFeature("forage_random_blackstone_rocks", BLACKSTONE_FEATURE.get());
+        blackstoneFlatConfiguredFeature = registerConfiguredFeature("forage_random_blackstone_rocks", BLACKSTONE_FLAT_FEATURE.get());
     }
 
     /**
@@ -212,6 +240,7 @@ public class ForageFeatures
         else if (netherBiomes.contains(event.getName()))
         {
             event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, blackstoneConfiguredFeature);
+            event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, blackstoneFlatConfiguredFeature);
         }
     }
 }
