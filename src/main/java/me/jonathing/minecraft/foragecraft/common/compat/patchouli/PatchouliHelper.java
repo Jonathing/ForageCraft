@@ -60,7 +60,7 @@ public class PatchouliHelper
                     new String[]{"  N  ", "  O  ", "  O  ", "  N  "},
                     new String[]{" IOi ", "  P  ", "  P  ", " IOi "},
                     new String[]{" LOl ", "  P  ", "  P  ", " LOl "},
-                    new String[]{" FO  ", "R PfB", "  P  ", " bOr "},
+                    new String[]{" FO  ", "R PfB", " 3P 2", " bOr "},
                     new String[]{" WNC ", "WWOCC", "WW0CC", " WNC "},
                     new String[]{"  N  ", " QNN ", " NNG ", "  N  "}
             };
@@ -114,7 +114,7 @@ public class PatchouliHelper
 
         PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "the_nether"),
                 PatchouliAPI.get().makeMultiblock(THE_NETHER,
-                        '0', Blocks.OBSIDIAN,
+                        '0', Blocks.OBSIDIAN, // center block
                         'N', Blocks.NETHERRACK,
                         'Q', Blocks.NETHER_QUARTZ_ORE,
                         'G', Blocks.NETHER_GOLD_ORE,
@@ -132,22 +132,34 @@ public class PatchouliHelper
                         'l', Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true),
                         'I', Blocks.IRON_BARS.defaultBlockState().setValue(PaneBlock.SOUTH, true),
                         'i', Blocks.IRON_BARS.defaultBlockState().setValue(PaneBlock.NORTH, true),
-                        '1', Blocks.FIRE.defaultBlockState().setValue(FireBlock.AGE, 0))
+                        '1', Blocks.FIRE.defaultBlockState().setValue(FireBlock.AGE, 0),
+                        '2', ForageBlocks.blackstone_rock,
+                        '3', ForageBlocks.blackstone_flat_rock)
                         .setSymmetrical(true));
 
         PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_stick"),
                 PatchouliAPI.get().makeMultiblock(SINGLE_BLOCK,
-                        '0', ForageBlocks.stick.defaultBlockState().setValue(StickBlock.FACING, Direction.SOUTH),
+                        '0', ForageBlocks.stick.defaultBlockState().setValue(StickBlock.FACING, Direction.SOUTH), // center block
                         '1', Blocks.GRASS_BLOCK));
 
         PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_rock"),
                 PatchouliAPI.get().makeMultiblock(SINGLE_BLOCK,
-                        '0', ForageBlocks.rock,
+                        '0', ForageBlocks.rock, // center block
                         '1', Blocks.GRASS_BLOCK));
 
         PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_flat_rock"),
                 PatchouliAPI.get().makeMultiblock(SINGLE_BLOCK,
-                        '0', ForageBlocks.flat_rock,
+                        '0', ForageBlocks.flat_rock, // center block
                         '1', Blocks.GRASS_BLOCK));
+
+        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_blackstone_rock"),
+                PatchouliAPI.get().makeMultiblock(SINGLE_BLOCK,
+                        '0', ForageBlocks.blackstone_rock, // center block
+                        '1', Blocks.NETHERRACK));
+
+        PatchouliAPI.get().registerMultiblock(new ResourceLocation(ForageInfo.MOD_ID, "single_blackstone_flat_rock"),
+                PatchouliAPI.get().makeMultiblock(SINGLE_BLOCK,
+                        '0', ForageBlocks.blackstone_flat_rock, // center block
+                        '1', Blocks.NETHERRACK));
     }
 }

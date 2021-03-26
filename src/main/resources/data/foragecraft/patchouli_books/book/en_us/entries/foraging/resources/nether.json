@@ -27,6 +27,32 @@
       "entity": "minecraft:piglin",
       "name": "The Piglin",
       "text": "A pig creature found in The Nether that is naturally hostile, unless you have gold and can offer it to them."
+    },
+    {
+      "type": "spotlight",
+      "item": "foragecraft:blackstone_rock",
+      "title": "Blackstone Rocks",
+      "link_recipe": true,
+      "text": "Although they seem to be rarer than their normal stone counterpart, blackstone rocks can be found in relative abundance throughout the harsh environment of $(bold)the Nether.$()"
+    },
+    {
+      "type": "multiblock",
+      "name": "",
+      "multiblock_id": "foragecraft:single_blackstone_rock",
+      "enable_visualize": false
+    },
+    {
+      "type": "spotlight",
+      "item": "foragecraft:blackstone_flat_rock",
+      "title": "Flat Blackstone Rocks",
+      "link_recipe": true,
+      "text": "Similar to their flat stone counterpart, flat blackstone rocks are a direct cousin of blackstone rocks that can be found around the same areas as to where $(bold)blackstone rocks can be found.$()"
+    },
+    {
+      "type": "multiblock",
+      "name": "",
+      "multiblock_id": "foragecraft:single_blackstone_flat_rock",
+      "enable_visualize": false
     }
   ]
 }
