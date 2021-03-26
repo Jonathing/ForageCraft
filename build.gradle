@@ -337,11 +337,14 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.0.62")
 
     // Biomes O' Plenty
-    runtimeOnly fg.deobf("curse.maven:bop-220318:3135698")
+    runtimeOnly fg.deobf("curse.maven:biomes-o-plenty-220318:3135698")
 
     // Patchouli
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48")
+
+    // Shutup Experimental Settings!
+    runtimeOnly fg.deobf("curse.maven:shutup-experimental-settings-407174:3188120")
 }
 
 // Attributes to include in the built jar file

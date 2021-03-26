@@ -6,6 +6,6 @@
  * ForageCraft's use of coremodding can be found in {@link me.jonathing.minecraft.foragecraft.asm}.
  *
  * @see me.jonathing.minecraft.foragecraft.asm
- * @see me.jonathing.minecraft.foragecraft.info.ForageInfo#IDE
+ * @see me.jonathing.minecraft.foragecraft.info.ForageInfo#DATAGEN
  */
 package me.jonathing.minecraft.foragecraft.asm.mixin.data;
