@@ -16,8 +16,8 @@
     "1.12.2-latest": "1.14.0.1-dev",
     "1.16.4-latest": "2.1.2",
     "1.16.4-recommended": "2.1.2",
-    "1.16.5-latest": "2.2.0",
-    "1.16.5-recommended": "2.2.0"
+    "1.16.5-latest": "2.2.1",
+    "1.16.5-recommended": "2.2.1"
   },
   "1.9": {
     "1.9": "Added support for Minecraft 1.9, 1.9.4, and 1.10.",
@@ -63,6 +63,7 @@
     "2.1.2": "2.1.2 - Foraging Research (Patch 2): The second patch to Foraging Research with bug fixes and minor improvements.\n- Sticks and rocks will now only generate in the overworld and has no chance to spawn in any modded biome. (#72)\n- Sticks are now waterloggable.\n- Sticks and rocks no longer spawn on top of snow and have a whitelist of blocks for where they can spawn.\n- Added a new hidden advancement involving the leek.\n- Made sure that the configured feature for the stick and rock random patch is properly registered. (#66)\n- Minecraft will now skip parsing any mod-compat related recipes if you do not have their related mod installed (i.e. Patchouli)."
   },
   "1.16.5": {
-    "2.2.0": "2.2.0 - Chipped Blackstone: Introducing blackstone rocks and flat rocks in the Nether, along with several major bug fixes and performance improvements!\n- Updated Minecraft to 1.16.5.\n- Updated Minecraft Forge to 36.1.0.\n- Forgo using JS ASM entirely in favor of using mixins.\n- Removed an unnecessary LivingEntity check for the leek trigger (#74).\n- Gave a name to the village houses loot pool (#75).\n- Removed VerificationUtil since it is unnecessary for this mod.\n- Added leek to crop tag (#78).\n- Better organized the mixins to prevent some dev-only mixins from activating in a normal environment.\n- Added Blackstone Rock.\n- Added Flat Blackstone Rock.\n- Changed most Supplies to Lazies, should help with world loading.\n- Blackstone rocks and flat rocks generate in small batches in the Nether.\n- Improved the hitboxes for the decorative blocks.\n- Fixed stick blocks all facing a single direction.\n- Fixed decorative blocks being able to be pushed by pistons.\n- Rocks and sticks now use a custom block placer to avoid random incorrect placements.\n- Fixed the paving stones Patchouli book entry not being able to be completed."
+    "2.2.0": "2.2.0 - Chipped Blackstone: Introducing blackstone rocks and flat rocks in the Nether, along with several major bug fixes and performance improvements!\n- Updated Minecraft to 1.16.5.\n- Updated Minecraft Forge to 36.1.0.\n- Forgo using JS ASM entirely in favor of using mixins.\n- Removed an unnecessary LivingEntity check for the leek trigger (#74).\n- Gave a name to the village houses loot pool (#75).\n- Removed VerificationUtil since it is unnecessary for this mod.\n- Added leek to crop tag (#78).\n- Better organized the mixins to prevent some dev-only mixins from activating in a normal environment.\n- Added Blackstone Rock.\n- Added Flat Blackstone Rock.\n- Changed most Supplies to Lazies, should help with world loading.\n- Blackstone rocks and flat rocks generate in small batches in the Nether.\n- Improved the hitboxes for the decorative blocks.\n- Fixed stick blocks all facing a single direction.\n- Fixed decorative blocks being able to be pushed by pistons.\n- Rocks and sticks now use a custom block placer to avoid random incorrect placements.\n- Fixed the paving stones Patchouli book entry not being able to be completed.",
+    "2.2.1": "2.2.1 - Chipped Blackstone (Patch 1): The first patch to Chipped Blackstone with an important critical bug fix.\n- Fixed Paving Stones causing server-sided issues due to an error when remapping the project."
   }
 }
