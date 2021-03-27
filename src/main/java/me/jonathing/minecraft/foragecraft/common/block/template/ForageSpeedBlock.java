@@ -43,7 +43,6 @@ public class ForageSpeedBlock extends Block
     public void stepOn(World level, BlockPos blockPos, Entity entity)
     {
         super.stepOn(level, blockPos, entity);
-
-        entity.lerpMotion(entity.getDeltaMovement().x * speedMultiplier, 0, entity.getDeltaMovement().z * speedMultiplier);
+        entity.setDeltaMovement(entity.getDeltaMovement().x * speedMultiplier, 0, entity.getDeltaMovement().z * speedMultiplier);
     }
 }

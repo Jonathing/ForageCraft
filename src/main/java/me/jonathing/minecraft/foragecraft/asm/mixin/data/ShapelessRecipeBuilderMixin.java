@@ -69,7 +69,8 @@ public class ShapelessRecipeBuilderMixin
                         value = "LOAD",
                         ordinal = 2
                 ),
-                index = 3)
+                index = 3
+        )
         @SuppressWarnings("deprecation")
         private JsonObject modify$jsonObject(JsonObject jsonObject)
         {
