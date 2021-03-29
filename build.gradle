@@ -1,7 +1,7 @@
 /*
  * GradleWorks for ForgeGradle 4/3
  * Written by Jonathing
- * Version 3.3.0
+ * Version 3.3.1
  *
  * What was once just an effort to make life easier is now a fully-fledged buildscript that does almost all of the work
  * for you! The only things you will need to take care of yourself are dependencies, but that shouldn't be too big of a
@@ -18,7 +18,7 @@ buildscript {
         maven { url 'https://files.minecraftforge.net/maven' }
 
         // SpongePowered Maven
-        maven { url 'https://repo.spongepowered.org/maven' }
+        maven { url 'https://repo.spongepowered.org/repository/maven-public' }
 
         // Maven Central
         mavenCentral()
@@ -73,9 +73,7 @@ apply plugin: 'maven-publish'
 static def isOsx() {
     def osProp = System.properties['os.name'].toLowerCase()
     return osProp.contains('darwin') || osProp.contains('osx') || osProp.contains('mac')
-};
-
-project.ext.isOsx = { return isOsx() }
+}; project.ext.isOsx = { return isOsx() }
 
 // Get the mod version from gradle.properties
 version = "${mod_version}"
@@ -195,7 +193,7 @@ minecraft {
                 //arg "-mixin.config=${mod_id}.mixins.json".toString()
             }
 
-            // Disables refmaps for mixin in a dev environment (commented out by default, uncomment if using mixin)
+            // Remaps refmaps to workspace mappings for mixin
             if (project.hasProperty('mixin_version')) {
                 property 'mixin.env.remapRefMap', 'true'
                 property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg".toString()
@@ -229,9 +227,10 @@ minecraft {
             // Additional arguments exclusive to the server (nogui by default, separated by ",")
             args 'nogui'
 
-            // Disables refmaps for mixin in a dev environment (commented out by default, uncomment if using mixin)
+            // Remaps refmaps to workspace mappings for mixin
             if (project.hasProperty('mixin_version')) {
-                property 'mixin.env.disableRefMap', 'true'
+                property 'mixin.env.remapRefMap', 'true'
+                property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg".toString()
             }
 
             // Logging markers for Forge. See default MDK for instructions
@@ -271,9 +270,10 @@ minecraft {
             // Additional arguments exclusive to data generation (do NOT change these unless necessary)
             args '--mod', "${mod_id}".toString(), '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
-            // Disables refmaps for mixin in a dev environment (commented out by default, uncomment if using mixin)
+            // Remaps refmaps to workspace mappings for mixin
             if (project.hasProperty('mixin_version')) {
-                property 'mixin.env.disableRefMap', 'true'
+                property 'mixin.env.remapRefMap', 'true'
+                property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg".toString()
             }
 
             // Logging markers for Forge. See default MDK for instructions
