@@ -32,7 +32,7 @@ import java.util.Random;
  * @see FallingBlock
  * @since 2.0.0
  */
-public class DecorativeBlock extends FallingBlock
+public abstract class DecorativeBlock extends FallingBlock
 {
     public static final VoxelShape STICK_SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 1.0D, 14.0D);
     public static final VoxelShape ROCK_SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 4.0D, 11.0D);
