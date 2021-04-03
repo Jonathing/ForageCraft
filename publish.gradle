@@ -65,7 +65,7 @@ publishing {
 		// Modding Legacy Maven
 		maven {
 			name = "ModdingLegacyMaven"
-			url = uri("https://maven.moddinglegacy.com/artifactory/modding-legacy/")
+			url = uri("https://maven.moddinglegacy.com/repository/jonathing/")
 			credentials {
 				username = project.findProperty("mlm.user") ?: System.getenv("ML_USERNAME")
 				password = project.findProperty("mlm.key") ?: System.getenv("ML_TOKEN")

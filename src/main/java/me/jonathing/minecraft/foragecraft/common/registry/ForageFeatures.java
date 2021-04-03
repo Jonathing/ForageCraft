@@ -16,6 +16,7 @@ import net.minecraft.world.gen.placement.NoiseDependant;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.util.NonNullLazy;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -227,20 +228,33 @@ public class ForageFeatures
                     .distinct().collect(Collectors.toList());
         }
 
-        if (overworldBiomes.contains(event.getName())
-                && !event.getCategory().equals(Biome.Category.BEACH)
-                && !event.getCategory().equals(Biome.Category.DESERT)
-                && !event.getCategory().equals(Biome.Category.OCEAN)
-                && !event.getCategory().equals(Biome.Category.ICY)
-                && !event.getCategory().equals(Biome.Category.NONE))
+        Biome.Category biomeCategory = event.getCategory();
+        BiomeGenerationSettingsBuilder biomeGenerator = event.getGeneration();
+
+        if (overworldBiomes.contains(event.getName()))
         {
-            event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, rockConfiguredFeature);
-            event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, stickConfiguredFeature);
+            // biomes that should contain both rocks and sticks
+            if (!biomeCategory.equals(Biome.Category.BEACH)
+                    && !biomeCategory.equals(Biome.Category.DESERT)
+                    && !biomeCategory.equals(Biome.Category.OCEAN)
+                    && !biomeCategory.equals(Biome.Category.ICY)
+                    && !biomeCategory.equals(Biome.Category.NONE))
+            {
+                biomeGenerator.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, rockConfiguredFeature);
+
+                // biomes that should contain only sticks
+                if (!biomeCategory.equals(Biome.Category.MUSHROOM))
+                {
+                    biomeGenerator.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, stickConfiguredFeature);
+                }
+            }
         }
-        else if (netherBiomes.contains(event.getName()))
+
+        // all nether biomes should attempt to have blackstone generate
+        if (netherBiomes.contains(event.getName()))
         {
-            event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, blackstoneConfiguredFeature);
-            event.getGeneration().addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, blackstoneFlatConfiguredFeature);
+            biomeGenerator.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, blackstoneConfiguredFeature);
+            biomeGenerator.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, blackstoneFlatConfiguredFeature);
         }
     }
 }
