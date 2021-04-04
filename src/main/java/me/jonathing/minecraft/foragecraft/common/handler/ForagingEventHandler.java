@@ -1,6 +1,7 @@
 package me.jonathing.minecraft.foragecraft.common.handler;
 
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
+import me.jonathing.minecraft.foragecraft.common.util.MathUtil;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -12,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -43,6 +45,8 @@ public class ForagingEventHandler
      * @since 2.1.0
      */
     private static boolean mainDropsInitialized = false;
+
+    private static Map<UUID, Integer> cooldownMap = new HashMap<>();
 
     /**
      * Contains a {@link List} of {@link Triple}s containing drop information when a {@link Blocks#GRASS_BLOCK} is
@@ -200,8 +204,10 @@ public class ForagingEventHandler
     {
         World level = ((World) event.getWorld());
         Random random = level.getRandom();
-        ServerPlayerEntity playerEntity = (ServerPlayerEntity) event.getPlayer();
         Block blockBroken = event.getState().getBlock();
+
+        ServerPlayerEntity playerEntity = (ServerPlayerEntity) event.getPlayer();
+        if (cooldownMap.containsKey(playerEntity.getUUID())) return;
 
         Collections.shuffle(dropList, random);
 
@@ -217,8 +223,17 @@ public class ForagingEventHandler
                 Block.popResource(level, event.getPos(), new ItemStack(item, random.nextInt(maxStack) + 1));
 
                 ForageTriggers.FORAGING_TRIGGER.trigger(playerEntity, blockBroken, item);
+                cooldownMap.put(playerEntity.getUUID(), MathUtil.secondsToWorldTicks(10));
                 break;
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onWorldTick(TickEvent.WorldTickEvent event)
+    {
+        if (event.world.isClientSide) return;
+        cooldownMap.replaceAll((k, v) -> v - 1);
+        cooldownMap.entrySet().removeIf(entry -> entry.getValue() <= 0);
     }
 }
