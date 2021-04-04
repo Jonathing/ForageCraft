@@ -89,8 +89,8 @@ public class ForageRecipeProvider extends RecipeProvider
                 .save(consumer, ForageCraft.find("stick_from_gathering_knife_and_sapling"));
 
         ShapedRecipeBuilder.shaped(ForageItems.primitive_pickaxe, 1)
-                .define('s', Items.STICK).define('g', Items.GRAVEL).define('f', Items.FLINT)
-                .pattern("s ").pattern("gf").unlockedBy(hasItem, has(Items.FLINT)).save(consumer);
+                .define('s', Items.STICK).define('c', Blocks.COBBLESTONE).define('f', Items.FLINT)
+                .pattern("cf").pattern("s ").unlockedBy(hasItem, has(Items.FLINT)).save(consumer);
     }
 
     private void simpleInOut(IItemProvider in, IItemProvider out, int amount)
