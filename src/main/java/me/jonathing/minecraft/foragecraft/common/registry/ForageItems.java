@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.item.GatheringKnifeItem;
 import me.jonathing.minecraft.foragecraft.common.item.LeekItem;
+import me.jonathing.minecraft.foragecraft.common.item.util.ForageItemTier;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
 import net.minecraft.item.*;
@@ -24,6 +25,7 @@ public class ForageItems
     public static Item spaghetti, leek;
     public static Item leek_seeds;
     public static Item gathering_knife;
+    public static Item primitive_pickaxe;
 
     private static IForgeRegistry<Item> iItemRegistry;
 
@@ -63,6 +65,10 @@ public class ForageItems
                         .tab(getItemGroup(ItemGroup.TAB_TOOLS))
                         .stacksTo(1)
                         .durability(60)));
+
+        primitive_pickaxe = register("primitive_pickaxe",
+                new PickaxeItem(ForageItemTier.PRIMITIVE, 1, -2.4F, new Item.Properties()
+                        .tab(getItemGroup(ItemGroup.TAB_TOOLS))));
 
         registerBlockItems();
     }
