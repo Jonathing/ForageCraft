@@ -91,6 +91,14 @@ public class ForageRecipeProvider extends RecipeProvider
         ShapedRecipeBuilder.shaped(ForageItems.primitive_pickaxe, 1)
                 .define('s', Items.STICK).define('c', Blocks.COBBLESTONE).define('f', Items.FLINT)
                 .pattern("cf").pattern("s ").unlockedBy(hasItem, has(Items.FLINT)).save(consumer);
+
+        ShapedRecipeBuilder.shaped(ForageItems.primitive_axe, 1)
+                .define('s', Items.STICK).define('c', Blocks.COBBLESTONE).define('f', Items.FLINT)
+                .pattern("fc").pattern("s ").unlockedBy(hasItem, has(Items.FLINT)).save(consumer);
+
+        ShapedRecipeBuilder.shaped(ForageItems.primitive_combat_knife, 1)
+                .define('s', Items.STICK).define('c', Blocks.COBBLESTONE).define('f', Items.FLINT)
+                .pattern("f ").pattern("sc").unlockedBy(hasItem, has(Items.FLINT)).save(consumer);
     }
 
     private void simpleInOut(IItemProvider in, IItemProvider out, int amount)

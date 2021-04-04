@@ -25,7 +25,7 @@ public class ForageItems
     public static Item spaghetti, leek;
     public static Item leek_seeds;
     public static Item gathering_knife;
-    public static Item primitive_pickaxe;
+    public static Item primitive_pickaxe, primitive_axe, primitive_combat_knife;
 
     private static IForgeRegistry<Item> iItemRegistry;
 
@@ -69,6 +69,12 @@ public class ForageItems
         primitive_pickaxe = register("primitive_pickaxe",
                 new PickaxeItem(ForageItemTier.PRIMITIVE, 1, -2.4F, new Item.Properties()
                         .tab(getItemGroup(ItemGroup.TAB_TOOLS))));
+        primitive_axe = register("primitive_axe",
+                new AxeItem(ForageItemTier.PRIMITIVE, 4.5F, -3.0F, (new Item.Properties())
+                        .tab(getItemGroup(ItemGroup.TAB_TOOLS))));
+        primitive_combat_knife = register("primitive_combat_knife",
+                new SwordItem(ForageItemTier.PRIMITIVE, 3, -2.2F, (new Item.Properties())
+                        .tab(getItemGroup(ItemGroup.TAB_COMBAT))));
 
         registerBlockItems();
     }
