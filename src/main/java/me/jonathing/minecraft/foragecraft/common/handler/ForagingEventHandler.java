@@ -142,7 +142,8 @@ public class ForagingEventHandler
         forageChunk.ifPresent(c ->
         {
             PLAYERS_ON_COOLDOWN.put(playerEntity.getUUID(), MathUtil.secondsToWorldTicks(ForageCraftConfig.SERVER.getUnsuccessfulForagingCooldown()));
-            if (c.getTimesForaged() >= ForageCraftConfig.SERVER.getMaxForagesPerChunk()) return;
+            if (c.getTimesForaged() >= ForageCraftConfig.SERVER.getMaxForagesPerChunk()
+                    && ForageCraftConfig.SERVER.getMaxForagesPerChunk() > 0) return;
 
             Collections.shuffle(dropList, random);
             for (Triple<IItemProvider, Integer, Float> drop : dropList)
