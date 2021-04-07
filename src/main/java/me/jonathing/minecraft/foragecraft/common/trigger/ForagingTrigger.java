@@ -1,6 +1,7 @@
 package me.jonathing.minecraft.foragecraft.common.trigger;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import mcp.MethodsReturnNonnullByDefault;
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.util.JsonUtil;
@@ -33,6 +34,8 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
 {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final ResourceLocation ID = ForageCraft.locate("foraging_trigger");
+    private static final String BLOCK_KEY = "block";
+    private static final String ITEM_KEY = "item";
 
     @Override
     public ResourceLocation getId()
@@ -44,8 +47,8 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
     @ParametersAreNonnullByDefault
     protected Instance createInstance(JsonObject json, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser)
     {
-        Block block = JsonUtil.Reader.getBlock(json);
-        Item item = JsonUtil.Reader.getItem(json);
+        Block block = JsonUtil.Reader.getBlock(json, BLOCK_KEY).orElseThrow(() -> new JsonSyntaxException("Unknown block type!"));
+        Item item = JsonUtil.Reader.getItem(json, ITEM_KEY).orElseThrow(() -> new JsonSyntaxException("Unknown item type!"));
         return new Instance(entityPredicate, block, item);
     }
 
@@ -115,8 +118,8 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
         public JsonObject serializeToJson(@Nonnull ConditionArraySerializer conditionSerializer)
         {
             JsonObject jsonObject = super.serializeToJson(conditionSerializer);
-            JsonUtil.Writer.writeBlock(jsonObject, block);
-            JsonUtil.Writer.writeItem(jsonObject, item);
+            JsonUtil.Writer.writeBlock(jsonObject, block, BLOCK_KEY);
+            JsonUtil.Writer.writeItem(jsonObject, item, ITEM_KEY);
             return jsonObject;
         }
     }

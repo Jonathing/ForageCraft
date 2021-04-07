@@ -6,11 +6,14 @@ import com.google.gson.JsonSyntaxException;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /*
@@ -19,52 +22,41 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 public final class JsonUtil
 {
-    @MethodsReturnNonnullByDefault
     public static final class Reader
     {
-        public static Block getBlock(@Nonnull JsonObject json) throws JsonParseException, NullPointerException
+        @ParametersAreNonnullByDefault
+        public static LazyOptional<Block> getBlock(JsonObject json, String key)
         {
-            if (json.has("block"))
-            {
-                ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getAsString(json, "block"));
-                Block block = ForgeRegistries.BLOCKS.getValue(resourcelocation);
-
-                if (block == null) throw new JsonSyntaxException("Unknown block type '" + resourcelocation + "'");
-
-                return block;
-            }
-
-            throw new NullPointerException("A block is required in the trigger JSON for the foraging trigger!");
+            ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getAsString(json, key));
+            return LazyUtil.LazyOptionalOf(() -> ForgeRegistries.BLOCKS.getValue(resourcelocation));
         }
 
-        public static Item getItem(@Nonnull JsonObject json) throws JsonParseException, NullPointerException
+        @ParametersAreNonnullByDefault
+        public static LazyOptional<Item> getItem(JsonObject json, String key)
         {
-            if (json.has("item"))
-            {
-                ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getAsString(json, "item"));
-                Item item = ForgeRegistries.ITEMS.getValue(resourcelocation);
+            ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getAsString(json, key));
+            return LazyUtil.LazyOptionalOf(() -> ForgeRegistries.ITEMS.getValue(resourcelocation));
+        }
 
-                if (item == null) throw new JsonSyntaxException("Unknown item type '" + resourcelocation + "'");
-
-                return item;
-            }
-
-            throw new NullPointerException("An item is required in the trigger JSON for the foraging trigger!");
+        @ParametersAreNonnullByDefault
+        public static IItemProvider getItemProvider(JsonObject json, String key)
+        {
+            return (IItemProvider) getBlock(json, key).cast().orElse(getItem(json, key));
         }
     }
 
     public static final class Writer
     {
         @ParametersAreNonnullByDefault
-        public static void writeBlock(JsonObject json, Block block) throws NullPointerException
+        public static void writeBlock(JsonObject json, Block block, String key) throws NullPointerException
         {
-            json.addProperty("block", ForgeRegistries.BLOCKS.getKey(block).toString());
+            json.addProperty(key, ForgeRegistries.BLOCKS.getKey(block).toString());
         }
 
         @ParametersAreNonnullByDefault
-        public static void writeItem(JsonObject json, Item item) throws NullPointerException
+        public static void writeItem(JsonObject json, IItemProvider item, String key) throws NullPointerException
         {
-            json.addProperty("item", ForgeRegistries.ITEMS.getKey(item).toString());
+            json.addProperty(key, ForgeRegistries.ITEMS.getKey(item.asItem()).toString());
         }
     }
 }
