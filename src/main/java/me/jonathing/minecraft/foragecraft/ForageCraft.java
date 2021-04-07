@@ -2,7 +2,6 @@ package me.jonathing.minecraft.foragecraft;
 
 import me.jonathing.minecraft.foragecraft.client.ForageClient;
 import me.jonathing.minecraft.foragecraft.common.compat.ModCompatHandler;
-import me.jonathing.minecraft.foragecraft.common.handler.ForagingEventHandler;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageFeatures;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageRegistry;
@@ -11,7 +10,6 @@ import me.jonathing.minecraft.foragecraft.data.ForageCraftData;
 import me.jonathing.minecraft.foragecraft.data.ForageCraftDataGen;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;

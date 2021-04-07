@@ -1,12 +1,10 @@
 package me.jonathing.minecraft.foragecraft.common.handler;
 
-import com.mojang.datafixers.util.Pair;
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.capability.ForageChunk;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import me.jonathing.minecraft.foragecraft.common.util.MathUtil;
-import me.jonathing.minecraft.foragecraft.data.ForageCraftData;
 import me.jonathing.minecraft.foragecraft.data.objects.ForagingRecipe;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
@@ -28,13 +26,10 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.tuple.Triple;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
 import java.util.*;
-import java.util.function.Supplier;
 
 /**
  * This class handles the foraging loot for vanilla blocks in the game. If I ever need to make loot for any of my own
@@ -111,7 +106,7 @@ public class ForagingEventHandler
 
     /**
      * This event method runs through the {@link #FORAGE_EVENT_REGISTRY} and then calls the
-     * @link #forageDrop(List, BlockEvent.BreakEvent)} method if there is data for the block that was broken.
+     * {@link #forageDrop(List, BlockEvent.BreakEvent)} method if there is data for the block that was broken.
      *
      * @param event The block break event that carries the information about the broken block.
      * @see BlockEvent.BreakEvent
@@ -153,6 +148,7 @@ public class ForagingEventHandler
         LazyOptional<ForageChunk> forageChunk = chunk.getCapability(ForageCapabilities.chunk);
         forageChunk.ifPresent(c ->
         {
+            cooldownMap.put(playerEntity.getUUID(), MathUtil.secondsToWorldTicks(1));
             if (c.getTimesForaged() >= MAX_FORAGES_PER_CHUNK) return;
 
             Collections.shuffle(dropList, random);
@@ -164,7 +160,6 @@ public class ForagingEventHandler
 
                 if (random.nextFloat() < chance)
                 {
-                    ForageCraft.LOGGER.trace(MARKER, String.format("%s dropping %s with chance %f", blockBroken, item, chance));
                     Block.popResource(level, event.getPos(), new ItemStack(item, random.nextInt(maxStack) + 1));
                     c.forage();
                     chunk.markUnsaved();

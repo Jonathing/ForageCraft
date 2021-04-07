@@ -6,13 +6,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
+import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
@@ -21,7 +22,7 @@ import java.util.Set;
 public abstract class ForageDataHandler<K, V> extends JsonReloadListener
 {
     protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-    public static final Logger LOGGER = LogManager.getLogger();
+    private static final Marker MARKER = MarkerManager.getMarker(ForageDataHandler.class.getSimpleName());
     protected final String name;
     private Map<K, V> data = Maps.newHashMap();
 
@@ -48,16 +49,16 @@ public abstract class ForageDataHandler<K, V> extends JsonReloadListener
             }
             catch (MissingRegistryObjectException e)
             {
-                LOGGER.error(e);
+                ForageCraft.LOGGER.error(MARKER, String.format("Data entry %s not found in registry!", name), e);
             }
             catch (Exception e)
             {
-                LOGGER.error("Parsing error loading {}: {}", this.name, name, e);
+                ForageCraft.LOGGER.error(MARKER, String.format("Parsing error loading %s: %s", this.name, name), e);
             }
         }
 
         this.data = newDataMap;
-        LOGGER.info("Loaded {} {}", newDataMap.size(), this.name);
+        ForageCraft.LOGGER.info(MARKER, String.format("Loaded %d %s", newDataMap.size(), this.name.replace('_', ' ')));
     }
 
     protected abstract Pair<K, V> parseJson(JsonObject json, ResourceLocation name) throws MissingRegistryObjectException;

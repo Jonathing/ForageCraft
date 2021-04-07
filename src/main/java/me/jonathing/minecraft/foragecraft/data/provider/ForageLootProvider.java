@@ -165,8 +165,8 @@ public class ForageLootProvider extends LootTableProvider
          * Creates a loot entry for the given item. Gives an amount between the min and max.
          *
          * @param item The item that should be used in the loot pool.
-         * @param min The minimum amount that the loot entry should have.
-         * @param max The maximum amount that the loot entry should have.
+         * @param min  The minimum amount that the loot entry should have.
+         * @param max  The maximum amount that the loot entry should have.
          * @return The new loot entry.
          */
         default StandaloneLootEntry.Builder<?> basicEntry(IItemProvider item, int min, int max)
