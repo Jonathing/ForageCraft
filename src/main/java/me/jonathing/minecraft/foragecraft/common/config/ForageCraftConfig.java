@@ -25,7 +25,7 @@ public class ForageCraftConfig
 
         public ServerConfig(ForgeConfigSpec.Builder builder)
         {
-            builder.comment("ForageCraft world config");
+            builder.comment("ForageCraft world config").push("server");
             this.unsuccessfulForagingCooldown = builder
                     .comment("The amount of time (in seconds) a player cannot forage even if it was unsuccessful.")
                     .define("unsuccessful_foraging_cooldown", 1);
