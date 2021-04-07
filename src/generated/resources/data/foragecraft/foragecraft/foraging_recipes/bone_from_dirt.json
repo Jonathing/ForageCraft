@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:dirt",
+  "item": "minecraft:bone",
+  "max_drops": 9,
+  "chance": 0.005
+}

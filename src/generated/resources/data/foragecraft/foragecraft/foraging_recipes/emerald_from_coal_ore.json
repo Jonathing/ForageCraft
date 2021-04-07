@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:coal_ore",
+  "item": "minecraft:emerald",
+  "max_drops": 1,
+  "chance": 0.001
+}

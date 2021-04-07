@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:nether_quartz_ore",
+  "item": "minecraft:gold_nugget",
+  "max_drops": 9,
+  "chance": 0.5
+}

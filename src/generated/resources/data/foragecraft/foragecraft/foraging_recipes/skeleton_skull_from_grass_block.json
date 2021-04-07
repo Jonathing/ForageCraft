@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:grass_block",
+  "item": "minecraft:skeleton_skull",
+  "max_drops": 1,
+  "chance": 0.0025
+}

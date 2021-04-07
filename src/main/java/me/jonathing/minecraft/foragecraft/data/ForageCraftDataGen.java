@@ -1,9 +1,6 @@
 package me.jonathing.minecraft.foragecraft.data;
 
-import me.jonathing.minecraft.foragecraft.data.provider.ForageAdvancementProvider;
-import me.jonathing.minecraft.foragecraft.data.provider.ForageLootProvider;
-import me.jonathing.minecraft.foragecraft.data.provider.ForageRecipeProvider;
-import me.jonathing.minecraft.foragecraft.data.provider.ForageTagProvider;
+import me.jonathing.minecraft.foragecraft.data.provider.*;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,6 +30,7 @@ public class ForageCraftDataGen
         generator.addProvider(new ForageTagProvider.ItemTagProvider(generator, blockTagsProvider, event.getExistingFileHelper()));
         generator.addProvider(new ForageRecipeProvider(generator));
         generator.addProvider(new ForageLootProvider(generator));
+        generator.addProvider(new ForagingRecipeProvider(generator));
         generator.addProvider(new ForageAdvancementProvider(generator));
     }
 }

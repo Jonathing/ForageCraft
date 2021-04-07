@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:dirt",
+  "item": "minecraft:potato",
+  "max_drops": 1,
+  "chance": 0.01
+}

@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:dirt",
+  "item": "minecraft:flint",
+  "max_drops": 1,
+  "chance": 0.04
+}

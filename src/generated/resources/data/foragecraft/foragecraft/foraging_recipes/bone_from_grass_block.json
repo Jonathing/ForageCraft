@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:grass_block",
+  "item": "minecraft:bone",
+  "max_drops": 9,
+  "chance": 0.005
+}

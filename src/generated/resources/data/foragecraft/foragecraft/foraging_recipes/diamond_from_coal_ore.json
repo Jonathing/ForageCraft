@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:coal_ore",
+  "item": "minecraft:diamond",
+  "max_drops": 1,
+  "chance": 0.001
+}

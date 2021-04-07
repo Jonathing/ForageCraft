@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:stone",
+  "item": "minecraft:gold_nugget",
+  "max_drops": 1,
+  "chance": 0.005
+}
