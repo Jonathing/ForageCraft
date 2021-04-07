@@ -23,7 +23,7 @@ public enum ForageItemTier implements IItemTier
      * incentivise using it all the time. Primitive tools are meant for emergencies or when the player is on low
      * resources.
      */
-    PRIMITIVE(0, 89, 2.25F, 0.0F, 0, () -> Ingredient.of(Items.FLINT));
+    PRIMITIVE(0, 59, 2.25F, 0.0F, 0, () -> Ingredient.of(Items.FLINT));
 
     private final int harvestLevel;
     private final int maxUses;
