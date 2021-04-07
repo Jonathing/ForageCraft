@@ -1,5 +1,6 @@
 package me.jonathing.minecraft.foragecraft.common.handler;
 
+import me.jonathing.minecraft.foragecraft.common.capability.ForageChunk;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import me.jonathing.minecraft.foragecraft.common.util.MathUtil;
@@ -15,7 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.IChunk;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -41,13 +42,10 @@ public class ForagingEventHandler
 {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    /**
-     * Once true, the {@link #init()} method will do nothing.
-     *
-     * @see #init()
-     * @since 2.1.0
-     */
+    public static final int MAX_FORAGES_PER_CHUNK = 25;
+
     private static boolean mainDropsInitialized = false;
+    private static boolean errorDisplayed = false;
 
     private static Map<UUID, Integer> cooldownMap = new HashMap<>();
 
@@ -130,11 +128,11 @@ public class ForagingEventHandler
         if (mainDropsInitialized) return;
 
         LOGGER.info("Initializing ForageCraft foraging drops");
-        FORAGE_EVENT_REGISTRY.put(Blocks.GRASS_BLOCK, GRASS_BLOCK_DROPS.get());
-        FORAGE_EVENT_REGISTRY.put(Blocks.DIRT, DIRT_DROPS.get());
-        FORAGE_EVENT_REGISTRY.put(Blocks.STONE, STONE_DROPS.get());
-        FORAGE_EVENT_REGISTRY.put(Blocks.COAL_ORE, COAL_ORE_DROPS.get());
-        FORAGE_EVENT_REGISTRY.put(Blocks.NETHER_QUARTZ_ORE, NETHER_QUARTZ_ORE_DROPS.get());
+        registerDrop(Blocks.GRASS_BLOCK, GRASS_BLOCK_DROPS.get());
+        registerDrop(Blocks.DIRT, DIRT_DROPS.get());
+        registerDrop(Blocks.STONE, STONE_DROPS.get());
+        registerDrop(Blocks.COAL_ORE, COAL_ORE_DROPS.get());
+        registerDrop(Blocks.NETHER_QUARTZ_ORE, NETHER_QUARTZ_ORE_DROPS.get());
         mainDropsInitialized = true;
     }
 
@@ -160,14 +158,9 @@ public class ForagingEventHandler
     public static void registerDrop(Block block, List<Triple<Float, Item, Integer>> drop)
     {
         if (!FORAGE_EVENT_REGISTRY.containsKey(block))
-        {
             FORAGE_EVENT_REGISTRY.put(block, drop);
-        }
         else
-        {
-            // TODO: Test this later.
             FORAGE_EVENT_REGISTRY.get(block).addAll(drop);
-        }
     }
 
     /**
@@ -177,7 +170,7 @@ public class ForagingEventHandler
      * to see if a random percentage is met, and if it is, drop an extra item.
      *
      * @param event The block break event that carries the information about the broken block.
-     * @see net.minecraftforge.event.world.BlockEvent.BreakEvent
+     * @see BlockEvent.BreakEvent
      */
     @SubscribeEvent
     public static void onBlockBroken(BlockEvent.BreakEvent event)
@@ -212,33 +205,39 @@ public class ForagingEventHandler
         ServerPlayerEntity playerEntity = (ServerPlayerEntity) event.getPlayer();
         if (cooldownMap.containsKey(playerEntity.getUUID())) return;
 
-        Collections.shuffle(dropList, random);
-
-        for (Triple<Float, Item, Integer> drop : dropList)
+        Chunk chunk = level.getChunkAt(event.getPos());
+        LazyOptional<ForageChunk> forageChunk = chunk.getCapability(ForageCapabilities.chunk);
+        forageChunk.ifPresent(c ->
         {
-            float chance = drop.getLeft();
-            Item item = drop.getMiddle();
-            int maxStack = drop.getRight();
+            if (c.getTimesForaged() >= MAX_FORAGES_PER_CHUNK) return;
 
-            if (random.nextFloat() < chance)
+            Collections.shuffle(dropList, random);
+            for (Triple<Float, Item, Integer> drop : dropList)
             {
-                LOGGER.trace(String.format("%s DROPPING %s with chance %f", blockBroken, item, chance));
-                Block.popResource(level, event.getPos(), new ItemStack(item, random.nextInt(maxStack) + 1));
+                float chance = drop.getLeft();
+                Item item = drop.getMiddle();
+                int maxStack = drop.getRight();
 
-                IChunk chunk = level.getChunk(event.getPos());
-                if (chunk instanceof Chunk)
+                if (random.nextFloat() < chance)
                 {
-                    ((Chunk) chunk).getCapability(ForageCapabilities.CHUNK).ifPresent(entry ->
-                    {
-                        entry.forage();
-                        ((Chunk) chunk).markUnsaved();
-                    });
-                }
+                    LOGGER.trace(String.format("%s dropping %s with chance %f", blockBroken, item, chance));
+                    Block.popResource(level, event.getPos(), new ItemStack(item, random.nextInt(maxStack) + 1));
+                    c.forage();
+                    chunk.markUnsaved();
 
-                ForageTriggers.FORAGING_TRIGGER.trigger(playerEntity, blockBroken, item);
-                cooldownMap.put(playerEntity.getUUID(), MathUtil.secondsToWorldTicks(10));
-                break;
+                    ForageTriggers.FORAGING_TRIGGER.trigger(playerEntity, blockBroken, item);
+                    cooldownMap.put(playerEntity.getUUID(), MathUtil.secondsToWorldTicks(10));
+                    break;
+                }
             }
+        });
+
+        if (!forageChunk.isPresent() && !errorDisplayed)
+        {
+            errorDisplayed = true;
+            LOGGER.fatal("Chunk capability not present! ForageCraft will not function!");
+            LOGGER.fatal("I have no idea how in God's name this is happening. Please report the issue!");
+            LOGGER.fatal("https://github.com/Jonathing/ForageCraft/issues");
         }
     }
 
