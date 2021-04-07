@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.handler;
 
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.capability.ForageChunk;
+import me.jonathing.minecraft.foragecraft.common.config.ForageCraftConfig;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import me.jonathing.minecraft.foragecraft.common.util.MathUtil;
@@ -40,11 +41,9 @@ public class ForagingEventHandler
 {
     private static final Marker MARKER = MarkerManager.getMarker(ForagingEventHandler.class.getSimpleName());
 
-    public static final int MAX_FORAGES_PER_CHUNK = 25;
-
     private static boolean errorDisplayed = false;
 
-    private static Map<UUID, Integer> cooldownMap = new HashMap<>();
+    private static final Map<UUID, Integer> PLAYERS_ON_COOLDOWN = new HashMap<>();
 
     /**
      * This {@link Map} contains all of the {@link List}s for all of the block drops. This includes drops provided in
@@ -136,14 +135,14 @@ public class ForagingEventHandler
         Block blockBroken = event.getState().getBlock();
 
         ServerPlayerEntity playerEntity = (ServerPlayerEntity) event.getPlayer();
-        if (cooldownMap.containsKey(playerEntity.getUUID())) return;
+        if (PLAYERS_ON_COOLDOWN.containsKey(playerEntity.getUUID())) return;
 
         Chunk chunk = level.getChunkAt(event.getPos());
         LazyOptional<ForageChunk> forageChunk = chunk.getCapability(ForageCapabilities.chunk);
         forageChunk.ifPresent(c ->
         {
-            cooldownMap.put(playerEntity.getUUID(), MathUtil.secondsToWorldTicks(1));
-            if (c.getTimesForaged() >= MAX_FORAGES_PER_CHUNK) return;
+            PLAYERS_ON_COOLDOWN.put(playerEntity.getUUID(), MathUtil.secondsToWorldTicks(ForageCraftConfig.SERVER.getUnsuccessfulForagingCooldown()));
+            if (c.getTimesForaged() >= ForageCraftConfig.SERVER.getMaxForagesPerChunk()) return;
 
             Collections.shuffle(dropList, random);
             for (Triple<IItemProvider, Integer, Float> drop : dropList)
@@ -159,7 +158,7 @@ public class ForagingEventHandler
                     chunk.markUnsaved();
 
                     ForageTriggers.FORAGING_TRIGGER.trigger(playerEntity, blockBroken, item.asItem());
-                    cooldownMap.put(playerEntity.getUUID(), MathUtil.secondsToWorldTicks(10));
+                    PLAYERS_ON_COOLDOWN.put(playerEntity.getUUID(), MathUtil.secondsToWorldTicks(ForageCraftConfig.SERVER.getSuccessfulForagingCooldown()));
                     break;
                 }
             }
@@ -177,7 +176,7 @@ public class ForagingEventHandler
     static void onWorldTick(TickEvent.WorldTickEvent event)
     {
         if (event.world.isClientSide) return;
-        cooldownMap.replaceAll((k, v) -> v - 1);
-        cooldownMap.entrySet().removeIf(entry -> entry.getValue() <= 0);
+        PLAYERS_ON_COOLDOWN.replaceAll((k, v) -> v - 1);
+        PLAYERS_ON_COOLDOWN.entrySet().removeIf(entry -> entry.getValue() <= 0);
     }
 }

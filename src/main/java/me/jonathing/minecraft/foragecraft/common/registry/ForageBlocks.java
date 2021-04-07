@@ -142,7 +142,7 @@ public class ForageBlocks
         public static final Map<Item, Integer> BURN_TIMES = new HashMap<Item, Integer>()
         {
             {
-                put(ForageBlocks.fascine, 20 * 5 * 9 * 9);
+                put(fascine, 20 * 5 * 9 * 9);
             }
 
             public void put(IItemProvider key, Integer value)
@@ -152,8 +152,8 @@ public class ForageBlocks
         };
 
         /**
-         * This event method sets the fuel burn time for specific items or blocks in ForageCraft. Since they cannot be
-         * defined in item properties, they are instead defined here.
+         * This event method sets the fuel burn time for specific blocks in ForageCraft. While items can be given burn
+         * times by use of anonymous classes, blocks don't have that same luxury, so we use this event instead.
          *
          * @param event The furnace fuel burn time event to use to add the burn times to.
          * @see FurnaceFuelBurnTimeEvent

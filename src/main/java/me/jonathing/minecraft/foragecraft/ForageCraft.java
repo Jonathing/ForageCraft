@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft;
 
 import me.jonathing.minecraft.foragecraft.client.ForageClient;
 import me.jonathing.minecraft.foragecraft.common.compat.ModCompatHandler;
+import me.jonathing.minecraft.foragecraft.common.config.ForageCraftConfig;
 import me.jonathing.minecraft.foragecraft.common.handler.GeneralEventHandler;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageFeatures;
@@ -14,7 +15,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -40,11 +43,15 @@ public class ForageCraft
      */
     public ForageCraft() // the Magic School Bus returns, bitch.
     {
+        // Print info to debug or IDE console
         printInfo();
 
+        // Register configs
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ForageCraftConfig.SERVER_SPEC);
+
+        // Register event listeners
         IEventBus mod = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forge = MinecraftForge.EVENT_BUS;
-
         ForageCraft.addEventListeners(mod, forge);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
                 ForageClient.addEventListeners(mod, forge));
