@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "f ",
-    "sc"
+    "sr"
   ],
   "key": {
     "s": {
       "item": "minecraft:stick"
     },
-    "c": {
-      "item": "minecraft:cobblestone"
+    "r": {
+      "item": "foragecraft:flat_rock"
     },
     "f": {
       "item": "minecraft:flint"

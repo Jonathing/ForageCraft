@@ -89,16 +89,16 @@ public class ForageRecipeProvider extends RecipeProvider
                 .save(consumer, ForageCraft.find("stick_from_gathering_knife_and_sapling"));
 
         ShapedRecipeBuilder.shaped(ForageItems.primitive_pickaxe, 1)
-                .define('s', Items.STICK).define('c', Blocks.COBBLESTONE).define('f', Items.FLINT)
-                .pattern("cf").pattern("s ").unlockedBy(hasItem, has(Items.FLINT)).save(consumer);
+                .define('s', Items.STICK).define('r', ForageBlocks.flat_rock).define('f', Items.FLINT)
+                .pattern("rf").pattern("s ").unlockedBy(hasItem, has(Items.FLINT)).save(consumer);
 
         ShapedRecipeBuilder.shaped(ForageItems.primitive_axe, 1)
-                .define('s', Items.STICK).define('c', Blocks.COBBLESTONE).define('f', Items.FLINT)
-                .pattern("fc").pattern("s ").unlockedBy(hasItem, has(Items.FLINT)).save(consumer);
+                .define('s', Items.STICK).define('r', ForageBlocks.flat_rock).define('f', Items.FLINT)
+                .pattern("fr").pattern("s ").unlockedBy(hasItem, has(Items.FLINT)).save(consumer);
 
         ShapedRecipeBuilder.shaped(ForageItems.primitive_combat_knife, 1)
-                .define('s', Items.STICK).define('c', Blocks.COBBLESTONE).define('f', Items.FLINT)
-                .pattern("f ").pattern("sc").unlockedBy(hasItem, has(Items.FLINT)).save(consumer);
+                .define('s', Items.STICK).define('r', ForageBlocks.flat_rock).define('f', Items.FLINT)
+                .pattern("f ").pattern("sr").unlockedBy(hasItem, has(Items.FLINT)).save(consumer);
     }
 
     private void simpleInOut(IItemProvider in, IItemProvider out, int amount)
@@ -116,7 +116,7 @@ public class ForageRecipeProvider extends RecipeProvider
 
     private void simple3x3withResourceLoc(IItemProvider in, IItemProvider out, int amount)
     {
-        ShapedRecipeBuilder.shaped(out, amount).define('#', in).pattern("###").pattern("###").pattern("###").unlockedBy(hasItem, has(in)).save(consumer, ForageCraft.find(out.asItem().getRegistryName().getPath() + "_from_" + in.asItem().getRegistryName().getPath()));
+        ShapedRecipeBuilder.shaped(out, amount).define('#', in).pattern("###").pattern("###").pattern("###").unlockedBy(hasItem, has(in)).save(consumer, ForageCraft.find(String.format("%s_from_%s", out.asItem().getRegistryName().getPath(), in.asItem().getRegistryName().getPath())));
     }
 
     private void simple3x3withResourceLoc(IItemProvider in, IItemProvider out)
@@ -132,6 +132,11 @@ public class ForageRecipeProvider extends RecipeProvider
     private void simple3x3(IItemProvider in, IItemProvider out)
     {
         simple3x3(in, out, 1);
+    }
+
+    private String itemFromItem(IItemProvider to, IItemProvider from)
+    {
+        return ForageCraft.find(String.format("%s_from_%s", to.asItem().getRegistryName().getPath(), from.asItem().getRegistryName().getPath()));
     }
 
     @Override
