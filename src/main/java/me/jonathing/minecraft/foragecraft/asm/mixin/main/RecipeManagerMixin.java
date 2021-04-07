@@ -1,6 +1,7 @@
 package me.jonathing.minecraft.foragecraft.asm.mixin.main;
 
 import com.google.gson.JsonElement;
+import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.data.ForageCraftData;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.profiler.IProfiler;
@@ -8,6 +9,8 @@ import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.ModList;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,9 +30,7 @@ import java.util.Map;
 @Mixin(RecipeManager.class)
 public class RecipeManagerMixin
 {
-    @Shadow
-    @Final
-    private static Logger LOGGER;
+    private static final Marker FC_MARKER = MarkerManager.getMarker("RecipeManagerMixin");
 
     /**
      * This method hooks into the {@link org.spongepowered.asm.mixin.injection.points.MethodHead} of the
@@ -54,7 +55,7 @@ public class RecipeManagerMixin
     {
         if (!ModList.get().isLoaded("patchouli"))
         {
-            LOGGER.debug("Skipping over ForageCraft's Patchouli recipe since Patchouli is not installed.");
+            ForageCraft.LOGGER.debug(FC_MARKER, "Skipping over ForageCraft's Patchouli recipe since Patchouli is not installed.");
             ForageCraftData.PATCHOULI_RECIPES.forEach(objectIn::remove);
         }
     }

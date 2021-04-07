@@ -24,6 +24,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
@@ -42,7 +44,7 @@ import java.util.function.Consumer;
  */
 public class ForageAdvancementProvider implements IDataProvider
 {
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Marker MARKER = MarkerManager.getMarker("AdvancementProvider");
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
     private final DataGenerator generator;
     private final List<Consumer<Consumer<Advancement>>> advancements = ImmutableList.of(new ForageAdvancements());
@@ -73,7 +75,7 @@ public class ForageAdvancementProvider implements IDataProvider
                 }
                 catch (IOException ioexception)
                 {
-                    LOGGER.error("Couldn't save advancement {}", path1, ioexception);
+                    ForageCraft.LOGGER.error(MARKER, String.format("Couldn't save advancement %s", path1), ioexception);
                 }
 
             }

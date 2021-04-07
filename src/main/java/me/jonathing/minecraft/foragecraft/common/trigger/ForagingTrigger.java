@@ -33,7 +33,6 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.Instance>
 {
-    private static final Logger LOGGER = LogManager.getLogger();
     private static final ResourceLocation ID = ForageCraft.locate("foraging_trigger");
     private static final String BLOCK_KEY = "block";
     private static final String ITEM_KEY = "item";
@@ -64,7 +63,6 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
      */
     public void trigger(ServerPlayerEntity playerEntity, Block block, IItemProvider item)
     {
-        LOGGER.debug("Triggering the foraging trigger with block `" + block + "` and item `" + item + "`.");
         this.trigger(playerEntity, (instance) -> instance.test(block, item));
     }
 

@@ -22,7 +22,7 @@ import java.util.Set;
 public abstract class ForageDataHandler<K, V> extends JsonReloadListener
 {
     protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-    private static final Marker MARKER = MarkerManager.getMarker(ForageDataHandler.class.getSimpleName());
+    private static final Marker MARKER = MarkerManager.getMarker("DataHandler");
     protected final String name;
     private Map<K, V> data = Maps.newHashMap();
 

@@ -26,7 +26,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class LeekTrigger extends AbstractCriterionTrigger<LeekTrigger.Instance>
 {
-    private static final Logger LOGGER = LogManager.getLogger();
     private static final ResourceLocation ID = ForageCraft.locate("leek_trigger");
 
     @Override
@@ -52,7 +51,6 @@ public class LeekTrigger extends AbstractCriterionTrigger<LeekTrigger.Instance>
      */
     public void trigger(ServerPlayerEntity player)
     {
-        LOGGER.debug("Triggering the leek trigger.");
         this.trigger(player, (instance) -> true);
     }
 
