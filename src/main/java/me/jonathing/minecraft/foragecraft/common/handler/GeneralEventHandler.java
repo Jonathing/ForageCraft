@@ -37,31 +37,10 @@ public class GeneralEventHandler
 
     public static void addEventListeners(IEventBus mod, IEventBus forge)
     {
-        forge.addListener(GeneralEventHandler::onFurnaceFuelBurnTime);
         forge.addListener(GeneralEventHandler::onLootTableLoad);
 
         forge.addListener(ForagingEventHandler::onBlockBroken);
         forge.addListener(ForagingEventHandler::onWorldTick);
-    }
-
-    /**
-     * This event method sets the fuel burn time for specific items or blocks in ForageCraft. Since they cannot be
-     * defined in item properties, they are instead defined here.
-     *
-     * @param event The furnace fuel burn time event to use to add the burn times to.
-     * @see FurnaceFuelBurnTimeEvent
-     */
-    private static void onFurnaceFuelBurnTime(FurnaceFuelBurnTimeEvent event)
-    {
-        Item item = event.getItemStack().getItem();
-        if (item.equals(ForageBlocks.fascine.asItem()))
-        {
-            event.setBurnTime(20 * 5 * 9 * 9);
-        }
-        else if (item.equals(ForageItems.stick_bundle))
-        {
-            event.setBurnTime(20 * 5 * 9);
-        }
     }
 
     /**

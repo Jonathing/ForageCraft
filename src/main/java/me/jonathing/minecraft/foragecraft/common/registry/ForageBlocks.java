@@ -12,10 +12,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.event.RegistryEvent.Register;
+import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -132,5 +135,36 @@ public class ForageBlocks
     {
         blockItemPropertiesMap.put(block, itemProperties);
         return register(key, block, defaultItemGroup, registerItem);
+    }
+
+    public static class BurnTimes
+    {
+        public static final Map<Item, Integer> BURN_TIMES = new HashMap<Item, Integer>()
+        {
+            {
+                put(ForageBlocks.fascine, 20 * 5 * 9 * 9);
+            }
+
+            public void put(IItemProvider key, Integer value)
+            {
+                super.put(key.asItem(), value);
+            }
+        };
+
+        /**
+         * This event method sets the fuel burn time for specific items or blocks in ForageCraft. Since they cannot be
+         * defined in item properties, they are instead defined here.
+         *
+         * @param event The furnace fuel burn time event to use to add the burn times to.
+         * @see FurnaceFuelBurnTimeEvent
+         */
+        static void onFurnaceFuelBurnTime(FurnaceFuelBurnTimeEvent event)
+        {
+            Item item = event.getItemStack().getItem();
+            if (!item.getRegistryName().getNamespace().equals(ForageInfo.MOD_ID)) return;
+
+            if (BURN_TIMES.containsKey(item))
+                event.setBurnTime(BURN_TIMES.get(item));
+        }
     }
 }

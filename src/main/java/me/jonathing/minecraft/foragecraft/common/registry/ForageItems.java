@@ -42,7 +42,14 @@ public class ForageItems
 
         stick_bundle = register("stick_bundle",
                 new Item(new Item.Properties()
-                        .tab(getItemGroup(ItemGroup.TAB_MISC))));
+                        .tab(getItemGroup(ItemGroup.TAB_MISC)))
+                {
+                    @Override
+                    public int getBurnTime(ItemStack itemStack)
+                    {
+                        return 20 * 5 * 9;
+                    }
+                });
 
         spaghetti = register("spaghetti",
                 new SoupItem(new Item.Properties()
