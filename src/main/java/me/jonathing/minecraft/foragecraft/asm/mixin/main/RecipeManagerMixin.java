@@ -1,7 +1,7 @@
 package me.jonathing.minecraft.foragecraft.asm.mixin.main;
 
 import com.google.gson.JsonElement;
-import me.jonathing.minecraft.foragecraft.data.ForageDataLists;
+import me.jonathing.minecraft.foragecraft.data.ForageCraftData;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
@@ -55,7 +55,7 @@ public class RecipeManagerMixin
         if (!ModList.get().isLoaded("patchouli"))
         {
             LOGGER.debug("Skipping over ForageCraft's Patchouli recipe since Patchouli is not installed.");
-            ForageDataLists.PATCHOULI_RECIPES.forEach(objectIn::remove);
+            ForageCraftData.PATCHOULI_RECIPES.forEach(objectIn::remove);
         }
     }
 }

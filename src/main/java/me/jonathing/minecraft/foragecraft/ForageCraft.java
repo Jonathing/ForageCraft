@@ -7,6 +7,7 @@ import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageFeatures;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageRegistry;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
+import me.jonathing.minecraft.foragecraft.data.ForageCraftData;
 import me.jonathing.minecraft.foragecraft.data.ForageCraftDataGen;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.util.ResourceLocation;
@@ -53,6 +54,7 @@ public class ForageCraft
         mod.register(ForageCraftDataGen.class);
         mod.addListener(ForageCraft::commonSetup);
         mod.register(ForageRegistry.class);
+        forge.addListener(ForageCraftData::addListeners);
         ForageTriggers.init();
     }
 

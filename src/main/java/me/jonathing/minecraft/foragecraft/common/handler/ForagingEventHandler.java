@@ -4,6 +4,7 @@ import me.jonathing.minecraft.foragecraft.common.capability.ForageChunk;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import me.jonathing.minecraft.foragecraft.common.util.MathUtil;
+import me.jonathing.minecraft.foragecraft.data.ForageCraftData;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

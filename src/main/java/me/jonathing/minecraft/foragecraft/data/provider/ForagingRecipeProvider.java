@@ -19,34 +19,6 @@ import java.util.function.Supplier;
 
 public class ForagingRecipeProvider extends ForageDataProvider<ForagingRecipe>
 {
-    private static final Supplier<List<Triple<Float, Item, Integer>>> GRASS_BLOCK_DROPS = () -> Arrays.asList(
-            Triple.of(0.09f, Items.STICK, 1),
-            Triple.of(0.01f, Items.CARROT, 1),
-            Triple.of(0.01f, Items.POTATO, 1),
-            Triple.of(0.01f, Items.POISONOUS_POTATO, 1),
-            Triple.of(0.01f, Items.BEETROOT, 1),
-            Triple.of(0.005f, Items.BONE, 9),
-            Triple.of(0.0025f, Items.SKELETON_SKULL, 1));
-
-    private static final Supplier<List<Triple<Float, Item, Integer>>> DIRT_DROPS = () -> Arrays.asList(
-            Triple.of(0.07f, Items.STICK, 1),
-            Triple.of(0.04f, Items.FLINT, 1),
-            Triple.of(0.01f, Items.POTATO, 1),
-            Triple.of(0.01f, Items.POISONOUS_POTATO, 1),
-            Triple.of(0.005f, Items.BONE, 9),
-            Triple.of(0.005f, Items.SKELETON_SKULL, 1));
-
-    private static final Supplier<List<Triple<Float, Item, Integer>>> STONE_DROPS = () -> Arrays.asList(
-            Triple.of(0.005f, Items.GOLD_NUGGET, 1),
-            Triple.of(0.05f, Items.FLINT, 1));
-
-    private static final Supplier<List<Triple<Float, Item, Integer>>> COAL_ORE_DROPS = () -> Arrays.asList(
-            Triple.of(0.001f, Items.DIAMOND, 1),
-            Triple.of(0.001f, Items.EMERALD, 1));
-
-    private static final Supplier<List<Triple<Float, Item, Integer>>> NETHER_QUARTZ_ORE_DROPS = () -> Arrays.asList(
-            Triple.of(0.5f, Items.GOLD_NUGGET, 9));
-
     public ForagingRecipeProvider(DataGenerator generator)
     {
         super(generator, ForagingRecipe.DIRECTORY);
@@ -57,13 +29,52 @@ public class ForagingRecipeProvider extends ForageDataProvider<ForagingRecipe>
     {
         Map<ResourceLocation, ForagingRecipe> registry = new HashMap<>();
 
-        GRASS_BLOCK_DROPS.get().forEach(drop -> foraging(registry, Blocks.GRASS_BLOCK, drop.getMiddle(), drop.getRight(), drop.getLeft()));
-        DIRT_DROPS.get().forEach(drop -> foraging(registry, Blocks.DIRT, drop.getMiddle(), drop.getRight(), drop.getLeft()));
-        STONE_DROPS.get().forEach(drop -> foraging(registry, Blocks.STONE, drop.getMiddle(), drop.getRight(), drop.getLeft()));
-        COAL_ORE_DROPS.get().forEach(drop -> foraging(registry, Blocks.COAL_ORE, drop.getMiddle(), drop.getRight(), drop.getLeft()));
-        NETHER_QUARTZ_ORE_DROPS.get().forEach(drop -> foraging(registry, Blocks.NETHER_QUARTZ_ORE, drop.getMiddle(), drop.getRight(), drop.getLeft()));
+        // Grass Block
+        oldRecipe(registry, Blocks.GRASS_BLOCK, Arrays.asList(
+                Triple.of(0.09f, Items.STICK, 1),
+                Triple.of(0.01f, Items.CARROT, 1),
+                Triple.of(0.01f, Items.POTATO, 1),
+                Triple.of(0.01f, Items.POISONOUS_POTATO, 1),
+                Triple.of(0.01f, Items.BEETROOT, 1),
+                Triple.of(0.005f, Items.BONE, 9),
+                Triple.of(0.0025f, Items.SKELETON_SKULL, 1)));
+
+        // Dirt
+        oldRecipe(registry, Blocks.DIRT, Arrays.asList(
+                Triple.of(0.07f, Items.STICK, 1),
+                Triple.of(0.04f, Items.FLINT, 1),
+                Triple.of(0.01f, Items.POTATO, 1),
+                Triple.of(0.01f, Items.POISONOUS_POTATO, 1),
+                Triple.of(0.005f, Items.BONE, 9),
+                Triple.of(0.005f, Items.SKELETON_SKULL, 1)));
+
+        // Stone
+        oldRecipe(registry, Blocks.STONE, Arrays.asList(
+                Triple.of(0.005f, Items.GOLD_NUGGET, 1),
+                Triple.of(0.05f, Items.FLINT, 1)));
+
+        // Coal Ore
+        oldRecipe(registry, Blocks.COAL_ORE, Arrays.asList(
+                Triple.of(0.001f, Items.DIAMOND, 1),
+                Triple.of(0.001f, Items.EMERALD, 1)));
+
+        // Nether Quartz Ore
+        oldRecipe(registry, Blocks.NETHER_QUARTZ_ORE, Arrays.asList(
+                Triple.of(0.5f, Items.GOLD_NUGGET, 9)));
 
         return registry;
+    }
+
+    // TODO: Get off your lazy ass and stop using the old list order!
+    @Deprecated
+    private static void oldRecipe(Map<ResourceLocation, ForagingRecipe> registry, Block block, List<Triple<Float, Item, Integer>> drops)
+    {
+        drops.forEach(drop -> foraging(registry, block, drop.getMiddle(), drop.getRight(), drop.getLeft()));
+    }
+
+    private static void foraging(Map<ResourceLocation, ForagingRecipe> registry, Block block, List<Triple<IItemProvider, Integer, Float>> drops)
+    {
+        drops.forEach(drop -> foraging(registry, block, drop.getLeft(), drop.getMiddle(), drop.getRight()));
     }
 
     private static void foraging(Map<ResourceLocation, ForagingRecipe> registry, Block block, IItemProvider item, int maxDrops, float chance)
