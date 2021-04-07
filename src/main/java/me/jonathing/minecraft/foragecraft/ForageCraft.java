@@ -3,12 +3,14 @@ package me.jonathing.minecraft.foragecraft;
 import me.jonathing.minecraft.foragecraft.client.ForageClient;
 import me.jonathing.minecraft.foragecraft.common.compat.ModCompatHandler;
 import me.jonathing.minecraft.foragecraft.common.handler.ForagingEventHandler;
+import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageFeatures;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageRegistry;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import me.jonathing.minecraft.foragecraft.data.ForageCraftDataGen;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -59,11 +61,12 @@ public class ForageCraft
      *
      * @param event The modloader common setup event to use for common setup.
      */
-    public static void commonSetup(final FMLCommonSetupEvent event)
+    private static void commonSetup(final FMLCommonSetupEvent event)
     {
         ForageFeatures.init();
         ModCompatHandler.init();
         ForagingEventHandler.init();
+        ForageCapabilities.init(MinecraftForge.EVENT_BUS);
     }
 
     /**

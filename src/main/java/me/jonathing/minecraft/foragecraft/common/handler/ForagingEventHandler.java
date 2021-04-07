@@ -1,5 +1,6 @@
 package me.jonathing.minecraft.foragecraft.common.handler;
 
+import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
@@ -12,6 +13,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.IChunk;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -215,6 +218,16 @@ public class ForagingEventHandler
             {
                 LOGGER.trace(String.format("%s DROPPING %s with chance %f", blockBroken, item, chance));
                 Block.popResource(level, event.getPos(), new ItemStack(item, random.nextInt(maxStack) + 1));
+
+                IChunk chunk = level.getChunk(event.getPos());
+                if (chunk instanceof Chunk)
+                {
+                    ((Chunk) chunk).getCapability(ForageCapabilities.CHUNK).ifPresent(entry ->
+                    {
+                        entry.forage();
+                        ((Chunk) chunk).markUnsaved();
+                    });
+                }
 
                 ForageTriggers.FORAGING_TRIGGER.trigger(playerEntity, blockBroken, item);
                 break;
