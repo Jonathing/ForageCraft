@@ -4,6 +4,7 @@ import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 /**
@@ -16,6 +17,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
  */
 public class ForageClient
 {
+    public static void addEventListeners(IEventBus mod, IEventBus forge)
+    {
+        mod.addListener(ForageClient::clientSetup);
+    }
+
     /**
      * Runs tasks specific to the client. It is called from {@link ForageCraft#ForageCraft()}.
      *
@@ -23,7 +29,7 @@ public class ForageClient
      * @see ForageCraft#ForageCraft()
      * @see FMLClientSetupEvent
      */
-    public static void clientSetup(final FMLClientSetupEvent event)
+    private static void clientSetup(final FMLClientSetupEvent event)
     {
         RenderTypeLookup.setRenderLayer(ForageBlocks.leek_crop, RenderType.cutout());
     }

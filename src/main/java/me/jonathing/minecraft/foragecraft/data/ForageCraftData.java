@@ -8,6 +8,7 @@ import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Collections;
@@ -27,7 +28,13 @@ public class ForageCraftData
             ForageCraft.locate("guide_book")
     );
 
-    public static void addListeners(AddReloadListenerEvent event)
+    public static void addEventListeners(IEventBus mod, IEventBus forge)
+    {
+        forge.addListener(ForageCraftData::onAddReloadListener);
+        mod.addListener(ForageCraftDataGen::gatherData);
+    }
+
+    private static void onAddReloadListener(AddReloadListenerEvent event)
     {
         register(event, FORAGING_RECIPES);
     }

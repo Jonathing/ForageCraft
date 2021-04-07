@@ -2,7 +2,6 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.world.ForageBlockPlacer;
 import me.jonathing.minecraft.foragecraft.data.objects.ForageBlockTags;
-import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -18,8 +17,6 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.util.NonNullLazy;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 import java.util.List;
@@ -32,7 +29,6 @@ import java.util.stream.Collectors;
  * @see #init()
  * @since 2.0.0
  */
-@Mod.EventBusSubscriber(modid = ForageInfo.MOD_ID)
 public class ForageFeatures
 {
     /**
@@ -204,8 +200,7 @@ public class ForageFeatures
      * @param event The biome loading event to use to add the features into the biomes.
      * @see BiomeLoadingEvent
      */
-    @SubscribeEvent
-    public static void biomeLoadingEvent(BiomeLoadingEvent event)
+    static void biomeLoadingEvent(BiomeLoadingEvent event)
     {
         if (overworldBiomes == null)
         {

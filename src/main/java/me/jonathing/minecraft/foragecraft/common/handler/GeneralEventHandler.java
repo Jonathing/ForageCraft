@@ -2,7 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.handler;
 
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
-import me.jonathing.minecraft.foragecraft.info.ForageInfo;
+import net.minecraft.item.Item;
 import net.minecraft.loot.ItemLootEntry;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
@@ -11,8 +11,7 @@ import net.minecraft.loot.functions.SetCount;
 import net.minecraftforge.common.util.NonNullLazy;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.eventbus.api.IEventBus;
 
 import java.util.function.Supplier;
 
@@ -22,7 +21,6 @@ import java.util.function.Supplier;
  * @author Jonathing
  * @since 2.0.0
  */
-@Mod.EventBusSubscriber(modid = ForageInfo.MOD_ID)
 public class GeneralEventHandler
 {
     /**
@@ -37,6 +35,15 @@ public class GeneralEventHandler
                             .apply(SetCount.setCount(RandomValueRange.between(0, 2))))
                     .build());
 
+    public static void addEventListeners(IEventBus mod, IEventBus forge)
+    {
+        forge.addListener(GeneralEventHandler::onFurnaceFuelBurnTime);
+        forge.addListener(GeneralEventHandler::onLootTableLoad);
+
+        forge.addListener(ForagingEventHandler::onBlockBroken);
+        forge.addListener(ForagingEventHandler::onWorldTick);
+    }
+
     /**
      * This event method sets the fuel burn time for specific items or blocks in ForageCraft. Since they cannot be
      * defined in item properties, they are instead defined here.
@@ -44,14 +51,14 @@ public class GeneralEventHandler
      * @param event The furnace fuel burn time event to use to add the burn times to.
      * @see FurnaceFuelBurnTimeEvent
      */
-    @SubscribeEvent
-    public static void onFurnaceFuelBurnTime(FurnaceFuelBurnTimeEvent event)
+    private static void onFurnaceFuelBurnTime(FurnaceFuelBurnTimeEvent event)
     {
-        if (event.getItemStack().getItem().equals(ForageBlocks.fascine.asItem()))
+        Item item = event.getItemStack().getItem();
+        if (item.equals(ForageBlocks.fascine.asItem()))
         {
             event.setBurnTime(20 * 5 * 9 * 9);
         }
-        else if (event.getItemStack().getItem().equals(ForageItems.stick_bundle))
+        else if (item.equals(ForageItems.stick_bundle))
         {
             event.setBurnTime(20 * 5 * 9);
         }
@@ -65,8 +72,7 @@ public class GeneralEventHandler
      * @see #VILLAGE_HOUSE_CHESTS
      * @since 2.1.0
      */
-    @SubscribeEvent
-    public static void onLootTableLoad(LootTableLoadEvent event)
+    private static void onLootTableLoad(LootTableLoadEvent event)
     {
         if (event.getName().equals(LootTables.VILLAGE_DESERT_HOUSE)
                 || event.getName().equals(LootTables.VILLAGE_PLAINS_HOUSE)

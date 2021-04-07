@@ -2,12 +2,12 @@ package me.jonathing.minecraft.foragecraft;
 
 import me.jonathing.minecraft.foragecraft.client.ForageClient;
 import me.jonathing.minecraft.foragecraft.common.compat.ModCompatHandler;
+import me.jonathing.minecraft.foragecraft.common.handler.GeneralEventHandler;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageFeatures;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageRegistry;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import me.jonathing.minecraft.foragecraft.data.ForageCraftData;
-import me.jonathing.minecraft.foragecraft.data.ForageCraftDataGen;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -42,18 +42,20 @@ public class ForageCraft
     {
         printInfo();
 
-        // Get event buses
         IEventBus mod = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forge = MinecraftForge.EVENT_BUS;
 
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> mod.addListener(ForageClient::clientSetup));
+        ForageCraft.addEventListeners(mod, forge);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
+                ForageClient.addEventListeners(mod, forge));
+        ForageRegistry.addEventListeners(mod, forge);
+        GeneralEventHandler.addEventListeners(mod, forge);
+        ForageCraftData.addEventListeners(mod, forge);
+    }
 
-        // Register the events
-        mod.register(ForageCraftDataGen.class);
+    private static void addEventListeners(IEventBus mod, IEventBus forge)
+    {
         mod.addListener(ForageCraft::commonSetup);
-        mod.register(ForageRegistry.class);
-        forge.addListener(ForageCraftData::addListeners);
-        ForageTriggers.init();
     }
 
     /**
@@ -64,8 +66,9 @@ public class ForageCraft
     private static void commonSetup(final FMLCommonSetupEvent event)
     {
         ForageFeatures.init();
+        ForageTriggers.init();
         ModCompatHandler.init();
-        ForageCapabilities.init(MinecraftForge.EVENT_BUS);
+        ForageCapabilities.init();
     }
 
     /**

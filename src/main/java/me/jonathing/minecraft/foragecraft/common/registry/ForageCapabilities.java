@@ -24,10 +24,9 @@ public class ForageCapabilities
     @CapabilityInject(ForageChunk.class)
     public static Capability<ForageChunk> chunk = null;
 
-    public static void init(IEventBus eventBus)
+    public static void init()
     {
         register(ForageChunk.class, ForageChunk::storage, ForageChunk::new);
-        eventBus.addGenericListener(Chunk.class, ForageCapabilities::onAttachChunkCapability);
     }
 
     private static <T> void register(Class<T> type, Supplier<Capability.IStorage<T>> storage, Callable<? extends T> factory)
@@ -35,7 +34,7 @@ public class ForageCapabilities
         CapabilityManager.INSTANCE.register(type, storage.get(), factory);
     }
 
-    private static void onAttachChunkCapability(AttachCapabilitiesEvent<Chunk> event)
+    static void onAttachChunkCapability(AttachCapabilitiesEvent<Chunk> event)
     {
         event.addCapability(ForageCraft.locate("foraged_chunk"), ForageChunk.provide(chunk.getDefaultInstance()));
     }

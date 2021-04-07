@@ -6,7 +6,6 @@ import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import me.jonathing.minecraft.foragecraft.common.util.MathUtil;
 import me.jonathing.minecraft.foragecraft.data.objects.ForagingRecipe;
-import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -23,8 +22,6 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.tuple.Triple;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
@@ -39,8 +36,6 @@ import java.util.*;
  * @see #onBlockBroken(BlockEvent.BreakEvent)
  * @since 2.0.0
  */
-// TODO Make configuration values.
-@Mod.EventBusSubscriber(modid = ForageInfo.MOD_ID)
 public class ForagingEventHandler
 {
     private static final Marker MARKER = MarkerManager.getMarker(ForagingEventHandler.class.getSimpleName());
@@ -111,8 +106,7 @@ public class ForagingEventHandler
      * @param event The block break event that carries the information about the broken block.
      * @see BlockEvent.BreakEvent
      */
-    @SubscribeEvent
-    public static void onBlockBroken(BlockEvent.BreakEvent event)
+    static void onBlockBroken(BlockEvent.BreakEvent event)
     {
         PlayerEntity player = event.getPlayer();
         if (((World) event.getWorld()).isClientSide || player.isCreative() || player.isSpectator()) return;
@@ -180,8 +174,7 @@ public class ForagingEventHandler
         }
     }
 
-    @SubscribeEvent
-    public static void onWorldTick(TickEvent.WorldTickEvent event)
+    static void onWorldTick(TickEvent.WorldTickEvent event)
     {
         if (event.world.isClientSide) return;
         cooldownMap.replaceAll((k, v) -> v - 1);
