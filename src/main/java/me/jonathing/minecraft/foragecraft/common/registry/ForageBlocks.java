@@ -6,6 +6,7 @@ import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
 import me.jonathing.minecraft.foragecraft.common.block.template.DecorativeBlock;
 import me.jonathing.minecraft.foragecraft.common.block.template.ForageHayBlock;
 import me.jonathing.minecraft.foragecraft.common.block.template.ForageSpeedBlock;
+import me.jonathing.minecraft.foragecraft.common.util.MathUtil;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -142,7 +143,10 @@ public class ForageBlocks
         public static final Map<Item, Integer> BURN_TIMES = new HashMap<Item, Integer>()
         {
             {
-                put(fascine, 20 * 5 * 9 * 9);
+                // 5 seconds is the burn time for a stick
+                // a stick bundle is 9 sticks
+                // a block of fascine is 9 stick bundles
+                put(fascine, MathUtil.secondsToTicks(5 * 9 * 9));
             }
 
             public void put(IItemProvider key, Integer value)

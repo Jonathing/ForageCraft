@@ -13,4 +13,9 @@ public class MathUtil
     {
         return seconds * 120;
     }
+
+    public static int secondsToTicks(int seconds)
+    {
+        return seconds * 20;
+    }
 }

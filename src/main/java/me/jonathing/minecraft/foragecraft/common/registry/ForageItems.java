@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.item.GatheringKnifeItem;
 import me.jonathing.minecraft.foragecraft.common.item.LeekItem;
+import me.jonathing.minecraft.foragecraft.common.util.MathUtil;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
 import net.minecraft.item.*;
@@ -47,7 +48,9 @@ public class ForageItems
                     @Override
                     public int getBurnTime(ItemStack itemStack)
                     {
-                        return 20 * 5 * 9;
+                        // 5 seconds is the burn time for a stick
+                        // a stick bundle is 9 sticks
+                        return MathUtil.secondsToTicks(5 * 9);
                     }
                 });
 
