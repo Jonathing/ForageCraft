@@ -67,7 +67,6 @@ public class ForageCraft
     {
         ForageFeatures.init();
         ModCompatHandler.init();
-        ForagingEventHandler.init();
         ForageCapabilities.init(MinecraftForge.EVENT_BUS);
     }
 

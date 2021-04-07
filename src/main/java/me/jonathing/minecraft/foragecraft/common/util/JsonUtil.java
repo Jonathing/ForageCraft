@@ -32,7 +32,7 @@ public final class JsonUtil
         }
 
         @ParametersAreNonnullByDefault
-        public static LazyOptional<Item> getItem(JsonObject json, String key)
+        public static LazyOptional<IItemProvider> getItem(JsonObject json, String key)
         {
             ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getAsString(json, key));
             return LazyUtil.LazyOptionalOf(() -> ForgeRegistries.ITEMS.getValue(resourcelocation));

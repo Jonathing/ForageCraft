@@ -13,6 +13,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.loot.ConditionArrayParser;
 import net.minecraft.loot.ConditionArraySerializer;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.world.BlockEvent;
 import org.apache.logging.log4j.LogManager;
@@ -48,12 +49,12 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
     protected Instance createInstance(JsonObject json, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser)
     {
         Block block = JsonUtil.Reader.getBlock(json, BLOCK_KEY).orElseThrow(() -> new JsonSyntaxException("Unknown block type!"));
-        Item item = JsonUtil.Reader.getItem(json, ITEM_KEY).orElseThrow(() -> new JsonSyntaxException("Unknown item type!"));
+        IItemProvider item = JsonUtil.Reader.getItem(json, ITEM_KEY).orElseThrow(() -> new JsonSyntaxException("Unknown item type!"));
         return new Instance(entityPredicate, block, item);
     }
 
     /**
-     * Triggers the {@link ForagingTrigger} with a specific {@link Block} and {@link Item} along with the responsible
+     * Triggers the {@link ForagingTrigger} with a specific {@link Block} and {@link IItemProvider} along with the responsible
      * {@link ServerPlayerEntity}.
      *
      * @param playerEntity The {@link ServerPlayerEntity} that caused the trigger via a forage drop.
@@ -61,7 +62,7 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
      * @param item         The {@link Item} that was foraged from the broken block.
      * @see me.jonathing.minecraft.foragecraft.common.handler.ForagingEventHandler#forageDrop(List, BlockEvent.BreakEvent)
      */
-    public void trigger(ServerPlayerEntity playerEntity, Block block, Item item)
+    public void trigger(ServerPlayerEntity playerEntity, Block block, IItemProvider item)
     {
         LOGGER.debug("Triggering the foraging trigger with block `" + block + "` and item `" + item + "`.");
         this.trigger(playerEntity, (instance) -> instance.test(block, item));
@@ -75,9 +76,9 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
     public static class Instance extends CriterionInstance
     {
         private final Block block;
-        private final Item item;
+        private final IItemProvider item;
 
-        public Instance(EntityPredicate.AndPredicate entityPredicate, @Nonnull Block block, @Nonnull Item item)
+        public Instance(EntityPredicate.AndPredicate entityPredicate, @Nonnull Block block, @Nonnull IItemProvider item)
         {
             super(ID, entityPredicate);
             this.block = block;
@@ -85,19 +86,19 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
         }
 
         /**
-         * Is used by {@link #trigger(ServerPlayerEntity, Block, Item)} to test if the trigger's {@link Block} and
+         * Is used by {@link #trigger(ServerPlayerEntity, Block, IItemProvider)} to test if the trigger's {@link Block} and
          * {@link Item} match that of this {@link Instance}'s.
          *
          * @param block The trigger's {@link Block}.
          * @param item  The trigger's {@link Item}.
          * @return The result of the test.
-         * @see #trigger(ServerPlayerEntity, Block, Item)
+         * @see #trigger(ServerPlayerEntity, Block, IItemProvider)
          */
-        protected boolean test(Block block, Item item)
+        protected boolean test(Block block, IItemProvider item)
         {
             if (block == null || item == null) return false;
 
-            return this.block.equals(block) && this.item.equals(item);
+            return this.block.equals(block) && this.item.asItem().equals(item.asItem());
         }
 
         /**
@@ -109,7 +110,7 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
          * @see Instance
          */
         @ParametersAreNonnullByDefault
-        public static Instance create(Block block, Item item)
+        public static Instance create(Block block, IItemProvider item)
         {
             return new Instance(EntityPredicate.AndPredicate.ANY, block, item);
         }
