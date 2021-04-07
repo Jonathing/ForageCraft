@@ -1,10 +1,12 @@
 package me.jonathing.minecraft.foragecraft.common.handler;
 
+import com.mojang.datafixers.util.Pair;
 import me.jonathing.minecraft.foragecraft.common.capability.ForageChunk;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import me.jonathing.minecraft.foragecraft.common.util.MathUtil;
 import me.jonathing.minecraft.foragecraft.data.ForageCraftData;
+import me.jonathing.minecraft.foragecraft.data.objects.ForagingRecipe;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -15,6 +17,8 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.LazyOptional;
@@ -116,7 +120,7 @@ public class ForagingEventHandler
      * @see #init()
      * @see #registerDrop(Block, List)
      */
-    private static final Map<Block, List<Triple<Float, Item, Integer>>> FORAGE_EVENT_REGISTRY = new HashMap<>();
+    private static final Map<Block, List<Triple<IItemProvider, Integer, Float>>> FORAGE_EVENT_REGISTRY = new HashMap<>();
 
     /**
      * Registers all of the main ForageCraft drop lists into the {@link #FORAGE_EVENT_REGISTRY}. Can only be run once.
@@ -128,12 +132,12 @@ public class ForagingEventHandler
     {
         if (mainDropsInitialized) return;
 
-        LOGGER.info("Initializing ForageCraft foraging drops");
-        registerDrop(Blocks.GRASS_BLOCK, GRASS_BLOCK_DROPS.get());
-        registerDrop(Blocks.DIRT, DIRT_DROPS.get());
-        registerDrop(Blocks.STONE, STONE_DROPS.get());
-        registerDrop(Blocks.COAL_ORE, COAL_ORE_DROPS.get());
-        registerDrop(Blocks.NETHER_QUARTZ_ORE, NETHER_QUARTZ_ORE_DROPS.get());
+//        LOGGER.info("Initializing ForageCraft foraging drops");
+//        registerDrop(Blocks.GRASS_BLOCK, GRASS_BLOCK_DROPS.get());
+//        registerDrop(Blocks.DIRT, DIRT_DROPS.get());
+//        registerDrop(Blocks.STONE, STONE_DROPS.get());
+//        registerDrop(Blocks.COAL_ORE, COAL_ORE_DROPS.get());
+//        registerDrop(Blocks.NETHER_QUARTZ_ORE, NETHER_QUARTZ_ORE_DROPS.get());
         mainDropsInitialized = true;
     }
 
@@ -156,12 +160,27 @@ public class ForagingEventHandler
      * @see #FORAGE_EVENT_REGISTRY
      * @since 2.1.0
      */
-    public static void registerDrop(Block block, List<Triple<Float, Item, Integer>> drop)
+    public static void registerDrops(Block block, List<Triple<IItemProvider, Integer, Float>> drop)
     {
         if (!FORAGE_EVENT_REGISTRY.containsKey(block))
             FORAGE_EVENT_REGISTRY.put(block, drop);
         else
             FORAGE_EVENT_REGISTRY.get(block).addAll(drop);
+    }
+
+    public static void registerDrop(Block block, IItemProvider item, int maxDrops, float chance)
+    {
+        registerDrops(block, new ArrayList<>(Arrays.asList(Triple.of(item, maxDrops, chance))));
+    }
+
+    public static void reloadDrops(Map<ResourceLocation, ForagingRecipe> data)
+    {
+        FORAGE_EVENT_REGISTRY.entrySet().removeIf(entry -> true);
+        data.forEach((k, v) ->
+        {
+            System.out.println(String.format("REGISTERING DROP %s", k.toString()));
+            registerDrop(v.getInput(), v.getResult(), v.getMaxDrops(), v.getChance());
+        });
     }
 
     /**
@@ -190,14 +209,14 @@ public class ForagingEventHandler
      * registered in the {@link #FORAGE_EVENT_REGISTRY}. This is also where the {@link ForageTriggers#FORAGING_TRIGGER}
      * is triggered, but it is only triggered if the block actually succeeds in dropping a forage drop.
      *
-     * @param dropList The list of tripless that contain the drop information.
+     * @param dropList The list of triples that contain the drop information.
      * @param event    The block break event that holds crucial information for the foraging drop such as the
      *                 {@link World}, the {@link ServerPlayerEntity}, and the {@link net.minecraft.block.BlockState}
      *                 which contains the {@link Block} that was broken.
      * @see #onBlockBroken(BlockEvent.BreakEvent)
      * @since 2.1.0
      */
-    private static void forageDrop(List<Triple<Float, Item, Integer>> dropList, BlockEvent.BreakEvent event)
+    private static void forageDrop(List<Triple<IItemProvider, Integer, Float>> dropList, BlockEvent.BreakEvent event)
     {
         World level = ((World) event.getWorld());
         Random random = level.getRandom();
@@ -213,11 +232,11 @@ public class ForagingEventHandler
             if (c.getTimesForaged() >= MAX_FORAGES_PER_CHUNK) return;
 
             Collections.shuffle(dropList, random);
-            for (Triple<Float, Item, Integer> drop : dropList)
+            for (Triple<IItemProvider, Integer, Float> drop : dropList)
             {
-                float chance = drop.getLeft();
-                Item item = drop.getMiddle();
-                int maxStack = drop.getRight();
+                IItemProvider item = drop.getLeft();
+                int maxStack = drop.getMiddle();
+                float chance = drop.getRight();
 
                 if (random.nextFloat() < chance)
                 {
@@ -226,7 +245,7 @@ public class ForagingEventHandler
                     c.forage();
                     chunk.markUnsaved();
 
-                    ForageTriggers.FORAGING_TRIGGER.trigger(playerEntity, blockBroken, item);
+                    ForageTriggers.FORAGING_TRIGGER.trigger(playerEntity, blockBroken, item.asItem());
                     cooldownMap.put(playerEntity.getUUID(), MathUtil.secondsToWorldTicks(10));
                     break;
                 }

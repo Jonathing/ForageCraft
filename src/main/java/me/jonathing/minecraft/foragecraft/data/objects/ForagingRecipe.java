@@ -56,7 +56,7 @@ public class ForagingRecipe implements IToJson<ForagingRecipe>
     {
         return new ForagingRecipe(
                 JsonUtil.Reader.getBlock(json, BLOCK_KEY).orElseThrow(() -> new JsonSyntaxException("Unable to get block!")),
-                JsonUtil.Reader.getItemProvider(json, ITEM_KEY),
+                JsonUtil.Reader.getItem(json, ITEM_KEY).orElseThrow(() -> new JsonSyntaxException("Unable to get item!")),
                 JSONUtils.getAsInt(json, MAX_DROPS_KEY),
                 JSONUtils.getAsFloat(json, CHANCE_KEY)
         );

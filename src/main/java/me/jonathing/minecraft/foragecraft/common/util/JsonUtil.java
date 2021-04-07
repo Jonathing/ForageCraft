@@ -37,12 +37,6 @@ public final class JsonUtil
             ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getAsString(json, key));
             return LazyUtil.LazyOptionalOf(() -> ForgeRegistries.ITEMS.getValue(resourcelocation));
         }
-
-        @ParametersAreNonnullByDefault
-        public static IItemProvider getItemProvider(JsonObject json, String key)
-        {
-            return (IItemProvider) getBlock(json, key).cast().orElse(getItem(json, key));
-        }
     }
 
     public static final class Writer

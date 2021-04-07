@@ -1,16 +1,30 @@
 package me.jonathing.minecraft.foragecraft.common.handler.data;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
+import me.jonathing.minecraft.foragecraft.common.handler.ForagingEventHandler;
 import me.jonathing.minecraft.foragecraft.data.objects.ForagingRecipe;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.profiler.IProfiler;
+import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
+import java.util.Map;
 
 public class ForagingRecipeHandler extends ForageDataHandler<ResourceLocation, ForagingRecipe>
 {
     public ForagingRecipeHandler()
     {
         super(ForagingRecipe.DIRECTORY);
+    }
+
+    @Override
+    protected void apply(Map<ResourceLocation, JsonElement> jsonMap, @Nonnull IResourceManager resourceManager, @Nonnull IProfiler profiler)
+    {
+        super.apply(jsonMap, resourceManager, profiler);
+        ForagingEventHandler.reloadDrops(this.getData());
     }
 
     public Pair<CompoundNBT, CompoundNBT> entryToNBT(ResourceLocation key, ForagingRecipe value)

@@ -15,8 +15,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,7 +23,7 @@ public abstract class ForageDataHandler<K, V> extends JsonReloadListener
     protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     public static final Logger LOGGER = LogManager.getLogger();
     protected final String name;
-    protected Map<K, V> data = Maps.newHashMap();
+    private Map<K, V> data = Maps.newHashMap();
 
     public ForageDataHandler(String name)
     {
