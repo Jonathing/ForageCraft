@@ -11,17 +11,18 @@ import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.event.RegistryEvent.Register;
-import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static me.jonathing.minecraft.foragecraft.common.registry.ForageItemGroups.getItemGroup;
 
 /**
  * This class holds all of the blocks in ForageCraft.
@@ -40,6 +41,7 @@ public class ForageBlocks
 
     public static Map<Block, ItemGroup> blockItemMap = new LinkedHashMap<>();
     public static Map<Block, Item.Properties> blockItemPropertiesMap = new LinkedHashMap<>();
+    public static Map<Block, Lazy<BlockItem>> customBlockItemMap = new LinkedHashMap<>();
 
     private static IForgeRegistry<Block> iBlockRegistry;
 
@@ -53,11 +55,11 @@ public class ForageBlocks
         ForageBlocks.iBlockRegistry = event.getRegistry();
 
         rock = register("rock",
-                new RockBlock(DecorativeBlock.ROCK_SHAPE, Lazy.of(() -> ForageBlocks.rock.asItem())),
+                new RockBlock(DecorativeBlock.ROCK_SHAPE, () -> ForageBlocks.rock.asItem()),
                 ItemGroup.TAB_MISC,
                 true);
         flat_rock = register("flat_rock",
-                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, Lazy.of(() -> ForageBlocks.flat_rock.asItem())),
+                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, () -> ForageBlocks.flat_rock.asItem()),
                 ItemGroup.TAB_MISC,
                 true);
         stick = register("stick",
@@ -66,11 +68,11 @@ public class ForageBlocks
                 false);
 
         blackstone_rock = register("blackstone_rock",
-                new RockBlock(DecorativeBlock.ROCK_SHAPE, Lazy.of(() -> ForageBlocks.blackstone_rock.asItem())),
+                new RockBlock(DecorativeBlock.ROCK_SHAPE, () -> ForageBlocks.blackstone_rock.asItem()),
                 ItemGroup.TAB_MISC,
                 true);
         blackstone_flat_rock = register("blackstone_flat_rock",
-                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, Lazy.of(() -> ForageBlocks.blackstone_flat_rock.asItem())),
+                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, () -> ForageBlocks.blackstone_flat_rock.asItem()),
                 ItemGroup.TAB_MISC,
                 true);
 
@@ -81,7 +83,7 @@ public class ForageBlocks
         fascine = register("fascine",
                 new ForageHayBlock(0.5F, AbstractBlock.Properties.copy(Blocks.HAY_BLOCK)),
                 ItemGroup.TAB_BUILDING_BLOCKS,
-                true);
+                MathUtil.secondsToTicks(5 * 9 * 9));
 
         paving_stones = register("paving_stones",
                 new ForageSpeedBlock(1.5F, AbstractBlock.Properties.copy(Blocks.STONE)),
@@ -110,7 +112,7 @@ public class ForageBlocks
     public static <B extends Block> B register(String key, B block, ItemGroup defaultItemGroup, boolean registerItem)
     {
         if (registerItem)
-            blockItemMap.put(block, ForageInfo.IDE && !ForageInfo.DATAGEN ? ForageItemGroups.FORAGECRAFT : defaultItemGroup);
+            blockItemMap.put(block, defaultItemGroup);
 
         ForageRegistry.register(iBlockRegistry, key, block);
         return block;
@@ -129,46 +131,39 @@ public class ForageBlocks
      * @param registerItem     If false, a block item will not be registered for the given block.
      * @param <B>              The generic type that extends {@link Block} for registration.
      * @return The new registered {@link Block} that the assigned variable now holds.
-     * @see #register(String, Block, Item.Properties, ItemGroup, boolean)
+     * @see #register(String, Block, ItemGroup, boolean)
      * @see #init(Register)
      */
-    public static <B extends Block> B register(String key, B block, Item.Properties itemProperties, ItemGroup defaultItemGroup, boolean registerItem)
+    public static <B extends Block> B register(String key, B block, Item.Properties itemProperties)
     {
         blockItemPropertiesMap.put(block, itemProperties);
-        return register(key, block, defaultItemGroup, registerItem);
+
+        ForageRegistry.register(iBlockRegistry, key, block);
+        return block;
     }
 
-    public static class BurnTimes
+    public static <B extends Block> B register(String key, B block, Lazy<BlockItem> blockItem)
     {
-        public static final Map<Item, Integer> BURN_TIMES = new HashMap<Item, Integer>()
+        customBlockItemMap.put(block, blockItem);
+
+        ForageRegistry.register(iBlockRegistry, key, block);
+        return block;
+    }
+
+    public static <B extends Block> B register(String key, B block, Item.Properties properties, int burnTime)
+    {
+        return register(key, block, () -> new BlockItem(block, properties)
         {
+            @Override
+            public int getBurnTime(ItemStack itemStack)
             {
-                // 5 seconds is the burn time for a stick
-                // a stick bundle is 9 sticks
-                // a block of fascine is 9 stick bundles
-                put(fascine, MathUtil.secondsToTicks(5 * 9 * 9));
+                return burnTime;
             }
+        });
+    }
 
-            public void put(IItemProvider key, Integer value)
-            {
-                super.put(key.asItem(), value);
-            }
-        };
-
-        /**
-         * This event method sets the fuel burn time for specific blocks in ForageCraft. While items can be given burn
-         * times by use of anonymous classes, blocks don't have that same luxury, so we use this event instead.
-         *
-         * @param event The furnace fuel burn time event to use to add the burn times to.
-         * @see FurnaceFuelBurnTimeEvent
-         */
-        static void onFurnaceFuelBurnTime(FurnaceFuelBurnTimeEvent event)
-        {
-            Item item = event.getItemStack().getItem();
-            if (!item.getRegistryName().getNamespace().equals(ForageInfo.MOD_ID)) return;
-
-            if (BURN_TIMES.containsKey(item))
-                event.setBurnTime(BURN_TIMES.get(item));
-        }
+    public static <B extends Block> B register(String key, B block, ItemGroup defaultItemGroup, int burnTime)
+    {
+        return register(key, block, new Item.Properties().tab(getItemGroup(defaultItemGroup)), burnTime);
     }
 }

@@ -29,11 +29,11 @@ public class GeneralEventHandler
      *
      * @see #onLootTableLoad(LootTableLoadEvent)
      */
-    private static final NonNullLazy<LootPool> VILLAGE_HOUSE_CHESTS = NonNullLazy.of(() ->
+    private static final NonNullLazy<LootPool> VILLAGE_HOUSE_CHESTS = () ->
             LootPool.lootPool().name("village_leek_seeds").add(
                     ItemLootEntry.lootTableItem(ForageItems.leek_seeds)
                             .apply(SetCount.setCount(RandomValueRange.between(0, 2))))
-                    .build());
+                    .build();
 
     public static void addEventListeners(IEventBus mod, IEventBus forge)
     {

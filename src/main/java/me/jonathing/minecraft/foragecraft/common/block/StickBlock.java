@@ -45,7 +45,7 @@ public class StickBlock extends RockBlock implements IWaterLoggable
      */
     public StickBlock()
     {
-        super(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS).noCollission().noOcclusion().instabreak(), DecorativeBlock.STICK_SHAPE, Lazy.of(() -> Items.STICK));
+        super(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS).noCollission().noOcclusion().instabreak(), DecorativeBlock.STICK_SHAPE, () -> Items.STICK);
     }
 
     /**

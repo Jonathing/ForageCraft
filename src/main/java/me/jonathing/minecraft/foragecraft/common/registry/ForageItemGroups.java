@@ -46,4 +46,9 @@ public class ForageItemGroups extends ItemGroup
     {
         return new ItemStack(ForgeRegistries.ITEMS.getValue(ForageCraft.locate(iconName)));
     }
+
+    static ItemGroup getItemGroup(ItemGroup itemGroup)
+    {
+        return ForageInfo.IDE && !ForageInfo.DATAGEN ? ForageItemGroups.FORAGECRAFT : itemGroup;
+    }
 }

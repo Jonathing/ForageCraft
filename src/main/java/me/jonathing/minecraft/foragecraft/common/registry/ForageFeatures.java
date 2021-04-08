@@ -40,12 +40,12 @@ public class ForageFeatures
      * @see #init()
      */
     public static final NonNullLazy<BlockClusterFeatureConfig> ROCK_CONFIG =
-            NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
+            () -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .add(ForageBlocks.flat_rock.defaultBlockState(), 1)
                     .add(ForageBlocks.rock.defaultBlockState(), 1),
                     new ForageBlockPlacer(ForageBlockTags.ROCK_PLACEABLE)))
                     .tries(1)
-                    .build());
+                    .build();
 
     /**
      * The default random generation config that defines how the {@link ForageBlocks#stick}s are generated. The feature
@@ -55,11 +55,11 @@ public class ForageFeatures
      * @see #init()
      */
     public static final NonNullLazy<BlockClusterFeatureConfig> STICK_CONFIG =
-            NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
+            () -> (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .add(ForageBlocks.stick.defaultBlockState(), 1),
                     new ForageBlockPlacer(ForageBlockTags.STICK_PLACEABLE)))
                     .tries(2)
-                    .build());
+                    .build();
 
     /**
      * The default random generation config that defines how the {@link ForageBlocks#blackstone_rock}s are generated.
@@ -69,13 +69,13 @@ public class ForageFeatures
      * @see #init()
      */
     public static final NonNullLazy<BlockClusterFeatureConfig> BLACKSTONE_CONFIG =
-            NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new SimpleBlockStateProvider(ForageBlocks.blackstone_rock.defaultBlockState())),
+            () -> (new BlockClusterFeatureConfig.Builder((new SimpleBlockStateProvider(ForageBlocks.blackstone_rock.defaultBlockState())),
                     new ForageBlockPlacer(ForageBlockTags.BLACKSTONE_ROCK_PLACEABLE)))
                     .xspread(12).zspread(12)
                     .yspread(10)
                     .tries(90)
                     .noProjection()
-                    .build());
+                    .build();
 
     /**
      * The default random generation config that defines how the {@link ForageBlocks#blackstone_flat_rock}s are
@@ -85,13 +85,13 @@ public class ForageFeatures
      * @see #init()
      */
     public static final NonNullLazy<BlockClusterFeatureConfig> BLACKSTONE_FLAT_CONFIG =
-            NonNullLazy.of(() -> (new BlockClusterFeatureConfig.Builder((new SimpleBlockStateProvider(ForageBlocks.blackstone_flat_rock.defaultBlockState())),
+            () -> (new BlockClusterFeatureConfig.Builder((new SimpleBlockStateProvider(ForageBlocks.blackstone_flat_rock.defaultBlockState())),
                     new ForageBlockPlacer(ForageBlockTags.BLACKSTONE_ROCK_PLACEABLE)))
                     .xspread(12).zspread(12)
                     .yspread(10)
                     .tries(90)
                     .noProjection()
-                    .build());
+                    .build();
 
     /**
      * The {@link ConfiguredFeature} that dictates how the {@link #ROCK_CONFIG} is placed in the world. The
@@ -101,10 +101,10 @@ public class ForageFeatures
      * @see #init()
      */
     public static final NonNullLazy<ConfiguredFeature<?, ?>> ROCK_FEATURE =
-            NonNullLazy.of(() -> Feature.RANDOM_PATCH
+            () -> Feature.RANDOM_PATCH
                     .configured(ROCK_CONFIG.get())
                     .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
-                    .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))));
+                    .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10)));
 
     /**
      * The {@link ConfiguredFeature} that dictates how the {@link #STICK_CONFIG} is placed in the world. The
@@ -114,10 +114,10 @@ public class ForageFeatures
      * @see #init()
      */
     public static final NonNullLazy<ConfiguredFeature<?, ?>> STICK_FEATURE =
-            NonNullLazy.of(() -> Feature.RANDOM_PATCH
+            () -> Feature.RANDOM_PATCH
                     .configured(STICK_CONFIG.get())
                     .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
-                    .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10))));
+                    .decorated(Placement.COUNT_NOISE.configured(new NoiseDependant(-0.8D, 5, 10)));
 
     /**
      * The {@link ConfiguredFeature} that dictates how the {@link #BLACKSTONE_CONFIG} is placed in the world. The
@@ -127,9 +127,9 @@ public class ForageFeatures
      * @see #init()
      */
     public static final NonNullLazy<ConfiguredFeature<?, ?>> BLACKSTONE_FEATURE =
-            NonNullLazy.of(() -> Feature.RANDOM_PATCH.configured(BLACKSTONE_CONFIG.get())
+            () -> Feature.RANDOM_PATCH.configured(BLACKSTONE_CONFIG.get())
                     .range(126)
-                    .chance(1));
+                    .chance(1);
 
     /**
      * The {@link ConfiguredFeature} that dictates how the {@link #BLACKSTONE_FLAT_CONFIG} is placed in the world. The
@@ -139,9 +139,9 @@ public class ForageFeatures
      * @see #init()
      */
     public static final NonNullLazy<ConfiguredFeature<?, ?>> BLACKSTONE_FLAT_FEATURE =
-            NonNullLazy.of(() -> Feature.RANDOM_PATCH.configured(BLACKSTONE_FLAT_CONFIG.get())
+            () -> Feature.RANDOM_PATCH.configured(BLACKSTONE_FLAT_CONFIG.get())
                     .range(126)
-                    .chance(1));
+                    .chance(1);
 
     public static ConfiguredFeature<?, ?> rockConfiguredFeature;
     public static ConfiguredFeature<?, ?> stickConfiguredFeature;

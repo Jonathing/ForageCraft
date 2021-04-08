@@ -23,7 +23,7 @@ public class ForageRegistry
     public static void addEventListeners(IEventBus mod, IEventBus forge)
     {
         mod.addGenericListener(Block.class, ForageRegistry::registerBlocks);
-        forge.addListener(ForageBlocks.BurnTimes::onFurnaceFuelBurnTime);
+        //forge.addListener(ForageBlocks.BurnTimes::onFurnaceFuelBurnTime);
         mod.addGenericListener(Item.class, ForageRegistry::registerItems);
         forge.addGenericListener(Chunk.class, ForageCapabilities::onAttachChunkCapability);
         forge.addListener(ForageFeatures::biomeLoadingEvent);
