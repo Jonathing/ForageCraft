@@ -45,8 +45,8 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
     @ParametersAreNonnullByDefault
     protected Instance createInstance(JsonObject json, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser)
     {
-        Block block = JsonUtil.Reader.getBlock(json, BLOCK_KEY).orElseThrow(() -> new JsonSyntaxException("Unknown block type!"));
-        IItemProvider item = JsonUtil.Reader.getItem(json, ITEM_KEY).orElseThrow(() -> new JsonSyntaxException("Unknown item type!"));
+        Block block = JsonUtil.Reader.fromRegistry(Block.class, json, BLOCK_KEY).orElseThrow(() -> new JsonSyntaxException("Unknown block type!"));
+        IItemProvider item = JsonUtil.Reader.fromRegistry(Item.class, json, ITEM_KEY).orElseThrow(() -> new JsonSyntaxException("Unknown item type!"));
         return new Instance(entityPredicate, block, item);
     }
 
@@ -115,8 +115,8 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
         public JsonObject serializeToJson(@Nonnull ConditionArraySerializer conditionSerializer)
         {
             JsonObject jsonObject = super.serializeToJson(conditionSerializer);
-            JsonUtil.Writer.writeBlock(jsonObject, block, BLOCK_KEY);
-            JsonUtil.Writer.writeItem(jsonObject, item, ITEM_KEY);
+            JsonUtil.Writer.fromRegistry(Block.class, block, jsonObject, BLOCK_KEY);
+            JsonUtil.Writer.fromRegistry(Item.class, item.asItem(), jsonObject, ITEM_KEY);
             return jsonObject;
         }
     }

@@ -28,12 +28,15 @@ public class ForageCraftConfig
             builder.comment("ForageCraft world config").push("server");
             this.unsuccessfulForagingCooldown = builder
                     .comment("The amount of time (in seconds) a player cannot forage even if it was unsuccessful.")
+                    .comment("Default is 1. To disable, set to -1.")
                     .define("unsuccessful_foraging_cooldown", 1);
             this.successfulForagingCooldown = builder
                     .comment("The amount of time (in seconds) a player cannot forage after a successful attempt.")
+                    .comment("Default is 7. To disable, set to -1.")
                     .define("successful_foraging_cooldown", 7);
             this.maxForagesPerChunk = builder
                     .comment("The maximum amount of forages allowed per chunk.")
+                    .comment("Default is 10. To disable, set to -1.")
                     .define("max_forages_per_chunk", 10);
             builder.pop();
         }

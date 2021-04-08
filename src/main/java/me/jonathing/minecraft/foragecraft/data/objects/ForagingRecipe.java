@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import me.jonathing.minecraft.foragecraft.common.util.JsonUtil;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.JSONUtils;
@@ -55,8 +56,8 @@ public class ForagingRecipe implements IToJson<ForagingRecipe>
     public static ForagingRecipe fromJson(JsonObject json)
     {
         return new ForagingRecipe(
-                JsonUtil.Reader.getBlock(json, BLOCK_KEY).orElseThrow(() -> new JsonSyntaxException("Unable to get block!")),
-                JsonUtil.Reader.getItem(json, ITEM_KEY).orElseThrow(() -> new JsonSyntaxException("Unable to get item!")),
+                JsonUtil.Reader.fromRegistry(Block.class, json, BLOCK_KEY).orElseThrow(() -> new JsonSyntaxException("Unable to get block!")),
+                JsonUtil.Reader.fromRegistry(Item.class, json, ITEM_KEY).orElseThrow(() -> new JsonSyntaxException("Unable to get item!")),
                 JSONUtils.getAsInt(json, MAX_DROPS_KEY),
                 JSONUtils.getAsFloat(json, CHANCE_KEY)
         );
@@ -66,8 +67,8 @@ public class ForagingRecipe implements IToJson<ForagingRecipe>
     public JsonObject toJson()
     {
         JsonObject json = new JsonObject();
-        json.addProperty(BLOCK_KEY, this.block.getRegistryName().toString());
-        json.addProperty(ITEM_KEY, this.item.asItem().getRegistryName().toString());
+        JsonUtil.Writer.fromRegistry(Block.class, this.block, json, BLOCK_KEY);
+        JsonUtil.Writer.fromRegistry(Item.class, this.item.asItem(), json, ITEM_KEY);
         json.addProperty(MAX_DROPS_KEY, this.maxDrops);
         json.addProperty(CHANCE_KEY, this.chance);
         return json;
