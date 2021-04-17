@@ -7,7 +7,6 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
@@ -18,92 +17,77 @@ import javax.annotation.Nullable;
  * set on each chunk to incentivise exploration.
  *
  * @author Jonathing
- * @see ForageCapabilities#chunk
+ * @see ForageCapabilities#CHUNK
  * @since 2.3.0
  */
-public class ForageChunk implements INBTSerializable<CompoundNBT>
+public class ForageChunk implements IForageChunk
 {
-    @CapabilityInject(ForageChunk.class)
-    public static Capability<ForageChunk> INSTANCE = null;
+    @CapabilityInject(IForageChunk.class)
+    public static Capability<IForageChunk> INSTANCE = null;
 
     private int timesForaged = 0;
 
+    @Override
     public void forage()
     {
         this.timesForaged++;
     }
 
+    @Override
     public int getTimesForaged()
     {
         return this.timesForaged;
     }
 
-    public static Storage storage()
-    {
-        return new Storage();
-    }
-
-    public static Provider provide(ForageChunk instance)
-    {
-        return new Provider(instance);
-    }
-
     @Override
-    public CompoundNBT serializeNBT()
+    public void setTimesForaged(int timesForaged)
     {
-        CompoundNBT nbt = new CompoundNBT();
-        nbt.putInt("timesForaged", this.timesForaged);
-        return nbt;
+        this.timesForaged = timesForaged;
     }
 
-    @Override
-    public void deserializeNBT(CompoundNBT nbt)
+    public static Capability.IStorage<IForageChunk> storage()
     {
-        this.timesForaged = nbt.getInt("timesForaged");
+        return new Capability.IStorage<IForageChunk>()
+        {
+            @Nullable
+            @Override
+            public INBT writeNBT(Capability<IForageChunk> capability, IForageChunk instance, Direction side)
+            {
+                return instance.serializeNBT();
+            }
+
+            @Override
+            public void readNBT(Capability<IForageChunk> capability, IForageChunk instance, Direction side, INBT nbt)
+            {
+                instance.deserializeNBT((CompoundNBT) nbt);
+            }
+        };
     }
 
-    public static class Storage implements Capability.IStorage<ForageChunk>
+    public static ICapabilitySerializable<CompoundNBT> provider(IForageChunk instance)
     {
-        @Nullable
-        @Override
-        public INBT writeNBT(Capability<ForageChunk> capability, ForageChunk instance, Direction side)
+        return new ICapabilitySerializable<CompoundNBT>()
         {
-            return instance.serializeNBT();
-        }
+            private final LazyOptional<IForageChunk> chunkHandler = LazyOptional.of(() -> instance);
 
-        @Override
-        public void readNBT(Capability<ForageChunk> capability, ForageChunk instance, Direction side, INBT nbt)
-        {
-            instance.deserializeNBT((CompoundNBT) nbt);
-        }
-    }
+            @Nonnull
+            @Override
+            public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side)
+            {
+                return cap == ForageChunk.INSTANCE ? this.chunkHandler.cast() : LazyOptional.empty();
+            }
 
-    public static class Provider implements ICapabilitySerializable<CompoundNBT>
-    {
-        private final LazyOptional<ForageChunk> chunkHandler;
+            @Override
+            public CompoundNBT serializeNBT()
+            {
+                return this.chunkHandler.orElseThrow(NullPointerException::new).serializeNBT();
+            }
 
-        public Provider(ForageChunk forageChunk)
-        {
-            this.chunkHandler = LazyOptional.of(() -> forageChunk);
-        }
-
-        @Nonnull
-        @Override
-        public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side)
-        {
-            return cap == ForageChunk.INSTANCE ? this.chunkHandler.cast() : LazyOptional.empty();
-        }
-
-        @Override
-        public CompoundNBT serializeNBT()
-        {
-            return this.chunkHandler.orElseThrow(NullPointerException::new).serializeNBT();
-        }
-
-        @Override
-        public void deserializeNBT(CompoundNBT nbt)
-        {
-            this.chunkHandler.orElseThrow(NullPointerException::new).deserializeNBT(nbt);
-        }
+            @Override
+            public void deserializeNBT(CompoundNBT nbt)
+            {
+                this.chunkHandler.orElseThrow(NullPointerException::new).deserializeNBT(nbt);
+            }
+        };
     }
 }

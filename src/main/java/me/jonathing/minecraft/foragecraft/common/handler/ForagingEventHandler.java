@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.handler;
 
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.capability.ForageChunk;
+import me.jonathing.minecraft.foragecraft.common.capability.IForageChunk;
 import me.jonathing.minecraft.foragecraft.common.config.ForageCraftConfig;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
@@ -138,7 +139,7 @@ public class ForagingEventHandler
         if (PLAYERS_ON_COOLDOWN.containsKey(playerEntity.getUUID())) return;
 
         Chunk chunk = level.getChunkAt(event.getPos());
-        LazyOptional<ForageChunk> forageChunk = chunk.getCapability(ForageCapabilities.chunk);
+        LazyOptional<IForageChunk> forageChunk = chunk.getCapability(ForageCapabilities.CHUNK);
         forageChunk.ifPresent(c ->
         {
             PLAYERS_ON_COOLDOWN.put(playerEntity.getUUID(), MathUtil.secondsToWorldTicks(ForageCraftConfig.SERVER.getUnsuccessfulForagingCooldown()));

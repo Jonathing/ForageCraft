@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.capability.ForageChunk;
+import me.jonathing.minecraft.foragecraft.common.capability.IForageChunk;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
@@ -21,12 +22,12 @@ import java.util.function.Supplier;
  */
 public class ForageCapabilities
 {
-    @CapabilityInject(ForageChunk.class)
-    public static Capability<ForageChunk> chunk = null;
+    @CapabilityInject(IForageChunk.class)
+    public static Capability<IForageChunk> CHUNK = null;
 
     public static void init()
     {
-        register(ForageChunk.class, ForageChunk::storage, ForageChunk::new);
+        register(IForageChunk.class, ForageChunk::storage, ForageChunk::new);
     }
 
     private static <T> void register(Class<T> type, Supplier<Capability.IStorage<T>> storage, Callable<? extends T> factory)
@@ -36,6 +37,6 @@ public class ForageCapabilities
 
     static void onAttachChunkCapability(AttachCapabilitiesEvent<Chunk> event)
     {
-        event.addCapability(ForageCraft.locate("foraged_chunk"), ForageChunk.provide(chunk.getDefaultInstance()));
+        event.addCapability(ForageCraft.locate("foraged_chunk"), ForageChunk.provider(CHUNK.getDefaultInstance()));
     }
 }
