@@ -185,14 +185,15 @@ public class ForagingEventHandler
     {
         World level = (World) event.getWorld();
         BlockPos pos = event.getPos();
-        IItemProvider item = event.getItem();
-        ItemStack stack = new ItemStack(item, event.getItemCount());
 
         Block block = event.getState().getBlock();
         ServerPlayerEntity player = event.getPlayer();
 
         if (!MinecraftForge.EVENT_BUS.post(event))
         {
+            ItemStack stack = event.getStackToDrop();
+            IItemProvider item = event.getItem();
+
             // Drop the foraged item.
             Block.popResource(level, pos, stack);
 

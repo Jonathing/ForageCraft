@@ -2,6 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.event;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.Cancelable;
@@ -26,6 +27,8 @@ public class BlockForagedEvent extends BlockEvent
     private IItemProvider item;
     private int itemCount;
 
+    private ItemStack forceStack;
+
     /**
      * This constructor creates a new {@link BlockForagedEvent} to be dispatched into Forge's event bus. If the given
      * {@link PlayerEntity} is not an instance of a {@link ServerPlayerEntity}, the event is automatically
@@ -43,6 +46,8 @@ public class BlockForagedEvent extends BlockEvent
         this.player = parent.getPlayer();
         this.item = item;
         this.itemCount = itemCount;
+
+        this.forceStack = null;
 
         if (!(this.player instanceof ServerPlayerEntity))
             this.setCanceled(true);
@@ -71,6 +76,38 @@ public class BlockForagedEvent extends BlockEvent
     public void setItemCount(int itemCount)
     {
         this.itemCount = itemCount;
+    }
+
+    /**
+     * This method forces this event to use a specific {@link ItemStack} for the
+     * {@link me.jonathing.minecraft.foragecraft.common.handler.ForagingEventHandler} to drop.
+     *
+     * @param stack The item stack to drop.
+     * @deprecated Please use {@link #forceItemStack(ItemStack, IItemProvider)} instead as you will be able to define
+     * your own default {@link IItemProvider}, which is safer for the event to use.
+     */
+    @Deprecated
+    public void forceItemStack(ItemStack stack)
+    {
+        this.forceItemStack(stack, stack.getItem());
+    }
+
+    /**
+     * This method forces this event to use a specific {@link ItemStack} for the
+     * {@link me.jonathing.minecraft.foragecraft.common.handler.ForagingEventHandler} to drop.
+     *
+     * @param stack The item stack to drop.
+     * @param item  The item provider for the event to use.
+     */
+    public void forceItemStack(ItemStack stack, IItemProvider item)
+    {
+        this.forceStack = stack;
+        this.item = item;
+    }
+
+    public ItemStack getStackToDrop()
+    {
+        return this.forceStack == null ? new ItemStack(this.item, this.itemCount) : this.forceStack;
     }
 
     @Override
