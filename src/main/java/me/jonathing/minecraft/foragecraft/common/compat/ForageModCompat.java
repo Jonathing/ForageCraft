@@ -9,7 +9,7 @@ import net.minecraftforge.fml.ModList;
  * @author Jonathing
  * @since 2.1.0
  */
-public class ModCompatHandler
+public class ForageModCompat
 {
     public static void init()
     {

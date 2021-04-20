@@ -1,24 +1,26 @@
 package me.jonathing.minecraft.foragecraft.common.registry;
 
-import me.jonathing.minecraft.foragecraft.common.block.LeekCropBlock;
 import me.jonathing.minecraft.foragecraft.common.block.RockBlock;
 import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
 import me.jonathing.minecraft.foragecraft.common.block.template.DecorativeBlock;
-import me.jonathing.minecraft.foragecraft.common.block.template.ForageHayBlock;
-import me.jonathing.minecraft.foragecraft.common.block.template.ForageSpeedBlock;
+import me.jonathing.minecraft.foragecraft.common.block.SpeedBlock;
 import me.jonathing.minecraft.foragecraft.common.util.MathUtil;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IItemProvider;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -54,44 +56,44 @@ public class ForageBlocks
     {
         ForageBlocks.iBlockRegistry = event.getRegistry();
 
-        rock = register("rock",
+        rock = block("rock",
                 new RockBlock(DecorativeBlock.ROCK_SHAPE, () -> ForageBlocks.rock.asItem()),
                 ItemGroup.TAB_MISC,
                 true);
-        flat_rock = register("flat_rock",
+        flat_rock = block("flat_rock",
                 new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, () -> ForageBlocks.flat_rock.asItem()),
                 ItemGroup.TAB_MISC,
                 true);
-        stick = register("stick",
+        stick = block("stick",
                 new StickBlock(),
                 null,
                 false);
 
-        blackstone_rock = register("blackstone_rock",
+        blackstone_rock = block("blackstone_rock",
                 new RockBlock(DecorativeBlock.ROCK_SHAPE, () -> ForageBlocks.blackstone_rock.asItem()),
                 ItemGroup.TAB_MISC,
                 true);
-        blackstone_flat_rock = register("blackstone_flat_rock",
+        blackstone_flat_rock = block("blackstone_flat_rock",
                 new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, () -> ForageBlocks.blackstone_flat_rock.asItem()),
                 ItemGroup.TAB_MISC,
                 true);
 
-        straw_bale = register("straw_bale",
-                new ForageHayBlock(0.3F, AbstractBlock.Properties.copy(Blocks.HAY_BLOCK)),
+        straw_bale = block("straw_bale",
+                hayBlock(0.3F, AbstractBlock.Properties.copy(Blocks.HAY_BLOCK)),
                 ItemGroup.TAB_BUILDING_BLOCKS,
                 true);
-        fascine = register("fascine",
-                new ForageHayBlock(0.5F, AbstractBlock.Properties.copy(Blocks.HAY_BLOCK)),
+        fascine = blockWithBurnTime("fascine",
+                hayBlock(0.5F, AbstractBlock.Properties.copy(Blocks.HAY_BLOCK)),
                 ItemGroup.TAB_BUILDING_BLOCKS,
                 MathUtil.secondsToTicks(5 * 9 * 9));
 
-        paving_stones = register("paving_stones",
-                new ForageSpeedBlock(1.5F, AbstractBlock.Properties.copy(Blocks.STONE)),
+        paving_stones = block("paving_stones",
+                new SpeedBlock(1.5F, AbstractBlock.Properties.copy(Blocks.STONE)),
                 ItemGroup.TAB_BUILDING_BLOCKS,
                 true);
 
-        leek_crop = register("leek_crop",
-                new LeekCropBlock(AbstractBlock.Properties.copy(Blocks.WHEAT)),
+        leek_crop = block("leek_crop",
+                cropsBlock(() -> ForageItems.leek_seeds, AbstractBlock.Properties.copy(Blocks.WHEAT)),
                 null,
                 false);
     }
@@ -109,7 +111,7 @@ public class ForageBlocks
      * @return The new registered block that the assigned variable now holds.
      * @see #init(Register)
      */
-    public static <B extends Block> B register(String key, B block, ItemGroup defaultItemGroup, boolean registerItem)
+    public static <B extends Block> B block(String key, B block, ItemGroup defaultItemGroup, boolean registerItem)
     {
         if (registerItem)
             blockItemMap.put(block, defaultItemGroup);
@@ -122,19 +124,15 @@ public class ForageBlocks
      * This method registers a {@link Block} with specific {@link Item.Properties} and then queues it for block item
      * registration.
      *
-     * @param key              The key to be used for the block's registration name.
-     * @param block            The block to be registered (i.e. {@link #rock}).
-     * @param itemProperties   The item properties that the specified block should hold.
-     * @param defaultItemGroup The default item group that the block should be added to. If in a development environment
-     *                         ({@link ForageInfo#IDE}), all of the ForageCraft blocks and items will be put into the
-     *                         {@link ForageItemGroups#FORAGECRAFT} category.
-     * @param registerItem     If false, a block item will not be registered for the given block.
-     * @param <B>              The generic type that extends {@link Block} for registration.
+     * @param key            The key to be used for the block's registration name.
+     * @param block          The block to be registered (i.e. {@link #rock}).
+     * @param itemProperties The item properties that the specified block should hold.
+     * @param <B>            The generic type that extends {@link Block} for registration.
      * @return The new registered {@link Block} that the assigned variable now holds.
-     * @see #register(String, Block, ItemGroup, boolean)
+     * @see #block(String, Block, ItemGroup, boolean)
      * @see #init(Register)
      */
-    public static <B extends Block> B register(String key, B block, Item.Properties itemProperties)
+    public static <B extends Block> B block(String key, B block, Item.Properties itemProperties)
     {
         blockItemPropertiesMap.put(block, itemProperties);
 
@@ -142,7 +140,7 @@ public class ForageBlocks
         return block;
     }
 
-    public static <B extends Block> B register(String key, B block, Lazy<BlockItem> blockItem)
+    public static <B extends Block> B blockWithCustomBlockItem(String key, B block, Lazy<BlockItem> blockItem)
     {
         customBlockItemMap.put(block, blockItem);
 
@@ -150,9 +148,9 @@ public class ForageBlocks
         return block;
     }
 
-    public static <B extends Block> B register(String key, B block, Item.Properties properties, int burnTime)
+    public static <B extends Block> B blockWithBurnTime(String key, B block, Item.Properties properties, int burnTime)
     {
-        return register(key, block, () -> new BlockItem(block, properties)
+        return blockWithCustomBlockItem(key, block, () -> new BlockItem(block, properties)
         {
             @Override
             public int getBurnTime(ItemStack itemStack)
@@ -162,8 +160,34 @@ public class ForageBlocks
         });
     }
 
-    public static <B extends Block> B register(String key, B block, ItemGroup defaultItemGroup, int burnTime)
+    public static <B extends Block> B blockWithBurnTime(String key, B block, ItemGroup defaultItemGroup, int burnTime)
     {
-        return register(key, block, new Item.Properties().tab(getItemGroup(defaultItemGroup)), burnTime);
+        return blockWithBurnTime(key, block, new Item.Properties().tab(getItemGroup(defaultItemGroup)), burnTime);
+    }
+
+    private static CropsBlock cropsBlock(Lazy<IItemProvider> seedItem, AbstractBlock.Properties properties)
+    {
+        return new CropsBlock(properties)
+        {
+            @Override
+            @Nonnull
+            protected IItemProvider getBaseSeedId()
+            {
+                return seedItem.get();
+            }
+        };
+    }
+
+    private static HayBlock hayBlock(float fallDamageMultiplier, AbstractBlock.Properties properties)
+    {
+        return new HayBlock(properties)
+        {
+            @Override
+            @ParametersAreNonnullByDefault
+            public void fallOn(World world, BlockPos pos, Entity entity, float damage)
+            {
+                entity.causeFallDamage(damage, fallDamageMultiplier);
+            }
+        };
     }
 }

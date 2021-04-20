@@ -99,7 +99,7 @@ public class ForageAdvancementProvider implements IDataProvider
 
     private class ForageAdvancements implements Consumer<Consumer<Advancement>>
     {
-        private String section = "";
+        private final String section = "";
 
         @Override
         @SuppressWarnings("unused")

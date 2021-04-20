@@ -2,7 +2,7 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.capability.ForageChunk;
-import me.jonathing.minecraft.foragecraft.common.capability.IForageChunk;
+import me.jonathing.minecraft.foragecraft.common.capability.base.IForageChunk;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;

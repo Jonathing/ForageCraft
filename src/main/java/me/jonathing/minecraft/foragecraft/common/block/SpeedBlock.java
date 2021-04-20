@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.common.block.template;
+package me.jonathing.minecraft.foragecraft.common.block;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -9,28 +9,26 @@ import net.minecraft.world.World;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * This class holds the {@link me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks#paving_stones} block. It
- * is required so that the player is able to walk faster on them as intended.
+ * A speed block is just like a normal {@link Block} but it speeds up any entities that step on it by a certain
+ * multiplier {@link #speedMultiplier} given in the {@link #SpeedBlock(float, Properties)} constructor.
  *
  * @author Jonathing
- * @see me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks#paving_stones
  * @see #stepOn(World, BlockPos, Entity)
  * @see Block
  * @since 2.0.0
  */
-public class ForageSpeedBlock extends Block
+public class SpeedBlock extends Block
 {
     private final float speedMultiplier;
 
-    public ForageSpeedBlock(float speedMultiplier, AbstractBlock.Properties properties)
+    public SpeedBlock(float speedMultiplier, AbstractBlock.Properties properties)
     {
         super(properties);
         this.speedMultiplier = speedMultiplier;
     }
 
     /**
-     * This method ensures that whenever an entity is walking on a
-     * {@link me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks#paving_stones} block, they move at 1.5
+     * This method ensures that whenever an entity is walking on a speed block, they move at {@link #speedMultiplier}
      * times their normal speed.
      *
      * @param level    The level in which the speed block exists.

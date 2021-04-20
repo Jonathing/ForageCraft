@@ -21,22 +21,27 @@ import net.minecraftforge.common.util.Lazy;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
+import java.util.function.Supplier;
 
 /**
  * This class holds the {@link ForageBlocks#stick} block. It is required so that it is able to have its own hitbox,
  * along with several other features that are exclusive to the stick block.
- * <p>
- * Why am I having the stick act like a rock? Because fuck you, that's why.
  *
  * @author Jonathing
  * @see ForageBlocks#stick
  * @see RockBlock
  * @since 2.0.0
  */
-public class StickBlock extends RockBlock implements IWaterLoggable
+public class StickBlock extends DecorativeBlock
 {
     public static final DirectionProperty FACING = HorizontalBlock.FACING;
-    private static final Random STICK_RANDOM = new Random();
+
+    private static final Supplier<Properties> PROPERTIES =
+            () -> AbstractBlock.Properties
+                    .copy(Blocks.OAK_PLANKS)
+                    .noCollission()
+                    .noOcclusion()
+                    .instabreak();
 
     /**
      * Makes a new {@link DecorativeBlock} with features exclusive to the {@link ForageBlocks#stick}.
@@ -45,7 +50,7 @@ public class StickBlock extends RockBlock implements IWaterLoggable
      */
     public StickBlock()
     {
-        super(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS).noCollission().noOcclusion().instabreak(), DecorativeBlock.STICK_SHAPE, () -> Items.STICK);
+        super(PROPERTIES.get(), DecorativeBlock.STICK_SHAPE, () -> Items.STICK);
     }
 
     /**
@@ -86,9 +91,9 @@ public class StickBlock extends RockBlock implements IWaterLoggable
      * @param context The item use context given to the method.
      * @return Either a waterlogged or non-waterlogged stick based on the result of this method.
      */
-    @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context)
+    @Nullable
+    public BlockState getStateForPlacement(@Nonnull BlockItemUseContext context)
     {
         FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
 
@@ -105,19 +110,6 @@ public class StickBlock extends RockBlock implements IWaterLoggable
         }
 
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
-    }
-
-    /**
-     * Calls {@link #getStateWithRandomDirection(Random)} but with our own {@link Random} instead.
-     *
-     * @return The {@link BlockState} given by {@link #getStateWithRandomDirection(Random)} using our own random.
-     * @see #getStateWithRandomDirection(Random)
-     * @see #STICK_RANDOM
-     */
-    @Nonnull
-    public BlockState getStateWithRandomDirection()
-    {
-        return this.getStateWithRandomDirection(STICK_RANDOM);
     }
 
     /**
@@ -141,7 +133,7 @@ public class StickBlock extends RockBlock implements IWaterLoggable
      *               {@link World#random}.
      * @return {@link Block#defaultBlockState()} with a random {@link Direction}.
      * @see Block#defaultBlockState()
-     * @see #getStateWithRandomDirection()
+     * @see #getStateWithRandomDirection(IWorld)
      */
     @Nonnull
     public BlockState getStateWithRandomDirection(@Nonnull Random random)

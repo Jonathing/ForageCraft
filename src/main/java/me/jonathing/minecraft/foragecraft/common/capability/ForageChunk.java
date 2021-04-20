@@ -1,5 +1,6 @@
 package me.jonathing.minecraft.foragecraft.common.capability;
 
+import me.jonathing.minecraft.foragecraft.common.capability.base.IForageChunk;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;

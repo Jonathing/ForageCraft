@@ -1,7 +1,7 @@
 package me.jonathing.minecraft.foragecraft.common.compat.patchouli;
 
 import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
-import me.jonathing.minecraft.foragecraft.common.compat.ModCompatHandler;
+import me.jonathing.minecraft.foragecraft.common.compat.ForageModCompat;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.block.*;
@@ -17,7 +17,7 @@ import vazkii.patchouli.api.PatchouliAPI;
  * {@link Block}s and {@link BlockState}s.
  *
  * @author Jonathing
- * @see ModCompatHandler#init()
+ * @see ForageModCompat#init()
  * @since 2.1.0
  */
 public class PatchouliHelper

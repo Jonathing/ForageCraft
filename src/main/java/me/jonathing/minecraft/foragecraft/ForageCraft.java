@@ -1,7 +1,7 @@
 package me.jonathing.minecraft.foragecraft;
 
 import me.jonathing.minecraft.foragecraft.client.ForageClient;
-import me.jonathing.minecraft.foragecraft.common.compat.ModCompatHandler;
+import me.jonathing.minecraft.foragecraft.common.compat.ForageModCompat;
 import me.jonathing.minecraft.foragecraft.common.config.ForageCraftConfig;
 import me.jonathing.minecraft.foragecraft.common.handler.GeneralEventHandler;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
@@ -74,7 +74,7 @@ public class ForageCraft
     {
         ForageFeatures.init();
         ForageTriggers.init();
-        ModCompatHandler.init();
+        ForageModCompat.init();
         ForageCapabilities.init();
     }
 

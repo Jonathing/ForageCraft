@@ -70,7 +70,7 @@ public class ItemMixin
             else
             {
                 BlockState blockState = ForageBlocks.stick.getStateForPlacement(useContext);
-                blockState = blockState == null ? ((StickBlock) ForageBlocks.stick).getStateWithRandomDirection() : blockState;
+                blockState = blockState == null ? ((StickBlock) ForageBlocks.stick).getStateWithRandomDirection(itemUseContext.getLevel()) : blockState;
                 if (!useContext.getLevel().setBlock(useContext.getClickedPos(), blockState, 11))
                 {
                     callback.setReturnValue(ActionResultType.FAIL);

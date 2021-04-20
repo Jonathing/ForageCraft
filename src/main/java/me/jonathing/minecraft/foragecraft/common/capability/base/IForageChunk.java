@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.common.capability;
+package me.jonathing.minecraft.foragecraft.common.capability.base;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;

@@ -2,7 +2,6 @@ package me.jonathing.minecraft.foragecraft.data.provider;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
-import me.jonathing.minecraft.foragecraft.common.block.LeekCropBlock;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
@@ -11,6 +10,7 @@ import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
+import net.minecraft.block.CropsBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
 import net.minecraft.data.loot.BlockLootTables;
@@ -205,7 +205,7 @@ public class ForageLootProvider extends LootTableProvider
                 }
                 else if (block.equals(ForageBlocks.leek_crop))
                 {
-                    ILootCondition.IBuilder growthCondition = BlockStateProperty.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(LeekCropBlock.AGE, ((LeekCropBlock) block).getMaxAge()));
+                    ILootCondition.IBuilder growthCondition = BlockStateProperty.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropsBlock.AGE, ((CropsBlock) block).getMaxAge()));
                     this.add(block, (b) -> crop(growthCondition, b, ForageItems.leek, ForageItems.leek_seeds));
                 }
                 else

@@ -1,8 +1,6 @@
 package me.jonathing.minecraft.foragecraft.common.handler;
 
-import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
-import net.minecraft.item.Item;
 import net.minecraft.loot.ItemLootEntry;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
@@ -10,7 +8,6 @@ import net.minecraft.loot.RandomValueRange;
 import net.minecraft.loot.functions.SetCount;
 import net.minecraftforge.common.util.NonNullLazy;
 import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 
 import java.util.function.Supplier;

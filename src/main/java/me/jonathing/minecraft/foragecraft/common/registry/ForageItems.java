@@ -39,28 +39,28 @@ public class ForageItems
     {
         ForageItems.iItemRegistry = event.getRegistry();
 
-        straw = register("straw",
+        straw = item("straw",
                 ItemGroup.TAB_MISC);
 
-        stick_bundle = register("stick_bundle",
+        stick_bundle = itemWithBurnTime("stick_bundle",
                 ItemGroup.TAB_MISC,
                 MathUtil.secondsToTicks(5 * 9));
 
-        spaghetti = register("spaghetti",
+        spaghetti = item("spaghetti",
                 new SoupItem(new Item.Properties()
                         .tab(getItemGroup(ItemGroup.TAB_FOOD))
                         .stacksTo(1)
                         .food(new Food.Builder().nutrition(11).saturationMod(0.375F).build())));
-        leek = register("leek",
+        leek = item("leek",
                 new LeekItem(new Item.Properties()
                         .tab(getItemGroup(ItemGroup.TAB_FOOD))
                         .food(new Food.Builder().nutrition(2).saturationMod(0.1F).build())));
 
-        leek_seeds = register("leek_seeds",
+        leek_seeds = item("leek_seeds",
                 new BlockNamedItem(ForageBlocks.leek_crop, new Item.Properties()
                         .tab(getItemGroup(ItemGroup.TAB_MISC))));
 
-        gathering_knife = register("gathering_knife",
+        gathering_knife = item("gathering_knife",
                 new GatheringKnifeItem(new Item.Properties()
                         .tab(getItemGroup(ItemGroup.TAB_TOOLS))
                         .stacksTo(1)
@@ -106,25 +106,25 @@ public class ForageItems
      * @param <I>  The item type.
      * @return The registered item instance.
      */
-    private static <I extends Item> I register(String name, I item)
+    private static <I extends Item> I item(String name, I item)
     {
         ForageRegistry.register(iItemRegistry, name, item);
         return item;
     }
 
-    private static Item register(String name, Item.Properties properties)
+    private static Item item(String name, Item.Properties properties)
     {
-        return register(name, new Item(properties));
+        return item(name, new Item(properties));
     }
 
-    private static Item register(String name, ItemGroup defaultItemGroup)
+    private static Item item(String name, ItemGroup defaultItemGroup)
     {
-        return register(name, new Item.Properties().tab(getItemGroup(defaultItemGroup)));
+        return item(name, new Item.Properties().tab(getItemGroup(defaultItemGroup)));
     }
 
-    private static Item register(String name, Item.Properties properties, int burnTime)
+    private static Item itemWithBurnTime(String name, Item.Properties properties, int burnTime)
     {
-        return register(name, new Item(properties)
+        return item(name, new Item(properties)
         {
             @Override
             public int getBurnTime(ItemStack itemStack)
@@ -134,8 +134,8 @@ public class ForageItems
         });
     }
 
-    private static Item register(String name, ItemGroup defaultItemGroup, int burnTime)
+    private static Item itemWithBurnTime(String name, ItemGroup defaultItemGroup, int burnTime)
     {
-        return register(name, new Item.Properties().tab(getItemGroup(defaultItemGroup)), burnTime);
+        return itemWithBurnTime(name, new Item.Properties().tab(getItemGroup(defaultItemGroup)), burnTime);
     }
 }
