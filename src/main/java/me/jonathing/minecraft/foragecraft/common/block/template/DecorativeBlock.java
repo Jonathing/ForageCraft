@@ -1,6 +1,5 @@
 package me.jonathing.minecraft.foragecraft.common.block.template;
 
-import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,9 +27,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.Lazy;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 /**
@@ -62,8 +59,6 @@ public abstract class DecorativeBlock extends FallingBlock implements IWaterLogg
      * @see FallingBlock#getShape(BlockState, IBlockReader, BlockPos, ISelectionContext)
      */
     @Override
-    @Nonnull
-    @ParametersAreNonnullByDefault
     @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState blockState, IBlockReader level, BlockPos pos, ISelectionContext context)
     {
@@ -79,8 +74,6 @@ public abstract class DecorativeBlock extends FallingBlock implements IWaterLogg
      * @return The reaction value when the block is pushed ({@link PushReaction#DESTROY}).
      */
     @Override
-    @Nonnull
-    @ParametersAreNonnullByDefault
     @SuppressWarnings("deprecation")
     public PushReaction getPistonPushReaction(BlockState blockState)
     {
@@ -92,14 +85,14 @@ public abstract class DecorativeBlock extends FallingBlock implements IWaterLogg
      * if the {@link BlockState} of the {@link BlockPos} right under it is solid. If the given {@link BlockState} is
      * water, the rock will be waterlogged.
      *
-     * @param blockState The blockstate to replace with the decorative block.
+     * @param blockState The blockstate to replace with the decorative block. <em>Unused and can be null.</em>
      * @param level      The level that the {@link BlockState} resides in.
      * @param blockPos   The position in the level of the {@link BlockState}.
      * @return The result of the position validity check.
      */
     @Override
     @SuppressWarnings("deprecation")
-    public boolean canSurvive(@Nonnull BlockState blockState, IWorldReader level, @Nonnull BlockPos blockPos)
+    public boolean canSurvive(@Nullable BlockState blockState, IWorldReader level, BlockPos blockPos)
     {
         BlockState blockStateBelow = level.getBlockState(blockPos.below());
         return (level.getBlockState(blockPos).getBlock() instanceof AirBlock
@@ -147,7 +140,6 @@ public abstract class DecorativeBlock extends FallingBlock implements IWaterLogg
      * @see FallingBlock#animateTick(BlockState, World, BlockPos, Random)
      */
     @Override
-    @ParametersAreNonnullByDefault
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState blockState, World level, BlockPos blockPos, Random random)
     {
@@ -172,17 +164,16 @@ public abstract class DecorativeBlock extends FallingBlock implements IWaterLogg
      * @param blockState          The blockstate of the decorative block that was activated.
      * @param level               The level in which the block was activated.
      * @param blockPos            The position in the level of the decorative block that was activated.
-     * @param player              The player that activated the block.
-     * @param hand                The hand of the {@link PlayerEntity} that activated the block.
-     * @param blockRayTraceResult The ray trace result given for the method.
+     * @param player              The player that activated the block. <em>Unusued and can be null.</em>
+     * @param hand                The hand of the {@link PlayerEntity} that activated the block. <em>Unused but
+     *                            <strong>should not</strong> be null.</em>
+     * @param blockRayTraceResult The ray trace result given for the method. <em>Unused and can be null.</em>
      * @return {@link ActionResultType#SUCCESS}
      * @see DecorativeBlock#use(BlockState, World, BlockPos, PlayerEntity, Hand, BlockRayTraceResult)
      */
     @Override
-    @Nonnull
-    @ParametersAreNonnullByDefault
     @SuppressWarnings("deprecation")
-    public ActionResultType use(BlockState blockState, World level, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult)
+    public ActionResultType use(BlockState blockState, World level, BlockPos blockPos, @Nullable PlayerEntity player, Hand hand, @Nullable BlockRayTraceResult blockRayTraceResult)
     {
         level.setBlockAndUpdate(blockPos, this.getFluidState(blockState).equals(Fluids.EMPTY.defaultFluidState()) ? Blocks.AIR.defaultBlockState() : this.getFluidState(blockState).createLegacyBlock());
         Block.popResource(level, blockPos, new ItemStack(this.getDecorativeItem(), 1));
@@ -190,7 +181,9 @@ public abstract class DecorativeBlock extends FallingBlock implements IWaterLogg
     }
 
     /**
-     * Some nonsense from the {@link LanternBlock} that allowed me to add waterlogging support for rocks.
+     * Some nonsense from the {@link LanternBlock} that allowed me to add waterlogging support for rocks. All arguments
+     * are sent to the {@link FallingBlock#updateShape(BlockState, Direction, BlockState, IWorld, BlockPos, BlockPos)}
+     * super method so they <strong>should not</strong> be null.
      *
      * @param stateIn     The blockstate of the rock to check if it is waterlogged.
      * @param facing      A horizontal-facing direction given to the method that is used in the superclass's method.
@@ -203,8 +196,7 @@ public abstract class DecorativeBlock extends FallingBlock implements IWaterLogg
      * @see FallingBlock#updateShape(BlockState, Direction, BlockState, IWorld, BlockPos, BlockPos)
      */
     @Override
-    @Nonnull
-    public BlockState updateShape(BlockState stateIn, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull IWorld level, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos)
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld level, BlockPos currentPos, BlockPos facingPos)
     {
         if (stateIn.getValue(WATERLOGGED))
         {
@@ -222,7 +214,6 @@ public abstract class DecorativeBlock extends FallingBlock implements IWaterLogg
      * @return The fluidstate if the rock is waterlogged or {@link Fluids#EMPTY} otherwise.
      */
     @Override
-    @Nonnull
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
@@ -245,7 +236,6 @@ public abstract class DecorativeBlock extends FallingBlock implements IWaterLogg
      * Get the OffsetType for this Block. Determines if the model is rendered slightly offset.
      */
     @Override
-    @Nonnull
     public OffsetType getOffsetType()
     {
         return OffsetType.XZ;

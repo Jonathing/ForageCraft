@@ -10,8 +10,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 
-import javax.annotation.Nonnull;
-
 /**
  * This is the class for the {@link me.jonathing.minecraft.foragecraft.common.registry.ForageItems#leek} item. It is
  * required specifically for the easter egg that has been included in prior versions of ForageCraft.
@@ -39,7 +37,7 @@ public class LeekItem extends Item
      * @see Item#hurtEnemy(ItemStack, LivingEntity, LivingEntity)
      */
     @Override
-    public boolean hurtEnemy(@Nonnull ItemStack itemStack, LivingEntity target, @Nonnull LivingEntity attacker)
+    public boolean hurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity attacker)
     {
         target.hurt(DamageSource.GENERIC, 4);
 

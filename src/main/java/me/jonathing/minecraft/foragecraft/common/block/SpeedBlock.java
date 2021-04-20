@@ -6,8 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 /**
  * A speed block is just like a normal {@link Block} but it speeds up any entities that step on it by a certain
  * multiplier {@link #speedMultiplier} given in the {@link #SpeedBlock(float, Properties)} constructor.
@@ -37,7 +35,6 @@ public class SpeedBlock extends Block
      * @see Block#stepOn(World, BlockPos, Entity)
      */
     @Override
-    @ParametersAreNonnullByDefault
     public void stepOn(World level, BlockPos blockPos, Entity entity)
     {
         super.stepOn(level, blockPos, entity);

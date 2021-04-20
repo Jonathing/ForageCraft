@@ -3,6 +3,8 @@ package me.jonathing.minecraft.foragecraft.common.capability.base;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 
+import javax.annotation.Nonnull;
+
 public interface IForageChunk extends INBTSerializable<CompoundNBT>
 {
     void forage();
@@ -11,6 +13,7 @@ public interface IForageChunk extends INBTSerializable<CompoundNBT>
 
     void setTimesForaged(int timesForaged);
 
+    @Nonnull
     default CompoundNBT serializeNBT()
     {
         CompoundNBT nbt = new CompoundNBT();
@@ -18,7 +21,7 @@ public interface IForageChunk extends INBTSerializable<CompoundNBT>
         return nbt;
     }
 
-    default void deserializeNBT(CompoundNBT nbt)
+    default void deserializeNBT(@Nonnull CompoundNBT nbt)
     {
         this.setTimesForaged(nbt.getInt("timesForaged"));
     }

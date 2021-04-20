@@ -1,6 +1,5 @@
 package me.jonathing.minecraft.foragecraft.common.handler;
 
-import me.jonathing.minecraft.foragecraft.common.event.BlockForagedEvent;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageItems;
 import net.minecraft.loot.ItemLootEntry;
 import net.minecraft.loot.LootPool;

@@ -13,6 +13,7 @@ import me.jonathing.minecraft.foragecraft.asm.MixinConnector;
  */
 public final class ForageInfo implements IForageInfo
 {
+    @SuppressWarnings("unused")
     public static final ForageInfo INSTANCE = new ForageInfo();
 
     /**

@@ -20,6 +20,7 @@ import java.util.Random;
  * @see SimpleBlockPlacer
  * @since 2.2.0
  */
+@ParametersAreNonnullByDefault
 public class ForageBlockPlacer extends SimpleBlockPlacer
 {
     private final ITag<Block> blockTag;
@@ -30,7 +31,6 @@ public class ForageBlockPlacer extends SimpleBlockPlacer
     }
 
     @Override
-    @ParametersAreNonnullByDefault
     public void place(IWorld level, BlockPos blockPos, BlockState blockState, Random random)
     {
         if (blockState.hasProperty(HorizontalBlock.FACING))

@@ -16,6 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author Jonathing
  * @since 2.2.2
  */
+@ParametersAreNonnullByDefault
 public final class JsonUtil
 {
     public static final class Reader
@@ -30,7 +31,6 @@ public final class JsonUtil
          * @param <T>  A type that extends {@link IForgeRegistry} so it is guaranteed that a registry exists for it.
          * @return The item from registry, if it (hopefully) exists.
          */
-        @ParametersAreNonnullByDefault
         public static <T extends IForgeRegistryEntry<T>> LazyOptional<T> fromRegistry(Class<T> type, JsonObject json, String key)
         {
             ResourceLocation resourceLocation = new ResourceLocation(JSONUtils.getAsString(json, key));
@@ -50,7 +50,6 @@ public final class JsonUtil
          * @param key    The key to write the object into.
          * @param <T>    A type that extends {@link IForgeRegistry} so it is guaranteed that a registry exists for it.
          */
-        @ParametersAreNonnullByDefault
         public static <T extends IForgeRegistryEntry<T>> void fromRegistry(Class<T> type, T object, JsonObject json, String key)
         {
             json.addProperty(key, RegistryManager.ACTIVE.getRegistry(type).getKey(object).toString());

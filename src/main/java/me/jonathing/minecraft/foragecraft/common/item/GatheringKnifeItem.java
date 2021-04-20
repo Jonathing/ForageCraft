@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * This is the class for the {@link ForageItems#gathering_knife} item. It is required specifically for specific drops that
@@ -46,7 +46,7 @@ public class GatheringKnifeItem extends Item implements IVanishable
      * @see Item#mineBlock(ItemStack, World, BlockState, BlockPos, LivingEntity)
      */
     @Override
-    public boolean mineBlock(@Nonnull ItemStack itemStack, World level, @Nonnull BlockState blockState, @Nonnull BlockPos pos, @Nonnull LivingEntity livingEntity)
+    public boolean mineBlock(ItemStack itemStack, World level, BlockState blockState, BlockPos pos, LivingEntity livingEntity)
     {
         if (!level.isClientSide && blockState.getBlock().equals(Blocks.GRASS))
         {
@@ -79,7 +79,7 @@ public class GatheringKnifeItem extends Item implements IVanishable
     }
 
     @Override
-    public boolean hasContainerItem(ItemStack itemStack)
+    public boolean hasContainerItem(@Nullable ItemStack itemStack)
     {
         return true;
     }

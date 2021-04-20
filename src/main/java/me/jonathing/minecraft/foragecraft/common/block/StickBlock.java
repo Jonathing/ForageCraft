@@ -59,7 +59,6 @@ public class StickBlock extends DecorativeBlock
      * @see net.minecraft.block.FallingBlock#rotate(BlockState, Rotation)
      */
     @Override
-    @Nonnull
     @SuppressWarnings("deprecation")
     public BlockState rotate(BlockState state, Rotation rot)
     {
@@ -70,7 +69,6 @@ public class StickBlock extends DecorativeBlock
      * @see net.minecraft.block.FallingBlock#mirror(BlockState, Mirror)
      */
     @Override
-    @Nonnull
     @SuppressWarnings("deprecation")
     public BlockState mirror(BlockState state, Mirror mirrorIn)
     {
@@ -88,14 +86,15 @@ public class StickBlock extends DecorativeBlock
 
     /**
      * Contains the same logic from {@link RockBlock#getStateForPlacement(BlockItemUseContext)} but also accounts for
-     * the {@link StickBlock#FACING} property.
+     * the {@link StickBlock#FACING} property. Can be {@code null} if a {@link BlockState} for placement cannot be
+     * found.
      *
      * @param context The item use context given to the method.
      * @return Either a waterlogged or non-waterlogged stick based on the result of this method.
      */
     @Override
     @Nullable
-    public BlockState getStateForPlacement(@Nonnull BlockItemUseContext context)
+    public BlockState getStateForPlacement(BlockItemUseContext context)
     {
         FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
 
@@ -121,8 +120,7 @@ public class StickBlock extends DecorativeBlock
      * @return The blockstate given by {@link #getStateWithRandomDirection(Random)} using the level's random.
      * @see IWorld#getRandom()
      */
-    @Nonnull
-    public BlockState getStateWithRandomDirection(@Nonnull IWorld level)
+    public BlockState getStateWithRandomDirection(IWorld level)
     {
         return this.getStateWithRandomDirection(level.getRandom());
     }
@@ -137,14 +135,12 @@ public class StickBlock extends DecorativeBlock
      * @see Block#defaultBlockState()
      * @see #getStateWithRandomDirection(IWorld)
      */
-    @Nonnull
     public BlockState getStateWithRandomDirection(@Nonnull Random random)
     {
         return this.defaultBlockState().setValue(FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random));
     }
 
     @Override
-    @Nonnull
     public Item asItem()
     {
         return this.getDecorativeItem();

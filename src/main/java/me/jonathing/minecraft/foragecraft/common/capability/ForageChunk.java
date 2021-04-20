@@ -46,6 +46,7 @@ public class ForageChunk implements IForageChunk
         this.timesForaged = timesForaged;
     }
 
+    @Nonnull
     public static Capability.IStorage<IForageChunk> storage()
     {
         return new Capability.IStorage<IForageChunk>()
@@ -65,6 +66,7 @@ public class ForageChunk implements IForageChunk
         };
     }
 
+    @Nonnull
     public static ICapabilitySerializable<CompoundNBT> provider(IForageChunk instance)
     {
         return new ICapabilitySerializable<CompoundNBT>()

@@ -1,7 +1,6 @@
 package me.jonathing.minecraft.foragecraft.common.trigger;
 
 import com.google.gson.JsonObject;
-import mcp.MethodsReturnNonnullByDefault;
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import net.minecraft.advancements.criterion.AbstractCriterionTrigger;
 import net.minecraft.advancements.criterion.CriterionInstance;
@@ -12,8 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.loot.ConditionArrayParser;
 import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 /**
  * This is the custom trigger that is exclusive to the triple baka goal advancement.
  *
@@ -21,7 +18,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @see me.jonathing.minecraft.foragecraft.common.item.LeekItem#hurtEnemy(ItemStack, LivingEntity, LivingEntity)
  * @since 2.1.2
  */
-@MethodsReturnNonnullByDefault
 public class LeekTrigger extends AbstractCriterionTrigger<LeekTrigger.Instance>
 {
     private static final ResourceLocation ID = ForageCraft.locate("leek_trigger");
@@ -33,7 +29,6 @@ public class LeekTrigger extends AbstractCriterionTrigger<LeekTrigger.Instance>
     }
 
     @Override
-    @ParametersAreNonnullByDefault
     protected LeekTrigger.Instance createInstance(JsonObject json, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser)
     {
         return new Instance(entityPredicate);
@@ -65,7 +60,6 @@ public class LeekTrigger extends AbstractCriterionTrigger<LeekTrigger.Instance>
          * @return The created {@link LeekTrigger.Instance} with the given parameters.
          * @see LeekTrigger.Instance
          */
-        @ParametersAreNonnullByDefault
         public static Instance create()
         {
             return new Instance(EntityPredicate.AndPredicate.ANY);

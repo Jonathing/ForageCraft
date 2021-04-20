@@ -2,7 +2,6 @@ package me.jonathing.minecraft.foragecraft.common.trigger;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import mcp.MethodsReturnNonnullByDefault;
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.util.JsonUtil;
 import net.minecraft.advancements.criterion.AbstractCriterionTrigger;
@@ -17,8 +16,7 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.world.BlockEvent;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.ParametersAreNullableByDefault;
 import java.util.List;
 
 /**
@@ -28,7 +26,6 @@ import java.util.List;
  * @see me.jonathing.minecraft.foragecraft.common.handler.ForagingEventHandler#forageDrop(List, BlockEvent.BreakEvent)
  * @since 2.1.0
  */
-@MethodsReturnNonnullByDefault
 public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.Instance>
 {
     private static final ResourceLocation ID = ForageCraft.locate("foraging_trigger");
@@ -42,7 +39,6 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
     }
 
     @Override
-    @ParametersAreNonnullByDefault
     protected Instance createInstance(JsonObject json, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser)
     {
         Block block = JsonUtil.Reader.fromRegistry(Block.class, json, BLOCK_KEY).orElseThrow(() -> new JsonSyntaxException("Unknown block type!"));
@@ -74,7 +70,7 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
         private final Block block;
         private final IItemProvider item;
 
-        public Instance(EntityPredicate.AndPredicate entityPredicate, @Nonnull Block block, @Nonnull IItemProvider item)
+        public Instance(EntityPredicate.AndPredicate entityPredicate, Block block, IItemProvider item)
         {
             super(ID, entityPredicate);
             this.block = block;
@@ -90,6 +86,7 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
          * @return The result of the test.
          * @see #trigger(ServerPlayerEntity, Block, IItemProvider)
          */
+        @ParametersAreNullableByDefault
         protected boolean test(Block block, IItemProvider item)
         {
             if (block == null || item == null) return false;
@@ -105,14 +102,13 @@ public class ForagingTrigger extends AbstractCriterionTrigger<ForagingTrigger.In
          * @return The created {@link Instance} with the given parameters.
          * @see Instance
          */
-        @ParametersAreNonnullByDefault
         public static Instance create(Block block, IItemProvider item)
         {
             return new Instance(EntityPredicate.AndPredicate.ANY, block, item);
         }
 
         @Override
-        public JsonObject serializeToJson(@Nonnull ConditionArraySerializer conditionSerializer)
+        public JsonObject serializeToJson(ConditionArraySerializer conditionSerializer)
         {
             JsonObject jsonObject = super.serializeToJson(conditionSerializer);
             JsonUtil.Writer.fromRegistry(Block.class, block, jsonObject, BLOCK_KEY);
