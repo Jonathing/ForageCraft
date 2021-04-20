@@ -2,7 +2,6 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 
 import me.jonathing.minecraft.foragecraft.common.block.RockBlock;
 import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
-import me.jonathing.minecraft.foragecraft.common.block.template.DecorativeBlock;
 import me.jonathing.minecraft.foragecraft.common.block.SpeedBlock;
 import me.jonathing.minecraft.foragecraft.common.util.MathUtil;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
@@ -57,11 +56,11 @@ public class ForageBlocks
         ForageBlocks.iBlockRegistry = event.getRegistry();
 
         rock = block("rock",
-                new RockBlock(DecorativeBlock.ROCK_SHAPE, () -> ForageBlocks.rock.asItem()),
+                new RockBlock(RockBlock.ROCK_SHAPE.get(), () -> ForageBlocks.rock.asItem()),
                 ItemGroup.TAB_MISC,
                 true);
         flat_rock = block("flat_rock",
-                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, () -> ForageBlocks.flat_rock.asItem()),
+                new RockBlock(RockBlock.FLAT_ROCK_SHAPE.get(), () -> ForageBlocks.flat_rock.asItem()),
                 ItemGroup.TAB_MISC,
                 true);
         stick = block("stick",
@@ -70,11 +69,11 @@ public class ForageBlocks
                 false);
 
         blackstone_rock = block("blackstone_rock",
-                new RockBlock(DecorativeBlock.ROCK_SHAPE, () -> ForageBlocks.blackstone_rock.asItem()),
+                new RockBlock(RockBlock.ROCK_SHAPE.get(), () -> ForageBlocks.blackstone_rock.asItem()),
                 ItemGroup.TAB_MISC,
                 true);
         blackstone_flat_rock = block("blackstone_flat_rock",
-                new RockBlock(DecorativeBlock.FLAT_ROCK_SHAPE, () -> ForageBlocks.blackstone_flat_rock.asItem()),
+                new RockBlock(RockBlock.FLAT_ROCK_SHAPE.get(), () -> ForageBlocks.blackstone_flat_rock.asItem()),
                 ItemGroup.TAB_MISC,
                 true);
 

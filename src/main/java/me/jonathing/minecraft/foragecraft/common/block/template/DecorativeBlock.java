@@ -34,20 +34,16 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 /**
- * This class holds the template for any decorative blocks in ForageCraft. This includes blocks such as
- * {@link ForageBlocks#rock}, {@link ForageBlocks#flat_rock}, and {@link ForageBlocks#stick}.
+ * This class holds the template for any decorative blocks in ForageCraft.
  *
  * @author Jonathing
  * @see FallingBlock
+ * @see IWaterLoggable
  * @since 2.0.0
  */
 public abstract class DecorativeBlock extends FallingBlock implements IWaterLoggable
 {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-
-    public static final VoxelShape STICK_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);
-    public static final VoxelShape ROCK_SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 4.0D, 11.0D);
-    public static final VoxelShape FLAT_ROCK_SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 2.0D, 12.0D);
 
     private final VoxelShape shape;
     private final Lazy<Item> decorativeItem;

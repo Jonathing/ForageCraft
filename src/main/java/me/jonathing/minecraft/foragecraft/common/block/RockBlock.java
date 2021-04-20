@@ -3,6 +3,7 @@ package me.jonathing.minecraft.foragecraft.common.block;
 import me.jonathing.minecraft.foragecraft.common.block.template.DecorativeBlock;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -24,6 +25,11 @@ import java.util.function.Supplier;
  */
 public class RockBlock extends DecorativeBlock
 {
+    public static final Supplier<VoxelShape> ROCK_SHAPE = () ->
+            Block.box(5.0D, 0.0D, 5.0D, 11.0D, 4.0D, 11.0D);
+    public static final Supplier<VoxelShape> FLAT_ROCK_SHAPE = () ->
+            Block.box(4.0D, 0.0D, 4.0D, 12.0D, 2.0D, 12.0D);
+
     private static final Supplier<Properties> PROPERTIES =
             () -> AbstractBlock.Properties
                     .of(Material.STONE)

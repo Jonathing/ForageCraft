@@ -129,7 +129,7 @@ public class ItemMixin
      *
      * @see BlockItem#updateBlockStateFromTag(BlockPos, World, ItemStack, BlockState)
      */
-    private static BlockState updateBlockStateFromTag(BlockPos blockPos, World world, ItemStack itemStack, BlockState blockState)
+    private static BlockState updateBlockStateFromTag(BlockPos blockPos, World level, ItemStack itemStack, BlockState blockState)
     {
         BlockState blockstate = blockState;
         CompoundNBT compoundnbt = itemStack.getTag();
@@ -151,7 +151,7 @@ public class ItemMixin
 
         if (blockstate != blockState)
         {
-            world.setBlock(blockPos, blockstate, 2);
+            level.setBlock(blockPos, blockstate, 2);
         }
 
         return blockstate;

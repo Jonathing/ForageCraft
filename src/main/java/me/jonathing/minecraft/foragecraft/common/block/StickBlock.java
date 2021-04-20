@@ -36,6 +36,8 @@ public class StickBlock extends DecorativeBlock
 {
     public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
+    private static final Supplier<VoxelShape> SHAPE = () ->
+            Block.box(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);
     private static final Supplier<Properties> PROPERTIES =
             () -> AbstractBlock.Properties
                     .copy(Blocks.OAK_PLANKS)
@@ -50,7 +52,7 @@ public class StickBlock extends DecorativeBlock
      */
     public StickBlock()
     {
-        super(PROPERTIES.get(), DecorativeBlock.STICK_SHAPE, () -> Items.STICK);
+        super(PROPERTIES.get(), SHAPE.get(), () -> Items.STICK);
     }
 
     /**
