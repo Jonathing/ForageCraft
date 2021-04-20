@@ -20,6 +20,10 @@
   "item.foragecraft.leek": "Leek",
   "item.foragecraft.gathering_knife": "Gathering Knife",
 
+  "_comment": "Death Messages",
+
+  "death.attack.leek.player": "%1$s was harassed to death by %2$s.",
+
   "_comment": "Advancements (advancements)",
 
   "advancements.foragecraft.root": "ForageCraft",
