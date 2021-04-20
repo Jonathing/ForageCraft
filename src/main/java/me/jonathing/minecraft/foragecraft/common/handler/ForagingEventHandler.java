@@ -3,6 +3,7 @@ package me.jonathing.minecraft.foragecraft.common.handler;
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.capability.base.IForageChunk;
 import me.jonathing.minecraft.foragecraft.common.config.ForageCraftConfig;
+import me.jonathing.minecraft.foragecraft.common.event.BlockForagedEvent;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageCapabilities;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageTriggers;
 import me.jonathing.minecraft.foragecraft.common.util.MathUtil;
@@ -18,8 +19,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -35,6 +38,7 @@ import java.util.*;
  *
  * @author Jonathing
  * @see #onBlockBroken(BlockEvent.BreakEvent)
+ * @see BlockForagedEvent
  * @since 2.0.0
  */
 public class ForagingEventHandler
@@ -43,6 +47,9 @@ public class ForagingEventHandler
 
     private static boolean errorDisplayed = false;
 
+    /**
+     * This {@link Map} contains {@link UUID}s of players who are on cooldown and thus are not able to forage.
+     */
     private static final Map<UUID, Integer> PLAYERS_ON_COOLDOWN = new HashMap<>();
 
     /**
@@ -53,7 +60,7 @@ public class ForagingEventHandler
      * @see #registerDrops(Block, List)
      * @see #registerDrop(Block, IItemProvider, int, float)
      */
-    private static final Map<Block, List<Triple<IItemProvider, Integer, Float>>> FORAGE_EVENT_REGISTRY = new HashMap<>();
+    private static final Map<Block, List<Triple<IItemProvider, Integer, Float>>> FORAGE_DROP_REGISTRY = new HashMap<>();
 
     /**
      * This method is used to register additional foraging drops of your own!
@@ -71,25 +78,25 @@ public class ForagingEventHandler
      *              {@link Float} with the chance of the drop (with 1.00F being 100%), the middle of the triple must be
      *              the {@link Item} that could be dropped, and the right must be an {@link Integer} that indicates the
      *              max stack of the dropped item.
-     * @see #FORAGE_EVENT_REGISTRY
+     * @see #FORAGE_DROP_REGISTRY
      * @since 2.1.0
      */
     public static void registerDrops(Block block, List<Triple<IItemProvider, Integer, Float>> drop)
     {
-        if (!FORAGE_EVENT_REGISTRY.containsKey(block))
-            FORAGE_EVENT_REGISTRY.put(block, drop);
+        if (!FORAGE_DROP_REGISTRY.containsKey(block))
+            FORAGE_DROP_REGISTRY.put(block, drop);
         else
-            FORAGE_EVENT_REGISTRY.get(block).addAll(drop);
+            FORAGE_DROP_REGISTRY.get(block).addAll(drop);
     }
 
     public static void registerDrop(Block block, IItemProvider item, int maxDrops, float chance)
     {
-        registerDrops(block, new ArrayList<>(Arrays.asList(Triple.of(item, maxDrops, chance))));
+        registerDrops(block, new ArrayList<>(Collections.singletonList(Triple.of(item, maxDrops, chance))));
     }
 
     public static void reloadDrops(Map<ResourceLocation, ForagingRecipe> data)
     {
-        FORAGE_EVENT_REGISTRY.entrySet().removeIf(entry -> true);
+        FORAGE_DROP_REGISTRY.entrySet().removeIf(entry -> true);
         data.forEach((k, v) ->
         {
             ForageCraft.LOGGER.debug(MARKER, String.format("Loading foraging drop %s with data {%s, %s, %d, %f}",
@@ -99,7 +106,7 @@ public class ForagingEventHandler
     }
 
     /**
-     * This event method runs through the {@link #FORAGE_EVENT_REGISTRY} and then calls the
+     * This event method runs through the {@link #FORAGE_DROP_REGISTRY} and then calls the
      * {@link #forageDrop(List, BlockEvent.BreakEvent)} method if there is data for the block that was broken.
      *
      * @param event The block break event that carries the information about the broken block.
@@ -112,13 +119,13 @@ public class ForagingEventHandler
 
         Block blockBroken = event.getState().getBlock();
 
-        if (FORAGE_EVENT_REGISTRY.containsKey(blockBroken) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, player.getMainHandItem()) == 0)
-            forageDrop(FORAGE_EVENT_REGISTRY.get(blockBroken), event);
+        if (FORAGE_DROP_REGISTRY.containsKey(blockBroken) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, player.getMainHandItem()) == 0)
+            forageDrop(FORAGE_DROP_REGISTRY.get(blockBroken), event);
     }
 
     /**
      * This method runs through what happens when a block is broken and the block has a foraging drop that has been
-     * registered in the {@link #FORAGE_EVENT_REGISTRY}. This is also where the {@link ForageTriggers#FORAGING_TRIGGER}
+     * registered in the {@link #FORAGE_DROP_REGISTRY}. This is also where the {@link ForageTriggers#FORAGING_TRIGGER}
      * is triggered, but it is only triggered if the block actually succeeds in dropping a forage drop.
      *
      * @param dropList The list of triples that contain the drop information.
@@ -132,7 +139,6 @@ public class ForagingEventHandler
     {
         World level = ((World) event.getWorld());
         Random random = level.getRandom();
-        Block blockBroken = event.getState().getBlock();
 
         ServerPlayerEntity playerEntity = (ServerPlayerEntity) event.getPlayer();
         if (PLAYERS_ON_COOLDOWN.containsKey(playerEntity.getUUID())) return;
@@ -154,12 +160,13 @@ public class ForagingEventHandler
 
                 if (random.nextFloat() < chance)
                 {
-                    Block.popResource(level, event.getPos(), new ItemStack(item, random.nextInt(maxStack) + 1));
-                    c.forage();
-                    chunk.markUnsaved();
+                    BlockForagedEvent forageEvent = new BlockForagedEvent(event, item, random.nextInt(maxStack) + 1);
+                    if (!postEvent(forageEvent))
+                    {
+                        c.forage();
+                        chunk.markUnsaved();
+                    }
 
-                    ForageTriggers.FORAGING_TRIGGER.trigger(playerEntity, blockBroken, item.asItem());
-                    PLAYERS_ON_COOLDOWN.put(playerEntity.getUUID(), MathUtil.secondsToWorldTicks(ForageCraftConfig.SERVER.getSuccessfulForagingCooldown()));
                     break;
                 }
             }
@@ -172,6 +179,29 @@ public class ForagingEventHandler
             ForageCraft.LOGGER.fatal(MARKER, "I have no idea how in God's name this is happening. Please report the issue!");
             ForageCraft.LOGGER.fatal(MARKER, "https://github.com/Jonathing/ForageCraft/issues");
         }
+    }
+
+    private static boolean postEvent(BlockForagedEvent event)
+    {
+        World level = (World) event.getWorld();
+        BlockPos pos = event.getPos();
+        IItemProvider item = event.getItem();
+        ItemStack stack = new ItemStack(item, event.getItemCount());
+
+        Block block = event.getState().getBlock();
+        ServerPlayerEntity player = event.getPlayer();
+
+        if (!MinecraftForge.EVENT_BUS.post(event))
+        {
+            // Drop the foraged item.
+            Block.popResource(level, pos, stack);
+
+            // Put the player on cooldown.
+            ForageTriggers.FORAGING_TRIGGER.trigger(player, block, item);
+            PLAYERS_ON_COOLDOWN.put(player.getUUID(), MathUtil.secondsToWorldTicks(ForageCraftConfig.SERVER.getSuccessfulForagingCooldown()));
+        }
+
+        return event.isCanceled();
     }
 
     static void onWorldTick(TickEvent.WorldTickEvent event)

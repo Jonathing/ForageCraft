@@ -5,7 +5,7 @@ package me.jonathing.minecraft.foragecraft.common.util;
  * shit!
  *
  * @author Jonathing
- * @since 2.3.0
+ * @since 2.2.2
  */
 public class MathUtil
 {

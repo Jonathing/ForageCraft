@@ -17,8 +17,8 @@ import java.util.function.Supplier;
  * This class holds all of the capabilities in ForageCraft.
  *
  * @author Jonathing
- * @see #init(IEventBus)
- * @since 2.3.0
+ * @see #init()
+ * @since 2.2.2
  */
 public class ForageCapabilities
 {

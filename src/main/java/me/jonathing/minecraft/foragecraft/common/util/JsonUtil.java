@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * Utility class for reading and writing JSON files.
  *
  * @author Jonathing
- * @since 2.3.0
+ * @since 2.2.2
  */
 public final class JsonUtil
 {

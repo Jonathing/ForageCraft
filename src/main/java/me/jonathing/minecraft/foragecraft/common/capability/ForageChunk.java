@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
  *
  * @author Jonathing
  * @see ForageCapabilities#CHUNK
- * @since 2.3.0
+ * @since 2.2.2
  */
 public class ForageChunk implements IForageChunk
 {
