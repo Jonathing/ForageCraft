@@ -19,6 +19,10 @@
   "item.foragecraft.leek_seeds": "大葱籽",
   "item.foragecraft.leek": "大葱",
   "item.foragecraft.gathering_knife": "Gathering Knife收割刀",
+  
+  "_comment": "Death Messages",
+
+  "death.attack.leek.player": "%1$s被%2$s羞辱致死。",
 
   "_comment": "Advancements (advancements)",
 
