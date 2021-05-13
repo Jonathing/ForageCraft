@@ -1,14 +1,22 @@
 {
   "version": {
-    "number": "2.2.1",
-    "name": "Chipped Blackstone (Patch 1)",
+    "number": "2.2.2",
+    "name": "Chipped Blackstone (Patch 2)",
     "minecraft": "1.16.5",
     "stable": true
   },
   "description": [
-    "The first patch to Chipped Blackstone with an important critical bug fix."
+    "The first patch to Chipped Blackstone with brand new support for datapacks!"
   ],
   "changelog": [
-    "Fixed Paving Stones causing server-sided issues due to an error when remapping the project."
+    "Sticks no longer generate in mushroom biomes.",
+    "Slightly increased the stick block's hitbox size.",
+    "Players will now experience a 7-second cooldown after a successful foraging attempt to prevent abusing high-efficiency or modded tools(configurable).",
+    "Players will now experience a 1-second cooldown after an unsuccessful foraging attempt to prevent abusing high-efficiency tools (configurable).",
+    "Chunks now have a foraging limit of 10 forages per chunk to encourage exploration (configurable).",
+    "The foraging system now uses data to process foraging drops.",
+    "Massively overhauled the entire foraging backend system.",
+    "Developers can now modify a forage drop by using an event handler for BlockForagedEvent.",
+    "Added a custom leek death message."
   ]
 }
