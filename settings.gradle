@@ -1,7 +1,7 @@
 /*
  * GradleWorks for ForgeGradle 4/3
  * Written by Jonathing
- * Version 3.3.1
+ * Version 3.3.2
  *
  * This gradle file contains specific settings for GradleWorks that allow specific backports or preview features that
  * were introduced in Gradle 5.0+.

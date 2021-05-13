@@ -1,7 +1,7 @@
 /*
  * GradleWorks for ForgeGradle 4/3
  * Written by Jonathing
- * Version 3.3.1
+ * Version 3.3.2
  *
  * What was once just an effort to make life easier is now a fully-fledged buildscript that does almost all of the work
  * for you! The only things you will need to take care of yourself are dependencies, but that shouldn't be too big of a
@@ -15,10 +15,10 @@ import net.minecraftforge.gradle.common.util.ModConfig
 buildscript {
     repositories {
         // Minecraft Forge Maven
-        maven { url 'https://files.minecraftforge.net/maven' }
+        maven { url 'https://maven.minecraftforge.net' }
 
         // SpongePowered Maven
-        maven { url 'https://repo.spongepowered.org/repository/maven-public' }
+        maven { url 'https://repo.spongepowered.org/maven' }
 
         // Maven Central
         mavenCentral()
@@ -48,7 +48,7 @@ ext {
 
 println('GradleWorks for ForgeGradle '.concat(project.hasProperty('use_forgegradle3') && "${use_forgegradle3}".toString() == 'true' ? '3' : '4'))
 println('Written by Jonathing')
-println('Version 3.3.0')
+println('Version 3.3.2')
 
 // ForgeGradle - The heart and soul of the buildscript and the development environment.
 apply plugin: 'net.minecraftforge.gradle'
@@ -114,13 +114,9 @@ println('Mod Information')
 println('- ID: ' + "${mod_id}".toString())
 println('- Name: ' + "${mod_name}".toString())
 println('- Version: ' + "${version}".toString())
-println()
 
 // Any repositories for dependencies go here. Feel free to add to them as needed.
 repositories {
-    // JCenter Repository
-    jcenter()
-
     // CurseMaven
     maven {
         url "https://www.cursemaven.com"
@@ -194,10 +190,8 @@ minecraft {
             }
 
             // Remaps refmaps to workspace mappings for mixin
-            if (project.hasProperty('mixin_version')) {
-                property 'mixin.env.remapRefMap', 'true'
-                property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg".toString()
-            }
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg".toString()
 
             // Logging markers for Forge. See default MDK for instructions
             property 'forge.logging.markers', 'REGISTRIES'
@@ -228,10 +222,8 @@ minecraft {
             args 'nogui'
 
             // Remaps refmaps to workspace mappings for mixin
-            if (project.hasProperty('mixin_version')) {
-                property 'mixin.env.remapRefMap', 'true'
-                property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg".toString()
-            }
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg".toString()
 
             // Logging markers for Forge. See default MDK for instructions
             property 'forge.logging.markers', 'REGISTRIES'
@@ -260,21 +252,19 @@ minecraft {
         // Data run configuration
         data {
             // The directory for Minecraft to run in
-            workingDirectory project.file('run/data')
+            workingDirectory project.file('run')
 
             // Enable mixins if installed (comment out if using a MixinConnector)
             if (project.hasProperty('mixin_version')) {
-                //arg "-mixin.config=${mod_id}.mixins.json".toString()
+                arg "-mixin.config=${mod_id}.mixins.json".toString()
             }
 
             // Additional arguments exclusive to data generation (do NOT change these unless necessary)
             args '--mod', "${mod_id}".toString(), '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             // Remaps refmaps to workspace mappings for mixin
-            if (project.hasProperty('mixin_version')) {
-                property 'mixin.env.remapRefMap', 'true'
-                property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg".toString()
-            }
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg".toString()
 
             // Logging markers for Forge. See default MDK for instructions
             property 'forge.logging.markers', 'REGISTRIES'
@@ -324,9 +314,9 @@ dependencies {
         }
     }
 
-    // Smooth Boot (Forge)
-    if (project.hasProperty('smoothboot_version')) {
-        runtimeOnly fg.deobf("io.github.ultimateboomer:smoothboot-forge:${smoothboot_version}".toString())
+    // Lazy DataFixerUpper(LazyDFU) [FORGE]
+    if (project.hasProperty('lazydfu_file_id')) {
+        runtimeOnly fg.deobf("curse.maven:lazy-dfu-forge-460819:${lazydfu_file_id}".toString())
     }
 
     // CI Test Server Plugin
