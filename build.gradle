@@ -349,9 +349,9 @@ jar {
                     'Implementation-Version'  : project.hasProperty('use_forgegradle3') && "${use_forgegradle3}".toString() == 'true' ? "${version}".toString() : "${archiveVersion.getOrNull()}".toString(),
                     'Implementation-Vendor'   : "${mod_author}".toString(),
                     'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                    //'MixinConfigs'            : "${mod_id}.mixins.json".toString()
+                    'MixinConfigs'            : "${mod_id}.mixins.json".toString()
                     // If you prefer to use a MixinConnector, feel free to do so; remember to uncomment the specified lines
-                    'MixinConnector'          : 'me.jonathing.minecraft.foragecraft.asm.MixinConnector'
+                    //'MixinConnector'          : 'me.jonathing.minecraft.foragecraft.asm.MixinConnector'
             ])
         } else {
             attributes([

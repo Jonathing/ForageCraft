@@ -52,16 +52,14 @@ public class RecipeManagerMixin
     )
     private void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn, CallbackInfo callback)
     {
-        ForageCraftData.OPTIONAL_RECIPES.forEach(RecipeManagerMixin::removeOptionalRecipes);
-    }
-
-    private static void removeOptionalRecipes(String modid, List<ResourceLocation> recipes)
-    {
-        if (!ModList.get().isLoaded(modid))
+        ForageCraftData.OPTIONAL_RECIPES.forEach((modid, recipes) ->
         {
-            int size = recipes.size();
-            LOGGER.debug(FC_MARKER, "Skipping {} recipe{} since {} is not installed.", size, size == 1 ? "" : "s", modid);
-            ForageCraftData.OPTIONAL_RECIPES.get(modid).forEach(recipes::remove);
-        }
+            if (!ModList.get().isLoaded(modid))
+            {
+                int size = recipes.size();
+                LOGGER.debug(FC_MARKER, "Skipping {} recipe{} since {} is not installed.", size, size == 1 ? "" : "s", modid);
+                ForageCraftData.OPTIONAL_RECIPES.get(modid).forEach(objectIn::remove);
+            }
+        });
     }
 }
