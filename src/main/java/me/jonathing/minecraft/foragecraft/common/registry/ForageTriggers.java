@@ -7,8 +7,12 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
 import java.util.Map;
+
+import static me.jonathing.minecraft.foragecraft.ForageCraft.LOGGER;
 
 /**
  * This class holds all of the custom advancement {@link CriteriaTriggers} in ForageCraft.
@@ -18,15 +22,15 @@ import java.util.Map;
  */
 public class ForageTriggers
 {
+    private static final Marker MARKER = MarkerManager.getMarker("Triggers");
+
     /**
      * This is a map that holds all of the triggers registered by ForageCraft only.
      *
      * @see #all()
      */
     private static final Map<ResourceLocation, ICriterionTrigger<?>> FORAGE_TRIGGERS_MAP = Maps.newHashMap();
-    /**
-     * This is the public reference to the {@link ForagingTrigger} that is registered into the game.
-     */
+
     public static final ForagingTrigger FORAGING_TRIGGER = register(new ForagingTrigger());
     public static final LeekTrigger LEEK_TRIGGER = register(new LeekTrigger());
 
@@ -47,6 +51,7 @@ public class ForageTriggers
             throw new IllegalArgumentException("Duplicate criterion id " + criterion.getId());
         }
 
+        LOGGER.debug(MARKER, "Registering new criteria trigger `{}`", criterion.getId());
         FORAGE_TRIGGERS_MAP.put(criterion.getId(), criterion);
         return CriteriaTriggers.register(criterion);
     }

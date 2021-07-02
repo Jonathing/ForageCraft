@@ -23,6 +23,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
 /**
  * The main class of ForageCraft containing a bunch of initialization methods.
@@ -33,10 +35,8 @@ import org.apache.logging.log4j.Logger;
 @Mod(ForageInfo.MOD_ID)
 public class ForageCraft
 {
-    /**
-     * This is the main logger that most of the methods in the mod will be using.
-     */
     public static final Logger LOGGER = LogManager.getLogger("ForageCraft");
+    private static final Marker MARKER = MarkerManager.getMarker("Init");
 
     /**
      * Public constructor for ForageCraft. The initial spark which begins all of the registration processes.
@@ -47,9 +47,11 @@ public class ForageCraft
         printInfo();
 
         // Register configs
+        LOGGER.debug(MARKER, "Registering configs");
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ForageCraftConfig.SERVER_SPEC);
 
         // Register event listeners
+        LOGGER.debug(MARKER, "Registering event listeners");
         IEventBus mod = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forge = MinecraftForge.EVENT_BUS;
         ForageCraft.addEventListeners(mod, forge);
@@ -115,23 +117,23 @@ public class ForageCraft
      */
     private void printInfo()
     {
-        LOGGER.info(String.format("Initializing %s.%s", ForageInfo.NAME, !ForageInfo.IDE ? " See the debug log for build information." : ""));
+        LOGGER.info(MARKER, String.format("Initializing %s.%s", ForageInfo.NAME, !ForageInfo.IDE ? " See the debug log for build information." : ""));
 
         if (ForageInfo.IDE)
         {
-            LOGGER.info(String.format("%s Build Information", ForageInfo.NAME));
-            LOGGER.info(String.format(" - Version:     %s - %s", ForageInfo.VERSION, ForageInfo.VERSION_NAME));
-            LOGGER.info(String.format(" - Build Date:  %s", ForageInfo.BUILD_DATE));
-            LOGGER.info(String.format(" - Dist:        %s", ForageInfo.DATAGEN ? "DATAGEN" : FMLEnvironment.dist.toString()));
-            LOGGER.info(String.format(" - Environment: %s", ForageInfo.TESTSERVER ? "GitHub Actions Test Server" : "IDE/Gradle"));
+            LOGGER.info(MARKER, String.format("%s Build Information", ForageInfo.NAME));
+            LOGGER.info(MARKER, String.format(" - Version:     %s - %s", ForageInfo.VERSION, ForageInfo.VERSION_NAME));
+            LOGGER.info(MARKER, String.format(" - Build Date:  %s", ForageInfo.BUILD_DATE));
+            LOGGER.info(MARKER, String.format(" - Dist:        %s", ForageInfo.DATAGEN ? "DATAGEN" : FMLEnvironment.dist.toString()));
+            LOGGER.info(MARKER, String.format(" - Environment: %s", ForageInfo.TESTSERVER ? "GitHub Actions Test Server" : "IDE/Gradle"));
         }
         else
         {
-            LOGGER.debug(String.format("%s Build Information", ForageInfo.NAME));
-            LOGGER.debug(String.format(" - Version:     %s - %s", ForageInfo.VERSION, ForageInfo.VERSION_NAME));
-            LOGGER.debug(String.format(" - Build Date:  %s", ForageInfo.BUILD_DATE));
-            LOGGER.debug(String.format(" - Dist:        %s", FMLEnvironment.dist.toString()));
-            LOGGER.debug(" - Environment: Normal");
+            LOGGER.debug(MARKER, String.format("%s Build Information", ForageInfo.NAME));
+            LOGGER.debug(MARKER, String.format(" - Version:     %s - %s", ForageInfo.VERSION, ForageInfo.VERSION_NAME));
+            LOGGER.debug(MARKER, String.format(" - Build Date:  %s", ForageInfo.BUILD_DATE));
+            LOGGER.debug(MARKER, String.format(" - Dist:        %s", FMLEnvironment.dist.toString()));
+            LOGGER.debug(MARKER, " - Environment: Normal");
         }
     }
 }

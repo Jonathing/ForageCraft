@@ -1,6 +1,5 @@
 package me.jonathing.minecraft.foragecraft.common.handler;
 
-import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.capability.base.IForageChunk;
 import me.jonathing.minecraft.foragecraft.common.config.ForageCraftConfig;
 import me.jonathing.minecraft.foragecraft.common.event.BlockForagedEvent;
@@ -31,6 +30,8 @@ import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
 import java.util.*;
+
+import static me.jonathing.minecraft.foragecraft.ForageCraft.LOGGER;
 
 /**
  * This class handles the foraging loot for vanilla blocks in the game. If I ever need to make loot for any of my own
@@ -99,7 +100,7 @@ public class ForagingEventHandler
         FORAGE_DROP_REGISTRY.entrySet().removeIf(entry -> true);
         data.forEach((k, v) ->
         {
-            ForageCraft.LOGGER.debug(MARKER, String.format("Loading foraging drop %s with data {%s, %s, %d, %f}",
+            LOGGER.debug(MARKER, String.format("Loading foraging drop %s with data {%s, %s, %d, %f}",
                     k, v.getInput(), v.getResult(), v.getMaxDrops(), v.getChance()));
             registerDrop(v.getInput(), v.getResult(), v.getMaxDrops(), v.getChance());
         });
@@ -175,9 +176,9 @@ public class ForagingEventHandler
         if (!forageChunk.isPresent() && !errorDisplayed)
         {
             errorDisplayed = true;
-            ForageCraft.LOGGER.fatal(MARKER, "Chunk capability not present! ForageCraft will not function!");
-            ForageCraft.LOGGER.fatal(MARKER, "I have no idea how in God's name this is happening. Please report the issue!");
-            ForageCraft.LOGGER.fatal(MARKER, "https://github.com/Jonathing/ForageCraft/issues");
+            LOGGER.fatal(MARKER, "Chunk capability not present! ForageCraft will not function!");
+            LOGGER.fatal(MARKER, "I have no idea how in God's name this is happening. Please report the issue!");
+            LOGGER.fatal(MARKER, "https://github.com/Jonathing/ForageCraft/issues");
         }
     }
 

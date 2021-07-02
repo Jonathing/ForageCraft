@@ -9,6 +9,8 @@ import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Collections;
@@ -17,6 +19,8 @@ import java.util.Map;
 
 public class ForageCraftData
 {
+    public static final Logger LOGGER = LogManager.getLogger("ForageCraftData");
+
     public static final ForagingRecipeHandler FORAGING_RECIPES = new ForagingRecipeHandler();
 
     /**

@@ -1,9 +1,12 @@
 package me.jonathing.minecraft.foragecraft.asm;
 
-import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 import org.spongepowered.asm.mixin.Mixins;
 import org.spongepowered.asm.mixin.connect.IMixinConnector;
+
+import static me.jonathing.minecraft.foragecraft.ForageCraft.LOGGER;
 
 /**
  * This class uses an {@link IMixinConnector} to connect our mixins to the environment. If we detect that we are in
@@ -16,6 +19,8 @@ import org.spongepowered.asm.mixin.connect.IMixinConnector;
  */
 public class MixinConnector implements IMixinConnector
 {
+    private static final Marker MARKER = MarkerManager.getMarker("Mixins");
+
     /**
      * Connects ForageCraft's mixins to the environment. The workspace is configured to use this in the IDE since it is
      * manually specified in the {@code MANIFEST.MF} file in the {@code META-INF} folder.
@@ -31,7 +36,7 @@ public class MixinConnector implements IMixinConnector
         if (ForageInfo.DATAGEN)
         {
             Mixins.addConfiguration(ForageInfo.MOD_ID + ".data.mixins.json");
-            ForageCraft.LOGGER.warn("ForageCraft's datagen mixins have been enabled.");
+            LOGGER.warn(MARKER, "ForageCraft's datagen mixins have been enabled.");
         }
     }
 }

@@ -18,9 +18,13 @@ import net.minecraftforge.common.util.NonNullLazy;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static me.jonathing.minecraft.foragecraft.ForageCraft.LOGGER;
 
 /**
  * This class holds all of the world generation features for ForageCraft.
@@ -31,6 +35,8 @@ import java.util.stream.Collectors;
  */
 public class ForageFeatures
 {
+    private static final Marker MARKER = MarkerManager.getMarker("Features");
+
     /**
      * The default random generation config that defines how the {@link ForageBlocks#rock}s and
      * {@link ForageBlocks#flat_rock}s are generated. The feature uses a {@link NonNullLazy} to prevent an
@@ -150,6 +156,7 @@ public class ForageFeatures
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> registerConfiguredFeature(String nameIn, ConfiguredFeature<FC, ?> featureIn)
     {
+        LOGGER.debug(MARKER, "Registering configured feature `{}`", nameIn);
         return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, nameIn, featureIn);
     }
 
@@ -204,6 +211,7 @@ public class ForageFeatures
     {
         if (overworldBiomes == null)
         {
+            LOGGER.debug(MARKER, "Populating the overworld biomes reference list.");
             overworldBiomes = BiomeDictionary.getBiomes(BiomeDictionary.Type.OVERWORLD)
                     .stream().map(RegistryKey::location)
                     .distinct().collect(Collectors.toList());
@@ -211,6 +219,7 @@ public class ForageFeatures
 
         if (netherBiomes == null)
         {
+            LOGGER.debug(MARKER, "Populating the nether biomes reference list.");
             netherBiomes = BiomeDictionary.getBiomes(BiomeDictionary.Type.NETHER)
                     .stream().map(RegistryKey::location)
                     .distinct().collect(Collectors.toList());
@@ -218,6 +227,7 @@ public class ForageFeatures
 
         if (theEndBiomes == null)
         {
+            LOGGER.debug(MARKER, "Populating the end biomes reference list.");
             theEndBiomes = BiomeDictionary.getBiomes(BiomeDictionary.Type.END)
                     .stream().map(RegistryKey::location)
                     .distinct().collect(Collectors.toList());
@@ -225,6 +235,7 @@ public class ForageFeatures
 
         Biome.Category biomeCategory = event.getCategory();
         BiomeGenerationSettingsBuilder biomeGenerator = event.getGeneration();
+        ResourceLocation name = event.getName();
 
         if (overworldBiomes.contains(event.getName()))
         {
@@ -235,12 +246,12 @@ public class ForageFeatures
                     && !biomeCategory.equals(Biome.Category.ICY)
                     && !biomeCategory.equals(Biome.Category.NONE))
             {
-                biomeGenerator.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, rockConfiguredFeature);
+                addCategoryFeature(biomeGenerator, name, GenerationStage.Decoration.LOCAL_MODIFICATIONS, rockConfiguredFeature);
 
                 // biomes that should contain only sticks
                 if (!biomeCategory.equals(Biome.Category.MUSHROOM))
                 {
-                    biomeGenerator.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, stickConfiguredFeature);
+                    addCategoryFeature(biomeGenerator, name, GenerationStage.Decoration.LOCAL_MODIFICATIONS, stickConfiguredFeature);
                 }
             }
         }
@@ -248,8 +259,14 @@ public class ForageFeatures
         // all nether biomes should attempt to have blackstone generate
         if (netherBiomes.contains(event.getName()))
         {
-            biomeGenerator.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, blackstoneConfiguredFeature);
-            biomeGenerator.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, blackstoneFlatConfiguredFeature);
+            addCategoryFeature(biomeGenerator, name, GenerationStage.Decoration.LOCAL_MODIFICATIONS, blackstoneConfiguredFeature);
+            addCategoryFeature(biomeGenerator, name, GenerationStage.Decoration.LOCAL_MODIFICATIONS, blackstoneFlatConfiguredFeature);
         }
+    }
+
+    private static void addCategoryFeature(BiomeGenerationSettingsBuilder biomeGenerator, ResourceLocation name, GenerationStage.Decoration decoration, ConfiguredFeature<?, ?> feature)
+    {
+        LOGGER.debug(MARKER, "Adding the `{}` configured feature to the `{}` biome", WorldGenRegistries.CONFIGURED_FEATURE.getKey(feature), name);
+        biomeGenerator.addFeature(decoration, feature);
     }
 }

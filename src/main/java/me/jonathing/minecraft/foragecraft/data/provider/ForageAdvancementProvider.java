@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
+import static me.jonathing.minecraft.foragecraft.data.ForageCraftData.LOGGER;
+
 /**
  * The provider for all of the advancements in ForageCraft.
  *
@@ -42,7 +44,7 @@ import java.util.function.Consumer;
  */
 public class ForageAdvancementProvider implements IDataProvider
 {
-    private static final Marker MARKER = MarkerManager.getMarker("AdvancementProvider");
+    private static final Marker MARKER = MarkerManager.getMarker("Advancements");
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
     private final DataGenerator generator;
     private final List<Consumer<Consumer<Advancement>>> advancements = ImmutableList.of(new ForageAdvancements());
@@ -73,7 +75,7 @@ public class ForageAdvancementProvider implements IDataProvider
                 }
                 catch (IOException ioexception)
                 {
-                    ForageCraft.LOGGER.error(MARKER, String.format("Couldn't save advancement %s", path1), ioexception);
+                    LOGGER.error(MARKER, String.format("Couldn't save advancement %s", path1), ioexception);
                 }
 
             }

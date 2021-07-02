@@ -3,24 +3,22 @@ package me.jonathing.minecraft.foragecraft.data.provider;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.data.objects.IToJson;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
 import net.minecraft.util.ResourceLocation;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 
+import static me.jonathing.minecraft.foragecraft.data.ForageCraftData.LOGGER;
+
 public abstract class ForageDataProvider<D extends IToJson<D>> implements IDataProvider
 {
-    protected static final Marker MARKER = MarkerManager.getMarker("DataProvider");
     protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     protected Map<ResourceLocation, D> data;
     protected final DataGenerator generator;
@@ -33,7 +31,7 @@ public abstract class ForageDataProvider<D extends IToJson<D>> implements IDataP
     }
 
     @Override
-    public void run(DirectoryCache cache) throws IOException
+    public void run(@Nonnull DirectoryCache cache)
     {
         this.data = this.gatherData();
 
@@ -50,7 +48,7 @@ public abstract class ForageDataProvider<D extends IToJson<D>> implements IDataP
             }
             catch (IOException e)
             {
-                ForageCraft.LOGGER.error(MARKER, String.format("Couldn't save %s %s", this.name, outputFile), e);
+                LOGGER.error(String.format("Couldn't save %s %s", this.name, outputFile), e);
             }
         }
     }

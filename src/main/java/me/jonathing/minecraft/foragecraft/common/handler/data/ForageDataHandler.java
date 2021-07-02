@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
-import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.info.ForageInfo;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;
@@ -18,6 +17,8 @@ import org.apache.logging.log4j.MarkerManager;
 import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.Set;
+
+import static me.jonathing.minecraft.foragecraft.ForageCraft.LOGGER;
 
 public abstract class ForageDataHandler<K, V> extends JsonReloadListener
 {
@@ -49,16 +50,16 @@ public abstract class ForageDataHandler<K, V> extends JsonReloadListener
             }
             catch (MissingRegistryObjectException e)
             {
-                ForageCraft.LOGGER.error(MARKER, String.format("Data entry %s not found in registry!", name), e);
+                LOGGER.error(MARKER, String.format("Data entry %s not found in registry!", name), e);
             }
             catch (Exception e)
             {
-                ForageCraft.LOGGER.error(MARKER, String.format("Parsing error loading %s: %s", this.name, name), e);
+                LOGGER.error(MARKER, String.format("Parsing error loading %s: %s", this.name, name), e);
             }
         }
 
         this.data = newDataMap;
-        ForageCraft.LOGGER.info(MARKER, String.format("Loaded %d %s", newDataMap.size(), this.name.replace('_', ' ')));
+        LOGGER.info(MARKER, String.format("Loaded %d %s", newDataMap.size(), this.name.replace('_', ' ')));
     }
 
     protected abstract Pair<K, V> parseJson(JsonObject json, ResourceLocation name) throws MissingRegistryObjectException;

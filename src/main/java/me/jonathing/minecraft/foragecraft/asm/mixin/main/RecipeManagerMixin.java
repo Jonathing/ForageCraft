@@ -1,7 +1,6 @@
 package me.jonathing.minecraft.foragecraft.asm.mixin.main;
 
 import com.google.gson.JsonElement;
-import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.data.ForageCraftData;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.profiler.IProfiler;
@@ -16,6 +15,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
+
+import static me.jonathing.minecraft.foragecraft.ForageCraft.LOGGER;
 
 /**
  * This mixin class is used to make certain modifications to the {@link RecipeManager} class to ForageCraft's needs.
@@ -52,7 +53,7 @@ public class RecipeManagerMixin
     {
         if (!ModList.get().isLoaded("patchouli"))
         {
-            ForageCraft.LOGGER.debug(FC_MARKER, "Skipping over ForageCraft's Patchouli recipe since Patchouli is not installed.");
+            LOGGER.debug(FC_MARKER, "Skipping over ForageCraft's Patchouli recipe since Patchouli is not installed.");
             ForageCraftData.PATCHOULI_RECIPES.forEach(objectIn::remove);
         }
     }
