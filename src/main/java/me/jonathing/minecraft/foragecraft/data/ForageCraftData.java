@@ -1,5 +1,6 @@
 package me.jonathing.minecraft.foragecraft.data;
 
+import com.google.common.collect.ImmutableMap;
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.handler.data.ForageDataHandler;
 import me.jonathing.minecraft.foragecraft.common.handler.data.ForagingRecipeHandler;
@@ -24,12 +25,12 @@ public class ForageCraftData
     public static final ForagingRecipeHandler FORAGING_RECIPES = new ForagingRecipeHandler();
 
     /**
-     * List of all of the Patchouli recipes to skip parsing if Patchouli is not installed.
+     * List of all the optional recipes from ForageCraft that are not required.
      *
      * @see RecipeManagerMixin#apply(Map, IResourceManager, IProfiler, CallbackInfo)
      */
-    public static final List<ResourceLocation> PATCHOULI_RECIPES = Collections.singletonList(
-            ForageCraft.locate("guide_book")
+    public static final Map<String, List<ResourceLocation>> OPTIONAL_RECIPES = ImmutableMap.of(
+            "patchouli", Collections.singletonList(ForageCraft.locate("guide_book"))
     );
 
     public static void addEventListeners(IEventBus mod, IEventBus forge)

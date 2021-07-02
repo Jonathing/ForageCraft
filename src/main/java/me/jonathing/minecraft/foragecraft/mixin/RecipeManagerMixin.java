@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.List;
 import java.util.Map;
 
 import static me.jonathing.minecraft.foragecraft.ForageCraft.LOGGER;
@@ -51,10 +52,16 @@ public class RecipeManagerMixin
     )
     private void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn, CallbackInfo callback)
     {
-        if (!ModList.get().isLoaded("patchouli"))
+        ForageCraftData.OPTIONAL_RECIPES.forEach(RecipeManagerMixin::removeOptionalRecipes);
+    }
+
+    private static void removeOptionalRecipes(String modid, List<ResourceLocation> recipes)
+    {
+        if (!ModList.get().isLoaded(modid))
         {
-            LOGGER.debug(FC_MARKER, "Skipping over ForageCraft's Patchouli recipe since Patchouli is not installed.");
-            ForageCraftData.PATCHOULI_RECIPES.forEach(objectIn::remove);
+            int size = recipes.size();
+            LOGGER.debug(FC_MARKER, "Skipping {} recipe{} since {} is not installed.", size, size == 1 ? "" : "s", modid);
+            ForageCraftData.OPTIONAL_RECIPES.get(modid).forEach(recipes::remove);
         }
     }
 }
