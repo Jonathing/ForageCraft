@@ -186,7 +186,7 @@ minecraft {
 
             // Enable mixins if installed (comment out if using a MixinConnector)
             if (project.hasProperty('mixin_version')) {
-                //arg "-mixin.config=${mod_id}.mixins.json".toString()
+                arg "-mixin.config=${mod_id}.mixins.json".toString()
             }
 
             // Remaps refmaps to workspace mappings for mixin
@@ -215,7 +215,7 @@ minecraft {
 
             // Enable mixins if installed (comment out if using a MixinConnector)
             if (project.hasProperty('mixin_version')) {
-                //arg "-mixin.config=${mod_id}.mixins.json".toString()
+                arg "-mixin.config=${mod_id}.mixins.json".toString()
             }
 
             // Additional arguments exclusive to the server (nogui by default, separated by ",")

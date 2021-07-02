@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.asm.mixin.main;
+package me.jonathing.minecraft.foragecraft.mixin;
 
 import me.jonathing.minecraft.foragecraft.common.block.StickBlock;
 import me.jonathing.minecraft.foragecraft.common.registry.ForageBlocks;

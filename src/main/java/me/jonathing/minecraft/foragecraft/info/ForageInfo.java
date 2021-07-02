@@ -1,7 +1,5 @@
 package me.jonathing.minecraft.foragecraft.info;
 
-import me.jonathing.minecraft.foragecraft.asm.MixinConnector;
-
 /**
  * Contains various important pieces of information about the instance of ForageCraft. Special thanks to Shadew for
  * allowing easy usage of this via his ModUtil plugin and the boilerplate we made for the Midnight.
@@ -44,7 +42,6 @@ public final class ForageInfo implements IForageInfo
      *
      * @see #wantsDevMixins()
      * @see #forceDevMixins()
-     * @see MixinConnector#connect()
      */
     public static final boolean FORCE_DEV_MIXINS = wantsDevMixins();
 

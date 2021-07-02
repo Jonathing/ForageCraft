@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.asm.mixin.main;
+package me.jonathing.minecraft.foragecraft.mixin;
 
 import com.google.gson.JsonElement;
 import me.jonathing.minecraft.foragecraft.data.ForageCraftData;

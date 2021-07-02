@@ -1,9 +1,9 @@
 package me.jonathing.minecraft.foragecraft.data;
 
 import me.jonathing.minecraft.foragecraft.ForageCraft;
-import me.jonathing.minecraft.foragecraft.asm.mixin.main.RecipeManagerMixin;
 import me.jonathing.minecraft.foragecraft.common.handler.data.ForageDataHandler;
 import me.jonathing.minecraft.foragecraft.common.handler.data.ForagingRecipeHandler;
+import me.jonathing.minecraft.foragecraft.mixin.RecipeManagerMixin;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;

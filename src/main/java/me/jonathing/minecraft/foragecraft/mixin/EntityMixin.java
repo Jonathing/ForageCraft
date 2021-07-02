@@ -1,4 +1,4 @@
-package me.jonathing.minecraft.foragecraft.asm.mixin.main;
+package me.jonathing.minecraft.foragecraft.mixin;
 
 import me.jonathing.minecraft.foragecraft.common.block.template.DecorativeBlock;
 import net.minecraft.entity.Entity;
