@@ -4,7 +4,6 @@
  * fired when the {@link me.jonathing.minecraft.foragecraft.info.ForageInfo#DATAGEN} property is enabled, as these
  * mixins only modify classes that generate specific JSON files during data generation.
  *
- * @see me.jonathing.minecraft.foragecraft.mixin
  * @see me.jonathing.minecraft.foragecraft.info.ForageInfo#DATAGEN
  */
 package me.jonathing.minecraft.foragecraft.mixin.data;

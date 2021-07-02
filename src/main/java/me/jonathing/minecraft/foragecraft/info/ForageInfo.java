@@ -38,14 +38,6 @@ public final class ForageInfo implements IForageInfo
     public static final boolean IDE = isRunningFromIDE();
 
     /**
-     * This constant is true when the system property {@code foragecraft.devmixins} is "true".
-     *
-     * @see #wantsDevMixins()
-     * @see #forceDevMixins()
-     */
-    public static final boolean FORCE_DEV_MIXINS = wantsDevMixins();
-
-    /**
      * This constant is true when the system property {@code foragecraft.datagen} is {@code "true"}. This property is set
      * in the {@code data} run configration (for the {@code runData} task).
      *
@@ -101,15 +93,6 @@ public final class ForageInfo implements IForageInfo
     private static boolean isRunningFromIDE()
     {
         String p = System.getProperty("foragecraft.iside");
-        return Boolean.parseBoolean(p);
-    }
-
-    /**
-     * @see #FORCE_DEV_MIXINS
-     */
-    private static boolean wantsDevMixins()
-    {
-        String p = System.getProperty("foragecraft.devmixins");
         return Boolean.parseBoolean(p);
     }
 
@@ -179,16 +162,6 @@ public final class ForageInfo implements IForageInfo
     public String buildDate()
     {
         return BUILD_DATE;
-    }
-
-    /**
-     * @return {@link #FORCE_DEV_MIXINS}
-     * @see IForageInfo#forceDevMixins()
-     */
-    @Override
-    public boolean forceDevMixins()
-    {
-        return FORCE_DEV_MIXINS;
     }
 
     /**

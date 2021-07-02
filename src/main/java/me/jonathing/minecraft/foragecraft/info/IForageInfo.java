@@ -55,13 +55,6 @@ public interface IForageInfo
     boolean ide();
 
     /**
-     * Returns whether ForageCraft should force enable development environment mixins or not.
-     *
-     * @return The result of the force dev mixins check.
-     */
-    boolean forceDevMixins();
-
-    /**
      * Returns whether ForageCraft is running as a data generator.
      *
      * @return The result of the datagen check.

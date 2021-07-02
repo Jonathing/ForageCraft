@@ -10,6 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * An alternative way of manually loading mixins without needing multiple mixin JSONs or the use of a
+ * {@link org.spongepowered.asm.mixin.connect.IMixinConnector}.
+ *
+ * @author Jonathing
+ * @since 2.2.2
+ */
 public class ForageMixinPlugin implements IMixinConfigPlugin
 {
     private static final String[] MAIN_MIXINS = new String[]

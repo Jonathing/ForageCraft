@@ -6,12 +6,12 @@
     "stable": true
   },
   "description": [
-    "The first patch to Chipped Blackstone with brand new support for datapacks!"
+    "The second patch to Chipped Blackstone with brand new support for datapacks!"
   ],
   "changelog": [
     "Sticks no longer generate in mushroom biomes.",
     "Slightly increased the stick block's hitbox size.",
-    "Players will now experience a 7-second cooldown after a successful foraging attempt to prevent abusing high-efficiency or modded tools(configurable).",
+    "Players will now experience a 7-second cooldown after a successful foraging attempt to prevent abusing high-efficiency or modded tools (configurable).",
     "Players will now experience a 1-second cooldown after an unsuccessful foraging attempt to prevent abusing high-efficiency tools (configurable).",
     "Chunks now have a foraging limit of 10 forages per chunk to encourage exploration (configurable).",
     "The foraging system now uses data to process foraging drops.",
