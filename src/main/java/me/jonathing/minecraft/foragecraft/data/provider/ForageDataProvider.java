@@ -37,20 +37,20 @@ public abstract class ForageDataProvider<D extends IToJson<D>> implements IDataP
 
         Path outputFolder = this.generator.getOutputFolder();
 
-        for (Map.Entry<ResourceLocation, D> dataEntry : this.data.entrySet())
+        this.data.forEach((key, value) ->
         {
-            Path outputFile = this.createPath(outputFolder, dataEntry.getKey());
+            Path outputFile = this.createPath(outputFolder, key);
 
             try
             {
-                JsonObject json = dataEntry.getValue().toJson();
+                JsonObject json = value.toJson();
                 IDataProvider.save(GSON, cache, json, outputFile);
             }
             catch (IOException e)
             {
                 LOGGER.error(String.format("Couldn't save %s %s", this.name, outputFile), e);
             }
-        }
+        });
     }
 
     protected abstract Map<ResourceLocation, D> gatherData();

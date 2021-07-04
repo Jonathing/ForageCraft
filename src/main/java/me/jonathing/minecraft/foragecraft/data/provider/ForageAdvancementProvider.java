@@ -62,9 +62,7 @@ public class ForageAdvancementProvider implements IDataProvider
         Consumer<Advancement> advancement = (a) ->
         {
             if (!set.add(a.getId()))
-            {
                 throw new IllegalStateException("Duplicate advancement " + a.getId());
-            }
             else
             {
                 Path path1 = getPath(path, a);
@@ -81,10 +79,7 @@ public class ForageAdvancementProvider implements IDataProvider
             }
         };
 
-        for (Consumer<Consumer<Advancement>> adv : this.advancements)
-        {
-            adv.accept(advancement);
-        }
+        this.advancements.forEach(adv -> adv.accept(advancement));
     }
 
     private static Path getPath(Path path, Advancement advancement)

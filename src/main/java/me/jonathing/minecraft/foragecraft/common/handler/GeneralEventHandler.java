@@ -55,8 +55,6 @@ public class GeneralEventHandler
                 || event.getName().equals(LootTables.VILLAGE_SAVANNA_HOUSE)
                 || event.getName().equals(LootTables.VILLAGE_SNOWY_HOUSE)
                 || event.getName().equals(LootTables.VILLAGE_TAIGA_HOUSE))
-        {
             event.getTable().addPool(VILLAGE_HOUSE_CHESTS.get());
-        }
     }
 }

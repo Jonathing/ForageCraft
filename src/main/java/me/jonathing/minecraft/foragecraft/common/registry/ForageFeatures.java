@@ -250,9 +250,7 @@ public class ForageFeatures
 
                 // biomes that should contain only sticks
                 if (!biomeCategory.equals(Biome.Category.MUSHROOM))
-                {
                     addCategoryFeature(biomeGenerator, name, GenerationStage.Decoration.LOCAL_MODIFICATIONS, stickConfiguredFeature);
-                }
             }
         }
 

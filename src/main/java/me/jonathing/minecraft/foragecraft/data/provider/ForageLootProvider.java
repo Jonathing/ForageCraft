@@ -200,18 +200,14 @@ public class ForageLootProvider extends LootTableProvider
             blocks().forEach(block ->
             {
                 if (block.equals(ForageBlocks.stick))
-                {
                     dropOther(block, Items.STICK);
-                }
                 else if (block.equals(ForageBlocks.leek_crop))
                 {
                     ILootCondition.IBuilder growthCondition = BlockStateProperty.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropsBlock.AGE, ((CropsBlock) block).getMaxAge()));
                     this.add(block, (b) -> crop(growthCondition, b, ForageItems.leek, ForageItems.leek_seeds));
                 }
                 else
-                {
                     dropSelf(block);
-                }
             });
         }
 

@@ -120,9 +120,7 @@ public abstract class DecorativeBlock extends FallingBlock implements IWaterLogg
             {
                 BlockState blockstate = this.defaultBlockState();
                 if (blockstate.canSurvive(context.getLevel(), context.getClickedPos()))
-                {
                     return blockstate.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
-                }
             }
         }
 
@@ -199,9 +197,7 @@ public abstract class DecorativeBlock extends FallingBlock implements IWaterLogg
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld level, BlockPos currentPos, BlockPos facingPos)
     {
         if (stateIn.getValue(WATERLOGGED))
-        {
             level.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        }
 
         return super.updateShape(stateIn, facing, facingState, level, currentPos, facingPos);
     }

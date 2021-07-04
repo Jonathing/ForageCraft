@@ -104,9 +104,7 @@ public class StickBlock extends DecorativeBlock
             {
                 BlockState blockstate = this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
                 if (blockstate.canSurvive(context.getLevel(), context.getClickedPos()))
-                {
                     return blockstate.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
-                }
             }
         }
 

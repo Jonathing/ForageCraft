@@ -34,9 +34,7 @@ public class ForageBlockPlacer extends SimpleBlockPlacer
     public void place(IWorld level, BlockPos blockPos, BlockState blockState, Random random)
     {
         if (blockState.hasProperty(HorizontalBlock.FACING))
-        {
             blockState = blockState.setValue(HorizontalBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(level.getRandom()));
-        }
 
         if (level.getBlockState(blockPos.below()).is(blockTag))
             super.place(level, blockPos, blockState, random);

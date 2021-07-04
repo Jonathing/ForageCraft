@@ -89,17 +89,13 @@ public class ItemMixin
                         BlockItem.updateCustomBlockEntityTag(world, player, pos, itemStack);
                         block.setPlacedBy(world, pos, blockStateInWorld, player, itemStack);
                         if (player instanceof ServerPlayerEntity)
-                        {
                             CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity) player, pos, itemStack);
-                        }
                     }
 
                     SoundType soundtype = blockStateInWorld.getSoundType(world, pos, useContext.getPlayer());
                     world.playSound(player, pos, SoundEvents.WOOD_PLACE, SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
                     if (player == null || !player.abilities.instabuild)
-                    {
                         itemStack.shrink(1);
-                    }
 
                     callback.setReturnValue(ActionResultType.sidedSuccess(world.isClientSide));
                 }

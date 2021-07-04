@@ -39,7 +39,7 @@ public abstract class ForageDataHandler<K, V> extends JsonReloadListener
         Map<K, V> newDataMap = Maps.newHashMap();
         Set<Map.Entry<ResourceLocation, JsonElement>> dataSet = jsonMap.entrySet();
 
-        for (Map.Entry<ResourceLocation, JsonElement> entry : dataSet)
+        dataSet.forEach(entry ->
         {
             ResourceLocation name = entry.getKey();
 
@@ -56,7 +56,7 @@ public abstract class ForageDataHandler<K, V> extends JsonReloadListener
             {
                 LOGGER.error(MARKER, String.format("Parsing error loading %s: %s", this.name, name), e);
             }
-        }
+        });
 
         this.data = newDataMap;
         LOGGER.info(MARKER, String.format("Loaded %d %s", newDataMap.size(), this.name.replace('_', ' ')));

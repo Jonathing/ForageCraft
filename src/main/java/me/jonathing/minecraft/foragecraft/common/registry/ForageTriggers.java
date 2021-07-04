@@ -47,9 +47,7 @@ public class ForageTriggers
     private static <T extends ICriterionTrigger<?>> T register(T criterion)
     {
         if (FORAGE_TRIGGERS_MAP.containsKey(criterion.getId()))
-        {
             throw new IllegalArgumentException("Duplicate criterion id " + criterion.getId());
-        }
 
         LOGGER.debug(MARKER, "Registering new criteria trigger `{}`", criterion.getId());
         FORAGE_TRIGGERS_MAP.put(criterion.getId(), criterion);
