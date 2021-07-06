@@ -3,6 +3,9 @@ package me.jonathing.minecraft.foragecraft.common.registry;
 import me.jonathing.minecraft.foragecraft.ForageCraft;
 import me.jonathing.minecraft.foragecraft.common.capability.ForageChunk;
 import me.jonathing.minecraft.foragecraft.common.capability.base.IForageChunk;
+import me.jonathing.minecraft.foragecraft.common.capability.util.CapabilityProvider;
+import me.jonathing.minecraft.foragecraft.common.capability.util.CapabilityStorage;
+import me.jonathing.minecraft.foragecraft.common.capability.util.IPersistentCapability;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
@@ -26,16 +29,16 @@ public class ForageCapabilities
 
     public static void init()
     {
-        register(IForageChunk.class, ForageChunk::storage, ForageChunk::new);
+        CapabilityManager.INSTANCE.register(IForageChunk.class, new CapabilityStorage<>(), ForageChunk::new);
     }
 
-    private static <T> void register(Class<T> type, Supplier<Capability.IStorage<T>> storage, Callable<? extends T> factory)
+    private static <T extends IPersistentCapability<T>> void register(Class<T> clazz, Callable<? extends T> factory)
     {
-        CapabilityManager.INSTANCE.register(type, storage.get(), factory);
+        CapabilityManager.INSTANCE.register(clazz, new CapabilityStorage<>(), factory);
     }
 
     static void onAttachChunkCapability(AttachCapabilitiesEvent<Chunk> event)
     {
-        event.addCapability(ForageCraft.locate("foraged_chunk"), ForageChunk.provider(CHUNK.getDefaultInstance()));
+        event.addCapability(ForageCraft.locate("foraged_chunk"), new CapabilityProvider<>(CHUNK.getDefaultInstance()));
     }
 }

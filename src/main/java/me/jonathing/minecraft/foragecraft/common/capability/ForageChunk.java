@@ -26,6 +26,12 @@ public class ForageChunk implements IForageChunk
     @CapabilityInject(IForageChunk.class)
     public static Capability<IForageChunk> INSTANCE = null;
 
+    @Override
+    public Capability<IForageChunk> getDefaultInstance()
+    {
+        return INSTANCE;
+    }
+
     private int timesForaged = 0;
 
     @Override
@@ -46,51 +52,17 @@ public class ForageChunk implements IForageChunk
         this.timesForaged = timesForaged;
     }
 
+    @Override
     @Nonnull
-    public static Capability.IStorage<IForageChunk> storage()
+    public CompoundNBT writeAdditional(CompoundNBT nbt)
     {
-        return new Capability.IStorage<IForageChunk>()
-        {
-            @Nullable
-            @Override
-            public INBT writeNBT(Capability<IForageChunk> capability, IForageChunk instance, Direction side)
-            {
-                return instance.serializeNBT();
-            }
-
-            @Override
-            public void readNBT(Capability<IForageChunk> capability, IForageChunk instance, Direction side, INBT nbt)
-            {
-                instance.deserializeNBT((CompoundNBT) nbt);
-            }
-        };
+        nbt.putInt("timesForaged", this.timesForaged);
+        return nbt;
     }
 
-    @Nonnull
-    public static ICapabilitySerializable<CompoundNBT> provider(IForageChunk instance)
+    @Override
+    public void read(@Nonnull CompoundNBT nbt)
     {
-        return new ICapabilitySerializable<CompoundNBT>()
-        {
-            private final LazyOptional<IForageChunk> chunkHandler = LazyOptional.of(() -> instance);
-
-            @Nonnull
-            @Override
-            public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side)
-            {
-                return cap == ForageChunk.INSTANCE ? this.chunkHandler.cast() : LazyOptional.empty();
-            }
-
-            @Override
-            public CompoundNBT serializeNBT()
-            {
-                return this.chunkHandler.orElseThrow(NullPointerException::new).serializeNBT();
-            }
-
-            @Override
-            public void deserializeNBT(CompoundNBT nbt)
-            {
-                this.chunkHandler.orElseThrow(NullPointerException::new).deserializeNBT(nbt);
-            }
-        };
+        this.timesForaged = nbt.getInt("timesForaged");
     }
 }
